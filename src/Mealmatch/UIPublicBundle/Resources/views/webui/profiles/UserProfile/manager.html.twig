@@ -1,0 +1,122 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title %}{{ 'userprofile.manager.title'|trans|raw }}{% endset %}
+{% set main_header_subtitle %}{% endset %}
+{% block title %}Mealmatch | {{ 'userprofile.manager.title'|trans }}{% endblock %}
+{#{% if app.user.profile.imageName == "image/udefault.png" %}#}
+    {#{% set profileImage %}{{ asset('bundles/uipublic/images/profile-img.png') }}{% endset %}#}
+{#{% else %}#}
+    {#{% set profileImage %}{{ asset(app.user.profile.imageName)}} {% endset %}#}
+{#{% endif %}#}
+ {% if app.user.profile.imageName != "image/udefault.png" %}
+     {% set profileImage %} {{ asset(app.user.profile.imageName, 's3img') }} {% endset %}
+ {% else %}
+     {% set profileImage %} {{ asset('bundles/uipublic/images/mm/profilbild_default.png') }} {% endset %}
+ {% endif %}
+{% set page = 'user-profilepage' %}
+{% block user_profile %}
+    <div class="user-profilepage">
+        <div class="container">
+            <div class="main-width">
+                <div class="for-padding">
+                    {% block main_content %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div>
+                                    <div class="form-bg">
+                                        <div class="banner-bg">
+                                            {{ form_start(formTabPic) }}
+                                            <div id="imageUpload" class="profile-img">
+                                                <img class="img-responsive img-circle" height="150px" width="150px"
+                                                     src="{{ profileImage }}" alt="ProfileImage">
+                                            </div>
+                                            {{ form_widget(formTabPic) }}
+                                            {{ form_end(formTabPic) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_start(formSinglePage) }}
+                                <div class="for-padding">
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.firstName) }}
+                                        {{ form_widget(formSinglePage.firstName) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.lastName) }}
+                                        {{ form_widget(formSinglePage.lastName) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.birthday) }}
+                                        {{ form_widget(formSinglePage.birthday) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.gender) }}
+                                        {{ form_widget(formSinglePage.gender) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.country) }}
+                                        {{ form_widget(formSinglePage.country) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.nationality) }}
+                                        {{ form_widget(formSinglePage.nationality) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.postalAddress) }}
+                                        {{ form_widget(formSinglePage.postalAddress) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(formSinglePage.selfDescription) }}
+                                        {{ form_widget(formSinglePage.selfDescription) }}
+                                    </div>
+                                    <div class="button-div text-center">
+                                        <button class="main-btn" type="submit">
+                                            {{ 'profile.registration.submit.label'|trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                                {{ form_end(formSinglePage) }}
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {#{{ encore_entry_script_tags('mmWebFrontJS') }}#}
+{% endblock %}
+
+{% block page_js %}
+    {# Our image upload JS #}
+    <script type="text/javascript">
+        $("#imageUpload").click(function () {
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+    </script>
+
+    {# Suave image upload JS #}
+    {#<script type="text/javascript">#}
+    {#function readURL(input) {#}
+    {#if (input.files && input.files[0]) {#}
+    {#var reader = new FileReader();#}
+
+    {#reader.onload = function (e) {#}
+    {#$('#test')#}
+    {#.attr('src', e.target.result)#}
+    {#.width(100)#}
+    {#.height(150);#}
+    {#};#}
+
+    {#reader.readAsDataURL(input.files[0]);#}
+    {#}#}
+    {#}#}
+    {#$("#test").click(function () {#}
+    {#$("#app_user_profile_ui_imageFile").trigger('click');#}
+    {#});#}
+    {#</script>#}
+
+{% endblock %}

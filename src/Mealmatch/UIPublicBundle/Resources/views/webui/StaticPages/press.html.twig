@@ -1,0 +1,23 @@
+{#{% extends "@WEBUI/simple_ui.html.twig" %}#}
+{% extends "@WEBUI/Layouts/main_layout.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'press.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}{{ 'press.contact-for-journalist'|trans }}{% endset %}
+
+{% block staticPages %}
+
+    <div class="">
+        <p class="career-left">{{ 'press.contact-text'|trans }}</p>
+        <p class="career-left"> Olaf Steinebach and Thomas Fiedler</p>
+        <p class="career-left"> Mealmatch GmbH</p>
+        <p class="career-left"><a href="tel: +49 (0)221 – 2833654"><i class="fa fa-phone dot-color"></i>&nbsp; +49 (0)221 – 2833654, </a>
+            <a href="tel: +49 (0)176 – 57902513"> +49 (0)176 – 57902513</a></p>
+        <p class="career-left"><a href="mailto: thomas.fiedler@mealmatch.de"><i class="fa fa-envelope-o dot-color"></i>&nbsp; thomas.fiedler@mealmatch.de, </a>
+            <a href="mailto: olaf.steinebach@mealmatch.de"> olaf.steinebach@mealmatch.de</a></p>
+        <p class="career-left"><a href="http://www.mealmatch.de/" target="_blank"><i class="fa fa-globe dot-color"></i>&nbsp; www.mealmatch.de</a></p>
+        <p class="career-left"><a href="https://www.facebook.com/mealmatchme" target="_blank"><i class="fa fa-facebook-official dot-color"></i>&nbsp; https://www.facebook.com/mealmatchme</a></p>
+        <p class="career-left"><a href=" https://www.instagram.com/mealmatchapp" target="_blank"><i class="fa fa-instagram dot-color"></i>&nbsp; https://www.instagram.com/mealmatchapp</a></p>
+    </div>
+
+{% endblock %}

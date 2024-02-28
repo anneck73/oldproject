@@ -1,0 +1,28 @@
+body:           Message
+messenger:      User messages
+inbox:          Inbox
+sent:           Sent
+deleted:        Deleted
+send_new:       Send new message
+allyourmessages: Here you can see all your messages
+search:         Search
+threads_found:  "%num% conversation found with | %num% conversations found with"
+thread:         Message history
+message_info:   "from %sender%, at %date%"
+reply:          Reply
+messages:       Messages
+subject:        Subject
+starter:        Author
+startdate:      Started at
+actions:        Actions
+new:            New
+goto_last:      Jump to last message
+last_message:   Last message
+on:             "Sent at %date%"
+by:             "from %sender%"
+no_thread:      There is no conversation to display.
+delete:         delete
+submit:         sent
+view:           view
+recipient:      Recipient (Mealmatch username)
+isread:         Read

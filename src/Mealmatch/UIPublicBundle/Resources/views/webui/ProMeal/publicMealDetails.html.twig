@@ -1,0 +1,208 @@
+{% extends "@WEBUI/Layouts/simple.html.twig" %}
+{% import '@WEBUI/Widgets/mealmatch.macros.html.twig' as widgets %}
+{% trans_default_domain "Mealmatch" %}
+{# Set template variables #}
+{% set simple_header_title %}{{ proMeal.title }}{% endset %}
+{% set currencySymbol = '€' %}
+{% if proMeal.sharedCostCurrency == 'USD' %}
+    {% set currencySymbol = '$' %}
+{% endif %}
+{% set endTime = proMeal.endDateTime|date('H:i') %}
+{# Overwrite blocks #}
+{% block page_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        let shortenText = mmUI.showHideMore();
+        mmUI.bindShowHideMoreElemten(shortenText);
+	});
+</script>
+{% endblock %}
+
+{% block base_twitter_image %}
+    {% if proMeal.host.restaurantProfile.pictures.count > 0%}
+        {% set twitterPic = proMeal.host.restaurantProfile.pictures.first %}
+        <meta name="twitter:image" content="{{ vich_uploader_asset(twitterPic, 'fileData') }}">
+    {% endif %}
+{% endblock %}
+
+{% block simple_main_content %}
+	<div class="breadcrumb">
+		<span class="icon-direction"></span>&nbsp;
+		<a href="{{ path('public_meals_index') }}">Social-Dining</a> /
+		<a href="{{ path('public_promeal_index') }}">Restaurant-Meals</a> /
+		<a href="{{ path('public_promeal_hostname', {'hostName': proMeal.host.username}) }}">{{ proMeal.host.username }}</a> /
+		<a href="{{ path('public_promeal_hostname_mealtitle', {'hostName': proMeal.host.username, 'mealTitle': proMeal.title}) }}">{{ proMeal.title }}</a> /
+		{{ proMeal.startDateTime|date('d.m.Y H:i') }}
+	</div>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+              "@id": "{{ url('public_meals_index') }}",
+              "name": "Meals"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+              "@id": "{{ url('public_promeal_index') }}",
+              "name": "Restaurant-Meals"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "{{ url('public_promeal_hostname', {'hostName': proMeal.host.username}) }}",
+          "name": "{{ proMeal.host.username }}"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "{{ url('public_promeal_hostname_mealtitle', {'hostName': proMeal.host.username, 'mealTitle': proMeal.title }) }}",
+          "name": "{{ proMeal.title }}"
+        }
+      }]
+    }
+    </script>
+    {# Using widget ... #}
+    {{ widgets.proMealEventJSONLD(proMeal) }}
+
+    <div class="row margin-bottom3 margin-top3">
+
+     	<!-- USER IMAGE -->
+        <div class="col-xs-3">
+            <div class="mm-user-image center-block">
+                <a href="{{ path('public_user_by_username', {'pName': proMeal.host.username}) }}">
+                {% if proMeal.host.profile.imageName == "image/udefault.png" %}
+                    <img class="card-profile img-circle"
+                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                         alt="Profileimage"/>
+                {% else %}
+                    <img class="card-profile img-circle" src="{{ asset(proMeal.host.profile.imageName, 's3img') }}"
+                         alt="{{ proMeal.host.username }}"/>
+                {% endif %}
+                </a>
+                <p class="text-center fs-xss margin-top-half">
+                    <a class="mm-green"
+                       href="{{ path('public_promeal_hostname', {'hostName': proMeal.host.username}) }}">{{ proMeal.host.username }}</a>
+                </p>
+                <p class="fs-xs">#{{ proMeal.host.restaurantprofile.type }}</p>
+            </div>
+        </div>
+
+        <!-- MEAL -->
+        <div class="col-xs-6">
+            <h2 class="no-margin">{{ proMeal.tableTopic }}</h2>
+            <h3 class="margin-bottom">{{ proMeal.startDateTime|date()|localizeddate('long', 'short', app.request.locale ) }} Uhr | # {{ proMeal.categories.first }}</h3>
+
+            <div class="post_wrap">
+            	<div class="child">
+            		<p>{{ proMeal.description|raw }}</p>
+            	</div>
+                {% for offer in proMeal.mealOffers %}
+                <div class="child">
+	                <h4 class="mm-line-dotted-bottom-green">Angebot {{ loop.index }}: {{ offer.name }}</h4>
+	            	<p>{{ offer.description|raw }}</p>
+	            	<p><a href="{{ path('api_mealticket_create_from_promeal', {'id': proMeal.id, 'mealOffer': offer.id}) }}">
+                        <button class="btn btn-lg btn-success btn-block">
+                            {{ 'meal.action.join'|trans }} {{ offer.price|number_format(2) }} {{ offer.currency }}
+                        </button></a></p>
+                </div>
+                {% endfor %}
+	             <p class="message mm-green pointer margin-top margin-bottom"></p>
+            </div>
+
+            <div class="guests mm-line-dotted-grey">
+                <p>Deine Tischnachbarn:</p>
+                <div class="flexbox fl-wrap mm-user-icon-list">
+                {% for guest in proMeal.guests %}
+                    <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                        {% if guest.profile.imageName == "image/udefault.png" %}
+                            <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                 alt="Profileimage"/>
+                        {% else %}
+                            <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                 src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                 alt="Profileimage"/>
+                        {% endif %}
+                    </a>
+                {% else %}
+                Sei der erste Gast!
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO BOX -->
+        <div class="col-xs-3">
+            <div class="mm-green-box pull-right">
+                <div class="inner">
+                    <div class="text-center">
+                    	<p class="font-weight-300">HUNGER?</p>
+                    	<div class="mm-line-dotted"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            {% set freeSeats =  proMeal.maxNumberOfGuest - proMeal.guests.count %}
+                            <p class="text-center mm-green">{{ freeSeats }}</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>Plätze frei!</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-calendar"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ proMeal.startDateTime|date('d.m.Y') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-clock"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ proMeal.startDateTime|date('H:i') }} Uhr</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green">{{ currencySymbol }}</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <select class="fs-xxs" onchange="location.href = this.value;">
+                            	<option>{{ 'public.promeal.choose_offer'|trans }}</option>
+                            	{% for offer in proMeal.mealOffers %}
+                            	<option value="{{ path('api_mealticket_create_from_promeal', {'id': proMeal.id, 'mealOffer': offer.id}) }}">{{ offer.price|number_format(2) }} {{ currencySymbol }} </span> - {{ offer.name }}</option>
+                            	{% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-location-pin"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ proMeal.address.postalCode }} {{ proMeal.address.city }}<br/>
+                                {{ proMeal.address.sublocality }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-success">Teilnehmen</button>
+            </div>
+        <div>
+    </div>
+{% endblock %}

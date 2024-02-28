@@ -1,0 +1,62 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set swtTitle %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('api_restaurant_profile_manager') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Restaurant Geo Koordinaten</p>
+                        </h3>
+                        <p>Die Addresse in einer Zeile: {{ rProfile.locationString|default('NO LOCATION STRING!!!') }}</p>
+                        {{ form_start(geoAddressForm) }}
+                        {{ form_row(geoAddressForm.locationString, { 'attr' : { 'class': 'tbox' } }) }}
+                        <p class="mm-line-dotted-bottom-green">Ermittelte Addresse:</p>
+                        <p> {{ rAddress.locationString }}</p>
+                        <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                        {{ form_end(geoAddressForm) }}
+                        <p class="mm-line-dotted-bottom-green">Darstellung auf der Karte:</p>
+                        <div id="restMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block page_js %}
+
+    <script type="text/javascript">
+
+        function initMap() {
+            var geoCoordiantes = {
+                lat: {{ geoCoordinates.lat }},
+                lng: {{ geoCoordinates.long }}
+            };
+            console.log('geoAddress: ' + geoCoordiantes.lat + ',' + geoCoordiantes.lng);
+            if (geoCoordiantes.length < 1) {
+                $("#restMap").hide();
+            } else {
+
+                // The location of restaurant
+                var latLng = { lat: geoCoordiantes['lat'], lng: geoCoordiantes['lng'] };
+
+                // The map centered at the restaurant location
+                var map = new google.maps.Map(document.getElementById('restMap'), {zoom: 14, center: latLng});
+
+                // The marker, positioned at the restaurant location
+                var marker = new google.maps.Marker({position: latLng, map: map, title: '{{ app.user.restaurantProfile.name }}' });
+            }
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GMAPS_API_KEY }}&callback=initMap"></script>
+{% endblock %}

@@ -1,0 +1,184 @@
+{#
+    HTML5 Template !!!
+    Shows a ProMeal "Card"
+#}
+{% trans_default_domain 'Mealmatch' %}
+
+{% spaceless %}
+
+    <section id="home-meal-card-{{ proMeal.id }}" class="grid pro-meal-card">
+
+        <section class="card">
+
+            <header>
+                <figure>
+                    {# ProMeal Card shows first image of RestaurantImages from the RestaurantProfile#}
+                    {% if proMeal.host.restaurantprofile.pictures|length > 0 %} {# @todo: implement this check inside the service, not here! #}
+                        {% set picture = proMeal.host.restaurantprofile.pictures.first %}
+                        <img class="mm-logo-s" src="{{ asset(picture.fileName, 's3_rimages') }}"
+                             alt="{{ proMeal.tableTopic }}">
+                    {% else %}
+                        <img class="mm-logo-s"
+                             src="{{ asset('bundles/uipublic/images/cards/card-picture.jpg') }}"
+                             alt="{{ proMeal.tableTopic }}">
+                    {% endif %}
+
+                    <figcaption>
+                        <p class="upper fs-4s text-shadow">{{ proMeal.mealEvents.first.startDateTime|date('d. M') }}</p>
+                        <p class="fs-l text-shadow">{{ proMeal.tabletopic|length > 45 ? proMeal.tabletopic|slice(0, 45) ~ '...' : proMeal.tabletopic }}</p>
+                    </figcaption>
+                </figure>
+            </header>
+
+            <div class="card-title flexbox-h grid">
+                <a href="{{ path('public_user_by_username', {'pName': proMeal.host.username}) }}">
+                {% if proMeal.host.profile.imageName == "image/udefault.png" %}
+                    <img class="card-profile img-circle"
+                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                         alt="Profileimage"/>
+                {% else %}
+                    <img class="card-profile img-circle" src="{{ asset(proMeal.host.profile.imageName, 's3img') }}"
+                         alt="{{ proMeal.host.username }}"/>
+                {% endif %}
+                </a>
+                <div>
+                    <p class="fs-xs">#{{ proMeal.host.restaurantprofile.type }}</p>
+                    <p class="light-grey fs-xs">{{ proMeal.description|raw }}</p>
+                </div>
+            </div>
+            <div class="card-infos grid">
+
+                <div class="hr"></div>
+
+                <div class="flexbox-centering grid-half">
+
+                    <div class="card-info">
+                        <span class="icon-clock"></span>
+                        <p>{{ proMeal.mealEvents.first.startDateTime|date('H:i') }}</p>
+                    </div>
+                    {% set currencySymbol = 'glyphicon-eur' %}
+                    {% if proMeal.sharedCostCurrency == 'USD' %}
+                        {% set currencySymbol = 'glyphicon-usd' %}
+                    {% endif %}
+                    <div class="card-info">
+                        <span class="glyphicon {{ currencySymbol }}"></span>
+                        <p>ab {{ proMeal.minOfferPrice|number_format(2) }}</p>
+                    </div>
+
+                    <div class="card-info">
+                        <span class="icon-location-pin"></span>
+                        <p>0,5 km</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-infos grid">
+                <div class="hr"></div>
+                <div class="flexbox-centering grid-half">
+                    <div class="card-info">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        <p>{{ proMeal.mealEvents.first.startDateTime|date('d.m.y') }}</p>
+                    </div>
+                    <div class="card-info">
+                        {% set guests =  proMeal.guests|length %}
+                        <p>{{ guests }}</p>
+                        <p> {% transchoice guests with {'%count%': guests } from "Mealmatch" %}
+                                promeal.manager.card.seats_taken{% endtranschoice %}
+                    </div>
+                    <div class="card-info">
+                        {% set freeSeats =  proMeal.maxNumberOfGuest - proMeal.guests.count %}
+                        <p class="mm-green">{{ freeSeats }}</p>
+                        <p> {% transchoice freeSeats with {'%count%': freeSeats } from "Mealmatch" %}
+                                promeal.manager.card.seats_free{% endtranschoice %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="card-infos grid">
+                <div class="hr"></div>
+                <h3>{{ 'meal.guests'|trans }}</h3>
+                <div class="flexbox-centering grid-half">
+                    <div class="flexbox fl-wrap mm-user-icon-list">
+                        {% for guest in proMeal.guests %}
+                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                         alt="Profileimage"/>
+                                {% else %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                         alt="Profileimage"/>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="hr"></div>
+            </div>
+
+            <!--// Meal Location //-->
+            <div class="card-infos grid">
+
+                <div class="hr"></div>
+
+                <div class="flexbox-centering grid-half">
+                    <div class="card-address text-center">
+                        <span class="icon-location-pin"></span>
+                        <p>{{ proMeal.host.profile.firstname }}, {{ proMeal.host.profile.lastname }}</p>
+                        {% if meal_service.isGuest(proMeal, app.user) %}
+                            <p>{{ proMeal.address.streetName }} {{ proMeal.address.streetNumber }}</p>
+                        {% endif %}
+                        <p>{{ proMeal.address.postalCode }} {{ proMeal.address.locality }}
+                            - {{ proMeal.address.sublocality }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="hr"></div>
+            <div class="text-center"><h2>{{ 'search.deals'|trans }} ({{ proMeal.mealOffers.count }}) </h2></div>
+            {% for offer in proMeal.mealOffers %}
+                <div class="flexbox-h grid">
+                    <a href="{{ path('public_user_by_username', {'pName': proMeal.host.username}) }}">
+                    {% if proMeal.host.profile.imageName == "image/udefault.png" %}
+                        <img class="card-profile img-circle"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="card-profile img-circle" src="{{ asset(proMeal.host.profile.imageName, 's3img') }}"
+                             alt="{{ proMeal.host.username }}"/>
+                    {% endif %}
+                    </a>
+                    <div>
+                        <h2 class="fs-xs">{{ offer.name }}</h2>
+                        <p class="light-grey fs-xs">{{ offer.description|raw }}</p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ path('api_mealticket_create_from_promeal', {'id': proMeal.id, 'mealOffer': offer.id}) }}">
+                        <button class="btn btn-lg btn-success btn-block">
+                            {{ 'meal.action.join'|trans }} {{ offer.price|number_format(2) }} {{ proMeal.sharedCostCurrency }}
+                        </button>
+                    </a>
+                </div>
+                <div class="hr"></div>
+                <div class="text-center">
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ proMeal.host.username }}" height="48px" width="49px"/>
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ proMeal.host.username }}" height="48px" width="49px"/>
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ proMeal.host.username }}" height="48px" width="49px"/>
+                </div>
+                <div class="hr"></div>
+            {% endfor %}
+
+
+        </section>
+
+    </section>
+
+
+{% endspaceless %}

@@ -1,0 +1,22 @@
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_dev.yml }
+
+framework:
+    test: ~
+    session: ~
+    profiler:
+        collect: false
+
+doctrine:
+    orm:
+        metadata_cache_driver: array
+        result_cache_driver: array
+        query_cache_driver: array
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true

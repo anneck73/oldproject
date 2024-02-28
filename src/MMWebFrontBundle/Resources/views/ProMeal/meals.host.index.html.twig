@@ -1,0 +1,21 @@
+{% extends "@MMWebFront/Layout/landingpage.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% set viewData = {'title': hostName ~ ' | Restaurant-Meals'} %}
+{% block main_content %}
+    <div class="breadcrumb">
+        <span class="icon-direction"></span>&nbsp;
+        <a href="{{ path('public_meals_index') }}">Social-Dining</a> /
+        <a href="{{ path('public_promeal_index') }}">Restaurant-Meals</a> /
+        <a href="{{ path('public_promeal_hostname', {'hostName': hostName}) }}">{{ hostName }}</a>
+    </div>
+
+    <p></p>
+    <div class="pull-right"><span class="label label-danger beta-badge">Beta</span></div>
+    <p class="mm-spacer"></p>
+    <div class="meal-grid pull-left">
+        <div class="meal-grid-sizer"></div>
+        {% for meal in proMeals %}
+            <div class="meal-grid-item">{{ include('@WEBUI/ProMeal/index.card.include.html.twig') }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}

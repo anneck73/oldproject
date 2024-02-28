@@ -1,0 +1,32 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set swtTitle %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('api_restaurant_profile_manager') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Restaurant Beschreibung</p>
+                        </h3>
+                        {{ form_start(editDescForm) }}
+                        {{ form_row(editDescForm.company, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(editDescForm.name, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(editDescForm.type, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(editDescForm.description, { 'attr' : { 'class': 'tbox' } }) }}
+                        <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                        {{ form_end(editDescForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

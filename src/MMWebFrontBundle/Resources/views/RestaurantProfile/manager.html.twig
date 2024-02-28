@@ -1,0 +1,238 @@
+{% extends '@WEBUI/Layout/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% form_theme formTabOne '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabTwo '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabThree '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabFour '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formSettings '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabPay '@WEBUI/Form/fields.html.twig' %}
+
+{% set main_header_title = 'restaurantprofile.manager.title'|trans %}
+{% set main_header_subtitle = 'restaurantprofile.manager.subtitle'|trans %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+
+{% block main_content %}
+
+    <div class="row margin-bottom3 margin-top1-5">
+        <div class="row">
+            <div class="col-xs-9 col-xs-offset-3 no-padding">
+                <h2 class="no-margin">{{ main_header_title }}</h2>
+                <h3 class="margin-bottom">{{ main_header_subtitle }}</h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-3">
+                <div class="mm-user-image center-block {% if app.user.profile.imageName == "image/udefault.png" %}mm-bg-light-white{% endif %}">
+                    <div id="imageUpload"
+                         class="upload-image flexbox-centering-all mm-upload-hover-img {% if app.user.profile.imageName != "image/udefault.png" %}mm-transparent{% endif %}">
+                        <div class="full-height flexbox fl-center fl-column">
+                            <p>{{ 'your'|trans }}<br/>{{ 'userprofile.image.label'|trans }} {{ 'update'|trans }}</p>
+                            <span class="icon-cloud-upload"></span>
+                        </div>
+                    </div>
+                    {% if app.user.profile.imageName != "image/udefault.png" %}
+                        <img class="img-responsive img-circle"
+                             src="{{ asset(app.user.profile.imageName, 's3img') }}"
+                             alt="Profileimage"/>
+                    {% endif %}
+                </div>
+                <div class="mm-user-image-safe-btn center-block">
+                    {{ form_start(formProfilePic) }}
+                    {{ form_widget(formProfilePic) }}
+                    {{ form_end(formProfilePic) }}
+                </div>
+            </div>
+
+
+            <div class="col-xs-6 no-padding">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="profilebase" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 1 %} in active{% endif %}">
+                        {{ form_start(formTabOne) }}
+                        {{ form_widget(formTabOne) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                        {{ form_end(formTabOne) }}
+                    </div>
+
+                    <div id="profile2" role="tabpanel"
+                         class="tab-pane fade mm-tab-content {% if selectedTab == 2 %} in active{% endif %}">
+                        {{ form_start(formTabTwo) }}
+                        {{ form_widget(formTabTwo) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                        {{ form_end(formTabTwo) }}
+                    </div>
+
+                    <div id="profile3" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 3 %} in active{% endif %}">
+                        {{ form_start(formTabThree) }}
+                        {{ form_widget(formTabThree) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                        {{ form_end(formTabThree) }}
+                    </div>
+
+                    <div id="profile4" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 4 %} in active{% endif %}">
+                        <h3>Bild Upload</h3>
+                        {{ form_start(formTabFour) }}
+                        {{ form_widget(formTabFour) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'restaurantprofile.manager.add.picture'|trans }}</button>
+                        {{ form_end(formTabFour) }}
+                        <div class="mm-spacer"></div>
+                        <h3>Restaurant Bilder</h3>
+                        <ul class="nav nav-tabs">
+                            {% for pic in rProfile.pictures %}
+                                <li class="">
+                                    <img class="img-thumbnail" src="{{ vich_uploader_asset(pic, 'fileData') }}"
+                                         alt="{{ pic.fileName }}"/>
+
+                                    <a href="{{ path('restaurant_profile_manager_delete_picture', { 'id': pic.id }) }}">
+                                        <button class="btn btn-lg btn-danger btn-block">
+                                            <span class="glyphicon glyphicon-minus-sign"></span>
+                                            {{ 'btn.delete.label'|trans }}
+                                        </button>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div id="profile5" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 5 %} in active{% endif %}">
+                        {{ form_start(formSettings) }}
+                        {{ form_widget(formSettings) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                        {{ form_end(formSettings) }}
+                    </div>
+
+                    <div id="profile6" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 6 %} in active{% endif %}">
+                        {{ form_start(formLegalFiles) }}
+                        {{ form_widget(formLegalFiles) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'restaurantprofile.manager.add.document.label'|trans }}</button>
+                        {{ form_end(formLegalFiles) }}
+                        <div>
+                            <h3>{{ 'legalfile.file'|trans }}</h3>
+
+                            {% for file in rProfile.legalFiles %}
+
+                                <a href="{{ vich_uploader_asset(file, 'fileData') }}">{{ file.fileName }}</a>
+                                <a href="{{ path('restaurant_profile_manager_delete_file', { 'id': file.id }) }}">
+                                    <button class="btn btn-lg btn-danger btn-block">
+                                        <span class="glyphicon glyphicon-minus-sign"></span>
+                                        {{ 'btn.delete.label'|trans }}
+                                    </button>
+                                </a>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 7 -->
+                    <div id="profile7" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 7 %} in active{% endif %}">
+                        {{ form_start(formTabPay) }}
+
+                        <!--// MangoPay .//-->
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_widget(formTabPay) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+
+                        {{ form_end(formTabPay) }}
+
+                    </div>
+
+                </div>
+            
+            </div>
+
+            {# The Tabs to the left #}
+            <div class="col-xs-3 no-padding">
+                <!-- Nav tabs -->
+                <ul class="nav nav-stacked tabs-right" role="tablist">
+                    <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}">
+                        <a href="#profilebase" aria-controls="promeal" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-user"></span>{{ 'restaurantprofile.manager.myrestaurant'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                        <a href="#profile2" aria-controls="offers" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-note"></span>{{ 'restaurantprofile.manager.businessdata'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}">
+                        <a href="#profile3" aria-controls="ingredients" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-location-pin"></span>{{ 'restaurantprofile.manager.location'|trans }}
+                        </a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 4 %}active{% endif %}">
+                        <a href="#profile4" aria-controls="events" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-picture"></span>{{ 'restaurantprofile.manager.images'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 5 %}active{% endif %}">
+                        <a href="#profile5" aria-controls="events" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-settings"></span>{{ 'restaurantprofile.manager.settings'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 6 %}active{% endif %}">
+                        <a href="#profile6" aria-controls="events" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-docs"></span>{{ 'restaurantprofile.manager.documents'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 7 %}active{% endif %}">
+                        <a href="#profile7" aria-controls="events" role="tab"
+                           data-toggle="tab"><span
+                                    class="icon-paypal"></span>Payment</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {% stylesheets
+    '@MMWebFrontBundle/Resources/public/css/bootstrap-switch.css'
+    output='css/bootstrap-switch.css'
+    filter='?scssphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block page_js %}
+    {% javascripts
+    '@MMWebFrontBundle/Resources/public/js/bootstrap-switch.js'
+    output='js/bootstrap-switch.min.js'
+    filter='?jsqueeze' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $("[name='mmuserbundle_mmusersettings[emailNotification]']").bootstrapSwitch();
+        $("[name='mmuserbundle_mmusersettings[uiHints]']").bootstrapSwitch();
+
+        $("#imageUpload").click(function () {
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+
+    </script>
+
+{% endblock %}

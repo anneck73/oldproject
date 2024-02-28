@@ -1,0 +1,4 @@
+services:
+  mm.exception_controller:
+        class: MMWebFrontBundle\Controller\ExceptionController
+        arguments: ['@twig', '%kernel.debug%', '@logger']

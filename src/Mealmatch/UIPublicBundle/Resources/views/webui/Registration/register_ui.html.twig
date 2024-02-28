@@ -1,0 +1,17 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_subtitle %}{{ 'registration.subtitle'|trans|raw }}{% endset %}
+{% set page = "restaurant-profile-page registration-form" %}
+{% block restaurant %}
+<body>
+<div class="restaurant-profile-page ">
+    <div class="container">
+        <div class="registration main-width">
+            {% block main_content %}
+                {% include "@WEBUI/Registration/register_content_ui.html.twig" %}
+            {% endblock %}
+            </div>
+    </div>
+</div>
+</body>
+{% endblock %}

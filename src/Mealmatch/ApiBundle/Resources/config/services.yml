@@ -1,0 +1,196 @@
+# Mealmatch API Services
+services:
+# ###########################################################
+# AWS3 Uploader Service
+# ###########################################################
+    api.legal_files:
+        public: true
+        class: Mealmatch\ApiBundle\Services\LegalFileService
+        arguments: ["@logger", "@doctrine.orm.default_entity_manager", "@api.aws_uploader"]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+
+# ###########################################################
+# AWS3 Uploader Service
+# ###########################################################
+    api.aws_uploader:
+        class: Mealmatch\ApiBundle\Services\AwsUploaderService
+        arguments: ["@mm.s3", "@logger", "%aws3_bucket%", "%kernel.environment%"]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# Meal Service
+# ###########################################################
+    api.meal.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\MealService
+        arguments: ['@logger', '@doctrine.orm.default_entity_manager', '@translator.default']
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+        calls:
+            - [addHomeMealService, ['@api.home_meal.service']]
+            - [addProMealService, ['@api.pro_meal.service']]
+            - [addMealEventService, ['@api.meal_event.service']]
+
+# ###########################################################
+# MealEvent Service
+# ###########################################################
+    api.meal_event.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\MealEventService
+        arguments: ['@logger', '@doctrine.orm.default_entity_manager', '@translator.default']
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# Meal Address Service
+# ###########################################################
+    api.geo_address.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\GeoAddressService
+        arguments: ['@logger', '@doctrine.orm.default_entity_manager', '@translator.default', '@geocoder']
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# Restaurant Service
+# ###########################################################
+    api.restaurant.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\RestaurantService
+        arguments:
+            - '@logger'
+            - '@doctrine.orm.default_entity_manager'
+            - '@translator.default'
+            - '@api.meal_ticket.service'
+            - '@MangopayApiService'
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+    # Helper service for RestaurantProfileManagerController
+    mm.restaurant.profilemanager.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\RestaurantProfileManagerService
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $logger: '@monolog.logger'
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+
+# ###########################################################
+# ProMeal Service
+# ###########################################################
+    api.pro_meal.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\ProMealService
+        arguments:
+            - '@logger'
+            - '@doctrine.orm.default_entity_manager'
+            - '@translator.default'
+            - '@api.geo_address.service'
+            - '@api.restaurant.service'
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# HomeMeal Service
+# ###########################################################
+    api.home_meal.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\HomeMealService
+        arguments: ['@logger', '@doctrine.orm.default_entity_manager', '@translator.default']
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+# ###########################################################
+# JoinRequest Service
+# ###########################################################
+    api.join_request.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\JoinRequestService
+        arguments: ['@logger', '@doctrine.orm.default_entity_manager', '@translator.default']
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+# ###########################################################
+# MealTicket Serivce
+# ###########################################################
+    api.meal_ticket.service:
+        public: true
+        class: Mealmatch\ApiBundle\Services\MealTicketService
+        arguments:
+              - "@doctrine.orm.entity_manager"
+              - "@logger"
+              - "@workflow.meal_ticket"
+              - "@api.join_request.service"
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+        calls:
+            - [setContainer, ["@service_container"]]
+
+# ###########################################################
+# UserManager Service Class
+# ###########################################################
+    api.user_manager:
+        public: true
+        class: Mealmatch\ApiBundle\MealMatch\UserManager
+        arguments: ["@fos_user.util.password_updater", "@fos_user.util.canonical_fields_updater", "@fos_user.object_manager", "%fos_user.model.user.class%"]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# @todo finish namespace upgrade for this service
+# Doctrine Version Naming Strategy
+# Alias: @mm.doctrine_version_naming_strategy
+# ###########################################################
+    mm_api.doctrine_version_naming_strategy:
+        class: Mealmatch\ApiBundle\MealMatch\Doctrine\VersionNamingStrategy
+        arguments: ['%app_version%']
+    # The Alias must match mm.{servicename}
+    mm.doctrine.version_naming_strategy:
+        alias: mm_api.doctrine_version_naming_strategy
+
+# ###########################################################
+# SEO Service
+# ###########################################################
+    api.seo:
+        public: true
+        class: Mealmatch\ApiBundle\Services\SEOService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@logger"
+            - "@request_stack"
+            - "@sonata.seo.page"
+            - "@router"
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+# ###########################################################
+# Mealmatch Cards
+# ###########################################################
+#    api.cards:
+#        class: Mealmatch\ApiBundle\Services\MealmatchCards
+#        arguments:
+#            - "@logger"
+#        tags:
+#            - { name: monolog.logger, channel: mealmatch }
+
+
+# ###########################################################
+# LogEntry handler service used by monolog
+# ###########################################################
+    apibundle.services.logentry_handler:
+        public: true
+        class: Mealmatch\ApiBundle\Services\LogEntryHandlerService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+            - "%kernel.debug%"
+
+    apibundle.services.paypal_logentry_handler:
+        public: true
+        class: Mealmatch\ApiBundle\Services\PayPalLogEntryHandlerService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+            - "%kernel.debug%"

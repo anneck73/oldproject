@@ -1,0 +1,135 @@
+mealmatch_ui:
+    resource: "@UIPublicBundle/Controller/"
+    type:     annotation
+
+mealmatch_mangopay:
+    resource: "@MealmatchMangopayBundle/Controller"
+    type:     annotation
+
+mealmatch_restaurant_web_front:
+    resource: "@MealmatchRestaurantWebFrontBundle/Controller"
+    type:     annotation
+
+mealmatch_search:
+    resource: "@MealmatchSearchBundle/Controller"
+    type:     annotation
+    options: { expose: true , i18n: false}
+
+mealmatch_workflow:
+    resource: "@MealmatchWorkflowBundle/Controller/"
+    type:     annotation
+    options: { expose: true , i18n: false}
+
+mealmatch_calendar:
+    resource: "@MealmatchCalendarBundle/Controller/"
+    type:     annotation
+    prefix:   /api/cal
+    options: { expose: true, i18n: false }
+
+adesigns_calendar:
+    resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+mm_user_mm_restaurant_profile:
+    resource: "@MMUserBundle/Controller/MMRestaurantProfileController.php"
+    type:     annotation
+
+mm_api_new:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+
+mealmatch_pay_pal:
+    resource: "@MealmatchPayPalBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+mm_game_logic:
+    resource: "@MMGameLogicBundle/Resources/config/routing.yml"
+    prefix:   /api/game
+
+mm_api:
+    resource: "@MMApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
+
+mm_web_front:
+    resource: "@MMWebFrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+mm_user:
+    resource: "@MMUserBundle/Controller/"
+    type:     annotation
+    prefix:   /u
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+web_admin_bundle:
+    resource: "@MealmatchWebAdminBundle/Controller/CSVExporterController.php"
+    type:     annotation
+    prefix:   /admin/exporter
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /account
+
+fos_user_register:
+    resource: "@MMUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /api/messages
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /api/community/admin/group
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /login
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+facebook_login:
+    path: /login/check-facebook
+
+paypal_login:
+    path: /login/check-paypal
+
+twitter_login:
+    path: /login/check-twitter
+
+google_login:
+    path: /login/check-google
+
+#always in last position
+#------------>
+#nonexistent_route:
+#    path:     /{url}
+#    defaults: { _controller: MMWebFrontBundle:Exception:show}
+#    requirements:
+#        url: ".+"
+#<-----------

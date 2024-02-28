@@ -1,0 +1,224 @@
+{
+  "name": "mealmatch/webapp",
+  "license": "proprietary",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "MMApiBundle\\": "src/MMApiBundle",
+      "MMUserBundle\\": "src/MMUserBundle",
+      "MMWebFrontBundle\\": "src/MMWebFrontBundle",
+      "Mealmatch\\ApiBundle\\": "src/Mealmatch/ApiBundle",
+      "Mealmatch\\CalendarBundle\\": "src/Mealmatch/CalendarBundle",
+      "Mealmatch\\CouponBundle\\": "src/Mealmatch/CouponBundle",
+      "Mealmatch\\UICouponBundle\\": "src/Mealmatch/UICouponBundle",
+      "Mealmatch\\GameLogicBundle\\": "src/Mealmatch/GameLogicBundle",
+      "Mealmatch\\MangopayBundle\\": "src/Mealmatch/MangopayBundle",
+      "Mealmatch\\MemeMemoryBundle\\": "src/Mealmatch/MemeMemoryBundle",
+      "Mealmatch\\PayPalBundle\\": "src/Mealmatch/PayPalBundle",
+      "Mealmatch\\RestaurantWebFrontBundle\\": "src/Mealmatch/RestaurantWebFrontBundle",
+      "Mealmatch\\SearchBundle\\": "src/Mealmatch/SearchBundle",
+      "Mealmatch\\ServiceTasksBundle\\": "src/Mealmatch/ServiceTasksBundle",
+      "Mealmatch\\WebAdminBundle\\": "src/Mealmatch/WebAdminBundle",
+      "Mealmatch\\WorkflowBundle\\": "src/Mealmatch/WorkflowBundle",
+      "Mealmatch\\UIPublicBundle\\": "src/Mealmatch/UIPublicBundle",
+      "Mealmatch\\UIProfileManagerBundle\\": "src/Mealmatch/UIProfileManagerBundle"
+    },
+    "classmap": [
+      "app/AppKernel.php",
+      "app/AppCache.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "config": {
+    "discard-changes": true,
+    "optimize-autoloader": true,
+    "classmap-authoritative": true,
+    "apcu-autoloader": true
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:Endouble/Symfony3-custom-coding-standard"
+    }
+  ],
+  "require": {
+    "php": "^5|^7.2",
+    "ext-json": "*",
+    "symfony/symfony": "3.4.*",
+    "twig/twig": "@stable",
+    "doctrine/orm": "@stable",
+    "doctrine/doctrine-bundle": "@stable",
+    "symfony/swiftmailer-bundle": "@stable",
+    "symfony/monolog-bundle": "@stable",
+    "symfony/polyfill-apcu": "@stable",
+    "sensio/distribution-bundle": "@stable",
+    "sensio/framework-extra-bundle": "@stable",
+    "incenteev/composer-parameter-handler": "@stable",
+    "friendsofsymfony/user-bundle": "@stable",
+    "friendsofsymfony/rest-bundle": "@stable",
+    "friendsofsymfony/jsrouting-bundle": "@stable",
+    "jms/serializer-bundle": "@stable",
+    "jms/translation-bundle": "dev-master",
+    "hwi/oauth-bundle": "@stable",
+    "twbs/bootstrap": "^3.3",
+    "sensio/generator-bundle": "@stable",
+    "egeloen/ckeditor-bundle": "^5.0",
+    "willdurand/geocoder": "@stable",
+    "willdurand/geocoder-bundle": "@stable",
+    "doctrine/doctrine-migrations-bundle": "@stable",
+    "doctrine/doctrine-fixtures-bundle": "@stable",
+    "knplabs/doctrine-behaviors": "@stable",
+    "symfony/filesystem": "@stable",
+    "knplabs/knp-gaufrette-bundle": "@stable",
+    "aws/aws-sdk-php": "^3.20",
+    "aws/aws-sdk-php-symfony": "^1.2",
+    "nelmio/cors-bundle": "@stable",
+    "jms/di-extra-bundle": "@stable",
+    "whiteoctober/swiftmailerdbbundle": "@stable",
+    "liip/imagine-bundle": "@stable",
+    "white-october/pagerfanta-bundle": "@stable",
+    "friendsofsymfony/http-cache-bundle": "@stable",
+    "salva/jshrink-bundle": "^1.1",
+    "friendsofsymfony/message-bundle": "@stable",
+    "jms/i18n-routing-bundle": "@stable",
+    "fabpot/goutte": "@stable",
+    "php-http/message": "@stable",
+    "easycorp/easyadmin-bundle": "@stable",
+    "adesigns/calendar-bundle": "@stable",
+    "ancarebeca/full-calendar-bundle": "@stable",
+    "simshaun/recurr": "^3.0",
+    "stof/doctrine-extensions-bundle": "@stable",
+    "gedmo/doctrine-extensions": "@stable",
+    "bmatzner/fontawesome-bundle": "@stable",
+    "vich/uploader-bundle": "@stable",
+    "oneup/flysystem-bundle": "@stable",
+    "league/flysystem-aws-s3-v3": "@stable",
+    "symfony/web-server-bundle": "@stable",
+    "cron/cron-bundle": "@stable",
+    "sonata-project/seo-bundle": "@stable",
+    "sideclick/bootstrap-modal-bundle": "@stable",
+    "dmishh/settings-bundle": "2.0.*@dev",
+    "dg/twitter-php": "@stable",
+    "php-http/httplug-bundle": "@stable",
+    "geocoder-php/google-maps-provider": "@stable",
+    "php-http/guzzle6-adapter": "@stable",
+    "mangopay/php-sdk-v2": "^2.3",
+    "gos/web-socket-bundle": "^1.8",
+    "symfony/webpack-encore-bundle": "^1.0",
+    "ext-memcached": "@stable",
+    "dompdf/dompdf": "^0.8.3"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "shivas/versioning-bundle": "@stable",
+    "components/normalize.css": "^3.0",
+    "leafo/scssphp": "@stable",
+    "patchwork/jsqueeze": "^2.0",
+    "symfony/phpunit-bridge": "^3.",
+    "phpspec/phpspec": "^3.0",
+    "phpmetrics/phpmetrics": "^2.4.1",
+    "phpmetrics/composer-extension": "dev-master",
+    "phpunit/phpunit": "@stable",
+    "squizlabs/php_codesniffer": "^3.0",
+    "sebastian/phpcpd": "^3.0",
+    "phpmd/phpmd": "^2.6",
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.0",
+    "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.0",
+    "dama/doctrine-test-bundle": "^5.0"
+
+  },
+  "scripts": {
+    "install-prod": [
+      "php bin/console cache:clear --env=prod --no-debug",
+      "php bin/console assets:install --env=prod --no-debug",
+      "php bin/console fos:js-routing:dump --target=web/static/prod/js-routing.js --env=prod --no-debug"
+    ],
+    "install-stage": [
+      "php bin/console cache:clear --env=stage --no-debug",
+      "php bin/console assets:install --env=stage --no-debug"
+    ],
+    "install-dev": [
+      "@database-autoupdate-dev",
+      "php bin/console cache:clear --env=dev --no-debug",
+      "php bin/console assets:install --symlink --env=dev --no-debug",
+      "php bin/console fos:js-routing:dump --target=web/static/dev/js-routing.js --env=dev --no-debug",
+      "yarn encore dev"
+    ],
+    "install-pipline": [
+      "@database-autoupdate-pipeline",
+      "php bin/console cache:clear --env=pipeline --no-debug",
+      "php bin/console assets:install --env=pipeline --no-debug"
+    ],
+    "install-test": [
+      "@database-autoupdate-test",
+      "php bin/console cache:clear --env=test --no-debug",
+      "php bin/console assets:install --env=test --no-debug",
+      "yarn encore dev"
+    ],
+    "database-autoupdate-dev": [
+      "php bin/console doctrine:schema:update --dump-sql --env=dev >> update-dev-SQL.sql",
+      "php bin/console doctrine:schema:update --force --env=dev --no-debug",
+      "php bin/console doctrine:fixtures:load -n --env=dev --no-debug"
+    ],
+    "database-autoupdate-test": [
+      "php bin/console doctrine:schema:update --dump-sql --env=test > update-test-SQL.sql",
+      "php bin/console doctrine:schema:update --force --env=test",
+      "php bin/console doctrine:migrations:migrate -n --env=test",
+      "php bin/console doctrine:fixtures:load -n --env=test"
+    ],
+    "database-autoupdate-pipeline": [
+      "php bin/console doctrine:schema:update --force --env=pipeline",
+      "php bin/console doctrine:migrations:migrate -n --env=pipeline",
+      "php bin/console doctrine:fixtures:load -n --env=pipeline"
+    ],
+    "database-validate": "php bin/console doctrine:schema:validate --no-debug",
+    "symfony-scripts": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "php bin/console assets:install --no-debug",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+    ],
+    "build-parameters": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ],
+    "post-install-cmd": [
+      "@symfony-scripts",
+      "@install-prod",
+      "@database-validate",
+      "@version"
+    ],
+    "post-update-cmd": [
+      "@symfony-scripts"
+    ],
+    "frbit-post-deploy": [
+      "php bin/console cron:startup --no-debug",
+      "@version"
+    ],
+    "autoformat-src": [
+      "php vendor/bin/php-cs-fixer fix --config=.php_cs.php"
+    ],
+    "version": [
+      "php bin/console app:version:status --no-debug"
+    ]
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
+    "symfony-web-dir": "web",
+    "symfony-tests-dir": "tests",
+    "symfony-assets-install": "relative",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    },
+    "branch-alias": "mealmatch-stage"
+  }
+}

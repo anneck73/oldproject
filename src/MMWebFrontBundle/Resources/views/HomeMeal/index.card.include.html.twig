@@ -1,0 +1,34 @@
+{% trans_default_domain 'Mealmatch' %}
+{#
+This file is used in PublicProMealController for all "index" actions showing one HomeMeal.
+#}
+<div class="meal-result-card flexbox">
+    <div class="meal-result-card-left">
+        <div class="text-center meal-result-card-date">{{ meal.startDateTime|date('d.') }}</br>
+            {{ meal.startDateTime|date('M.') }}
+        </div>
+
+    </div>
+    <div class="meal-result-card-center">
+        {% if meal.status is not same as ("RUNNING") %}<div class="pull-right"><span class="label label-danger beta-badge">Abgelaufen</span></div>{% endif %}
+        {% if meal.status is same as ("RUNNING") %}<a href="{{ path('public_homemeal_show', {'id': meal.id}) }}">{% endif %}
+        <div class="meal-result-card-meal-title">{{ meal.title|length > 45 ? meal.title|slice(0, 45) ~ '...' : meal.title }}</div>
+        <div class="meal-result-card-meal-fulldate">{{ meal.startDateTime|date('d.m.y H:i') }}</div>
+        <div class="meal-result-card-meal-hostnloc">{{ meal.address.postalcode }} {{ meal.address.city }}
+            - {{ meal.host.username }}</div>
+        {% if meal.status is same as ("RUNNING") %}</a>{% endif %}
+    </div>
+    <div class="meal-result-card-right">
+        <div id="mealResultProMealProfileImage" class="meal-result-card-profile-image">
+            <a href="{{ path('public_user_by_username', {'pName': meal.host.username }) }}">
+            {% if meal.host.profile.imageName == "image/udefault.png" %}
+                <img class="img-responsive img-circle mm-object-fit-contain"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+            {% else %}
+                <img class="img-responsive img-circle mm-object-fit-contain"
+                     src="{{ asset(meal.host.profile.imageName, 's3img') }}" alt="Profileimage"/>
+            {% endif %}
+            </a>
+        </div>
+    </div>
+</div>

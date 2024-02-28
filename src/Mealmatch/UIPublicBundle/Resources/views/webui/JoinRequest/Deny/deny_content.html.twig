@@ -1,0 +1,37 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="row">
+    <div class="text-center">
+        {% if joinRequest.createdBy.profile.imageName == "image/udefault.png" %}
+            <img class="center-block img-responsive img-circle"
+                 width="240px"
+                 height="240px"
+                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+        {% else %}
+            <img class="center-block img-responsive img-circle"
+                 width="240px"
+                 height="240px"
+                 src="{{ asset(joinRequest.createdBy.profile.imageName, 's3img') }}" />
+        {% endif %}
+        <p>Username: {{ joinRequest.createdBy }}</p>
+    </div>
+    <div class="text-justify">
+        <h3>Nachricht vom Gast</h3>
+        <blockquote>{{ joinRequest.messageToHost }}</blockquote>
+    </div>
+    <div class="text-justify">
+        <p>{{ 'joinrequest.deny.text-to-host'|trans }}</p>
+    </div>
+
+</div>
+
+{{ form_start(denied_form) }}
+{{ form_widget(denied_form) }}
+<div>
+    <button class="btn btn-lg btn-danger" type="submit">
+
+        {{ 'joinrequest.deny.submit'|trans }}
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+    </button>
+</div>
+{{ form_end(denied_form) }}

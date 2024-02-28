@@ -1,0 +1,53 @@
+{% trans_default_domain 'Mealmatch' %}
+{#
+This file is used in SearchService, and served through a JSON response to the mm-search.js "load" method.
+#}
+
+{% if location_marker is not defined or location_marker is same as(false)%}
+    {% set border %}{% endset %}
+{% else %}
+    {% set border %}border-none{% endset %}
+{% endif %}
+
+<div class="shop-wrap {{ border }}">
+    <div class="shop-logo">
+        <a href="{{ path('public_user_by_username', {'pName': meal.host.username }) }}">
+            {% if meal.host.profile.imageName == "image/udefault.png" %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+            {% else %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset(meal.host.profile.imageName, 's3img') }}" alt="Profileimage"/>
+            {% endif %}
+        </a>
+    </div>
+    <div class="shop-det">
+        <span class="shop-name">{{ meal.tabletopic|length > 45 ? meal.tabletopic|slice(0, 45) ~ '...' : meal.tabletopic }}</span>
+        <div class="shop-dtetime">
+            <span class="icon-calendar"></span><span>{{ meal.getStartDateTime|date('d.m.y') }}</span>
+            <span class="icon-clock"></span><span>{{ meal.getStartDateTime|date('H:i') }} Uhr</span>
+        </div>
+        <span class="icon-location-pin"></span>
+        <div class="shop-location">
+            {{ meal.address.postalcode }} {{ meal.address.city }}
+            - {{ meal.host.restaurantprofile.name }}
+        </div>
+    </div>
+    <div class="view-btn">
+        <a href="#" data-toggle="modal" data-target="#proMealCard-{{ meal.id }}">
+            <button type="button" class="main-btn shop-viewbtn">View</button>
+        </a>
+    </div>
+</div>
+
+<!-- ProMealModal#{{ meal.id }} -->
+<div class="modal fade meal-modal" id="proMealCard-{{ meal.id }}" tabindex="-1" role="dialog" aria-labelledby="proMealModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                {% set proMeal = meal %}
+                {% set rProfile = meal.host.restaurantprofile %}
+                {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+        </div>
+    </div>
+</div>
+

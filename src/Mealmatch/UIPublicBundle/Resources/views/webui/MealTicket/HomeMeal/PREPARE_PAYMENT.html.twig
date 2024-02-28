@@ -1,0 +1,20 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currencySymbol = 'glyphicon-eur' %}
+{{ form_start(payinDataForm) }}
+{{ form_row(payinDataForm.firstName, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.lastName, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.address, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.postalCode, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.city, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.region, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.birthday, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.nationality, { 'attr': {'class': 'tbox'} }) }}
+{{ form_row(payinDataForm.countryOfResidence, { 'attr': {'class': 'tbox'} }) }}
+{% if not ticket.isPayable %}
+    <div class="prepare-pmt-btn">
+        <button class="btn-lg btn-success btn-block">
+            {{ 'mealticket.show.ProMeal.PREPARE_PAYMENT.button'|trans }}
+        </button>
+    </div>
+{% endif %}
+{{ form_end(payinDataForm) }}

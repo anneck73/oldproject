@@ -1,0 +1,149 @@
+/*
+ * Copyright (c) 2017. Mealmatch UG
+ * Author: Wizard <wizard@mealmatch.de>
+ */
+
+
+/*------------------------------------*\
+  # Slider Images
+\*------------------------------------*/
+
+.big-slide {
+  .item {
+    position: relative;
+  }
+}
+
+
+/*------------------------------------*\
+  # Slider Text
+\*------------------------------------*/
+
+.mm-sliderTextBox {
+  position: absolute;
+  bottom: 1.2rem;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  padding: 5px 10px;
+}
+
+.mm-sliderText {
+  text-transform: uppercase;
+  color: $white;
+  border: 3px solid $white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px 40px;
+  font-size: $fs-2s;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .mm-sliderText {
+    font-size: $fs-l !important;
+    padding: 15px 30px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mm-sliderText {
+    font-size: $fs-s !important;
+    padding: 10px 20px !important;
+  }
+}
+
+
+/*------------------------------------*\
+  # 
+\*------------------------------------*/
+
+#bigSlide {
+  /* ****
+   * Margin top depends on NavBar Height on *.index.* pages and wherever
+   * the bigSlide is used ...
+   *
+   */
+
+}
+
+#bigSlide .carousel-caption {
+  color: black;
+  right: 38%;
+  text-align: center;
+  max-width: 500px;
+  left: auto;
+  /*top: auto;*/
+  top: 33%;
+  transform: translateY(-50%);
+  bottom: initial;
+}
+
+/* Same slider ... but only visible on visible-xs */
+#bigSlideXS {
+
+}
+
+#bigSlideXS .carousel-caption {
+  color: black;
+  right: 38%;
+  text-align: center;
+  max-width: 500px;
+  left: auto;
+  /*top: auto;*/
+  top: 33%;
+  transform: translateY(-50%);
+  bottom: initial;
+}
+
+.item {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  max-height: 570px;
+}
+
+.mm-slide-text {
+  margin-left: 5px;
+}
+
+.carousel-control.right {
+
+}
+
+.carousel-control.left {
+
+}
+
+#big-slide-1 .carousel-caption .lead {
+  margin-top: 150px;
+
+  color: white;
+}
+
+#big-slide-2 .carousel-caption .lead {
+  margin-top: 250px;
+  color: black;
+}
+
+#big-slide-3 .carousel-caption .lead {
+  margin-top: 300px;
+  margin-left: 100px;
+  color: white;
+}
+
+#big-slide-4 .carousel-caption .lead {
+
+  color: white;
+}
+
+#big-slide-5 .carousel-caption .lead {
+  margin-top: -125px;
+  margin-left: -200px;
+  color: black;
+}

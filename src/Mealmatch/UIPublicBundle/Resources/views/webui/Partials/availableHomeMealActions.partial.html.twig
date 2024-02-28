@@ -1,0 +1,43 @@
+{#
+    to be included ... shows all available actions for current homemeal.
+#}
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="margin-bottom-half">
+    {% for transition in workflow_transitions(meal) %}
+        <a href="{{ path('doTransitionBaseMeal', { 'id': meal.id, 'transition': transition.name }) }}">
+            <button class="btn btn-155 btn-success">
+                <!-- Bereitstellen -->
+                {% if transition.name == "restart_meal" %}
+                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+
+                    <!-- Veröffentlichen -->
+                {% elseif transition.name == "start_meal" %}
+                    <i class="icon-globe"></i>
+
+                    <!-- Stoppen -->
+                {% elseif transition.name == "stop_meal" %}
+                    <i class="fa fa-hourglass-o"></i>
+                {% endif %}
+                {{ ('transition.' ~ transition.name)|trans }}
+            </button>
+        </a>
+    {% else %}
+        No actions available.
+    {% endfor %}
+</div>
+
+<div>
+    <a name="meal_edit_link" href="{{ path('api_homemeal_manager_show', {'id': meal.id}) }}">
+        <button class="btn btn-smaller btn-white margin-right-half"><i class="icon-eye"></i></button>
+    </a>
+    <a name="meal_edit_link" href="{{ path('api_homemeal_manager_edit', {'id': meal.id}) }}">
+        <button class="btn btn-smaller btn-white margin-right-half"><i class="icon-settings"></i></button>
+    </a>
+    <a class="fb-xfbml-parse-ignore" target="_blank"
+       href="https://www.facebook.com/sharer/sharer.php?u={{ url('public_homemeal_byhash', {'hash': meal.hash} ) }}&amp;src=sdkpreparse">
+        <button class="btn btn-smaller btn-white"><i class="icon-social-facebook"></i></button>
+    </a>
+</div>
+
+

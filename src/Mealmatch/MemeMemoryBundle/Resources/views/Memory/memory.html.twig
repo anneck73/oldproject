@@ -1,0 +1,63 @@
+{# Mealmatch FoodMeme Memory #}
+{% extends '@MealmatchMemeMemory/memory-base.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'about.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-about-circle"></span>{% endset %}
+{% block jsHead %}
+    {% javascripts
+        '@MealmatchMemeMemoryBundle/Resources/public/js/memory/MemoryGame.js'
+        '@MealmatchMemeMemoryBundle/Resources/public/js/memory/Card.js'
+        output='js/mmmemory.js'
+        filter='?jsqueeze'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block page_js %}
+    {% javascripts
+        '@MealmatchMemeMemoryBundle/Resources/public/js/memory/BrowserInterface.js'
+        output='js/mmmbrowserinterface.js'
+        filter='?jsqueeze'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block memory_content %}
+    <section class="memory--menu-bar">
+        <div class="inner">
+            <div class="left"><h1 class="memory--app-name">Mealmatch FoodMeme Memory Game</h1></div>
+            <div class="right"><a href="#settings"><img id="memory--settings-icon" src="{{ asset('images/testbilder/meal-test.jpg') }}" /></a></div>
+        </div>
+    </section>
+    <div class="center-block">
+        <section id="memory--settings-modal" class="valign-table modal show">
+            <div class="valign-cell">
+                <form>
+                    <h2 class="memory--settings-label">Schwierigkeitsgrad:</h2>
+                    <select id="memory--settings-grid">
+                        <option value="2x3">Einfach</option>
+                        <option value="3x4" selected>Mittel</option>
+                        <option value="3x5">Schwer</option>
+                    </select>
+                    <input id="memory--settings-reset" type="submit" value="Spiel Starten" />
+                </form>
+            </div>
+        </section>
+    </div>
+    <section id="memory--end-game-modal" class="valign-table modal">
+        <div class="valign-cell">
+            <div class="wrapper">
+                <h2 id="memory--end-game-message"></h2>
+                <h3 id="memory--end-game-score"></h3>
+            </div>
+        </div>
+    </section>
+    <section id="memory--app-container">
+        <ul id="memory--cards">
+        </ul>
+    </section>
+
+{% endblock %}
+

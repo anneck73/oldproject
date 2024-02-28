@@ -1,0 +1,17 @@
+{% extends '@WEBUI/Layouts/print.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title = ('mealticket.show.'~ticket.basemeal.mealtype~'.'~ticket.status~'.title')|trans %}
+{% set main_header_subtitle = ('mealticket.show.'~ticket.basemeal.mealtype~'.'~ticket.status~'.subtitle')|trans %}
+{% set currencySymbol = 'glyphicon-eur' %}
+{% if ticket.currency == 'USD' %}
+    {% set currencySymbol = 'glyphicon-usd' %}
+{% endif %}
+{# Title Tag #}
+{% block title %}Mealmatch | Ticket#{{ ticket.number }} {{ ticket.status }} {{ ticket.basemeal.mealtype }}{% endblock %}
+{# main content uses includes per MealType and Ticket-Status. #}
+{% block default_main %}
+    <!--// {{ ticket.basemeal.mealtype }}-{{ ticket.status }}:MAIN_CONTENT //-->
+    <div class="container-fluid">
+        {{ include('@WEBUI/MealTicket/'~ticket.basemeal.mealtype~'/PAYED_print.html.twig') }}
+    </div>
+{% endblock %}

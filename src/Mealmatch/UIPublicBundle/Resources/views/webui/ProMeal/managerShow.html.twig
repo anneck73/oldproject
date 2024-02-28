@@ -1,0 +1,32 @@
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% set main_header_title = 'promeal.manager.title'|trans %}
+{% set main_header_subtitle = 'promeal.manager.show.subtitle'|trans %}
+{% set main_header_action_path = path('api_promeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+
+
+{% block main_content %}
+    <div class="container semi-width">
+        <div class="row">
+            <div class="" aria-labelledby="proMealModalLabel">
+                <div class="meal-preview" role="document">
+                    <div class="preview-content">
+                        {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

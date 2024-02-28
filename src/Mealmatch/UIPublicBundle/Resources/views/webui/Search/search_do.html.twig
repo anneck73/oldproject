@@ -1,0 +1,109 @@
+{% extends '@WEBUI/Layouts/search-layout.html.twig' %}
+{#{% extends '@MMWebFront/Layout/search.html.twig' %}#}
+{% trans_default_domain 'Mealmatch' %}
+{% set viewData = {'title': 'meal.search'|trans} %}
+{#
+The following template variables should be passed into this by a controller.
+'mealMarker' => $mealsJson,
+'meals' => $searchResults,
+'mealsJSON' => $currentPageResults
+'searchPanel' => array()
+'resultPager' => $pagerfanta
+#}
+{% block title %}Mealmatch | Suche {% endblock %}
+{% block jsHead %}
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key={{ GMAPS_API_KEY }}">
+    </script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js">
+    </script>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+   {{ parent() }}
+   {{ encore_entry_script_tags('searchJS') }}
+{% endblock %}
+
+{% block search_panel %}
+    <h2 id="resultCount" class="content-title">... loading</h2>
+{% endblock %}
+
+{# Search Results #}
+{% block search_results %}
+    <div class="prettyprint" id="meal-search-results">
+        <!--// Filled by JS //-->
+    </div>
+{% endblock %}
+
+{% block page_js %}{% spaceless %}
+
+    <script type="text/javascript">
+        const map = new GMaps({
+            div: '#map-canvas',
+            lat: 52.5219184,
+            lng: 13.4132147,
+            maxZoom: 15,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
+            streetViewControl: false,
+            mapTypeControl: false
+        });
+        let maxHeight = $( window ).outerHeight(true) - 100;
+        let $currentWidth = $( window ).outerWidth(true);
+        let browserPosition;
+        let markers_data = [];
+        var mmIcon = '{{ asset('bundles/uipublic/images/mm/map_pin_logo.png')}}';
+        GMaps.geolocate({
+            success: function(position) {
+                let browserPosition = position;
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+            },
+            error: function(error) {
+                console.log('Geolocation failed: '+error.message);
+            },
+            not_supported: function() {
+                console.log("Your browser does not support geolocation");
+            },
+            always: function() {
+                console.log('geolocate: successfull!');
+            }
+        });
+        // Routing.generate('my_route_to_expose', { id: 10, foo: "bar" });
+        jsonUrl = Routing.generate('search_do_json',
+            {
+                'searchLocation': '{{ search.city }}',
+                'page': '{{ resultPager.currentPage }}'
+            }
+        );
+        // xhr is to be read by mm-search.js
+        let xhr = $.getJSON(jsonUrl);
+        // and the other stuff could ...
+        var allMarkers = {{ mealMarker|json_encode|raw }};
+        let allResultCount = '{{ meals|length }}';
+        let mealLabel = 'Meal';
+        if (allResultCount > 1) {
+            mealLabel = 'Meals'
+        } else if( allResultCount == 0){
+            mealLabel = 'Oops! No Meals'
+        }
+        let searchCity = '{{ search.city }}';
+        if (searchCity !== '') {
+            $("#resultCount").html(mealLabel + " in "+searchCity+" {{ 'search.found'|trans }}");
+            $("#resultCountXS").html(mealLabel + " in "+searchCity+" {{ 'search.found'|trans }}");
+        } else {
+            $("#resultCount").html(mealLabel + " {{ 'search.found'|trans }}");
+            $("#resultCountXS").html(mealLabel + " {{ 'search.found'|trans }}");
+        }
+
+    </script>
+
+{% endspaceless %}{% endblock %}

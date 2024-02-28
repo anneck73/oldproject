@@ -1,0 +1,131 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% form_theme addLegalUserForm 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme addBankAccountForm 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+{% set swtTitle %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('api_restaurant_profile_manager') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Restaurant Bezahlinformationen</p>
+                        </h3>
+                        <p class="mm-line-dotted-bottom-green">Registrierte Personen:</p>
+                        <p>Eigentümer: {{ pProfile.mangopayID|default('NO MANGOPAY ID!!!') }}</p>
+                        <p>Kontostand (E-Wallet): {{ pProfile.mangopayWalletID|default('NO MANGOPAY WALLET ID!!!') }}</p>
+                        <p>Verknüpftes Bankkonto: {{ pProfile.mangopayBankAccountID|default('NO MANGOPAY BankAccount ID!!!') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// //-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="button-div text-center">
+                                    <a href="#" data-toggle="modal" data-target="#editPaymentAddLegalUser">
+                                        <button class="main-btn">{{ 'restaurantprofile.payment.addLegalUser'|trans }}</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                {% if pProfile.mangopayID is not null %}
+                                    <div class="button-div text-center">
+                                        <a href="#" data-toggle="modal" data-target="#editPaymentAddBankAccount">
+                                            <button class="main-btn">{{ 'restaurantprofile.payment.addBankAccount'|trans }}</button>
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                        <div class="button-div text-center">
+
+                                            <p>Bitte zuerst die Benutzerdate erfolgreich eingeben.</p>
+
+                                        </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                <div class="button-div text-center"><button class="main-btn">{{ 'restaurantprofile.payment.payoutWallet'|trans }}</button></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# Modal to Add Mangopay Legal User #}
+    <div id="editPaymentAddLegalUser" class="modal fade" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Firmendaten:</h3>
+                    {{ form_start(addLegalUserForm) }}
+                    {{ form_row(addLegalUserForm.Name) }}
+                    {{ form_row(addLegalUserForm.Email) }}
+                    {{ form_row(addLegalUserForm.CompanyNumber) }}
+                    {{ form_row(addLegalUserForm.HQAddressLine1) }}
+                    {{ form_row(addLegalUserForm.HQAddressLine2) }}
+                    {{ form_row(addLegalUserForm.HQCity) }}
+                    {{ form_row(addLegalUserForm.HQRegion) }}
+                    {{ form_row(addLegalUserForm.HQPostalCode) }}
+                    {{ form_row(addLegalUserForm.HQCountry) }}
+                    <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Vertretungsberechtigte Person:</h3>
+                    {{ form_row(addLegalUserForm.LRFirstName) }}
+                    {{ form_row(addLegalUserForm.LRLastName) }}
+                    {{ form_row(addLegalUserForm.LRBirthday) }}
+                    {{ form_row(addLegalUserForm.LRCountryOfResidence) }}
+                    {{ form_row(addLegalUserForm.LRNationality) }}
+                    {{ form_row(addLegalUserForm.LREmail) }}
+                    {{ form_row(addLegalUserForm.LRAddressLine1) }}
+                    {{ form_row(addLegalUserForm.LRAddressLine2) }}
+                    {{ form_row(addLegalUserForm.LRAddressCity) }}
+                    {{ form_row(addLegalUserForm.LRAddressRegion) }}
+                    {{ form_row(addLegalUserForm.LRAddressPostalCode) }}
+                    {{ form_row(addLegalUserForm.LRAddressCountry) }}
+                    <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                    {{ form_end(addLegalUserForm) }}
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+    {# Modal to Add Mangopay BankAccount #}
+    <div id="editPaymentAddBankAccount" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {{ form_start(addBankAccountForm) }}
+                <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Kontodaten:</h3>
+                {{ form_row(addBankAccountForm.IBAN) }}
+                {{ form_row(addBankAccountForm.BIC) }}
+                {{ form_row(addBankAccountForm.OwnerName) }}
+                <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Addressdaten:</h3>
+                {{ form_row(addBankAccountForm.OwnerName) }}
+                {{ form_row(addBankAccountForm.Country) }}
+                {{ form_row(addBankAccountForm.Region) }}
+                {{ form_row(addBankAccountForm.PostalCode) }}
+                {{ form_row(addBankAccountForm.City) }}
+                {{ form_row(addBankAccountForm.AddressLine1) }}
+                {{ form_row(addBankAccountForm.AddressLine2) }}
+                <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                {{ form_end(addLegalUserForm) }}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

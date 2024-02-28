@@ -1,0 +1,117 @@
+{#
+This templates contains the content for "My Meals" as shown to a RESTAURANT_USER.
+This template extends the main layout and shows a list of ProMeals.
+This template uses a custom SCSS promeal-index.scss.
+#}
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# Overwrite main_* variables from layout/main #}
+{% set main_header_title = 'promeal.index.title'|trans %}
+{% set main_header_subtitle = 'promeal.index.subtitle'|trans %}
+{% set main_header_action_path = path('api_promeal_new') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-plus"></span><span class="hidden-xs"> {{ 'promeal.create.label'|trans }}</span>
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-meals-circle"></span>{% endset %}
+{# TitleTag im HEAD #}
+{% block title %}Mealmatch | {{ 'promeal.index.title'|trans }}{% endblock %}
+{# Custom Block "stylesheets" from twbs3_base, included in HEAD after webapp.scss #}
+{# My Meals / promeal-index Styles #}
+{% block stylesheets %}
+{% stylesheets filter='?cssrewrite,scssphp'output='css/promeal-index.css'
+    'bundles/mmwebfront/sass/mm/promeal-index.scss' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+{# Block from main/layout #}
+{% block main_content %}{% spaceless %}
+
+    <div class="mm-table">
+
+        <div class="row table-head hidden-xs">
+            <div class="col-xs-1">{{ 'meal.status.label'|trans }}</div>
+            <div class="col-xs-5">{{ 'meal.index.informations'|trans }}</div>
+            <div class="col-xs-4">{{ 'meal.guests'|trans }}</div>
+            <div class="col-xs-2">{{ 'meal.index.available.actions.label'|trans }}</div>
+        </div>
+
+
+        <div class="mm-line-dotted-grey margin-bottom-half"></div>
+        {% for meal in allMeals %}
+            {% set freePlaces = (meal.maxnumberofguest - meal.guests|length) %}
+            {% set maxPlaces = meal.maxnumberofguest %}
+
+        <div class="row padding-top-half">
+                <!-- Status -->
+
+                <div class="col-xs-12 col-sm-1">
+                    <div class="hidden-xs mm-meal-status">
+                        <div class="mm-meal-status-icon fa fa-bullseye
+                                        {% if meal.status == 'RUNNING' %} mm-green
+                                        {% elseif meal.status == 'READY' %} mm-red
+                                        {% elseif meal.status == 'STOPPED' %} mm-light-grey
+                                        {% endif %}" aria-hidden="true"></div>
+                        <p>{{ ('basemeal.status.' ~ meal.status ~ '.label')|trans }}</p>
+                    </div>
+
+                    <div class="visible-xs margin-bottom2">
+                        <p class="mm-meal-status-xs
+                                {% if meal.status == 'RUNNING' %} mm-bg-green
+                                {% elseif meal.status == 'READY' %} mm-bg-red
+                                {% elseif meal.status == 'STOPPED' %} mm-bg-light-grey
+                                {% endif %}" aria-hidden="true">
+                            {{ ('basemeal.status.' ~ meal.status ~ '.label')|trans }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Meal -->
+                <div class="col-xs-12 col-sm-5">
+                    <div class="flexbox">
+                        <div>
+                            <p class="font-weight-300">
+                                {{ meal.title }}
+                            </p>
+                            <p>{{ meal.tableTopic }} am {{ meal.mealEvents.first.startDateTime|date('d.m.y - H:i') }}</p>
+                            <p>{{ meal.guests|length }} {{ 'meal.seats.taken'|trans }} | {{ freePlaces }} {{ 'meal.seats.free'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--// Gäste //-->
+                <div class="col-xs-12 col-sm-3 col-md-4">
+                    {% if meal.guests|length > 0 %}
+                        <div class="flexbox mm-user-icon-list">
+                            {% for guest in meal.guests %}
+
+                                <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                         alt="Profileimage"/>
+                                {% else %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                         alt="Profileimage"/>
+                                {% endif %}
+                                {% set mealOffers = restaurant_service.getSelectedMealOffers(meal, guest) %}
+                                {% for mealOffer in mealOffers %}
+                                    <p class="fs-xxs">{{ mealOffer.name }} {{ mealOffer.price|number_format(2) }} {{ mealOffer.currency }}</p>
+                                {% else %}
+                                    --- ERROR: NO SELECTED MEAL OFFER FOUND ---
+                                {% endfor %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Derzeit noch keine Gäste</p>
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-2 valign-top padding-left-xs">
+                    {{ include('@WEBUI/Partials/availableProMealActions.partial.html.twig') }}
+                </div>
+        </div>
+        <div class="mm-line-dotted-grey margin-bottom-half margin-top-half"></div>
+        {% endfor %}
+
+
+{% endspaceless %}{% endblock %}

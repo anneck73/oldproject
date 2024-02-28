@@ -1,0 +1,148 @@
+{# Meine Home-Meals Verwalten #}
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# Overwrite main_* variables from layout/main #}
+{% set main_header_title = 'meal.index.title'|trans %}
+{% set main_header_subtitle = 'meal.index.subtitle'|trans %}
+{% set main_header_action_path = path('api_homemeal_new') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-plus"></span><span class=""> {{ 'promeal.create.label'|trans }}</span>
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-meals-circle"></span>{% endset %}
+{% block title %}Mealmatch | {{ 'meal.index.title'|trans }}{% endblock %}
+
+{% block main_content %}{% spaceless %}
+
+    <div class="col-md-12">
+        <div class="mela-manager-table table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td class="status-th">{{ 'meal.status.label'|trans }}</td>
+                    <td>{{ 'meal.index.informations'|trans }}</td>
+                    <td>{{ 'meal.guests'|trans }}</td>
+                    <td class="action-th">{{ 'meal.index.available.actions.label'|trans }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for meal in allChildMeals %}
+                {% set freePlaces = (meal.maxnumberofguest - meal.guests|length) %}
+                {% set maxPlaces = meal.maxnumberofguest %}
+                <tr>
+                    <td>
+                        <div class="mm-meal-status">
+                            <div class="mm-meal-status-icon fa fa-bullseye
+                                    {% if meal.status == 'RUNNING' %} mm-green
+                                    {% elseif meal.status == 'READY' %} mm-red
+                                    {% elseif meal.status == 'STOPPED' %} mm-light-grey
+                                    {% elseif meal.status == 'FINISHED' %} mm-light-grey
+                                    {% endif %}" aria-hidden="true"></div>
+                            <p>{{ ('basemeal.status.' ~ meal.status ~ '.label')|trans }}</p>
+                        </div>
+                    </td>
+
+                    <td class="info-cont">
+                        <h3 class="mealinfo-title"> {{ meal.title }}</h3>
+                        <p class="meal-day-time">
+                            <span class="day"><i class="fa fa-calendar icons"></i>{{ meal.mealEvents.first.startDateTime|date('d.m.y - H:i') }}</span>
+                        </p>
+                        <p class="meal-seat">
+                            <span class="seat-available"><i class="icon-pie-chart"></i> {{ meal.guests|length }} {{ 'meal.seats.taken'|trans }} | {{ freePlaces }} {{ 'meal.seats.free'|trans }}</span>
+                        </p>
+                    </td>
+                    <td  class="guest-cont">
+                        {% set item = '' %}
+                        <div id="guest-carousel" class="carousel slide hidden-xs hidden-sm" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for guest in meal.guests %}
+                                {% if loop.first %} {% set item = 'active' %} {% endif %}
+                                {% if (loop.index % 2) == 1 %}
+                                <div class="item {{ item }}">
+                                    <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                        {% if guest.profile.imageName == "image/udefault.png" %}
+                                            <img class="mm-user-icon-small" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                        {% else %}
+                                            <img class="mm-user-icon-small" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                        {% endif %}
+                                    </a>
+                                    {% if loop.last %}
+                                        {{ '</div>' }}
+                                    {% endif %}
+                                {% endif %}
+                                {% if (loop.index % 2) == 0 %}
+                                <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                    {% if guest.profile.imageName == "image/udefault.png" %}
+                                        <img class="mm-user-icon-small" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                    {% else %}
+                                        <img class="mm-user-icon-small" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% set item = '' %}
+                            {% else %}
+                                <p class="guest-notfound">--No Guests Found--</p>
+                            {% endfor %}
+                        </div>
+                        <!-- Left and right controls -->
+                        {% if meal.guests|length > 2 %}
+                            <a class="left carousel-control" href="#guest-carousel" data-slide="prev">
+                                <i class="fa fa-chevron-left"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#guest-carousel" data-slide="next">
+                                <i class="fa fa-chevron-right"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        {% endif %}
+               </div>
+
+        <div id="guest-carousel-mobile" class="carousel slide visible-xs visible-sm" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for guest in meal.guests %}
+                    {% if loop.first %} {% set item = 'active' %} {% endif %}
+                    <div class="item {{ item }}">
+                        <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="guset-pic" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                            {% else %}
+                                <img class="guset-pic" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                            {% endif %}
+                        </a>
+                    </div>
+                    {% set item = '' %}
+                {% else %}
+                    <p class="guest-notfound">--No Guests Found--</p>
+                {% endfor %}
+            </div>
+
+            <!-- Left and right controls -->
+            {% if meal.guests|length > 1 %}
+                <a class="left carousel-control" href="#guest-carousel-mobile" data-slide="prev">
+                    <i class="fa fa-chevron-left"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#guest-carousel-mobile" data-slide="next">
+                    <i class="fa fa-chevron-right"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %}
+        </div>
+
+        </td>
+        <td class="action-cont">
+            {{ include('@WEBUI/HomeMeal/availableHomeMealActions.html.twig') }}
+        </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+{% endspaceless %}{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('mealManager') }}
+{% endblock %}

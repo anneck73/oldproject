@@ -1,0 +1,40 @@
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_test.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!event]
+        console:
+            type:   console
+            channels: [!event, !doctrine]
+        mealmatch:
+            # log all messages (since debug is the lowest level)
+            level:    info
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_mealmatch.log"
+            channels: [security]
+
+security:
+    firewalls:
+        # replace 'main' by the name of your own firewall
+        main:
+            http_basic: ~

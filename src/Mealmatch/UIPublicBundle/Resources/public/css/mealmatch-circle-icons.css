@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'mealmatch-circle-icons';
+  src:  url('../../../../../Mealmatch/UIPublicBundle/Resources/public/fonts/mealmatch-circle-icons.eot?fopf71');
+  src:  url('../../../../../Mealmatch/UIPublicBundle/Resources/public/fonts/mealmatch-circle-icons.eot?fopf71#iefix') format('embedded-opentype'),
+    url('../../../../../Mealmatch/UIPublicBundle/Resources/public/fonts/mealmatch-circle-icons.ttf?fopf71') format('truetype'),
+    url('../../../../../Mealmatch/UIPublicBundle/Resources/public/fonts/mealmatch-circle-icons.woff?fopf71') format('woff'),
+    url('../../../../../Mealmatch/UIPublicBundle/Resources/public/fonts/mealmatch-circle-icons.svg?fopf71#mealmatch-circle-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="mm-icon-"], [class*=" mm-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'mealmatch-circle-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mm-icon-about:before {
+  content: "\e900";
+}
+.mm-icon-meals:before {
+  content: "\e901";
+}
+.mm-icon-default:before {
+  content: "\e902";
+}
+.mm-icon-default-circle:before {
+  content: "\e903";
+}
+.mm-icon-message:before {
+  content: "\e904";
+}
+.mm-icon-message-circle:before {
+  content: "\e905";
+}
+.mm-icon-matches:before {
+  content: "\e906";
+}
+.mm-icon-matches-circle:before {
+  content: "\e907";
+}
+.mm-icon-create-meal:before {
+  content: "\e908";
+}
+.mm-icon-create-meal-circle:before {
+  content: "\e909";
+}
+.mm-icon-meals-circle:before {
+  content: "\e90a";
+}
+.mm-icon-inbox:before {
+  content: "\e90b";
+}
+.mm-icon-imprint:before {
+  content: "\e90c";
+}
+.mm-icon-events:before {
+  content: "\e90d";
+}
+.mm-icon-trust:before {
+  content: "\e90e";
+}
+.mm-icon-guest:before {
+  content: "\e90f";
+}
+.mm-icon-host:before {
+  content: "\e910";
+}
+.mm-icon-press:before {
+  content: "\e911";
+}
+.mm-icon-career:before {
+  content: "\e912";
+}
+.mm-icon-inbox-circle:before {
+  content: "\e913";
+}
+.mm-icon-imprint-circle:before {
+  content: "\e914";
+}
+.mm-icon-events-circle:before {
+  content: "\e915";
+}
+.mm-icon-trust-circle:before {
+  content: "\e916";
+}
+.mm-icon-guest-circle:before {
+  content: "\e917";
+}
+.mm-icon-host-circle:before {
+  content: "\e918";
+}
+.mm-icon-press-circle:before {
+  content: "\e919";
+}
+.mm-icon-career-circle:before {
+  content: "\e91a";
+}
+.mm-icon-about-circle:before {
+  content: "\e91b";
+}
+.mm-icon-help:before {
+  content: "\e91c";
+}
+.mm-icon-help-circle:before {
+  content: "\e91d";
+}
+.mm-icon-circle:before {
+  content: "\e91e";
+}

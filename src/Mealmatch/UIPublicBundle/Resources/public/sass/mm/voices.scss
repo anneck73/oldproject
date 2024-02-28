@@ -1,0 +1,48 @@
+/*
+ * Copyright (c) 2017. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ *
+ * Host & Guest Voices (Startpage)
+ */
+
+/*------------------------------------*\
+  # VOICES
+\*------------------------------------*/
+
+
+#mm-voices{
+    height: 300px;
+}
+
+.mm-voice-text{
+    margin: 30px 0 0 auto;
+}
+
+.mm-voice-name{
+    font-size: $fs-xs;
+}
+
+#mm-voices-slider{
+    margin-top: 50px;
+
+    img{
+        width: 100px;
+        height: auto;
+    }
+
+    .carousel-control{
+        background-image: none;
+        text-shadow: 1px 1px 1px rgba(0,0,0,1);
+        width: auto;
+
+        .fa{
+            color: $green;
+            font-size: 60px;
+        }
+
+    }
+}
+

@@ -1,0 +1,1547 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # BASE
+\*------------------------------------*/
+
+/* BODY */
+html, body {
+  font-size: $fs-base;
+  color: $grey;
+  font-weight: 200;
+  height: 100%;
+
+
+  @include small-devices(){
+    font-size: 18px;
+  }
+
+  @include x-small-devices(){
+    font-size: 18px;
+  }
+
+}
+
+
+
+
+
+body {
+  position: relative;
+}
+
+/* Asterisk after label */
+label.required:after {
+  content: ' *';
+  color: #cc0000;
+}
+
+/* Header fixed */
+header.fixed-header {
+  /*position: fixed;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  z-index: 1000;*/
+}
+
+main.content {
+  @include flexbox();
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  @include align-items(center);
+  height: 100%;
+}
+
+section.main {
+  margin-top: $nav-height; // navbar height
+  
+  @include x-small-devices(){
+    margin-top: $nav-height-xs;
+  }
+}
+
+footer {
+  width: 100%;
+}
+
+
+
+/* Fonts */
+.mm-fontMarke {
+  font-family: $font-marke;
+}
+
+.mm-font {
+  font-family: $font-stack;
+  font-size: $fs-s;
+  font-weight: 200;
+}
+
+.fs-xxs{ font-size: $fs-xxs; }  // 14px
+.fs-xs{ font-size: $fs-xs; }    // 16px
+.fs-xss{ font-size: $fs-xss; }  // 18px
+.fs-s{ font-size: $fs-s; }      // 20px
+.fs-m{ font-size: $fs-m; }      // 24px
+.fs-l{ font-size: $fs-l; }      // 28px
+.fs-xl{ font-size: $fs-xl; }    // 32px
+.fs-xxl{ font-size: $fs-xxl; }  // 36px
+.fs-2s{ font-size: $fs-2s; }    // 40px
+.fs-3s{ font-size: $fs-3s; }    // 50px
+.fs-4s{ font-size: $fs-4s; }    // 60px
+.fs-5s{ font-size: $fs-5s; }    // 80px
+
+
+a:link, a:active, a:visited {
+  color: $grey;
+}
+
+a.mm-green:link, a.mm-green:active, a.mm-green:visited {
+  color: $green;
+}
+
+a:hover, a:visited, a:focus{
+  text-decoration: none;
+}
+
+/* Headers */
+h1 {
+  font-size: $fs-l;
+  // color: #606061;
+
+}
+
+h2 {
+  font-size: $fs-m;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  //color: #808080;
+  //text-decoration: underline;
+}
+
+h3 {
+  font-size: $fs-xss;
+  font-weight: 200;
+  color: $light-grey;
+  margin: 5px 0;
+}
+
+h4 {
+  font-size: $fs-xss;
+  font-weight: 300;
+}
+
+.font-weight-200 {
+  font-weight: 200;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+b, strong{
+  font-weight: 300;
+}
+
+/*------------------------------------*\
+  # FLEXBOX
+\*------------------------------------*/
+
+.flexbox {
+  @include flexbox();
+}
+
+// Centering everything
+.fl-center {
+  @include justify-content(center);
+  @include align-content(center);
+  @include align-items(center);
+}
+
+// Default is row
+.fl-column {
+  @include flex-direction(column);
+}
+
+// Default is no-wrap
+.fl-wrap {
+  @include flex-wrap(wrap);
+}
+
+.fl-justify-space-between {
+  @include justify-content(space-between);
+}
+
+.fl-align-items-center {
+  @include align-items(center);
+}
+
+/*------------------------------------*\
+  # BASE CLASSES
+\*------------------------------------*/
+
+
+
+
+/* Text */
+.mm-setFirstLetter {
+  color: $green;
+}
+
+/* Vertikal */
+.mm-shorten-long-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  p {
+    margin: 0;
+  }
+
+}
+
+// Horizontal - you need a width
+.mm-shorten-long-text-horizontal{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Needed for JS: shortenTextAndShowMore
+.morecontent span {
+  display: none;
+}
+
+/* Colors */
+.mm-green {
+  /* 0.0.14-beta color: #86bd24; */
+  color: $green;
+}
+
+.mm-bg-green {
+  background-color: $green;
+}
+
+.mm-red {
+  color: $red;
+}
+
+.mm-bg-red {
+  background-color: $red;
+}
+
+.mm-transparent{
+  color: transparent;
+}
+
+// NOCH ANPASSEN //
+.mm-black {
+  color: #9f9f9e;
+}
+
+.mm-white {
+  color: #F1F1F1;
+}
+
+.mm-grey {
+  color: #293133;
+}
+
+// ANPASSEN ENDE //
+
+.mm-light-grey {
+  color: $light-grey;
+}
+
+.mm-bg-light-grey {
+  background-color: $light-grey;
+}
+
+.mm-bg-light-light-grey {
+  background-color: $light-light-grey;
+}
+
+.mm-bg-light-white{
+  background-color: $light-white;
+}
+
+
+.mm-circle-icon {
+  font-size: 5rem;
+  color: $green;
+
+  @include x-small-devices(){
+    font-size: 4rem;
+  }
+  /*position: absolute;
+  top: 0;
+  left: 3rem;*/
+}
+
+
+/* kann wahrscheinlich raus (se, 01.18) */
+.mm-circle {
+  width: $fs-5s;
+  height: $fs-5s;
+  border-radius: 50%;
+  font-size: $fs-2s;
+  color: $green;
+  line-height: 5.3rem;
+  text-align: center;
+  border: 2px solid $green;
+}
+
+.mm-point {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+}
+
+/* ENDE - kann wahrscheinlich raus (se, 01.18) */
+
+// no
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+
+// padding
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.padding-top-half{
+  padding-top: 0.5rem;
+}
+
+.padding-top{
+  padding-top: 1rem;
+}
+
+.padding-left-xs{
+  padding-left: 0;
+
+  @include x-small-devices(){
+    padding-left: 15px;
+  }
+}
+
+
+// margin grid
+.margin-grid{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+// margin right
+.margin-right-half {
+  margin-right: 0.5rem;
+}
+
+// margin top
+.margin-top-half{
+  margin-top: 0.5rem;
+}
+
+.margin-top{
+  margin-top: 1rem;
+}
+
+.margin-top1-5 {
+  margin-top: 1.5rem;
+}
+
+.margin-top3 {
+  margin-top: 3rem;
+}
+
+
+// margin bottom
+.margin-bottom-half {
+  margin-bottom: 0.5rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.margin-bottom1-5 {
+  margin-bottom: 1.5rem;
+}
+
+.margin-bottom2 {
+  margin-bottom: 2rem;
+}
+
+.margin-bottom3 {
+  margin-bottom: 3rem;
+}
+
+
+// full
+.full-width{
+  width: 100%;
+}
+
+.full-height{
+  height: 100%;
+}
+
+// opacity
+.opacity0{
+  opacity: 0;
+}
+
+// position
+.position-relative {
+  position: relative;
+}
+
+// images
+.mm-user-icon-small {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.mm-img-meal-q-small {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+
+
+// object-fit
+.mm-object-fit-contain{
+  object-fit: contain;
+}
+
+.mm-object-fit-cover{
+  object-fit: cover;
+}
+
+// clickable link: an a with this class makes the whole div clickable
+.whole-link{
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Box
+.mm-green-box{
+  
+  position: relative;
+  width: 230px;
+
+  .inner{
+    border: 1px dotted $green;
+    border-radius: 2px 2px 0 0;
+    background-color: $light-white;
+    border-bottom: 0px;
+    padding: 10px 20px 10px 20px;
+    font-size: $fs-xss;
+  }
+
+  select{
+    max-width: 145px;
+  }
+
+  button{
+    border-radius: 0 0 2px 2px;
+    height: 40px;
+    width: 100%;
+  }
+
+}
+
+// Lines
+.mm-line-dotted{
+  border-top: 1px dotted $green;
+  margin: 0 30px 1rem 30px;
+}
+
+.mm-line-dotted-grey{
+  border-top: 2px dotted $light-grey;
+}
+
+
+.mm-line-dotted-bottom-green{
+  border-bottom: 2px dotted $green;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+// Breadcrumb
+.breadcrumb{
+  position: absolute;
+  left: 0;
+  font-size: $fs-xxs;
+  padding: 5px 10px;
+}
+
+// Cursor
+.pointer{
+  cursor: pointer;
+}
+
+/*------------------------------------*\
+  # FORM CLASSES
+\*------------------------------------*/
+
+.btn {
+  border-radius: 4px;
+  border: none;
+}
+
+.btn-155 {
+  width: 155px;
+  height: 40px;
+}
+
+.btn-80p {
+  width: 80%;
+  height: 35px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.btn-small {
+  width: 60px;
+  height: 33px;
+  span{
+    font-size: 16px;
+  }
+}
+
+.btn-smaller {
+  width: 45px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.btn-disabled {
+  background-color: $white;
+  color: $light-grey;
+  border: 1px dashed $light-grey;
+  font-size: 1rem;
+
+  &:focus, &:focus, &:hover, &:active{
+    color: $light-grey;
+  }
+}
+
+.btn-red {
+  background-color: $red;
+  color: $grey;
+  border: 1px solid $grey;
+  font-size: 1rem;
+}
+
+.btn-green {
+  background-color: $green;
+  color: $grey;
+  border: 1px solid $grey;
+  font-size: 1rem;
+}
+
+.btn-white {
+  background-color: $white;
+  color: $grey;
+  border: 1px solid $grey;
+  font-size: 1rem;
+}
+
+a.btn-delete{
+  padding: 9px 12px;
+}
+
+.btn-delete {
+  background-color: $red;
+  color: $white;
+  border: none;
+  font-size: 16px;
+
+  &:before {
+    font-family: "simple-line-icons";
+    content: "\e054";
+    display: inline-block;
+  }
+
+  &:hover {
+    background-color: rgba($red, 0.8);
+    color: $white;
+  }
+}
+
+.btn-danger {
+  background: $red none;
+}
+
+a.btn{
+  color: $white;
+}
+
+.btn-xs-right{
+  position: absolute;
+  right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+
+.input-group {
+  input, .btn-success {
+    height: 32px;
+  }
+}
+
+.btn-success:focus,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success,
+.btn-success {
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+
+.btn-success:focus,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success,
+.btn-success{
+  background: $green;
+}
+
+
+.btn-success{
+
+  &:hover{
+    background-color: rgba($green, 0.8);
+    color: $white;
+  }
+}
+
+.btn-save {
+  color: $white;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+button.close{
+  font-weight: 200;
+  opacity: initial;
+  color: $grey;
+}
+
+.form-control:focus {
+  border-color: $green;
+  webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($green, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($green, .6)
+}
+
+label {
+  font-weight: 200;
+  font-size: $fs-xss;
+  margin-bottom: 0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.mm-tab-content {
+  input, select {
+    background-color: $white;
+    border: 1px solid #d1d1d1;
+    color: $grey;
+    font-size: $fs-xs;
+    padding: 0.3rem 0.5rem;
+  }
+
+  input{
+    height: 1.8rem;
+  }
+
+  input[type='checkbox']{
+    height: initial;
+  }
+
+  .checkbox label,
+  .radio label{
+    font-weight: 300;
+  }
+}
+
+
+#mealmatch_apibundle_meal_promeal_notes_categories{
+  border-top: 1px solid #F4F4F4;
+}
+
+
+/* ALERTS */
+
+.alert-warning{
+  background: $light-green none;
+  border: 1px solid #ddd;
+  color: $grey;
+}
+
+
+
+/* Switcher */
+
+.onoffswitch {
+  position: relative;
+  width: 4.8rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  .onoffswitch-checkbox {
+    display: none;
+  }
+
+  .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 30px;
+  }
+
+  .onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+
+    &:before, &:after {
+      display: block;
+      float: left;
+      width: 50%;
+      height: 30px;
+      padding: 0;
+      line-height: 30px;
+      font-size: 20px;
+      color: $white;
+      box-sizing: border-box;
+    }
+
+    &:before {
+      content: "ON";
+      padding-left: 12px;
+      background-color: $green;
+      color: $white;
+    }
+
+    &:after {
+      content: "OFF";
+      padding-right: 14px;
+      background-color: $light-light-grey;
+      color: $white;
+      text-align: right;
+    }
+
+  }
+
+  .onoffswitch-switch {
+    display: block;
+    width: 15px;
+    margin: 7.5px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 64px;
+    border: 1px solid #999999;
+    border-radius: 30px;
+    transition: all 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0;
+  }
+}
+
+.onoffswitch-label-right {
+  position: absolute;
+  top: 4px;
+}
+
+/*------------------------------------*\
+  # STARTPAGE
+\*------------------------------------*/
+
+#mm-content-startpage {
+  background-color: $white;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.mm-container-lg {
+  width: 100%;
+}
+
+/*------------------------------------*\
+
+  # STANDARD PAGES - HEADER
+
+\*------------------------------------*/
+
+#mm-header {
+  position: relative;
+}
+
+.mm-header-box {
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top: 50%;
+  bottom: 50%;
+}
+
+.mm-header-title {
+  font-size: $fs-3s;
+  color: $white;
+  text-transform: uppercase;
+  font-weight: 200;
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.57);
+}
+
+/*------------------------------------*\
+
+  # TABs
+
+\*------------------------------------*/
+
+.mm-tab-content {
+  border: none;
+  background-color: $light-white;
+  padding: 1.5rem;
+  border-radius: 2px;
+
+  .mm-tab-section{
+    margin: -1px -31px -1px -30px;
+    padding: 15px 30px 30px;
+    background: $light-green;
+    border-top: 1px dashed #979797;
+    border-bottom: 1px dashed #979797;
+  }
+}
+
+ul.tabs-right {
+
+  //display: inline-block; // evtl. ueberfluessig (se, 01.18)
+
+  li {
+    padding: 0;
+    border-bottom: 1px solid $light-white;
+    margin-top: 0;
+
+    &.active a {
+      background-color: $light-white;
+      border-left: 4px solid $green;
+    }
+
+    &.action a {
+      background-color: $light-white;
+      border-left: 4px solid orange;
+
+      &:hover {
+        background-color: orange;
+        color: $white;
+      }
+
+    }
+
+    a {
+      padding: 0.5rem 1rem;
+      border-radius: 0 2px 2px 0;
+      @include t-ease-background(0.5s);
+
+      span {
+        padding-right: 0.5rem;
+      }
+
+      &:hover {
+        background-color: $green;
+        color: $white;
+      }
+    }
+
+    &:last-child, &.active {
+      border-bottom: none;
+    }
+
+  }
+}
+
+/*------------------------------------*\
+
+  # TABLE CLASSES
+
+\*------------------------------------*/
+
+.mm-table {
+
+  width: 100%;
+  font-size: $fs-xs;
+
+  thead th, .table-head {
+    font-size: $fs-xxs;
+    font-weight: 200;
+  }
+
+  thead th, tbody td {
+    padding-left: 0;
+    padding-right: 30px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  th, tr {
+    border-bottom: 1px dashed $light-grey;
+  }
+
+  tfoot tr{
+    border-bottom: 0;
+  }
+
+  th.transparent, tr.transparent{
+    border-bottom-color: transparent;
+  }
+
+  td {
+    padding: 0.5rem 0;
+    font-size: $fs-xs;
+
+    p {
+      margin: 0;
+    }
+
+    .mm-status {
+      height: 40px;
+    }
+
+  }
+
+  .mm-line-dotted-grey{
+    @nclude x-small-devices(){
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+
+  }
+
+}
+
+.valign-top{
+  vertical-align: top;
+}
+
+/*----------------------------------------------------------------------------------------*\
+  # MAIN LAYOUT
+\*----------------------------------------------------------------------------------------*/
+.mm-layout-main-header-title-box {
+  padding-left: 0;
+
+   @include x-small-devices(){
+    text-align: center;
+  }
+}
+ 
+
+
+/*----------------------------------------------------------------------------------------*\
+  # User-icon-list // ausgerichtet auf meals // evtl. ueberarbeiten
+\*----------------------------------------------------------------------------------------*/
+
+
+.mm-user-icon-list {
+  img {
+
+    &:nth-child(4) {
+      margin-right: 0;
+    }
+
+    &:nth-child(n+5) {
+      margin-bottom: 0;
+    }
+
+    @include flex-wrap(wrap);
+  }
+
+  @include x-small-devices(){
+    @include justify-content(center);
+    @include align-content(center);
+    @include align-items(center);
+    background-color: $light-white;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem;
+
+    img{
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+/*----------------------------------------------------------------------------------------*\
+  # NOCH NICHT SCSS-KONFORM
+\*----------------------------------------------------------------------------------------*/
+
+.nav-tabs > li {
+  width: 50%;
+  text-align: center;
+}
+
+.mm-well {
+  background-color: #FFFFFF;
+  padding: 15px 15px 5px 15px;
+}
+
+.mm-body {
+  /* background-color: #86bd24; */
+  background-color: #FFFFFF;
+  font-family: $font-stack;
+  font-weight: 200;
+  visibility: visible;
+}
+
+#mm-bodywrap {
+  width: 100%;
+  height: 100vh;
+}
+
+
+.mm-user-dropdown-xs {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.mm-navbar-public .mm-user-dropdown > a {
+  position: relative;
+}
+
+.mm-navbar-public-trans .mm-user-dropdown > a {
+  position: relative;
+}
+
+/** Text beside Logo */
+.mm-navbar-mealmatch {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  height: 48px;
+}
+
+.btn.raised {
+  box-shadow: 0 3px 0 0 #808080;
+}
+
+.btn.raised:active, .btn.raised.active {
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
+}
+
+#mm-starter {
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  font-family: "Caibir Light, Verdana, sans serife", Verdana, serif;
+  font-size: 11px;
+
+}
+
+.mm-starter-box {
+  border: 1px solid #0f0f0f;
+  height: 80px;
+  padding-top: 5px;
+}
+
+#map-canvas {
+  height: 100%;
+  width: 100%;
+}
+
+#a, #b {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+}
+
+#a {
+  margin-top: 5px;
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 35%;
+}
+
+#b {
+  text-align: justify;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 65%;
+}
+
+.mm-profile-image {
+
+}
+
+/** bootstrap recommends this fix for firefox table problems */
+@-moz-document url-prefix() {
+  fieldset {
+    display: table-cell;
+  }
+}
+
+/* MM Jumbotron*/
+.mm-jumbotron {
+  padding-top: 15px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #FFFFFF;
+}
+
+.mm-jumbotron h1,
+.mm-jumbotron .h1 {
+  color: inherit;
+}
+
+.mm-jumbotron p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.mm-jumbotron > hr {
+  border-top-color: #d5d5d5;
+}
+
+.container .mm-jumbotron,
+.container-fluid .mm-jumbotron {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 6px;
+}
+
+.mm-jumbotron .container {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .mm-jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .mm-jumbotron,
+  .container-fluid .mm-jumbotron {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .mm-jumbotron h1,
+  .mm-jumbotron .h1 {
+    font-size: 38px;
+  }
+}
+
+.popover {
+  min-width: 350px;
+}
+
+.mm-alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2000;
+
+}
+
+.mm-alert-noautoremove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2000;
+
+}
+
+.mm-meal-modal {
+  background-color: #9f9f9e;
+}
+
+// ProMeal/HomeMeal Manager
+#mm-promeal-manager .nav-tabs > li {
+  width: 25%;
+}
+
+#mm-promeal-manager .nav-tabs > li > a {
+  border-bottom-color: $green;
+}
+
+#mm-promeal-manager .nav-tabs > li.active > a {
+  border-left-color: $green;
+  border-right-color: $green;
+  border-top-color: $green;
+  border-bottom-color: transparent;
+}
+
+#mm-homemeal-manager .nav-tabs > li {
+  width: 25%;
+}
+
+#mm-homemeal-manager .nav-tabs > li > a {
+  border-bottom-color: $green;
+}
+
+#mm-homemeal-manager .nav-tabs > li.active > a {
+
+  border-left-color: $green;
+  border-right-color: $green;
+  border-top-color: $green;
+  border-bottom-color: transparent;
+}
+
+#mm-userprofile-manager .nav-tabs > li {
+  width: 25%;
+}
+
+#mm-userprofile-manager .nav-tabs > li > a {
+
+  border-bottom-color: $green;
+
+}
+
+#mm-userprofile-manager .nav-tabs > li.active > a {
+
+  border-left-color: $green;
+  border-right-color: $green;
+  border-top-color: $green;
+  border-bottom-color: transparent;
+
+}
+
+.mm-search-btn {
+  position: relative;
+  top: 30px;
+  left: 15px;
+}
+
+.mm-register-title {
+  /* not used yet */
+}
+
+.mm-accordion-panel-host-image {
+  margin-top: -5px;
+  margin-right: -10px;
+}
+
+.mm-accordion-collapse-places {
+  margin-top: 0;
+  margin-right: 0;
+
+}
+
+.mm-accordion-collapse-action {
+  margin-top: 0;
+  margin-right: 0;
+}
+
+.mm-panel-heading {
+  text-align: center;
+}
+
+.mm-panel-body {
+  padding: 0;
+}
+
+.mm-accordion-collapse-content {
+  margin-top: 25px;
+}
+
+.mm-accordion-panel-title {
+  max-width: 480px;
+}
+
+.mm-accordion-panel-location {
+
+}
+
+.mm-imprint p {
+  font-size: small;
+}
+
+.mm-version {
+  color: #777776;
+  font-size: x-small;
+}
+
+
+
+.mm-navbar-brand-dropdown {
+  margin-top: 0;
+}
+
+.mm-navbar-brand.dropdown-toggle {
+  padding-top: 15px;
+}
+
+.mm-dropdown-menu.dropdown-brand {
+  margin-left: -15px;
+}
+
+#mm-brand-dropdown {
+  width: 100%;
+  margin-top: 40px;
+  border: 0;
+  border-radius: 0;
+  z-index: 5;
+}
+
+#mm-brand-dropdown-xs {
+  width: 100%;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 0;
+  z-index: 5;
+}
+
+#mm-user-dropdown-xs {
+  width: 250px;
+  border: 0;
+  border-radius: 0;
+  z-index: 5;
+  background-color: #86bd24;
+  margin-right: -5px;
+}
+
+.dropdown .dropdown-menu {
+  -webkit-transition: max-height 0.3s, opacity 0.2s 0.1s, visibility 0s 0.3s;
+  -moz-transition: max-height 0.3s, opacity 0.2s 0.1s, visibility 0s 0.3s;
+  -ms-transition: max-height 0.3s, opacity 0.2s 0.1s, visibility 0s 0.3s;
+  -o-transition: max-height 0.3s, opacity 0.2s 0.1s, visibility 0s 0.3s;
+  transition: max-height 0.3s, opacity 0.2s 0.1s, visibility 0s 0.3s;
+
+  display: block;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown.open .dropdown-menu {
+  -webkit-transition: max-height 0.3s, opacity 0.2s, visibility 0s;
+  -moz-transition: max-height 0.3s, opacity 0.2s, visibility 0s;
+  -ms-transition: max-height 0.3s, opacity 0.2s, visibility 0s;
+  -o-transition: max-height 0.3s, opacity 0.2s, visibility 0s;
+  transition: max-height 0.3s, opacity 0.2s, visibility 0s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  background: #86bd24 linear-gradient(to bottom right, #86bd24 0, #FFFFFF 100%);
+}
+
+.mm-edit-action-panel {
+  box-sizing: border-box;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.mm-panel-titel-button {
+
+}
+
+.mm-btn-panel {
+  margin-top: -8px;
+  margin-right: -13px;
+}
+
+#layout {
+  height: 1px;
+}
+
+
+
+
+#mm-public-search-config-modal {
+  border: 1px solid #86bd24;
+}
+
+
+
+.mm-map-control {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.mm-map-control-wrap {
+  border-top: 1px solid black;
+}
+
+.toggle-active {
+  color: #FFFFFF;
+}
+
+.toggle-inactive {
+  color: black;
+}
+
+#toggle-list {
+
+}
+
+#toggle-map {
+
+}
+
+.mm-text {
+  color: $grey;
+  font-size: 1rem;
+  //text-align: justify;
+
+}
+
+.mm-question-sign {
+  position: absolute;
+  right: 15px;
+  top: 0;
+}
+
+.mm-question-sign:hover,
+.mm-question-sign:active {
+  color: #86bd24;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.mm-spacer {
+  height: 1.5rem;
+}
+
+.mm-help-icon, .mm-help-icon:active, .mm-help-icon:hover, .mm-help-icon:focus {
+  text-decoration: none;
+  color: #9f9f9e;
+
+}
+
+.mm-help-icon:active, .mm-help-icon:hover, .mm-help-icon:focus {
+  font-size: larger;
+  color: #86bd24;
+}
+
+.mm-subtitle {
+  margin-top: -20px;
+}
+
+.mm-search-container {
+  padding-right: 0;
+}
+
+.mm-submit-btn-container {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  padding-right: 25px;
+}
+
+
+/*------------------------------------*\
+ Used in Layouts/main.html.twig
+\*------------------------------------*/
+
+.mm-layout-main-left {
+  padding-right: 0;
+}
+
+.mm-layout-main-header {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.mm-layout-main-header-box {
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top: 50%;
+  bottom: 50%;
+}
+
+.mm-layout-main-action {
+
+}
+
+.mm-layout-main-content {
+  padding-left: 0;
+}
+
+.mm-layout-header-title {
+  font-size: $fs-3s;
+  color: $white;
+  text-transform: uppercase;
+  font-weight: 200;
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.57);
+
+  @include small-devices(){
+    font-size: $fs-2s;  
+  }
+
+  @include x-small-devices(){
+    font-size: $fs-xxl;  
+  }
+}
+
+
+
+.layout-main-bottom {
+
+  .carousel-inner {
+    height: 250px;
+  }
+
+}

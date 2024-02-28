@@ -1,0 +1,24 @@
+{% extends '@WEBUI/Layouts/default.html.twig' %}
+{% block default_main%}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-push-2">
+                <h3>Coupon Wallet</h3>
+                <p>Betrag in Wallet {{ couponWallet.Balance.Amount / 100 }} {{ couponWallet.Balance.Currency }}</p>
+                CouponWallet: {{ couponWallet.Id }}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10 col-lg-push-2">
+                <h3>Einzahlen</h3>
+                {{ form_start(amountForm) }}
+                {{ form_row(amountForm.amount) }}
+                <div class="button-div text-center"><button class="main-btn">Einzahlen</button></div>
+                {{ form_end(amountForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

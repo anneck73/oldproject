@@ -1,0 +1,301 @@
+# Desc: /api/address/{id}
+address_delete: '/api/address/{id}'
+
+# Desc: /api/address/{id}/edit
+address_edit: '/api/address/{id}/edit'
+
+# Desc: /api/address/
+address_index: /api/address/
+
+# Desc: /api/address/new
+address_new: /api/address/new
+
+# Desc: /api/address/{id}
+address_show: '/api/address/{id}'
+
+# Desc: /becomeHost
+become_host: /becomeHost
+
+# Desc: /contactEmailSend
+contact_email_send: /contactEmailSend
+
+# Desc: /contact
+contact_show_form: /contact
+
+# Desc: /login/check-facebook
+facebook_login: /login/check-facebook
+
+# Desc: /api/messages/deleted
+fos_message_deleted: /api/messages/deleted
+
+# Desc: /api/messages/
+fos_message_inbox: /api/messages/
+
+# Desc: /api/messages/search
+fos_message_search: /api/messages/search
+
+# Desc: /api/messages/sent
+fos_message_sent: /api/messages/sent
+
+# Desc: /api/messages/{threadId}/delete
+fos_message_thread_delete: '/api/messages/{threadId}/delete'
+
+# Desc: /api/messages/new
+fos_message_thread_new: /api/messages/new
+
+# Desc: /api/messages/{threadId}/undelete
+fos_message_thread_undelete: '/api/messages/{threadId}/undelete'
+
+# Desc: /api/messages/{threadId}
+fos_message_thread_view: '/api/messages/{threadId}'
+
+# Desc: /profile/change-password
+fos_user_change_password: /profile/change-password
+
+# Desc: /account/edit
+fos_user_profile_edit: /account/edit
+
+# Desc: /account/
+fos_user_profile_show: /account/
+
+# Desc: /register/check-email
+fos_user_registration_check_email: /register/check-email
+
+# Desc: /register/confirm/{token}
+fos_user_registration_confirm: '/register/confirm/{token}'
+
+# Desc: /register/confirmed
+fos_user_registration_confirmed: /register/confirmed
+
+# Desc: /register/
+fos_user_registration_register: /register/
+
+# Desc: /resetting/check-email
+fos_user_resetting_check_email: /resetting/check-email
+
+# Desc: /resetting/request
+fos_user_resetting_request: /resetting/request
+
+# Desc: /resetting/reset/{token}
+fos_user_resetting_reset: '/resetting/reset/{token}'
+
+# Desc: /resetting/send-email
+fos_user_resetting_send_email: /resetting/send-email
+
+# Desc: /login_check
+fos_user_security_check: /login_check
+
+# Desc: /login
+fos_user_security_login: /login
+
+# Desc: /logout
+fos_user_security_logout: /logout
+
+# Desc: /login/check-google
+google_login: /login/check-google
+
+# Desc: /help
+help: /help
+
+# Desc: /
+home: /
+
+# Desc: /variation/{variant}
+home_variation: '/variation/{variant}'
+
+# Desc: /login/
+hwi_oauth_connect: /login/
+
+# Desc: /login/registration/{key}
+hwi_oauth_connect_registration: '/login/registration/{key}'
+
+# Desc: /login/service/{service}
+hwi_oauth_connect_service: '/login/service/{service}'
+
+# Desc: /login/{service}
+hwi_oauth_service_redirect: '/login/{service}'
+
+# Desc: /invite/emailSend
+invite_email_send: /invite/emailSend
+
+# Desc: /invite/
+invite_show_form: /invite/
+
+# Desc: /api/joinrequest/{hash}/accept
+joinrequest_accept: '/api/joinrequest/{hash}/accept'
+
+# Desc: /api/joinrequest/{id}
+joinrequest_delete: '/api/joinrequest/{id}'
+
+# Desc: /api/joinrequest/{hash}/deny
+joinrequest_deny: '/api/joinrequest/{hash}/deny'
+
+# Desc: /api/joinrequest/{id}/edit
+joinrequest_edit: '/api/joinrequest/{id}/edit'
+
+# Desc: /api/joinrequest/
+joinrequest_index: /api/joinrequest/
+
+# Desc: /api/joinrequest/new
+joinrequest_new: /api/joinrequest/new
+
+# Desc: /api/joinrequest/{hash}/payed
+joinrequest_payed: '/api/joinrequest/{hash}/payed'
+
+# Desc: /api/joinrequest/{id}
+joinrequest_show: '/api/joinrequest/{id}'
+
+# Desc: /categories
+json_categories: /categories
+
+# Desc: /s/json/
+json_search: /s/json/
+
+# Desc: /api/map/
+map_index: /api/map/
+
+# Desc: /api/meal/{id}/addGuest
+meal_add_guest: '/api/meal/{id}/addGuest'
+
+# Desc: /api/meal/{id}/addJoinRequest
+meal_add_join_request: '/api/meal/{id}/addJoinRequest'
+
+# Desc: /meal/byLocAddress/{rLocAdd}
+meal_by_loc_address: '/meal/byLocAddress/{rLocAdd}'
+
+# Desc: /api/meal/{id}
+meal_delete: '/api/meal/{id}'
+
+# Desc: /api/meal/{id}/edit
+meal_edit: '/api/meal/{id}/edit'
+
+# Desc: /api/meal/
+meal_index: /api/meal/
+
+# Desc: /loc/{locationSearch}
+meal_loc_search: '/loc/{locationSearch}'
+
+# Desc: /api/meal/new
+meal_new: /api/meal/new
+
+# Desc: /s2/
+meal_search: /s2/
+
+# Desc: /api/meal/{id}
+meal_show: '/api/meal/{id}'
+
+# Desc: /api/meal/{id}/startOffering
+meal_start: '/api/meal/{id}/startOffering'
+
+# Desc: /api/meal/{id}/stop
+meal_stop: '/api/meal/{id}/stop'
+
+# Desc: /api/mealcategories/{id}
+mealcategories_delete: '/api/mealcategories/{id}'
+
+# Desc: /api/mealcategories/{id}/edit
+mealcategories_edit: '/api/mealcategories/{id}/edit'
+
+# Desc: /api/mealcategories/
+mealcategories_index: /api/mealcategories/
+
+# Desc: /api/mealcategories/new
+mealcategories_new: /api/mealcategories/new
+
+# Desc: /api/mealcategories/{id}
+mealcategories_show: '/api/mealcategories/{id}'
+
+# Desc: /api/mealevent/{id}
+mealevent_delete: '/api/mealevent/{id}'
+
+# Desc: /api/mealevent/{id}/edit
+mealevent_edit: '/api/mealevent/{id}/edit'
+
+# Desc: /api/mealevent/
+mealevent_index: /api/mealevent/
+
+# Desc: /api/mealevent/new
+mealevent_new: /api/mealevent/new
+
+# Desc: /api/mealevent/{id}
+mealevent_show: '/api/mealevent/{id}'
+
+# Desc: /about
+mm_about: /about
+
+# Desc: /Aktionen
+mm_Aktionen: /Aktionen
+mm_aktionen: /aktionen
+
+# Desc: /career
+mm_career: /career
+
+# Desc: /Events
+mm_events: /events
+mm_Events: /Events
+
+# Desc: /GutGastgeben
+mm_gut_gastgeben: /GutGastgeben
+
+# Desc: /how_it_works
+mm_how_it_works: /how_it_works
+
+# Desc: /HowToHost
+mm_how_to_host: /HowToHost
+
+# Desc: /imprint
+mm_imprint: /imprint
+
+# Desc: /karriere
+mm_karriere: /karriere
+
+# Desc: /presse
+mm_press: /presse
+
+# Desc: /so_funktionierts
+mm_so_funktionierts: /so_funktionierts
+
+# Desc: /TrustAndSecurity
+mm_trust_security: /TrustAndSecurity
+
+# Desc: /über
+mm_ueber: /über
+
+# Desc: /u/profile/edit
+mm_user_profile_edit: /u/profile/edit
+
+# Desc: /u/profile/
+mm_user_profile_show: /u/profile/
+
+# Desc: /u/profile/show/{username}
+mm_user_profile_show_other: '/u/profile/show/{username}'
+
+# Desc: /VertrauenUndSicherheit
+mm_vertrauen_sicherheit: /VertrauenUndSicherheit
+
+# Desc: /p/paypal/cancel/{hash}
+paypal_cancel: '/p/paypal/cancel/{hash}'
+
+# Desc: /login/check-paypal
+paypal_login: /login/check-paypal
+
+# Desc: /p/paypal/success/{hash}
+paypal_success: '/p/paypal/success/{hash}'
+
+# Desc: /meal/{city}/byCity
+public_meal_by_city: '/meal/{city}/byCity'
+
+# Desc: /meal/{hash}
+public_meal_show: '/meal/{hash}'
+
+# Desc: /s/
+public_search: /s/
+
+# Desc: /p/{pHash}/hash
+public_user_by_hash: '/p/{pHash}/hash'
+
+# Desc: /p/{pName}/name
+public_user_by_username: '/p/{pName}/name'
+
+# Desc: /login/check-twitter
+twitter_login: /login/check-twitter

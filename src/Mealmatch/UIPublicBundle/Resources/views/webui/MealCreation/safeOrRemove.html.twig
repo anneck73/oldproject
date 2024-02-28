@@ -1,0 +1,16 @@
+{% trans_default_domain 'Mealmatch' %}
+{% if data is defined %}
+    {% set mealID = data[mealID] %}
+{% endif %}
+{% if idx is defined %}
+    <div class="action-td no-padding">
+        <button class="date-save"><i class="fa fa-save"></i></button>
+
+    {% if loop.index0 > 0 %}
+        <a href="{{ path('api_mealevent_remove', { 'id': eventID, 'mealID': mealID }) }}" class="btn btn-delete">
+        </a>
+    {% endif %}
+    </div>
+{% else %}
+    <span class="error"> template: safeOrRemove.include.html.twig requires IDX!!!</span>
+{% endif %}

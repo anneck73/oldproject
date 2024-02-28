@@ -1,0 +1,4 @@
+parameters:
+    app_version: 0.2.21-DEV
+    env(APP_NAME): mealmatch-local
+    app_name: '%env(APP_NAME)%'

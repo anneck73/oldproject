@@ -1,0 +1,27 @@
+{% extends '@WEBUI/Layout/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% block stylesheets %}
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+    <div class="notification-content">
+        {% if state == 'registeruserdetails' %}
+            <h5>{{ 'payin.reg.response'|trans }}</h5>
+            <a href="{{ path('userprofile_manager_show') }}"> {{ 'payin.reg.response1'|trans }}</a>
+        {% elseif state == 'paymenterror' %}
+            <h5>{{ 'payin.error.msg'|trans }}</h5><br>
+            <h6 style="font-size: 35px">{{ 'payin.error.msg1'|trans }}</h6>
+            <a href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'layout.home'|trans }}</a>
+        {% elseif state == 'thanku' %}
+            <h5>{{ 'payin.success.msg'|trans }}</h5>
+            <a href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'layout.home'|trans }}</a>
+        {% elseif state == 'restaurantError'%}
+            <br>
+            <h4>{{ 'payin.success.msg'|trans }}</h4>
+            <p style="font-size: 20px">{{ 'payout.restaurant.error'|trans|raw }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

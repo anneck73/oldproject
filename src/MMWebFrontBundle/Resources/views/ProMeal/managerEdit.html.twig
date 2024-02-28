@@ -1,0 +1,335 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% form_theme meal_form '@WEBUI/Form/fields.html.twig' %}
+{% for offer in proMeal.mealOffers %}
+    {% form_theme offerForms[loop.index0] '@WEBUI/Form/fields.html.twig' %}
+{% endfor %}
+{% form_theme mealNotes_form '@WEBUI/Form/fields.html.twig' %}
+
+{% set main_header_title = 'promeal.manager.title'|trans %}
+{% set main_header_subtitle = 'promeal.manager.subtitle'|trans %}
+{% set main_header_action_path = path('api_promeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-create-meal-circle"></span>{% endset %}
+
+{% block main_content %}   
+    <div class="col-xs-9 no-padding no-margin">
+        <!-- Tab panes -->
+        <div class="tab-content nav-tabs-justified">
+            
+            <!-- TAB 1 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 1 %} in active{% endif %}"
+                 id="promeal">
+                {{ form_start(meal_form) }}
+                <div class="row">
+                    <div class="col-lg-10">
+                        {{ form_row(meal_form.title, {'help': 'promeal.titel.help'|trans}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        {{ form_row(meal_form.tableTopic, {'help': 'promeal.tabletopic.help'|trans}) }}
+                    </div>
+                    <div class="col-xs-5">
+                        {{ form_row(meal_form.maxNumberOfGuest, {'help': 'promeal.maxguest.help'|trans}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10">
+                        {{ form_row(meal_form.specials, {'help': 'promeal.specials.help'|trans}) }}
+                        {{ form_row(meal_form.description, {'help': 'promeal.description.help'|trans}) }}
+                        {{ form_widget(meal_form) }}
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-lg-6">   
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                    </div>
+                </div>
+                {{ form_end(meal_form) }}
+            </div>
+
+            <!-- TAB 2 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 2 %} in active{% endif %}"
+                 id="offers">
+                <table class="mm-table table-responsive">
+                    <thead>
+                        <th class="col-xs-3">Name</th>
+                        <th class="col-xs-5">Beschreibung</th>
+                        <th class="col-xs-2">Preis</th>
+                        <th class="col-xs-2">Aktionen</th>
+                    </thead>
+
+                    <tbody>
+                    {% for offer in proMeal.mealOffers %}
+                        <tr>
+                            <td class="valign-top"><div class="mm-shorten-long-text">{{ offer.name }}</div></td>
+                            <td class="valign-top"><div class="mm-shorten-long-text">{{ offer.description|raw }}</div></td>
+                            <td>{{ offer.price|number_format(2) }} {{ proMeal.sharedCostCurrency }}</td>
+                            <td>{{ include('@WEBUI/MealOffer/collapseAndRemove.include.html.twig',
+                                {'idx': loop.index0, 'offerID': offer.id, 'mealID': proMeal.id}) }}</td>
+                        </tr>
+                        <tr id="offer-{{ offer.id }}" class="collapse fade">
+                            <td colspan="5" class="no-padding">
+                                <div class="mm-tab-section">
+                                    {{ form_start(offerForms[loop.index0]) }}
+                                    {# Inject help and title translations into the help popover #}
+                                    {{ form_row(offerForms[loop.index0].name,
+                                            {
+                                                'help': 'promeal.addOffer.name.help'|trans,
+                                                'title': 'promeal.addOffer.name.helptitle'|trans
+                                            }
+                                        )
+                                    }}
+                                    {{ form_row(offerForms[loop.index0].description,
+                                    {'help': 'promeal.addOffer.description.help'|trans, 'id': offer.id }) }}
+                                    {{ form_row(offerForms[loop.index0].price,
+                                    {'help': 'promeal.addOffer.price.help'|trans}) }}
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button class="btn btn-large btn-success pull-right">
+                                                <span class="glyphicon glyphicon-save"></span>
+                                                {{ 'meal.btn.safe.label'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(offerForms[loop.index0]) }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+
+                                <!--button href="{{ path('api_promeal_manager_addOffer', { 'id': proMeal.id }) }}" class="btn btn-success pull-left margin-top-half">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    {{ 'promeal.addOffer.label'|trans }}
+                                </button-->
+
+
+                                <a href="{{ path('api_promeal_manager_addOffer', { 'id': proMeal.id }) }}"
+                                   class="btn btn-success pull-left">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    {{ 'promeal.addOffer.label'|trans }}
+                                </a>
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- TAB 3 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 3 %} in active{% endif %}"
+                 id="ingredients">
+                {{ form_start(mealNotes_form) }}
+                <div class="row">
+                    <div class="col-lg-10">
+
+                        {{ form_row(mealNotes_form.mealOfferNotes, {'help': 'promeal.mealoffernotes.help'|trans}) }}
+
+                        {{ form_row(mealNotes_form.countryOfferNotes, {'help': 'promeal.countryoffernotes.help'|trans}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{ form_row(mealNotes_form.categories, {'help': 'promeal.categories.help'|trans}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                    </div>
+                </div>
+                {{ form_end(mealNotes_form) }}
+            </div>
+
+            <!-- TAB 4 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 4 %} in active{% endif %}"
+                 id="events">
+                {{ include('@WEBUI/MealEvent/help.include.html.twig') }}
+                
+
+                <table class="mm-table">
+                    <thead>
+                        <th>Von</th>
+                        <th>Bis</th>
+                        <th>Aktionen</th>
+                    </thead>
+                    <tbody>
+                        {% if proMeal.mealEvents.count > 0 %}
+                            {% for mealEvent in proMeal.mealEvents %}
+                                {{ form_start(eventForms[loop.index0]) }}
+                                <tr>
+                                    <td>{{ form_widget(eventForms[loop.index0].startDateTime) }}</td>
+                                    <td>{{ form_widget(eventForms[loop.index0].endDateTime) }}</td>
+                                    <td>{{ include('@WEBUI/MealEvent/safeOrRemove.include.html.twig',
+                                        {'idx': loop.index0, 'eventID': mealEvent.id, 'mealID': proMeal.id}) }}</td>
+                                </tr>
+                                {{ form_end(eventForms[loop.index0]) }}
+                            {% endfor %}
+                        {% endif %}
+                        {% if proMeal.isRootNode and proMeal.mealEvents.count < 5 %}
+                            <tr>
+                                <td colspan="3">
+
+                                    <!--button href="{{ path('api_promeal_manager_addEvent', { 'id': proMeal.id }) }}" class="btn btn-success pull-left">   <span class="glyphicon glyphicon-plus"></span>
+                                        {{ 'promeal.addEvent.label'|trans }}
+                                    </button-->
+
+                                    <a href="{{ path('api_promeal_manager_addEvent', { 'id': proMeal.id }) }}"
+                                       class="btn btn-success pull-left">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        {{ 'promeal.addEvent.label'|trans }}
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            {#
+                                {% if proMeal.mealEvents.count > 0 %}
+                                {% for mealEvent in proMeal.mealEvents %}
+
+                                    {{ form_start(eventForms[loop.index0]) }}
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <div class="form-group">
+
+                                    <label>{{ 'promeal.startdatetime.label'|trans }}</label>
+                                    <a class="pull-right glyphicon glyphicon-question-sign mm-help-icon"
+                                       tabindex="8"
+                                       data-toggle="popover"
+                                       data-trigger="focus"
+                                       data-placement="left"
+                                       data-container="body"
+                                       title="{{ 'promeal.startdatetime.label'|trans }}"
+                                       data-content="{{ 'promeal.startdatetime.help'|trans }}"></a>
+                                    <div class="input-group date" id="mm-addEventStart-datetimepicker">
+                                        {{ form_widget(eventForms[loop.index0].startDateTime) }}
+                                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-5">
+                                <div class="form-group">
+                                    <label>{{ 'promeal.enddatetime.label'|trans }}</label>
+                                    <a class="pull-right glyphicon glyphicon-question-sign mm-help-icon"
+                                       tabindex="8"
+                                       role="button"
+                                       data-toggle="popover"
+                                       data-trigger="focus"
+                                       data-placement="left"
+                                       data-container="body"
+                                       title="{{ 'promeal.enddatetime.label'|trans }}"
+                                       data-content="{{ 'promeal.enddatetime.help'|trans }}"></a>
+                                    <div class="input-group date" id="mm-addEventEnd-datetimepicker">
+                                        {{ form_widget(eventForms[loop.index0].endDateTime) }}
+                                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="cols-xs-12">
+                                <div class="container"> {% include '@WEBUI/Partials/rrule-form.inc.html.twig' %}</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {{ form_widget(eventForms[0]) }}
+                            </div>
+                        </div>
+
+
+                        {{ form_end(eventForms[loop.index0]) }}
+
+                    {% endfor %}
+                {% endif %}
+          #}
+        </div>
+
+    </div>
+    <div class="col-xs-3 no-padding">
+        <!-- Nav tabs -->
+        <ul class="nav nav-stacked tabs-right" role="tablist">
+            <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}">
+                <a href="#promeal" aria-controls="promeal" role="tab"
+                   data-toggle="tab"><span class="icon-note"></span>{{ 'promeal.manager.tab.meal.label'|trans }}</a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                <a href="#offers" aria-controls="offers" role="tab"
+                   data-toggle="tab"><span class="icon-list"></span>{{ 'promeal.offers'|trans }}</a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}">
+                <a href="#ingredients" aria-controls="ingredients" role="tab"
+                   data-toggle="tab"><span class="icon-notebook"></span>{{ 'promeal.notes'|trans }}</a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 4 %}active{% endif %}">
+                <a href="#events" aria-controls="events" role="tab"
+                   data-toggle="tab"><span class="icon-clock"></span>{{ 'promeal.events'|trans }}</a>
+            </li>
+            {% for transition in workflow_transitions(proMeal) %}
+                <li role="presentation" class="action">
+                    <a href="{{ path('doTransitionBaseMeal', { 'id': proMeal.id, 'transition': transition.name }) }}"
+                       role="tab">
+                        <button class="btn btn-block btn-warning">
+                            {{ ('transition.' ~ transition.name)|trans }}
+                        </button>
+                    </a>
+                </li>
+            {% else %}
+                <!--// No actions available. //-->
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+{% endblock %}
+
+
+{% block layout_center %}
+{% endblock %}
+
+{% block layout_right %}
+
+{% endblock %}
+{% block layout_left %}
+
+    <div class="mm-circle pull-right"><span class="icon-cup mm-green"></span></div>
+
+{% endblock %}
+{% block page_js %}
+    {#
+    {% javascripts
+    '@MMWebFrontBundle/Resources/public/js/jquery/jquery-ui.js'
+    '@MMWebFrontBundle/Resources/public/js/mm-rrule-gui.js'
+    output='js/mealmatch-rrule-ui.js'
+    filter='?jsqueeze'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+#}
+{% endblock %}

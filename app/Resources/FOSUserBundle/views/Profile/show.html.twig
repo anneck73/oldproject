@@ -1,0 +1,23 @@
+{% extends "@WEBUI/newUI-Base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'profile.title'|trans }}{% endblock %}
+{% block fos_user_content %}
+
+{% endblock fos_user_content %}
+{% block body %}
+    <div id="mm-content" class="container-fluid">
+        <div class="row">
+            {#<div class="col-xs-12 col-sm-8 col-sm-push-2 col-md-4 col-md-push-4 center-block">#}
+            <div class="center-block">
+                <div class="form-wrap center-block">
+                    <h1 class="text-center login-title">Profile</h1>
+                    <div class="mm-well">
+
+                        {% include "@FOSUser/Profile/show_content.html.twig" %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

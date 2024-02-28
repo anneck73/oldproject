@@ -1,0 +1,47 @@
+services:
+
+  Mealmatch\ServiceTasksBundle\Services\PayoutProMealsService:
+    arguments:
+      $proMealService: '@api.pro_meal.service'
+      $mealTicketService: '@api.meal_ticket.service'
+      $logger: '@logger'
+    tags:
+       - { name: monolog.logger, channel: mealmatch }
+
+  Mealmatch\ServiceTasksBundle\Services\PayoutHomeMealsService:
+    arguments:
+      $homeMealService: '@api.home_meal.service'
+      $mealTicketService: '@api.meal_ticket.service'
+      $logger: '@logger'
+    tags:
+      - { name: monolog.logger, channel: mealmatch }
+
+  Mealmatch\ServiceTasksBundle\Command\MangopayPayoutProMealsCommand:
+    arguments:
+      $logger: '@monolog.logger.command'
+      $payoutProMealsService: '@Mealmatch\ServiceTasksBundle\Services\PayoutProMealsService'
+      $mealTicketService: '@api.meal_ticket.service'
+      $mealticketTransactionService: '@MealticketTransactionService'
+      $mangopayService: '@PublicMangopayService'
+      $restaurantService: '@api.restaurant.service'
+    tags:
+      - { name: 'console.command', command: 'mm:mangopay:payout_promeals' }
+      - { name: monolog.logger, channel: command }
+
+  Mealmatch\ServiceTasksBundle\Command\MangopayPayoutHomeMealsCommand:
+    arguments:
+      $logger: '@monolog.logger.command'
+      $payoutHomeMealsService: '@Mealmatch\ServiceTasksBundle\Services\PayoutHomeMealsService'
+      $mealTicketService: '@api.meal_ticket.service'
+      $mealticketTransactionService: '@MealticketTransactionService'
+      $mangopayService: '@PublicMangopayService'
+    tags:
+      - { name: 'console.command', command: 'mm:mangopay:payout_homemeals' }
+      - { name: monolog.logger, channel: command }
+
+  Mealmatch\ServiceTasksBundle\Command\LogCleaner:
+    arguments:
+      $entityManager: '@doctrine.orm.entity_manager'
+    tags:
+      - { name: 'console.command', command: 'mm:log:clean' }
+      - { name: monolog.logger, channel: command }

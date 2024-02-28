@@ -1,0 +1,6 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    <h3>{{ 'header.registration_success' | trans({'%username%': app.user.username}, 'HWIOAuthBundle') }}</h3>
+{% endblock %}

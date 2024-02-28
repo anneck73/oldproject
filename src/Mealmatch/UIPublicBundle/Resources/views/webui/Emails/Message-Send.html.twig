@@ -1,0 +1,11 @@
+<p>Hallo {{ Receiver.Username }},</p>
+
+du hast eine persönliche Nachricht von {{ MessageData.sender.username }} mit dem Betreff:
+"{{ MessageData.subject }}"
+erhalten.
+
+Du kannst dir die Nachricht <a href="{{ url('fos_message_thread_view', { 'threadId': MessageData.threadID } ) }}">hier</a> ansehen.
+
+<p>- Das Mealmatch-Team</p>
+
+{{ include('@MMApi/Emails/footer.html.twig') }}

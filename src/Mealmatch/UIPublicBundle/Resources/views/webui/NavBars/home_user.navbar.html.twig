@@ -1,0 +1,61 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currentRoute = app.request.get('_route') %}
+<!-- RestaurantNavbar -->
+<nav class="navbar navbar-fixed-top mm-navbar-public" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mm-navbar-collapse">
+            <span class="sr-only">{{ 'navbar.toggle.navigation'|trans }}</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <span class="badge mm-bg-green">PRO</span>
+            <img src="{{ asset('bundles/uipublic/images/mm/mealmatch-logo.png') }}" alt="Mealmatch"
+                 class="pull-left mm-navbar-logo">
+        </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="mm-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            {% if currentRoute != 'home' %}
+                <li>{{ include('@WEBUI/NavBars/searchNavbar.partial.html.twig') }}</li>
+            {% endif %}
+
+            {% if currentRoute == 'api_meal_index' %}
+                <li class="active"><a href="{{ path('api_meal_index') }}">{{ 'navbar.mymeals'|trans }}</a></li>
+            {% else %}
+                <li><a href="{{ path('api_meal_index') }}">{{ 'navbar.mymeals'|trans }}</a></li>
+            {% endif %}
+
+            {% if currentRoute == 'joinrequest_index' %}
+                <li class="active"><a href="{{ path('joinrequest_index') }}">{{ 'navbar.mymatches'|trans }}</a></li>
+            {% else %}
+                <li><a href="{{ path('joinrequest_index') }}">{{ 'navbar.mymatches'|trans }}</a></li>
+            {% endif %}
+
+            {% if currentRoute == 'help' %}
+                <li class="active"><a href="{{ path(currentRoute) }}">{{ 'navbar.help'|trans }}</a></li>
+            {% else %}
+                <li><a href="{{ path('help') }}">{{ 'navbar.help'|trans }}</a></li>
+            {% endif %}
+            {% if not app.user %}
+                {% if currentRoute == 'fos_user_registration_register' %}
+                    <li class="active"><a href="{{ path(currentRoute) }}">{{ 'navbar.register'|trans }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_registration_register') }}">{{ 'navbar.register'|trans }}</a></li>
+                {% endif %}
+            {% endif %}
+            <li>
+                {# Get the number of new threads for the authenticated participant #}
+                <a href="{{ path('fos_message_inbox') }}"><span class="glyphicon glyphicon-inbox"></span> {{ fos_message_nb_unread() }}</a>
+            </li>
+            <!--// User Profile Image //-->
+            {{ include('@WEBUI/NavBars/userDropdown.include.html.twig') }}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+
+</nav>
+<!-- /RestaurantNavbar -->

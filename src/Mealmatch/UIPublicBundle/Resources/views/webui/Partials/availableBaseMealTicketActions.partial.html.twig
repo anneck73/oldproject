@@ -1,0 +1,15 @@
+{#
+    to be included ... shows all available actions for current homemeal.
+#}
+{% trans_default_domain 'Mealmatch' %}
+<div class="margin-bottom-half">
+    {% for transition in workflow_transitions(ticket) %}
+        <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': transition.name }) }}">
+            <button class="btn-lg btn-success btn-block">
+                {{ ('transition.' ~ transition.name)|trans }}
+            </button>
+        </a>
+    {% else %}
+        No actions available.
+    {% endfor %}
+</div>

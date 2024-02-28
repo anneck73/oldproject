@@ -1,0 +1,142 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="newsletter-div">
+    <div class="container">
+        <div class="main-width">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="title-div">
+                        <p>Subscribe us to get Latest Updates</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="inside-div">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your Email" name="search">
+                            <div class="input-group-btn">
+                                <button class="footer" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="primary-footer">
+    <div class="container">
+        <div class="main-width hidden-xs hidden-sm">
+            <div class="row">
+                <div class="col-md-5th-1 col-sm-4 col-md-offset-0 ">
+                    <div class="footer-menu">
+                        <h3>{{ 'public-footer.head.mealmatch'|trans }}</h3>
+                        <ul>
+                            <li><a href="{{ path('mm_about') }}">{{ 'public-footer.about'|trans }}</a></li>
+                            <li><a href="{{ path('mm_career') }}">{{ 'public-footer.career'|trans }}</a></li>
+                            <li><a href="{{ path('mm_press') }}">{{ 'public-footer.press'|trans }}</a></li>
+                            <li>{{ 'public-footer.blog-UpAndLowercase'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5th-1 col-sm-4">
+                    <div class="footer-menu">
+                        <h3>{{ 'public-footer.head.hosts'|trans }}</h3>
+                        <ul>
+                            <li><a href="{{ path('mm_how_it_works') }}">{{ 'public-footer.becomeGuest'|trans }}</a></li>
+                            <li><a href="{{ path('mm_trust_security') }}">{{ 'public-footer.trustAndSecurity'|trans }}</a></li>
+                            <li><a href="{{ path('mm_events') }}">{{ 'public-footer.events'|trans }}</a></li>
+                            {% if is_granted('ROLE_USER') %}
+                                <li>
+                                    <a href="{{ path('invite_email_show') }}">{{ 'public-footer.head.invidefriends'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5th-1 col-sm-4">
+                    <div class="footer-menu">
+                        <h3>{{ 'public-footer.head.legal'|trans }}</h3>
+                        <ul>
+                            <li><a href="{{ path('mm_privacy') }}">{{ 'data.privacy.statement.label'|trans }}</a></li>
+                            <li><a href="{{ path('mm_terms') }}">Mealmatch {{ 'terms.label'|trans }}</a></li>
+                            <li><a href="{{ path('mm_restaurant_terms') }}">Restaurant {{ 'terms.label'|trans }}</a></li>
+                            <li><a href="{{ path('mm_mangopay_terms') }}">Mangopay {{ 'terms.label'|trans }}</a></li>
+                            <li><a href="{{ path("mm_imprint") }}">{{ 'imprint.label'|trans }}</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5th-1 col-sm-4">
+                    <div class="footer-menu">
+                        <h3>{{ 'public-footer.cities'|trans }}</h3>
+                        <ul>
+                            <li><a href="{{ path('public_meals_city', {'city': 'Köln'}) }}">Köln</a></li>
+                            <li><a href="{{ path('public_meals_city', {'city': 'Bonn'}) }}">Bonn</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-5th-1 col-sm-4">
+                    <div class="footer-menu">
+                        <h3>{{ 'public-footer.language'|trans }}</h3>
+                        {% if app.request.get('_route') %}
+                            {% if app.request.get('_locale') %}
+                                {% if app.request.get('_route_params') %}
+                                    <ul>
+                                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'de'})) }}">{{ 'public-footer.language-german'|trans }}</a></li>
+                                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'public-footer.language-english'|trans }}</a></li>
+                                    </ul>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="hidden-sm hidden-xs">
+    <div class="container">
+        <div class="main-width">
+            <div class="row dispflex">
+                <div class="col-md-4 col-sm-4">
+                    <div class="hidden-lg hidden-md text-center">
+                        <a class="footer-link" target="_blank"
+                           href="{{ path('mm_datenschutz') }}">{{ 'data.privacy.statement.label'|trans }}</a>
+                        |
+                        <a class="footer-link" target="_blank" href="{{ path('mm_restaurant_terms') }}">{{ 'terms.label'|trans }} Restaurant</a>
+                        |
+                        <a class="footer-link" target="_blank" href="{{ path('mm_terms') }}">{{ 'terms.label'|trans }}</a>
+                        |
+                        <a class="footer-link" href="{{ path("mm_imprint") }}">{{ 'imprint.label'|trans }}</a>
+                    </div>
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="https://www.facebook.com/mealmatchme/"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/mealmatchapp/"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/mealmatchapp"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                        <a href="{{ path('contact_show_form') }}" class="footer-link">Write us!</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="secure" style="float: left">
+                        <label>{{ 'public-footer.team-mealmatching'|trans }}</label>
+                        <img align="left" height="28px" src="{{ asset('/bundles/uipublic/images/FrühLogo.png') }}">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="secure">
+                        <label>{{ 'public-footer.secure-mealmatching'|trans }}</label>
+                        <img src="{{ asset('/bundles/uipublic/images/secure.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="secondary-footer text-center">
+    <p>Mealmatch GmbH © 2018</p>
+    <p class="small">{{ app_name }} Version {{ app_version }}</p>
+</div>

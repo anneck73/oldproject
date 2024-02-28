@@ -1,0 +1,24 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'MMWebFrontBundle' %}
+{% set main_header_title %}{{ 'data.privacy.statement.label'|trans }}{% endset %}
+{% set page %}foo{% endset %}
+{% block title %}Mealmatch | {{ 'data.privacy.statement.label'|trans }}{% endblock %}
+{# Terms overwrites BODY because we dont need a layout.#}
+{% block body %}
+    <div
+        class="mm-exported-html-container pre-scrollable container-fluid"
+        dir="ltr"
+        style="margin-top:0.9839in; margin-bottom:0.7874in; text-align: justify-all"
+    >
+        {% include '@WEBUI/StaticPages/Privacy/privacy-text.html.twig' %}
+    </div>
+{% endblock body %}
+{# Pagespecific stylesheet. #}
+{# WARNING! Dont try to export this into css, this is generated form libre office and is always copy&paste ! #}
+{% block page_stylesheets %}
+    <style type="text/css">
+        @page { margin-left: 0.98in; margin-right: 0.98in; margin-top: 0.98in; margin-bottom: 0.79in }
+        p { margin-bottom: 0.1in; direction: ltr; line-height: 115%; text-align: left; orphans: 2; widows: 2 }
+        a:link { color: #0000ff }
+    </style>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# Set Variables #}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% set colorClass %}mm-green{% endset %}
+{# Overwrite Blocks #}
+{% block title %}Mealmatch | {{ 'restaurant.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}{% spaceless %}
+    <h2>{{ 'restaurantview.tickets-sold-last.label'|trans }}</h2>
+    <table class="mm-table">
+        <thead>
+        <th class="col-xs-1">{{ 'restaurantview.tablehead.payed'|trans }}</th>
+        <th class="col-xs-6">{{ 'restaurantview.tablehead.meal'|trans }}</th>
+        <th class="col-xs-3">{{ 'restaurantview.tablehead.guest'|trans }}</th>
+        <th class="col-xs-2">{{ 'restaurantview.tablehead.actions.label'|trans }}</th>
+        </thead>
+        <tbody>
+
+        {% for ticket in ticketsSoldLast %}
+        {# Determin CSS Class to use for status color symbol #}
+        {% if ticket.status == 'PAYED' %}{% set colorClass %}mm-green{% endset %}
+        {% elseif ticket.status == 'PROCESSING' %}{% set colorClass %}mm-light-grey{% endset %}
+        {% elseif ticket.status == 'CANCELLED' %}{% set colorClass %}mm-light-grey{% endset %}
+        {% elseif ticket.status == 'ERROR' %}{% set colorClass %}mm-red{% endset %}
+        {% endif %}
+        <tr>
+            {# Status #}
+            <td class="col-xs-1">
+                <div class="mm-meal-status">
+                    <div class="mm-meal-status-icon fa fa-bullseye {{ colorClass }}" aria-hidden="true">
+                    </div>
+                </div>
+            </td>
+
+            {# Meal #}
+            <td class="col-xs-6">
+                <div class="flexbox">
+                    <div>
+                        <a href="{{ path('api_mealticket_show', {'id': ticket.id}) }}">
+                            {% set mealType %}{{ ticket.baseMeal.mealType }}{% endset %}
+                            {% if mealType == "ProMeal" %}
+                                {% set mealOffer = ticket.selectedMealOffer %}
+                                <p><b>{{ ticket.baseMeal.tabletopic }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                                <p class="mm-footer-text">{{ mealOffer.name }}
+                                    | {{ mealOffer.price }} {{ mealOffer.currency }}</p>
+                            {% endif %}
+                            {% if mealType == "HomeMeal" %}
+                                <p><b>{{ ticket.baseMeal.title }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </td>
+
+            {# Guests #}
+            <td class="col-xs3">
+                <a href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">
+                    {% if ticket.guest.profile.imageName == "image/udefault.png" %}
+                        <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset(ticket.guest.profile.imageName, 's3img') }}"
+                             alt="Profileimage"/>
+                    {% endif %}
+                </a>
+            </td>
+            <td class="col-xs-2">
+                <a class="btn btn-lg btn-success btn-block"
+                   href="{{ path('api_mealticket_show', {'id': ticket.id}) }}">
+                    {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                </a>
+            </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mm-spacer"></div>
+
+    <h2>{{ 'restaurantview.served-next.label'|trans }}</h2>
+    <table class="mm-table">
+        <thead>
+        <th class="col-xs-1">{{ 'restaurantview.tablehead.payed'|trans }}</th>
+        <th class="col-xs-6">{{ 'restaurantview.tablehead.meal'|trans }}
+            & {{ 'restaurantview.tablehead.offer'|trans }}</th>
+        <th class="col-xs-3">{{ 'restaurantview.tablehead.guest'|trans }}</th>
+        <th class="col-xs-2">{{ 'restaurantview.tablehead.actions.label'|trans }}</th>
+        </thead>
+        <tbody>
+
+
+        {% for ticket in ticketsNext %}
+
+        <tr>
+            {# Status #}
+            <td class="col-xs-1">
+                <div class="mm-meal-status">
+                    <div class="mm-meal-status-icon fa fa-bullseye
+                     {% if ticket.status == 'PAYED' %} mm-green
+                     {% endif %}" aria-hidden="true">
+                    </div>
+                </div>
+            </td>
+
+            {# Meal #}
+            <td class="col-xs-1">
+                <a href="{{ path('api_mealticket_show', {'id': ticket.id}) }}">
+                    {% set mealType %}{{ ticket.baseMeal.mealType }}{% endset %}
+                    {% if mealType == "ProMeal" %}
+                        {% set mealOffer = ticket.selectedMealOffer %}
+                        <p><b>{{ ticket.baseMeal.tabletopic }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                        <p class="mm-footer-text">{{ mealOffer.name }}
+                            | {{ mealOffer.price }} {{ mealOffer.currency }}</p>
+                    {% endif %}
+                    {% if mealType == "HomeMeal" %}
+                        <p><b>{{ ticket.baseMeal.title }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                    {% endif %}
+                </a>
+            </td>
+
+            {# Guests #}
+            <td class="col-xs-3">
+                <a href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">
+                    {% if ticket.guest.profile.imageName == "image/udefault.png" %}
+                        <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset(ticket.guest.profile.imageName, 's3img') }}"
+                             alt="Profileimage"/>
+                    {% endif %}
+                </a>
+            </td>
+            <td class="col-xs-2">
+                <a class="btn btn-lg btn-success btn-block"
+                   href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">
+                    {{ 'restaurantview.action.ticket.label.guestprofile'|trans }}
+                </a>
+            </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+
+
+        </tbody>
+    </table>
+{% endspaceless %}
+{% endblock %}

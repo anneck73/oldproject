@@ -1,0 +1,25 @@
+# Mealmatch SocialPost configuration
+# Since v0.2.9
+social_post:
+    publish_on: [facebook, twitter]         # List which Social networks you will be publishing to and configure your access to them as shown below
+    providers:
+        facebook:
+            app_id: "%facebook_app_id%"
+            app_secret: "%facebook_secret%"
+            default_access_token: "YOUR-FACEBOOK-NON-EXPIRING-PAGE-ACCESS-TOKEN"
+            page_id: "258590011183625"
+            enable_beta_mode: true
+            default_graph_version: "v2.8"             # Optional, also supports "mcrypt" and "urandom". Default uses the latest graph version.
+            persistent_data_handler: "memory"         # Optional, also supports "session". Default is "memory".
+            pseudo_random_string_generator: "openssl" # Optional, also supports "mcrypt" and "urandom". Default is "openssl".
+            http_client_handler: "curl"               # Optional, also supports "stream" and "guzzle". Default is "curl".
+        linkedin:
+            client_id: "YOUR-LINKEDIN-APP-CLIENT-ID"
+            client_secret: "YOUR-LINKEDIN-APP-CLIENT-SECRET"
+            access_token: "YOUR-LINKEDIN-60-DAYS-LONG-USER-ACCESS-TOKEN"
+            company_page_id: "YOUR-LINKEDIN-COMPANY-PAGE-ID"
+        twitter:
+            consumer_key: "mZN14KgLyz96hSFPXi1x8dSwn"
+            consumer_secret: "lfWOFtfC9gEbDeV95rgYofRNB7fjtXIVklDAnVY87LOgVuNwHg"
+            access_token: "1597883136-RJAQJxliA5Zj7J2PNwKJRHYD1CkM9JHkGSiO6QL"
+            access_token_secret: "OXQSxSrBpOl9790KtoZlsCP5A2DUbFVfBurzUrXqYxfBf"

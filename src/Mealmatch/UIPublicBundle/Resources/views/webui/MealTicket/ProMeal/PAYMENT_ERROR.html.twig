@@ -1,0 +1,44 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currencySymbol = 'glyphicon-eur' %}
+<h1>Fehlerbeschreibung :</h1>
+<div>
+    <p>Der Bezahlvorgang ist aufgrund einer Fehlermeldung nicht erfolgreich gewesen. Die Bezahlvorgänge sind hier
+    aufgelistet und zeigen welcher Fehler gemeldet worden ist. Bitte wende dich mit dieser Fehlermeldung an den
+    Bezahlservice den du verwendet hat.</p>
+    <p>
+        Hinweis: Das Restaurant kann dieser Fehlermeldung ebenfalls einsehen.
+    </p>
+</div>
+
+<div>
+    {% set transactions = ticket.transactions %}
+    {% for mtt in transactions %}
+        <p class="error">
+            {{ mtt.MangoEvent }} - {{ mtt.MangoEventType }} - {{ mtt.PaymentStatus }}
+        </p>
+    {% endfor %}
+</div>
+
+{#{% set tokens = ticket.paymentTokens %}
+<div>
+    #}{# todo: Dies ist ein Copy&Paste vom PROCESSING_PAYMENT und MUSS angepasst werden!!!!#}{#
+    <h2>Bezahlvorgänge (#{{ tokens.count }}):</h2>
+    {% for token in tokens %}
+        {% set reqFields = pTokens.first.tokenReq.fields %}
+        {% set reqService = pTokens.first.tokenReq.Service %}
+
+        <p>#{{ token.id }} - {{ token.tokenStatus }} {{ reqFields.actionType }}</p>
+        <p>{{ reqFields.receiverList.0.email }} ({{ reqFields.receiverList.0.amount }}
+            ), {{ reqFields.receiverList.1.email }} ({{ reqFields.receiverList.1.amount }})</p>
+
+        {% if pTokens.first.tokenResp.PayPalException is not null %}
+            <p class="alert-danger">{{ pTokens.first.tokenResp.PayPalException }}</p>
+        {% endif %}
+    {% endfor %}
+</div>#}
+
+<div class="mm-spacer"></div>
+
+{{ include('@WEBUI/MealTicket/ProMeal/head.include.html.twig') }}
+{{ include('@WEBUI/MealTicket/ProMeal/mainTable.include.html.twig') }}
+{{ include('@WEBUI/MealTicket/ProMeal/bottom.include.html.twig') }}

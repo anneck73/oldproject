@@ -1,0 +1,8 @@
+{% extends "@WEBUI/Layouts/simple_ui_a.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{% block main_content %}
+    <div class="mm-layout-header-title">Community Group</div>
+    <div class="fos_user_group_show">
+        <p>{{ 'group.show.name'|trans }}: {{ group.getName() }}</p>
+    </div>
+{% endblock  %}

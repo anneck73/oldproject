@@ -1,0 +1,73 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+<div id="mm-public-search-config-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="navigation">
+        <div class="modal-content">
+            <form role="search" method="get" action="{{ path('search_do') }}">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{ 'public-search-config.modal.title'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="mm-search-wrap">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="mm-spacer"></div>
+                                Es wurden {{ searchPanel.results }} Meals gefunden.
+                                {% if searchPanel.location is not empty %}Gesucht wurde im Ort: {{ searchPanel.location }}{% endif %}
+                                <p>mit einem Startzeitpunkt ab {{ searchPanel.modDatetime }}</p>
+                                {% if searchPanel.categories is not empty %}<p>in der/den Kategorie(en):
+                                    {% for cat in searchPanel.categories %}
+                                        {{ cat|e }}
+                                    {% endfor %}
+                                    </p>{% endif %}
+
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="control-label required" for="mmapibundle_meal_category">Wo</label>
+                                <input value="{{ searchPanel.location }}"
+                                       name="searchLocation" type="text" class="form-control input" placeholder="{{ 'search.submit'|trans({}, 'Mealmatch') }}">
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="control-label required" for="mmapibundle_meal_category">Wann</label>
+                                <div class="form-group">
+                                    <div class="input-group date" id="mm-search-datetimepicker-mod">
+                                        <input value="{{ searchPanel.modDatetime }}"
+                                               name="datetimeMod" type="text" class="form-control input"/>
+                                        <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                    </div>
+                                    {#
+                                    <div class="input-group date" id="mm-search-datetimepicker-max">
+                                        <input value="{{ searchPanel.maxDatetime }}"
+                                                name="datetimeMax" type="text" class="form-control input"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                    #}
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label
+                                        class="control-label required" for="mmapibundle_meal_category">Kategorie</label>
+                                <p></p>
+                                <input id="mm-search-cat" data-provide="typeahead" name="searchCategory" type="text"
+                                       class="form-control input">
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-block btn-lg">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endspaceless %}

@@ -1,0 +1,5 @@
+{% trans_default_domain 'Mealmatch' %}
+{{ 'invite.email.text'|trans({'%email%': DATA.email, '%username%': USER.username })|raw }}
+<p><a href="{{ url('search_do', {'searchLocation': USER.profile.city}) }}">www.mealmatch.de</a></p>
+{{ 'invite.email.text2'|trans|raw }}
+{{ include('@Api/Emails/footer.html.twig') }}

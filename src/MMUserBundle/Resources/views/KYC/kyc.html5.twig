@@ -1,0 +1,69 @@
+{#
+    HTML5 Template !!!
+    Shows a User KYC details card
+#}
+{% trans_default_domain 'Mealmatch' %}
+
+{% spaceless %}
+
+    <section id="kycModal-1" class="grid pro-meal-card111">
+        <section class="card">
+            <div class="card-title flexbox-h grid">
+                <div>
+                    <h2>{{ 'kyc.modal.title'|trans }} </h2>
+                    <p class="light-grey fs-xs"> </p>
+                </div>
+            </div>
+            <div class="card-infos grid">
+
+                <div class="flexbox-centering grid-half">
+                    {#<h1>User Name:{{ data.userName }}</h1>#}
+                    <table>
+                        <tr>
+                        <th>KYC ID</th>
+                        <th>Kyc Document Submitted</th>
+                        <th>Kyc Document Type</th>
+                        <th>Status</th>
+                        </tr>
+                        {% for k in userData %}
+                        <tr>
+                            <td>{{ k['kycId'] }}</td>
+                            <td>{{ k['kycDocSubmitted'] }}</td>
+                            <td>{{ k['kycDocType'] }}</td>
+                            <td>{{ k['status'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+{% endspaceless %}
+
+
+{% block stylesheets %}
+
+    <style>
+        @media (min-width: 760px){
+            .modal-dialog {
+                min-width: 400px;
+                margin: 30px auto;
+                max-width: 1000px;
+                width:auto !important;
+            }
+        }
+        .card-title h2{
+            padding: 10px 0;
+            margin-bottom:0;
+        }
+        .card{
+            padding: 20px;
+        }
+
+    </style>
+{% endblock %}

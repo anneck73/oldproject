@@ -1,0 +1,291 @@
+{% extends "@MMWebFront/Layout/simple.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% set main_header_title %}Dein Meal in Köln {% endset %}
+{% block page_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+	
+		$ShowHideMore = $('.post_wrap');
+
+		var showLess = 'Weniger anzeigen <i class="fa fa-caret-up mm-green"></i>';
+		var showMore = 'Mehr anzeigen <i class="fa fa-caret-down mm-green"></i>';
+		var shortenText = false;
+		
+		// Length of chars		   
+		var chars = 200;
+
+
+		$ShowHideMore.each(function() {
+		    
+			// Count child-elements
+		    var times = $(this).children('.child');
+
+		    // Save first-childs content
+		    var content = $ShowHideMore.children(':nth-of-type(1)').html();
+
+		    
+		    
+		    // more than 1 child
+		    if (times.length > 1) {
+
+		    	$ShowHideMore.children(':nth-of-type(2)').addClass('scrollTo');
+	    	
+	    		// first child-content < chars
+		    	if(content.length < chars) {
+		    		// hide all childs after the second child
+		    		$ShowHideMore.children(':nth-of-type(n+3)').addClass('moreShown').hide();
+		    	}
+		    	
+		    	// first child-content > chars
+		    	else{
+		    		// hide content after the first child
+		    		$ShowHideMore.children(':nth-of-type(n+2)').addClass('moreShown').hide();
+		    	}
+		        
+		        if (times.length > 1){
+		        	$(this).find('p.message').addClass('more-times').html(showMore);
+		    	}
+
+		    // only 1 child: shorten text if necessary
+		    } else{
+		    	// shorten content
+		    	var c = content.substr(0, chars);
+		    	// content - shorten
+            	var h = content.substr(chars, content.length - chars - 4);
+            	var html = c + '<span class="ellipseText">...</span><span class="moreShown" style="display:none">' + h + '</span></p>';
+            	shortenText = true;
+            	
+            	$ShowHideMore.children(':nth-of-type(1)').html(html);
+            	$(this).find('p.message').addClass('more-times').html(showMore);
+		    }
+		});
+
+		$(document).on('click', '.post_wrap > p.message', function() {
+		  	
+		  	var that = $(this);
+		  	var thisParent = that.closest('.post_wrap');
+
+		  
+		  	if (that.hasClass('more-times')) {
+		    	
+		  		if (shortenText) {
+		  			thisParent.find('.ellipseText').addClass('invisible');
+		  		}
+
+		    	thisParent.find('.moreShown').slideDown();
+
+		    	that.toggleClass('more-times', 'less-times').html(showLess);
+
+		    	if (!shortenText) {
+			    	$('html, body').animate({
+				        scrollTop: $(".scrollTo").offset().top - 65
+				    }, 1000);
+				}
+		    	
+
+		  	} else {
+
+		  		if (shortenText) {
+		  			thisParent.find('.ellipseText').removeClass('invisible');
+		  		}
+		    	
+		    	$('html, body').animate({
+			        scrollTop: $(".post_wrap").offset().top - 65
+			    }, 1000);
+
+		    	thisParent.find('.moreShown').slideUp();
+
+		    	that.toggleClass('more-times', 'less-times').html(showMore);
+
+		  	}  
+		});
+	
+	});
+</script>
+{% endblock %}
+
+{% block main_content %}
+
+	<div class="breadcrumb">
+		<span class="icon-direction"></span>&nbsp;
+		<a href="#">Meals</a> / 
+		<a href="#">Restaurant-Meals</a> / 
+		<a href="#">Name des Restaurants</a>
+	</div>
+
+     <div class="row margin-bottom3 margin-top3">
+
+     	<!-- USER IMAGE -->
+        <div class="col-xs-3">
+            <div class="mm-user-image center-block">
+               
+                <img class="img-responsive img-circle"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                     alt="Profileimage"/>
+
+                <p class="text-center fs-xss margin-top-half"><a class="mm-green" href="#">Name des Restaurants</a></p>
+               
+            </div>
+        </div>
+
+        <!-- MEAL -->
+        <div class="col-xs-6">
+            <h2 class="no-margin">New Yorker Stil</h2>
+            <h3 class="margin-bottom">28. Februar 2018 - 19:00 Uhr</h3>
+
+            <div class="post_wrap">
+            	<div class="child">
+            		<p>Zu unserem Ü50 Meal sind alle herzlichst eingeladen, die bereits das 50. Lebensjahr erreicht haben.
+						Treffen sie Menschen in Ihrem Alter und erweitern Sie Ihren Freundeskreis bei einem leckeren Meal in entspannter Atmosphäre und Gesellschaft.</p>
+            	</div>
+
+            	 <div class="child">
+	            	<h4 class="mm-line-dotted-bottom-green">Angebot 1: Alibaba Persia Burger</h4>
+	            	<p>Minze-Hummus, frischer Salat, süße Datteln, gebratene Aubergine, saftige Tomaten, knackige Gurken, Aioli- Dressing, karamellisierte Zwiebeln, Sesam<br />
+	            	Bartling: Kichererbsen, orientalisch gewürzt</p>
+	            	<p>Preis: 9.90 EUR</p>
+	            </div>
+
+
+	            <div class="child">
+	            	<h4 class="mm-line-dotted-bottom-green">Angebot 2: Alibaba Persia Burger</h4>
+	            	<p>Minze-Hummus, frischer Salat, süße Datteln, gebratene Aubergine, saftige Tomaten, knackige Gurken, Aioli- Dressing, karamellisierte Zwiebeln, Sesam<br />
+	            	Bartling: Kichererbsen, orientalisch gewürzt</p>
+	            	<p>Preis: 9.90 EUR</p>
+	            </div>
+	            
+
+	             <p class="message mm-green pointer margin-top margin-bottom"></p>
+            </div>
+
+           
+
+         
+
+            <div class="guests mm-line-dotted-grey margin-top padding-top">
+                <p>Deine Tischnachbarn:</p>
+
+                <div class="flexbox fl-wrap mm-user-icon-list">
+                	<img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                </div>
+
+            	{#% if meal.guests|length > 0 %}#
+                    <div class="flexbox fl-wrap mm-user-icon-list">
+                        {#% for guest in meal.guests %}
+
+                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                            {% else %}
+                                <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                     alt="Profileimage"/>
+                            {% endif %
+                            {% set mealOffers = restaurant_service.getSelectedMealOffers(meal, guest)  %}
+                            {% for mealOffer in mealOffers %}
+                                {{ mealOffer.name }} {{ mealOffer.price }}
+                            {% endfor %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                 	<p>Sei der / die Erste!</p>
+                {% endif %#}
+                    
+            </div>
+
+
+        </div>
+
+        <!-- INFO BOX -->
+        <div class="col-xs-3">
+            <div class="mm-green-box pull-right">
+                <div class="inner">
+                    <div class="text-center">
+                    	<p class="font-weight-300">HUNGER?</p>
+                    	<div class="mm-line-dotted"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green">4</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>Plätze frei!</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-calendar"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>20.08.2017</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-clock"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>19:00 Uhr</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green">$</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <!-- Preis bei einem Home-Meal -->
+                            <!--p>29.00 €</p-->
+
+                            <!-- Auswahl bei einem Pro-Meal -->
+                            <select class="fs-xxs">
+                            	<option>Angebot wählen</option>
+                            	<option>23.00 € - Angebot 1</option>
+                            	<option>24.00 € - Angebot 2</option>
+                            	<option>26.00 € - Angebot 3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-location-pin"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>50825 Köln<br/>
+                                Ehrenfeld
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-success">Teilnehmen</button>
+            </div>
+        <div>
+    </div>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <script type="text/css">
+        /* Overwrite to make mm-layout elements visible*/
+        .mm-layout {
+            border: 1px dashed red;
+        }
+    </script>
+    {{ parent() }}
+{% endblock stylesheets %}

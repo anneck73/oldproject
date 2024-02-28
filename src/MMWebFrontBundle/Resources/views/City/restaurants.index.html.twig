@@ -1,0 +1,16 @@
+{% extends "@MMWebFront/Layout/empty.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% block empty_content %}
+    <div class="container-fluid">
+        <p></p>
+        <div class="pull-right"><span class="label label-danger">Beta</span></div>
+        <h2 class="pull-left no-margin">Restaurants in {{ city }}</h2>
+        <div class="meal-grid pull-left">
+            {% for meal in cityRestaurants %}
+               <div class="meal-grid-item">{{ include('@WEBUI/Search/gmaps/mealResult-Card-ProMeal.html.twig') }}</div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

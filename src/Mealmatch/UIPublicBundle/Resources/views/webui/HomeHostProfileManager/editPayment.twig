@@ -1,0 +1,113 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% form_theme addNaturalUserForm 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme addBankAccountForm 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% set swtTitle %}{{ 'homehostprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('homehost_profile_manager_show') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Bezahlinformationen</p>
+                        </h3>
+                        <p class="mm-line-dotted-bottom-green">Registrierte Personen:</p>
+                        <p>Mangopay ID: {{ pProfile.mangopayID|default('NO MANGOPAY ID!!!') }}</p>
+                        <p>(E-Wallet): {{ pProfile.mangopayWalletID|default('NO MANGOPAY WALLET ID!!!') }}</p>
+                        <p>Verknüpftes Bankkonto: {{ pProfile.mangopayBankAccountID|default('NO MANGOPAY BankAccount ID!!!') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// //-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2"><!--//meal-icon-via-css//--></div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {% if pProfile.mangopayID is null %}
+                                <div class="button-div text-center">
+                                    <a href="#" data-toggle="modal" data-target="#editPaymentAddNaturalUser">
+                                        <button class="main-btn">{{ 'homehostprofile.payment.addNaturalUser'|trans }}</button>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                {% if pProfile.mangopayID is not null %}
+                                    {% if pProfile.mangopayBankAccountID is null %}
+                                    <div class="button-div text-center">
+                                        <a href="#" data-toggle="modal" data-target="#editPaymentAddBankAccount">
+                                            <button class="main-btn">{{ 'restaurantprofile.payment.addBankAccount'|trans }}</button>
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% else %}
+                                        <div class="button-div text-center">
+
+                                            <p>Bitte zuerst die Benutzerdate erfolgreich eingeben.</p>
+
+                                        </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                {% if pProfile.mangopayBankAccountID is not null %}
+                                <div class="button-div text-center"><button class="main-btn">{{ 'restaurantprofile.payment.payoutWallet'|trans }}</button></div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# Modal to Add Mangopay Natural User #}
+    <div id="editPaymentAddNaturalUser" class="modal fade" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Benutzerdaten:</h3>
+                {{ form_start(addNaturalUserForm) }}
+                {{ form_widget(addNaturalUserForm) }}
+                <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                {{ form_end(addNaturalUserForm) }}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+    {# Modal to Add Mangopay BankAccount #}
+    <div id="editPaymentAddBankAccount" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {{ form_start(addBankAccountForm) }}
+                <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Kontodaten:</h3>
+                {{ form_row(addBankAccountForm.IBAN) }}
+                {{ form_row(addBankAccountForm.BIC) }}
+                {{ form_row(addBankAccountForm.OwnerName) }}
+                <h3 class="mm-line-dotted-bottom-green-simple">&nbsp;Addressdaten:</h3>
+                {{ form_row(addBankAccountForm.OwnerName) }}
+                {{ form_row(addBankAccountForm.Country) }}
+                {{ form_row(addBankAccountForm.Region) }}
+                {{ form_row(addBankAccountForm.PostalCode) }}
+                {{ form_row(addBankAccountForm.City) }}
+                {{ form_row(addBankAccountForm.AddressLine1) }}
+                {{ form_row(addBankAccountForm.AddressLine2) }}
+                <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                {{ form_end(addBankAccountForm) }}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

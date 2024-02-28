@@ -1,0 +1,88 @@
+# Mealmatch DEV settings
+# DONT COMMIT LOCAL SETTINGS !!!!
+# -------------------------------------------------------
+imports:
+ - { resource: parameters.yml }
+
+parameters:
+
+    ga_tracking_id: DEV-Mealmatch
+
+    paypal_marketplace:
+        live:
+            clientID: ""
+            secret: ""
+            token: ""
+            testMode: ""
+        sandbox:
+            clientID: ""
+            secret: ""
+            token: ""
+            testMode: ""
+
+    twitter_credentials:
+        MealmatchKoeln:
+            consumerKey: "UDXt5X25iSKSDHteDszoyBL3f"
+            consumerSecret: "mWiVqbuyDvL41VIhHpKIL3XVxXHcvZCCHqj5LWGHSWLrTE56EF"
+            accessToken: "984755612536975362-2AJPikDgo9frY7oUpJDA5rWirXxlsct"
+            accessTokenSecret: "zLlOvnrobRDEn8x5qi8P7yL3NII27Cg6loMlNga9YsaA1"
+        MealmatchApp:
+            consumerKey: "xxx"
+            consumerSecret: "xxx"
+            accessToken: "xxx"
+            accessTokenSecret: "xxx"
+
+    paypal_credentials:
+        app_id: xxx
+        username: xxx
+        password: xxx
+        signature: xxx
+        email: xxx
+        live: false
+        sandbox:
+            app_id: APP-80W284485P519543T
+            username: andre.anneck-facilitator_api1.mealmatch.de
+            password: HR5SLLDZM5VGRLMY
+            email: mmtest.merchant@mealmatch.de
+            signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A8VATVg.JX2gjB-7T2q3kBzbjmHH
+    # GMaps
+    gmaps_api_key: AIzaSyC0xceQe_AIz0qbhS4QQtPdRX0022EBALI
+
+  # MangoPay
+    mangopay_coupon_wallet_id:
+      sandbox: '60376095'
+      live: '-1'
+
+    mangopay_credentials:
+      live: false
+      sandbox:
+        client_id: '220777'
+        client_password: 'xLWXBMC5QADRK6g0koK3bAOqiAuWzEbQ62SkNokvfTXQftfXXx'
+      production:
+        client_id: 'xxx'
+        client_password: 'xxx'
+    # Memcache for local dev
+    # disable memcache in config_dev.yml
+    session_memcache_host_1: mealmatch.local
+    session_memcache_port_1: 11211
+
+    # this is to enable JSON/JS etc...
+    router.request_context.host: mealmatch.local
+
+    # these settings are not use yet!
+    www_req.domain: 'mealmatch|mealmatchapp'
+    www_req.subdomain: 'www|pro|restaurant|home'
+    www_req.toplevel: 'de|local'
+    www_def.toplevel: 'local'
+
+    # this channel is enforced and set to http on local dev.
+    # if you need to test https, use default setting(https).
+    mm_security_channel: 'http'
+
+    mm_features:
+        variant_default: dev
+        ticket_coupons: true
+        messaging: false
+        autobahn: false
+        websockets: false
+        facebook_login: true

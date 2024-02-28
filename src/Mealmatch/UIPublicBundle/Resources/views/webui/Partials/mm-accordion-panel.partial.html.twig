@@ -1,0 +1,25 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+<h4 class="panel-title mm-accordion-panel-title">
+    <div class="mm-accordion-panel-host-image pull-right">
+        <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+            {% if meal.host.profile.imageName == "image/udefault.png" %}
+                <img class="img-circle"
+                     width="35px"
+                     height="35px"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+            {% else %}
+                <img class="img-circle"
+                     width="35px"
+                     height="35px"
+                     src="{{ asset(meal.host.profile.imageName, 's3img') }}" />
+            {% endif %}
+        </a>
+    </div>
+    <a role="button" data-toggle="collapse"
+       data-parent="#accordion" href="#collapse-{{ meal.id }}"
+       aria-expanded="false" aria-controls="collapse-{{ meal.id }}"
+       style="display: block"
+>{{ meal.title|length > 45 ? meal.title|slice(0, 45) ~ '...' : meal.title  }}</br>{{ meal.address.postalcode }} {{ meal.address.city }} | {{ meal.startDateTime|date('d.m.y H:i') }}</a>
+</h4>
+{% endspaceless %}

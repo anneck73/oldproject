@@ -1,0 +1,99 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'MMWebFrontBundle' %}
+{% set main_header_title %}{{ 'data.privacy.statement.label'|trans }}{% endset %}
+{% block title %}Mealmatch | {{ 'terms.title'|trans }}{% endblock %}
+{# Terms overwrites BODY because we dont need a layout.#}
+{% block body %}
+    <div
+            class="mm-exported-html-container pre-scrollable"
+            dir="ltr"
+            style="max-width:8.2681in; margin-top:0.9839in; margin-bottom:0.7874in; margin-left:0.9839in; margin-right:0.9839in; text-align: justify-all"
+    >
+        {% include '@WEBUI/StaticPages/Terms/restaurant-text.html.twig' %}
+    </div>
+{% endblock body %}
+{# Pagespecific stylesheet. #}
+{# WARNING! Dont try to export this into css, this is generated form libre office and is always copy&paste ! #}
+{% block page_stylesheets %}
+    {# Using LibreOffice style export format #}
+    <style type="text/css">
+        @page {  }
+        table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+        td, th { vertical-align:top; font-size:12pt;}
+        h1, h2, h3, h4, h5, h6 { clear:both;}
+        ol, ul { margin:0; padding:0;}
+        li { list-style: none; margin:0; padding:0;}
+        /* "li span.odfLiEnd" - IE 7 issue*/
+        li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+        span.footnodeNumber { padding-right:1em; }
+        span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+        span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+        .gr1 { font-size:11pt; font-family:Calibri; margin-left:0.1252in; margin-right:0.1252in; margin-top:0in; margin-bottom:0in; vertical-align:top; }
+        .P1 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P10 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; margin-left:1in; margin-right:0in; text-indent:0in; }
+        .P11 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; margin-left:1in; margin-right:0in; text-indent:0in; }
+        .P12 { font-size:11pt; line-height:100%; margin-bottom:0in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P13 { font-size:11pt; line-height:100%; margin-bottom:0in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P14 { font-size:12pt; line-height:100%; margin-bottom:0in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P15 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P16 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P17 { font-size:11pt; line-height:100%; margin-bottom:0in; margin-top:0in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P18 { font-size:11pt; line-height:100%; margin-bottom:0in; margin-top:0in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P19 { font-size:11pt; line-height:100%; margin-bottom:0in; margin-top:0in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P2 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P20 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; margin-left:1in; margin-right:0in; text-indent:-0.25in; }
+        .P21 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-left:1in; margin-right:0in; margin-top:0.1945in; text-align:left ! important; text-indent:0in; font-family:Calibri; writing-mode:lr-tb; }
+        .P22 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-left:0.5in; margin-right:0in; margin-top:0.1945in; text-align:left ! important; text-indent:0in; font-family:Calibri; writing-mode:lr-tb; }
+        .P23 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Times New Roman; writing-mode:lr-tb; }
+        .P24 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Times New Roman; writing-mode:lr-tb; margin-left:0.4917in; margin-right:0in; text-indent:0in; }
+        .P25 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Times New Roman; writing-mode:lr-tb; margin-left:0.9835in; margin-right:0in; text-indent:0in; }
+        .P26 { font-size:11pt; font-family:Calibri; writing-mode:page; text-align:center ! important; }
+        .P3 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P4 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P5 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P6 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P7 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; }
+        .P8 { font-size:11pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; margin-left:0.5in; margin-right:0in; text-indent:0in; }
+        .P9 { font-size:12pt; line-height:100%; margin-bottom:0.1945in; margin-top:0.1945in; text-align:left ! important; font-family:Calibri; writing-mode:lr-tb; margin-left:0.5in; margin-right:0in; text-indent:0in; }
+        .Internet_20_link { color:#0000ff; text-decoration:underline; }
+        .ListLabel_20_1 { font-size:12pt; font-weight:bold; }
+        .ListLabel_20_10 { font-size:10pt; }
+        .ListLabel_20_11 { font-size:10pt; }
+        .ListLabel_20_12 { font-size:10pt; }
+        .ListLabel_20_13 { font-size:10pt; }
+        .ListLabel_20_14 { font-size:10pt; }
+        .ListLabel_20_15 { font-size:10pt; }
+        .ListLabel_20_16 { font-size:10pt; }
+        .ListLabel_20_17 { font-size:10pt; }
+        .ListLabel_20_18 { font-size:10pt; }
+        .ListLabel_20_19 { font-size:10pt; }
+        .ListLabel_20_2 { font-size:12pt; font-weight:normal; }
+        .ListLabel_20_20 { font-size:10pt; }
+        .ListLabel_20_21 { font-size:10pt; }
+        .ListLabel_20_22 { font-size:10pt; }
+        .ListLabel_20_23 { font-size:10pt; }
+        .ListLabel_20_24 { font-size:10pt; }
+        .ListLabel_20_25 { font-size:10pt; }
+        .ListLabel_20_26 { font-size:10pt; }
+        .ListLabel_20_27 { font-size:10pt; }
+        .ListLabel_20_28 { font-size:10pt; }
+        .ListLabel_20_29 { font-size:10pt; }
+        .ListLabel_20_3 { font-weight:normal; }
+        .ListLabel_20_30 { font-size:10pt; }
+        .ListLabel_20_31 { font-size:10pt; }
+        .ListLabel_20_33 { font-family:Calibri; }
+        .ListLabel_20_34 { font-size:12pt; }
+        .ListLabel_20_4 { font-size:12pt; font-weight:normal; }
+        .ListLabel_20_5 { font-size:10pt; }
+        .ListLabel_20_6 { font-size:10pt; }
+        .ListLabel_20_7 { font-size:10pt; }
+        .ListLabel_20_8 { font-size:10pt; }
+        .ListLabel_20_9 { font-size:10pt; }
+        .Strong { font-weight:bold; }
+        .T1 { font-size:12pt; }
+        .T3 { font-family:Calibri; }
+        .T4 { font-family:Calibri; font-weight:normal; }
+        /* ODF styles with no properties representable as CSS */
+        .Endnote_20_Symbol .Footnote_20_Symbol .ListLabel_20_32 .T2  { }
+    </style>
+{% endblock %}

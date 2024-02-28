@@ -1,0 +1,299 @@
+mm.registration.welcome-msg: 'Herzlich wilkommen bei Mealmatch deiner Social-Dining Platform, Marktplatz, Community.'
+slider.slide1.title: Mealmatch
+slider.slide1.text: 'Erlebe authentische Meals in angenehmer Atmosphäre.'
+slider.slide2.title: Mealmatch
+slider.slide2.text: 'Die Mealmatch Gastgeber erwarten Dich!'
+slider.slide3.title: Mealmatch
+slider.slide3.text: 'Probiere die Köstlichkeiten deiner Stadt!'
+slider.slide4.title: Mealmatch
+slider.slide4.text: 'Entdecke neue kulinarische Köstlichkeiten.'
+slider.slide5.title: Mealmatch
+slider.slide5.text: 'Genieße Gerichte aus aller Herren Länder.'
+slider.slide6.title: Mealmatch
+slider.slide6.text: 'Sei Teil der Mealmatch Community.'
+slider.slide7.title: Mealmatch
+slider.slide7.text: 'Entdecke die kulinarische Vielfalt (d)einer Stadt'
+slider.slide8.title: Mealmatch
+slider.slide8.text: 'Multi-Kulti = Multi-kulinarisch!'
+slider.slide9.title: Mealmatch
+slider.slide9.text: 'Tauch ein in die Welt köstlicher Meals und netter Menschen.'
+slider.slide10.title: Mealmatch
+slider.slide10.text: 'Entdecke die leckere Vielfalt Deiner Stadt'
+slider.slide11.title: Mealmatch
+slider.slide11.text: 'Erlebe authentische Meals'
+slider.slide12.title: Mealmatch
+slider.slide12.text: 'Genieße Gerichte aus aller Herren Länder'
+slider.slide13.title: Mealmatch
+slider.slide13.text: 'Make new friends'
+slider.slide14.title: Mealmatch
+slider.slide14.text: 'Probiere kulinarische Köstlichkeiten'
+about.text: '<p>Mealmatch ist eine Online-Community-Plattform, die Menschen weltweit zu einem gemeinsamen Meal zusammenbringt. Gegründet im Juli 2016 in und mit Sitz in Köln, Deutschland.</p> <p>Den Gründern, Olaf und Thomas, waren bei dem Aufbau der Plattform mehrere Aspekte wichtig, die das Leben der Menschen dauerhaft positiv beeinflussen sollen. Gemeinsam mit André arbeiten sie daran diese Ziele umzusetzen.</p> <p>Durch Mealmatch soll es den Usern der Plattform möglich werden einfach neue Kontakte herzustellen. Die traditionelle Koch- und Esskultur soll durch das Angebot von Mealmatch belebt und der Nachhaltigkeitsgedanke bei der Verwendung von Lebensmitteln gefördert werden.</p>'
+help.title: Hilfe
+help.paragraph1.head: 'Allgemein:'
+help.paragraph1.title1: 'Was ist Mealmatch?'
+help.paragraph1.text1: 'Mealmatch ist eine Plattform, die Menschen mit Menschen zu einem gemeinsamen Meal in entspannter Atmosphäre zusammenbringt'
+help.paragraph1.title2: 'Wie funktioniert Mealmatch?'
+help.paragraph1.text2: 'Um alle Funktionen von Mealmatch nutzen zu können, muss der User sich bei Mealmatch anmelden und ein Profil anlegen. Anschließend kann er sofort ein eigenes Meal erstellen und veröffentlichen oder die bereits eingestellten Angebote anhand mehrerer Kriterien für ein Meal durchsuchen und einen Platz für die Meals seiner Wahl anfragen. Sobald der Gastgeber die Anfrage des Gastes akzeptiert, bezahlt der Gast den Kostenbeitrag via PayPal und dem gemeinsamen Meal steht nichts mehr im Wege.'
+help.paragraph1.title3: 'Was kostet es ein Profil anzulegen?'
+help.paragraph1.text3: 'Das Anlegen eines Profils auf Mealmatch ist 100% kostenlos.'
+help.paragraph1.title4: 'Wie erstelle ich ein Profil?'
+help.paragraph1.text4: fehlt
+help.paragraph1.title5: 'Was mache ich wenn ich mein Passwort vergessen habe?'
+help.paragraph1.text5: fehlt
+help.paragraph2.head: 'Für Gastgeber:'
+help.paragraph2.title1: 'Wie erstelle ich ein Meal?'
+help.paragraph2.text1: 'Nach der Anmeldung bei Mealmatch kann jeder Gastgeber ein eigenes Meal zusammenstellen und veröffentlichen. Der Gastgeber kann wählen was und wie viele Gänge er seinen Gästen anbieten will und wie hoch der Kostenbeitrag pro Gast ist.'
+help.paragraph2.title2: 'Gibt es Vorgaben wie teuer ein Meal sein darf?'
+help.paragraph2.text2: 'Nein, es gibt keinerlei Vorgaben für die Preisgestaltung von Seiten Mealmatch Betreiber.'
+help.paragraph2.title3: 'Wieviel Provision bekommt Mealmatch?'
+help.paragraph2.text3: 'Mealmatch erhält 8,5% des Kostenbeitrags der Gäste als Provision. Zusätzlich trägt der Gast die Gebühren, die PayPal für die Bereitstellung ihres Services erhebt.'
+help.paragraph3.head: 'Für Gäste:'
+help.paragraph3.title1: 'Wie suche und buche ich ein Meal?'
+help.paragraph3.text1: 'Nach einem Meal kann durch mehrere Kriterien gesucht werden, z.B. unter Verwendung des Ortes oder der generellen Geschmacksrichtung. Sobald der Gast ein Meal gefunden hat an der er gerne teilnehmen würde, fragt er einen freien Platz bei dem Gastgeber an und sobald der Gastgeber den Gast bestätigt hat, wird der Bezahlvorgang abgeschlossen und dem gemeinsamen Meal steht nichts mehr im Wege.'
+help.paragraph4.head: 'Bezahlen:'
+help.paragraph4.title1: 'Wie kann ich für ein Meal bezahlen?'
+help.paragraph4.text1: 'Alle Bezahlvorgänge werden mit PayPal abgewickelt.'
+help.paragraph4.title2: 'Warum kann ich nur mit PayPal bezahlen?'
+help.paragraph4.text2: 'PayPal bietet einen umfassenden Käuferschutz, der sowohl den Gästen als auch den Gastgebern die höchst mögliche Sicherheit garantiert.'
+help.paragraph_security.head: 'Sicherheit:'
+help.paragraph_security.title1: 'Ich hab mein Password vergessen!'
+help.paragraph_security.text1: 'Du kannst jederzeit die URL: <a href="/resetting/request">/resetting/request</a> verwenden um ein neues Passwort per Email zu erhalten.'
+help.paragraph_security.title2: 'Gibt es Vorgaben wie teuer ein Meal sein darf?'
+help.paragraph_security.text2: 'Nein, es gibt keinerlei Vorgaben für die Preisgestaltung von Seiten Mealmatch Betreiber.'
+invite.form.email.label: 'Die EMail Adresse deines Freundes'
+invite.form.button.label: 'Einladung senden'
+imprint.text: Impressum
+imprint.title: Impressum
+imprint.label: Impressum
+imprint.fulltext: '<span>Mealmatch GmbH</span></br>
+                   <span>Brühler Str. 30</span></br>
+                   <span>50968 Köln</span></br>
+                   <span>Deutschland</span></br>
+                   <p></p>
+                   <span>Geschäftsführer: 				     Thomas Fiedler, Olaf Steinebach</span></br>
+                   <span>UmSt-Identifikationsnummer:         DE308440126</span></br>
+                   <span>Handelsregisternummer:              HRB 88598</span></br>
+                   <span>Amtsgericht:                        Köln</span></br>
+                   <span>Sitz der Gesellschaft:              Köln</span></br>
+                   <p></p>
+                   <span>Kontakt:</span></br>
+                   <span>+49 (0)221-283 36 54</span></br>
+                   <span><a href="mailto:info@mealmatch.de">info@mealmatch.de</a></span></br>
+                   <p></p>
+                   <span>Website der EU-Kommission zur Online-Streitbeilegung:</span></br>
+                   <span><a target="_blank" href="http://ec.europa.eu/consumers/odr">http://ec.europa.eu/consumers/odr</a></span></br>'
+terms.label: AGB
+terms.title: Nutzungsbedingungen.
+terms.text: 'Ich hab die Nutzungsbedingungen gelesen und bin damit einverstanden.'
+terms.not_true: 'Bitte bestätigen Sie die Nutzungsbedingungen.'
+over18.label: Volljährig
+over18.title: 'Über 18'
+over18.text: 'JA, ich bestätige, dass ich mindestens 18 Jahre alt bin.'
+over18.not_true: 'Bitte bestätigen das du Volljährig bist ;).'
+data.privacy.statement.label: Datenschutz
+invite.friend.label: 'Einen Freund einladen'
+invite.form.title: 'Einen Freund einladen'
+contact.label: Emailkontakt
+contact.form.title: Kontaktformular
+contact.form.button.label: 'Nachricht absenden'
+contact.form.message.label: 'Deine Nachricht an uns:'
+contact.form.message.placeholder: '... schreibe uns!'
+contact.form.message.error: 'Bitte eine Nachricht eingeben!'
+contact.form.email.label: 'Deine EMail Adresse:'
+account.edit.submit: Aktualisieren
+becomeHost.title: 'Werde ein Gastgeber'
+becomeHost.headline: 'Werde ein Gastgeber'
+becomeHost.popover: 'Gastgeber werden'
+navbar.becomeHost.link: 'Werde ein Gastgeber bei Mealmatch'
+navbar.becomeHost.popover-text: '<p>Mealmatch ermöglicht es dir ein Chefkoch zu werden und deine Kochkünste mit anderen Menschen zu teilen.</p>
+                                 <p>Erstelle deine eigenen Menüs und veröffentliche diese auf der Mealmatch Plattform.</p>
+                                 <p>Kreiere ein außergewöhnliches Erlebnis für deine Gäste und mach sie zu neuen Freunden.</p>'
+doHost.text: Gastgeben
+group.edit.submit: 'Gruppe aktualisieren'
+group.show.name: Gruppenname
+group.new.submit: 'Gruppe erstellen'
+group.flash.updated: 'Die Gruppe wurde aktualisiert.'
+group.flash.created: 'Die Gruppe wurde erstellt.'
+group.flash.deleted: 'Die Gruppe wurde gelöscht.'
+security.login.username: Benutzername
+security.login.password: Passwort
+security.login.remember_me: 'An mich erinnern'
+security.login.submit: Anmelden
+profile.show.username: Benutzername
+profile.show.email: E-Mail
+profile.edit.submit: 'Benutzer aktualisieren'
+profile.flash.updated: 'Das Benutzerprofil wurde aktualisiert.'
+change_password.submit: 'Passwort ändern'
+change_password.flash.success: 'Das Passwort wurde geändert.'
+registration.title: Registrierung
+registration.check_email: 'Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Benutzerkonto zu bestätigen.'
+registration.confirmed: 'Glückwunsch %username%, Ihr Benutzerkonto ist jetzt bestätigt.'
+registration.back: 'Zurück zur ursprünglichen Seite.'
+registration.submit: Registrieren
+registration.flash.user_created: 'Der Benutzer wurde erfolgreich erstellt.'
+registration.email.subject: 'Willkommen %username%!'
+registration.email.message: '<h2>Hallo %username%,</h2><h3>herzlich Willkommen bei Mealmatch!</h3><p></p><p>Um die Registrierung abzuschließen muss Mealmatch deine E-Mail Adresse überprüfen.</p><p>Für die Bestätigung deiner E-Mail Adresse klick bitte folgenden Link:</p><p><a href="%confirmationUrl%">Bestätigungslink</a>.</p><p></p><p>Vielen Dank!</br>Das Mealmatch-Team</p>'
+resetting.check_email: "Eine E-Mail wurde verschickt. Sie beinhaltet einen Link zum Zurücksetzen des Passwortes.\nHinweis: Ein neues Passwort kann nur alle %tokenLifetime% Stunden beantragt werden.\n\nEventuell wurde diese E-Mail als Spam markiert, wenn sie nicht angekommen ist.\n"
+resetting.request.username: 'Benutzername oder E-Mail-Adresse'
+resetting.request.submit: 'Passwort zurücksetzen'
+resetting.request.title: 'Anfrage zum Zurücksetzen des Passwort.'
+resetting.reset.submit: 'Passwort ändern'
+resetting.flash.success: 'Das Passwort wurde erfolgreich zurückgesetzt.'
+resetting.email.subject: 'Passwort zurücksetzen'
+resetting.email.message: "Hallo %username%!\n\nBesuchen Sie bitte folgende Seite, um Ihr Passwort zurückzusetzen: %confirmationUrl%\n\nMit besten Grüßen,\ndas Team.\n"
+resetting.title: Zurücksetzen
+layout.logout: Abmelden
+layout.login: Anmelden
+layout.register: Registrieren
+layout.logged_in_as: 'Angemeldet als %username%'
+layout.home: Startseite
+form.group_name: Gruppenname
+form.username: Benutzername
+form.email: E-Mail-Adresse
+form.current_password: 'Derzeitiges Passwort'
+form.password: Passwort
+form.password_confirmation: 'Passwort bestätigen'
+form.new_password: 'Neues Passwort'
+form.new_password_confirmation: 'Neues Passwort bestätigen'
+search.submit: Suchen
+user-menu.modal.title: Benutzermenu
+public-logo-menu.modal.title: Navigation
+navbar.language-english: EN
+navbar.toggle.navigation: Navigationsschalter
+navbar.account.edit: Benutzerkonto
+navbar.help: Hilfe
+navbar.profil.edit: 'Profil bearbeiten'
+navbar.profil.text: Profil
+navbar.register: Registrieren
+navbar.mymeals: 'Meine Meals'
+navbar.mymatches: 'Meine Matches'
+public-search-config.modal.title: 'Suche Anpassen'
+public-footer.modal.title: Rechtliches
+public-footer.teaser.text: '<p>Mealmatch bringt Menschen mit Menschen für ein gemeinsames Meal zusammen.</p><p>Die Anmeldung bei Mealmatch ist kostenfrei.</p>'
+career.title: Karriere
+career.text: '<p>WE’LL CHANGE THE WAY HOW PEOPLE WILL EAT TOGETHER IN THE FUTURE FROM SCRATCH.</p>
+             <p>Du hast Ziele und möchtest gerne mit Freude an unserer schönen Sache mitarbeiten?</p>
+             <p>Bist Du bereit mit Mealmatch und deinen Aufgaben zu wachsen?</p>
+             <p>Wir möchten gerne mit Menschen zusammenarbeiten die neue Wege gehen wollen.</p>
+             <p>Neben spannenden Herausforderungen bieten wir dir eine individuelle Förderung und ein ungewöhnliches Arbeitsumfeld.</p>
+             <p></p>
+             <p>Werde Teil unseres Teams und gehe mit uns diesen Weg gemeinsam.</p>
+             <p>Inspirierende initiative Bewerbung sind jederzeit herzlich Willkommen. Unser aktuellen Jobangebote findest Du nachfolgend.</p>
+             <p>Wir freuen uns über deine Bewerbung an: jobs@mealmatch.de</p>
+             <p>Personal Assistent (PDF), PR-Fachleute (PDF), Software Ingenieur  PHP7, JavaScript, HTML5, CSS3, Symfony3+ (PDF), PromotionHelden (PDF), MarketingManager (PDF), Texter/-innen (PDF)</p>'
+footer.legal: Impressum|AGB|Datenschutz
+invide.form.title: 'Freunde Einladen'
+howToHost.title: 'Gelungen Gastgeben'
+howToHost.text: '<h1>Die 10 Gebote guten Gastgebens:</h1>
+                    <p>1. Behandle deine Gäste so, wie Du selbst gerne als Gast behandelt werden möchtest.</p>
+                    <p>2. Ein vollständiges Profil ist ein gutes Profil.</p>
+                    <p>3. Falls du noch kein PayPal Konto hast, dann lege schnell eins an –>  <a target="_blank" href="https://www.paypal.com">www.paypal.com</a></p>
+                    <p>4. Beschreib dein Meal so ausführlich wie möglich.</p>
+                    <p>5. Lass deine Gäste wissen, was du Ihnen zum trinken anbieten willst.</p>
+                    <p>6. Bereite so viel wie möglich vor, um unnötigen Stress zu vermeiden.</p>
+                    <p>7. Sei Achtsam bezüglich möglicher Allergien und Unverträglichkeiten deiner Gäste.</p>
+                    <p>8. Ein gelungenes Meal hängt vom Wohlfühlfaktor ab, deinem eigenen und dem deiner Gäste.</p>
+                    <p>9. Du musst dir nicht alles von deinen Gästen gefallen lassen – dein Heim, deine Regeln.</p>
+                    <p>10. Hab Spaß und genieße dein Meal gemeinsam mit deinen Gästen.</p>'
+howItWorks.title: 'So funktioniert es'
+howItWorks.text: '<h1>So funktioniert es:</h1>
+                   <p>Finde ein Meal nach deinem Geschmack mit Hilfe der Such-Funktion, wähle WO, WANN und WAS du gerne essen möchtest.</p>
+                   <p>Sobald du dich für ein Meal entschieden hast, registriere dich und lege ein Profil an.</p>
+                   <p>Kontaktiere den Gastgeber und formuliere deine Anfrage für einen Platz bei deinem WunschMeal.</p>
+                   <p>Nachdem der Gastgeber deine Anfrage akzeptiert hat, kannst du das Meal direkt bezahlen.</p>
+                   <p>Nach Abschluss des Bezahlvorgangs wird dir die Adresse des Gastgebers mitgeteilt.</p>
+                   <p>Viel Spaß und guten Appetit bei deinem Meal.</p>'
+contact.form.send.message: 'Vielen Dank! Deine Nachricht wurde erfolgreich an das Mealmatch Team weiter geleitet.'
+contact.form.send.title: 'Nachricht gesendet!'
+contact.form.subject.label: Betreff
+invite.form.send.title: 'Einladung versendet'
+invite.form.send.message: 'Vielen Dank! Deine Einladung wurde erfolgreich versendet.'
+events.title: Aktionen
+events.text: '<p>Verwandle dein Meal in ein Event der Extraklasse.</p> <p>Themenabende sind momentan total angesagt, veranstalte doch einfach dein eigenes Krimi, Dunkel oder Brettspiel Meal?</p> <p>Lass deiner Kreativität freien Lauf und biete deinen Gästen etwas wirklich Außergewöhnliches. Mealmatch bietet dir die Möglichkeit neue Dinge auszuprobieren und diese deinen Gästen anzubieten.</p> <p>Wir können es gar nicht erwarten all deine interessanten Ideen für besondere Meals zu sehen.</p> <p></p> <p></p> <p>Hier findest Du einige weitere Beispiele zur Anregung für deinen Themenabend:</p> <p>Fitness  Meal | Brettspiel Meal | Fußball Meal | Ritter Meal | Karneval Meal | Quiz Meal |Business Meal | Literarisches Meal | Märchen Meal | Green Meal | Hiking Meal | Poetry Meal | Diet Meal | Musik Meal | History Meal | Doppelkopf Meal | Skat Meal | Movie Meal</p> <p></p> <p>Zusätzlich plant Mealmatch köstliche Aktionen für Dich und deine Freunde in deiner Stadt:</p> <p>#SUSHIME | #NOODLEME | #BBQME | #PIZZAME | #TACOME | #PHOME | #WAFFLEME</p> '
+trustAndSecurity.title: 'Vertrauen braucht Sicherheit'
+trustAndSecurity.text: '<p>Mealmatch hat Standards, die der Community und jedem Einzelnen zu Gute kommen. Wir haben Prozesse eingerichtet, um für mehr Sicherheit in unserer Community zu sorgen und jedem bei Mealmatch dabei zu helfen, mit einem guten Gefühl Gast zu sein und gastzugeben.</p> <p>Vollständige Profilbeschreibung der Gastgeber und Gäste helfen einander sich ein erstes Bild vor dem Meal zu machen. Die Email-Adresse für den PayPal-Account wird während des Bezahlvorgangs durch PayPal validiert.</p> <p>Und wie auch sonst im Leben gilt, dass persönliche Einschätzung und Lebenserfahrung gute Ratgeber sind. Werden Sie Gastgeber, alleine oder im Tandem, und laden Sie viele Menschen ein. In großen geselligen Runden ist es gemütlicher.</p>'
+navbar.messages: Nachrichten
+navabar.inbox: Nachrichteneingang
+navabar.sent: 'Gesendete Nachrichten'
+email.reset: 'Email zurücksetzen'
+public-footer.head.about: 'ÜBER'
+public-footer.head.mealmatch: 'MEALMATCH'
+public-footer.head.hosts: 'GASTGEBER & GÄSTE'
+public-footer.head.legal: 'RECHTLICHES'
+public-footer.head.contactform: 'KONTAKT'
+public-footer.head.invidefriends: 'FREUNDE EINLADEN'
+public-footer.about: 'Über'
+public-footer.career: 'Karriere'
+public-footer.press: 'Presse'
+public-footer.events: 'Aktionen'
+public-footer.trustAndSecurity: 'Vertrauen & Sicherheit'
+public-footer.howItWorks: 'So Funktioniert''s'
+public-footer.becomeHost: 'Gastgeber werden'
+public-footer.becomeGuest: 'Gast werden'
+public-footer.howToHost: 'Gelungen gastgeben'
+security:
+  login:
+    passwordreset:
+      txt: 'Passwort zurücksetzen lassen'
+becomeHost:
+  text: <p>Mealmatch ermöglicht es dir ein Chefkoch zu werden und deine Kochkünste mit anderen Menschen zu teilen.</p>
+        <p>Erstelle deine eigenen Menüs und veröffentliche diese auf der Mealmatch Plattform.</p>
+        <p>Kreiere ein außergewöhnliches Erlebnis für deine Gäste und mach sie zu neuen Freunden.</p>
+        <p>ERSTELLE DEIN EIGENES MENÜ – Was, Wann und wie viel es kostet.</p>
+        <p>SEI EIN MITGLIED DER WACHSENDEN MEALMATCH COMMUNITY – Gutes Essen, nette Menschen, interessante Gespräche – be smart, take part!</p>
+        <p>HELFE MIT TRADITIONELLE KOCH- UND ESSKULTUR AM LEBEN ZU ERHALTEN – Teile dein Wissen und deine Kochkünste mit anderen Menschen.</p>
+        <p>NUTZE LEBENSMITTELRESOURCEN NACHHALTIG UND VERANTWORTUNGSVOLL – Wirke der heutigen Wegwerfgesellschaft entgegen.</p>
+email:
+  footer: '
+          ------------------------------------------------------------------------------------
+          Bitte antworten Sie nicht auf diese E-Mail. Dieses Postfach wird nicht überwacht, deshalb werden Sie keine Antwort erhalten. Wenn Sie Hilfe benötigen, loggen Sie sich in Ihr Mealmatch-Konto ein, und klicken Sie oben rechts auf einer der Mealmatch-Seiten auf den Link "Hilfe".
+
+          Copyright © 2016 Mealmatch Alle Rechte vorbehalten.
+
+          Mealmatch GmbH
+          Brühler Str. 30
+          50968 Köln
+          Deutschland
+
+          USt. Id–Nr.: DE 308440126 | HRB: 88598 | Sitz der Gesellschaft: Köln | Amtsgericht: Köln | Geschäftsführer: Thomas Fiedler'
+registration:
+  check_email:
+    title: 'Benutzerkonto Bestätigen'
+  confirmed:
+    title: 'Registrierung vollständig und erfolgreich'
+invite:
+  email:
+    text: '<p>Hallo %email%,</p>
+           <p>%username% lädt dich ein mit ihm zusammen Mealmatch zu entdecken.</p>
+           <p>Du bist ein guter Koch oder gehst gerne gut essen?</p>
+           <p>Dann ist Mealmatch genau das Richtige für dich.</p>
+           <p>Melde dich jetzt kostenlos an und probier es aus.</p>'
+    text2: '<p>Viel Spaß beim mealmatchen!</p><p>Das Mealmatch Team</p>'
+    failed: 'Die Einladung konnte nicht versendet werden!'
+    already:
+      done: 'An diese Email-Adress wurde bereits eine Einladung verschickt.'
+  text:
+    salutation: 'Hallo %username%, '
+    main: 'du hast Freunde, die lecker kochen können, gerne gut essen und denen Mealmatch auch gefallen könnte? Schick ihnen doch einfach eine Einladung und entdecke gemeinsam mit deinen Freunden Mealmatch.'
+    footer: '- Dein Mealmatch Team'
+public-footer:
+  blog: 'Blog'
+  language: 'Sprache'
+  language-german: 'Deutsch'
+  language-english: 'Englisch'
+search:
+  where: 'Wo'
+  when: 'Wann'
+  category: 'Kategorie'
+  start: 'Finde Dein Meal'
+press.title: Presse
+press:
+  contact-for-journalist: 'Ansprechpartner für Journalisten'
+  contact-text: 'Unsere Pressestelle steht Journalisten für Informationen und Interviewanfragen gerne zur Verfügung:'
+  and: 'und'
+navbar:
+  restaurant:
+    profil:
+      text: 'Restaurantprofil'
+    link:
+      text: 'Mein Restaurant'

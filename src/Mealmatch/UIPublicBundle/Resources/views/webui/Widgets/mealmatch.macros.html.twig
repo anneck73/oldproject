@@ -1,0 +1,278 @@
+{# See doc/WebFront/TwigMacros.md - Mealcards Horizontal#}
+{% trans_default_domain 'Mealmatch' %}
+
+{# json-ld for a meal #}
+{% macro proMealEventJSONLD(proMeal) %}
+    {# here are some internal variable "shortcuts" to have less clutter #}
+    {% set endTime = proMeal.endDateTime|date('H:i') %}
+    {% if proMeal.host.profile.imageName == "image/udefault.png" %}
+        {% set performerImage %}{{ asset('bundles/mmwebfront/images/mm/profilbild_default.png') }}{% endset %}
+    {% else %}
+        {% set performerImage %}{{ asset(proMeal.host.profile.imageName, 's3img') }}{% endset %}
+    {% endif %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "Mealmatch Restaurant-Meal {{ proMeal.title }} bei {{ proMeal.host.restaurantProfile.name }}",
+      "startDate": "{{ proMeal.startDateTime|date('Y-m-d') }}T{{ proMeal.startDateTime|date('H:i') }}-{{ endTime }}",
+      "location": {
+        "@type": "Place",
+        "name": "{{ proMeal.host.restaurantProfile.name }}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ proMeal.address.streetName }} {{ proMeal.address.streetNumber }}",
+          "addressLocality": "{{ proMeal.address.locality }}",
+          "postalCode": "{{ proMeal.address.postalCode }}",
+          "addressRegion": "{{ proMeal.address.sublocality }}",
+          "addressCountry": "{{ proMeal.address.countryCode }}"
+        }
+      },
+
+      "image": [
+      {% for pic in proMeal.host.restaurantProfile.pictures %}
+        "{{ vich_uploader_asset(pic, 'fileData') }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+       ],
+      "description": "{{ proMeal.description }}",
+      "endDate": "{{ proMeal.startDateTime|date('Y-m-d') }}T{{ proMeal.startDateTime|date('H:i') }}-{{ endTime }}",
+      "offers": {
+        "@type": "AggregateOffer",
+        "highPrice": "{{ proMeal.maxOfferPrice|number_format(2, '.', '.') }}",
+        "lowPrice": "{{ proMeal.minOfferPrice|number_format(2, '.', '.') }}",
+        "offerCount": "{{ proMeal.mealOffers.count }}",
+        "offers": [
+        {% for offer in proMeal.mealOffers%}
+          {
+            "@type" : "Offer",
+            "availability" : "http://schema.org/InStock",
+            "price" : "{{ offer.price|number_format(2, '.', '') }}",
+            "priceCurrency" : "{{ offer.currency }}",
+            "itemCondition": "http://schema.org/NewCondition",
+            "url": "{{ url('api_mealticket_create_from_promeal', {'mealOffer': offer, 'id': proMeal.id}) }}",
+            "validFrom": "{{ proMeal.startDateTime|date('Y-m-d') }}T{{ proMeal.startDateTime|date('H:i') }}-{{ endTime }}",
+            "itemOffered" :
+              {
+                "@type" : "Product",
+                "description" : "{{ offer.description }}",
+                "name" : "{{ offer.name }}"
+              }
+            }{% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
+      },
+      "performer": {
+         "@type": "Restaurant",
+         "name": "{{ proMeal.host.restaurantProfile.company }}",
+         "image": "{{ performerImage }}",
+         "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ proMeal.address.streetName }} {{ proMeal.address.streetNumber }}",
+          "addressLocality": "{{ proMeal.address.locality }}",
+          "postalCode": "{{ proMeal.address.postalCode }}",
+          "addressRegion": "{{ proMeal.address.sublocality }}",
+          "addressCountry": "{{ proMeal.address.countryCode }}"
+        },
+        "servesCuisine": "{{ proMeal.host.restaurantProfile.type }}",
+        "priceRange": "{{ proMeal.minOfferPrice|number_format(2, '.', '.') }} - {{ proMeal.maxOfferPrice|number_format(2, '.', '.') }}",        "telephone": "{{ proMeal.host.restaurantProfile.contactPhone }}"
+      }
+    }
+    </script>
+{% endmacro %}
+
+{# Breadcrumbs ? #}
+{% macro breadcrumbs(type)%}
+    <div class="breadcrumb">
+        <span class="icon-direction"></span>&nbsp;
+        <a href="#">Meals</a> /
+        <a href="#">{{ type }}</a>
+    </div>
+{% endmacro %}
+
+{# A Demo, this is WiP ...  #}
+{% macro printMeals(meals, emptyMessage) %}
+    {% for meal in mealss %}
+        <div>
+            <h2>{{ meal.title }}</h2>
+            <div class="mm-user-image center-block">
+                <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+                    {% if meal.host.profile.imageName == "image/udefault.png" %}
+                        <img class="card-profile img-circle"
+                             src="{{ asset('bundles/mmwebfront/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="card-profile img-circle" src="{{ asset(meal.host.profile.imageName, 's3img') }}"
+                             alt="{{ meal.host.username }}"/>
+                    {% endif %}
+                </a>
+                <p class="text-center fs-xss margin-top-half">
+                    <a class="mm-green"
+                       href="{{ path('public_promeal_hostname', {'hostName': meal.host.username}) }}">{{ meal.host.username }}</a>
+                </p>
+                <p class="fs-xs">#{{ meal.host.restaurantprofile.type }}</p>
+            </div>
+        </div>
+
+        {% if loop.index is divisible by(3) and not loop.last %}
+            </div><div class="row">
+        {% endif %}
+    {% else %}
+        <div class="alert alert-error span12">
+            {{ emptyMessage }}
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+
+{# Trennlinie Strich-Herz-Strich #}
+{% macro heartline() %}
+<div id="mm-content-startpage-1" class="container-fluid">
+    <div class="col-lg-12">
+    <div class="flexbox fl-center">
+        {#<div class=" align-mm-icon-line">#}
+            <div class="mm-icon-line-left"></div>
+        {#</div>#}
+        <div class=" text-center">
+            <span class="mm-icon-matches mm-matches-icon-small"></span>
+        </div>
+        {#<div class="align-mm-icon-line">#}
+            <div class="mm-icon-line-right"></div>
+        {#</div>#}
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+
+{% macro mealcardsHorizontal(meals, startpageteaser) %}
+    <div>
+        <h2 class="content-title">{{ startpageteaser }}</h2>
+
+        {# Used in index.html (startpage) #}
+        <div class="col-md-12 col-sm-12">
+
+            {% for meal in meals|slice(0,2) %}
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="meal-div">
+                        <div class="res-wrap">
+                            <div class="res-logo">
+                                <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+                                {% if meal.host.profile.imageName == "image/udefault.png" %}
+                                    <img src="{{ asset('/bundles/uipublic/images/profilbild_default.png') }}"/>
+                                {% else %}
+                                    <img src="{{ asset(meal.host.profile.imageName, 's3img') }}"/>
+                                {% endif %}
+                                </a>
+                            </div>
+                            <div class="res-det">
+                                <ul class="">
+                                    <li>
+                                        <span class="res-name">{{ meal.host.restaurantProfile.name }}</span>
+                                        <span class="res-loc">{{ meal.mealOffers.first }}</span>
+                                        <span class="res-fullname">{{ meal.host.restaurantProfile.name }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-calendar"></span><span> {{ meal.getStartDateTime|date('d.F - H:i') }} Uhr</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="icon-location-pin"></span><span> {{ meal.host.restaurantProfile.address.getCity }} </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="join-now">
+                            <a href="{{ path('api_mealticket_create_from_promeal', {'id': meal.id, 'mealOffer': meal.mealOffers.first.id}) }}" class=""> {{'startpage.mealcard.join'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-12 col-sm-12">
+
+            {% for meal in meals|slice(2,2) %}
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="meal-div">
+                        <div class="res-wrap">
+                            <div class="res-logo">
+                                <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+                                {% if meal.host.profile.imageName == "image/udefault.png" %}
+                                    <img src="{{ asset('/bundles/uipublic/images/profilbild_default.png') }}"/>
+                                {% else %}
+                                    <img src="{{ asset(meal.host.profile.imageName, 's3img') }}"/>
+                                {% endif %}
+                                </a>
+                            </div>
+                            <div class="res-det">
+                                <ul class="">
+                                    <li>
+                                        <span class="res-name">{{ meal.host.restaurantProfile.name }}</span>
+                                        <span class="res-loc">{{ meal.mealOffers.first }}</span>
+                                        <span class="res-fullname">{{ meal.host.restaurantProfile.name }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-calendar"></span><span> {{ meal.getStartDateTime|date('d.F - H:i') }} Uhr</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="icon-location-pin"></span><span> {{ meal.host.restaurantProfile.address.getCity }} </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="join-now">
+                            <a href="{{ path('api_mealticket_create_from_promeal', {'id': meal.id, 'mealOffer': meal.mealOffers.first.id}) }}" class=""> {{'startpage.mealcard.join'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro mangopayOwnerCard(mangopayUser) %}
+    {% if mangopayUser.PersonType == 'NATURAL' %}
+        <div>
+            <!--//Mangopay NATURAL Owner Card//-->
+            <ul>
+                <li>Fullname: {{ mangopayUser.FirstName }} {{ mangopayUser.LastName }}</li>
+            </ul>
+        </div>
+    {% endif %}
+    {% if mangopayUser.PersonType == 'LEGAL' %}
+        <div>
+            <!--//Mangopay LEGAL Owner Card//-->
+            <ul>
+                <li>Name: {{ mangopayUser.Name }}</li>
+            </ul>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro mangopayWalletCard(mangopayWallet) %}
+    <div>
+        <!--//Mangopay Wallet Card//-->
+        <ul>
+            <li>Balance: {{ mangopayWallet.Balance.Amount }} {{ mangopayWallet.Currency }}</li>
+        </ul>
+    </div>
+{% endmacro %}
+
+{% macro mangopayBankaccountCard(mangopayBankaccount) %}
+    <div>
+        <!--//Mangopay Bankaccount Card//-->
+        <ul>
+            <li>Type: {{ mangopayBankaccount.Type }}</li>
+            {% set ibanStop =  mangopayBankaccount.Details.IBAN|length %}
+            {% set ibanStart =  mangopayBankaccount.Details.IBAN|length-4 %}
+            <li>IBAN: {{ mangopayBankaccount.Details.IBAN[0:3] }}...{{ mangopayBankaccount.Details.IBAN[ibanStart:ibanStop] }}</li>
+            {% set bicStop =  mangopayBankaccount.Details.BIC|length %}
+            {% set bicStart =  mangopayBankaccount.Details.BIC|length-2 %}
+            <li>BIC: {{ mangopayBankaccount.Details.BIC[0:2] }}...{{ mangopayBankaccount.Details.BIC[bicStart:bicStop] }}</li>
+        </ul>
+
+    </div>
+{% endmacro %}

@@ -1,0 +1,42 @@
+{#
+    Included from navbars' ...
+#}
+{% trans_default_domain 'Mealmatch' %}
+{% if is_granted('ROLE_USER') %}
+    <li class="dropdown mm-user-dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-haspopup="true" aria-expanded="false">
+            {% if app.user.profile.imageName == "image/udefault.png" %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                     alt="Profileimage"/>
+            {% else %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset(app.user.profile.imageName, 's3img') }}" alt="Profileimage"/>
+            {% endif %}
+        </a>
+        <ul id="mm-profile-image-dropdown-menu" class="dropdown-menu">
+            {% if is_granted('ROLE_RESTAURANT_USER') %}
+                <li><a href="{{ path('api_restaurant_profile_manager') }}">{{ 'navbar.restaurant.profil.text'|trans }}</a></li>
+            {% endif %}
+            <li><a href="{{ path('api_userprofile_manager') }}">{{ 'navbar.profil.text'|trans }}</a></li>
+            <li><a href="{{ path("fos_user_profile_edit") }}">{{ 'navbar.account.edit'|trans }}</a></li>
+            {#{% if is_granted('ROLE_ADMIN') %}#}
+                {#<li><a href="{{ path("userprofile_kyc_status_show") }}">KYC</a></li>#}
+            {#{% else %}#}
+                {#{% if app.user.overallKycStatus != 'Approved' %}#}
+                    {#<li><a href="{{ path("userprofile_kyc_show") }}">KYC</a></li>#}
+                {#{% endif %}#}
+            {#{% endif %}#}
+            <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+        </ul>
+    </li>
+{% else %}
+    {% if currentRoute == 'fos_user_registration_register' %}
+        <li class="active"><i class="fa fa-pencil" aria-hidden="true"></i><a
+                    href="{{ path(currentRoute) }}">{{ 'registration.submit'|trans }}</a></li>
+    {% else %}
+        <li><span class="icon-pencil" aria-hidden="true"></span><a
+                    href="{{ path('fos_user_registration_register') }}">{{ 'registration.submit'|trans }}</a></li>
+    {% endif %}
+{% endif %}

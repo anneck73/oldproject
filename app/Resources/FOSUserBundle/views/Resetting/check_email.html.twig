@@ -1,0 +1,15 @@
+{% extends '@WEBUI/Layouts/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'resetting.request.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'resetting.request.title'|trans }}{% endset %}
+
+{% block simple_main_content %}
+    <div class="invite-friend">
+        <div class="invite-content">
+            <i class="icon-info fa-4x" aria-hidden="true"></i>
+            {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime }) | raw }}<br>
+            {{ 'resetting.check_email2'|trans }}
+                <a href="{{ path('contact_show_form') }}">{{ 'contact.form.title'|trans }}</a>.
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,311 @@
+{% extends '@WEBUI/Layout/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% form_theme formTabOne '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabTwo '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabThree '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabFour '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabPay '@WEBUI/Form/fields.html.twig' %}
+{% form_theme formTabPic '@WEBUI/Form/fields.html.twig' %}
+
+{% set main_header_title = 'userprofile.manager.title'|trans %}
+{% set main_header_subtitle = 'userprofile.manager.title'|trans %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+
+    <div class="row margin-bottom3 margin-top1-5">
+        <div class="row">
+            <div class="col-xs-9 col-xs-offset-3 no-padding">
+                <h2 class="no-margin">{{ main_header_title }}</h2>
+                <h3 class="margin-bottom">{{ main_header_subtitle }}</h3>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-3">
+
+                <div class="mm-user-image center-block {% if app.user.profile.imageName == "image/udefault.png" %}mm-bg-light-white{% endif %}">
+                    <div id="imageUpload"
+                         class="upload-image flexbox-centering-all mm-upload-hover-img {% if app.user.profile.imageName != "image/udefault.png" %}mm-transparent{% endif %}">
+                        <div class="full-height flexbox fl-center fl-column">
+                            <p>{{ 'your'|trans }}<br/>{{ 'userprofile.image.label'|trans }} {{ 'update'|trans }}</p>
+                            <span class="icon-cloud-upload"></span>
+                        </div>
+                    </div>
+                    {% if app.user.profile.imageName != "image/udefault.png" %}
+                        <img class="img-responsive img-circle mm-object-fit-cover"
+                             src="{{ asset(app.user.profile.imageName, 's3img') }}"
+                             alt="Profileimage"/>
+                    {% endif %}
+                </div>
+                <div class="mm-user-image-safe-btn center-block">
+                    {{ form_start(formTabPic) }}
+                    {{ form_widget(formTabPic) }}
+                    {{ form_end(formTabPic) }}
+                </div>
+            </div>
+
+            <div class="col-xs-6 no-padding">
+
+                <!-- Tab panes -->
+                <div class="tab-content nav-tabs-justified">
+
+                    <!-- TAB 1 -->
+                    <div id="profilebase" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 1 %} in active{% endif %}">
+                        {{ form_start(formTabOne) }}
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabOne.firstName, {'help': 'help.user.profile.firstname'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabOne.lastName, {'help': 'help.user.profile.lastname'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                {{ form_row(formTabOne.birthday, {'help': 'help.user.profile.birthday'|trans}) }}
+                            </div>
+                            <div class="col-xs-5">
+                                {{ form_row(formTabOne.gender, {'help': 'help.user.profile.gender'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabOne.nationality, {'help': 'help.user.profile.nationality'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(formTabOne) }}
+                    </div>
+
+                    <!-- TAB 2 -->
+                    <div id="profile2" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 2 %} in active{% endif %}">
+                        {{ form_start(formTabTwo) }}
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabTwo.addressLine1, {'help': 'help.user.profile.addressLine1'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabTwo.addressLine2, {'help': 'help.user.profile.addressLine2'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                {{ form_row(formTabTwo.areaCode, {'help': 'help.user.profile.areaCode'|trans}) }}
+                            </div>
+
+                            <div class="col-xs-5">
+                                {{ form_row(formTabTwo.city, {'help': 'help.user.profile.city'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabTwo.state, {'help': 'help.user.profile.state'|trans}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabTwo.country, {'help': 'help.user.profile.country'|trans}) }}
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(formTabTwo) }}
+                    </div>
+
+                    <!-- TAB 3 -->
+                    <div id="profile3" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 3 %} in active{% endif %}">
+                        {{ form_start(formTabThree) }}
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_widget(formTabThree) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(formTabThree) }}
+                    </div>
+
+                    <!-- TAB 4 -->
+                    <div id="profile4" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 4 %} in active{% endif %}">
+                        <!--{{ form_start(formTabFour) }}-->
+
+                        <div class="row">
+                            <div class="col-xs-11">
+                                <div class="col-xs-3 no-padding">
+                                    <div class="form-group">
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                                   id="switch-email" checked>
+                                            <label class="onoffswitch-label" for="switch-email">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9 no-padding">
+                                    <label class="control-label onoffswitch-label-right">{{ 'profile.settings.email.notification'|trans }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-11">
+                                <div class="col-xs-3 no-padding">
+                                    <div class="form-group">
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                                   id="switch-hints" checked>
+                                            <label class="onoffswitch-label" for="switch-hints">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9 no-padding">
+                                    <label class="control-label onoffswitch-label-right">{{ 'profile.settings.ui.hints'|trans }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+                        <!--{{ form_end(formTabFour) }}-->
+                    </div>
+
+                    <!-- TAB 5 -->
+                    <div id="profile5" role="tabpanel"
+                         class="tab-pane fade mm-tab-content{% if selectedTab == 5 %} in active{% endif %}">
+                        {{ form_start(formTabPay) }}
+
+                        <!--// MangoPay .//-->
+                        <div class="row">
+                            <div class="col-xs-10">
+                                {{ form_row(formTabPay.paymentMethod, {'help': 'help.user.profile.paypal'|trans}) }}
+                            </div>
+                            <div class="col-xs-10">
+                                {{ form_row(formTabPay.mangopayID) }}
+                            </div>
+                            <div class="col-xs-10">
+                                {{ form_row(formTabPay.mangopayWalletID) }}
+                            </div>
+                            <div class="col-xs-10">
+                                {{ form_row(formTabPay.mangopayBankAccountID) }}
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+                        </div>
+
+                        {{ form_end(formTabPay) }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-xs-3 no-padding">
+                <!-- Nav tabs -->
+                <ul class="nav nav-stacked tabs-right" role="tablist">
+                    <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}">
+                        <a href="#profilebase" aria-controls="promeal" role="tab"
+                           data-toggle="tab"><span class="icon-user"></span>{{ 'profile.registration.tab_one'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                        <a href="#profile2" aria-controls="offers" role="tab"
+                           data-toggle="tab"><span class="icon-location-pin"></span>{{ 'profile.registration.tab_two'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}">
+                        <a href="#profile3" aria-controls="ingredients" role="tab"
+                           data-toggle="tab"><span class="icon-note"></span>{{ 'profile.registration.tab_three'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 4 %}active{% endif %}">
+                        <a href="#profile4" aria-controls="events" role="tab"
+                           data-toggle="tab"><span class="icon-settings"></span>{{ 'profile.registration.tab_four'|trans }}</a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 5 %}active{% endif %}">
+                        <a href="#profile5" aria-controls="events" role="tab"
+                           data-toggle="tab"><span class="icon-paypal"></span>{{ 'profile.registration.tab_five'|trans }}</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        '@MMWebFrontBundle/Resources/public/css/bootstrap-switch.css'
+        output='css/bootstrap-switch.css'
+        filter='?scssphp' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block page_js %}
+    {% javascripts
+        '@MMWebFrontBundle/Resources/public/js/bootstrap-switch.js'
+        output='js/bootstrap-switch.min.js'
+        filter='?jsqueeze' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $("[name='mmuserbundle_mmusersettings[emailNotification]']").bootstrapSwitch();
+        $("[name='mmuserbundle_mmusersettings[uiHints]']").bootstrapSwitch();
+        $("#imageUpload").click(function () {
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+
+        $(function () {
+            $('#mmuserbundle_mmuserprofile_basic_birthday').datetimepicker({
+                locale: 'de',
+                format: 'D.M.YYYY'
+            });
+        });
+
+    </script>
+
+{% endblock %}

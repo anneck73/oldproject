@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+@import "../webapp-variables";
+/*------------------------------------*\
+  # PRO MEAL INDEX
+  # View: ProMeal / index.html.twig
+\*------------------------------------*/
+
+// CSS-Regeln hier gelten vermutlich fuer Home+Pro Meals, evtl. auf beide Layouts ausweiten.
+
+@include x-small-devices(){
+
+	/* 	Buttons ausblenden: Menu hinzufuegen, Menu bearbeiten */
+	.mm-layout-main-action, 
+	.meal-action-edit
+	{
+		@include invisible();
+	}
+
+	.mm-line-dotted-grey{
+		@include width-grid();
+	}
+}
+
+
+.promeal-actions{
+  
+  @include justify-content(space-between);
+  
+  @include x-small-devices(){
+    @include justify-content(center);
+  }  
+}

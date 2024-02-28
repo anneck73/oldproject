@@ -1,0 +1,20 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>{{ 'joinrequest.created.mail.salutation'|trans({ '%hostusername%': MEAL.host.username }) }}</p>
+<p>{{ 'joinrequest.created.text.1'|trans }} <a
+            href="{{ url('public_user_by_username', {'pName': GUEST.username}) }}">{{ GUEST.username }}</a>
+    {{ 'joinrequest.created.text.2'|trans({'%mealtitle%': MEAL.title, '%number%': (JR.extraGuest + 1)}) }}
+</p>
+<p>{{ 'joinrequest.created.text.3'|trans }} „<a
+            href="{{ url('joinrequest_index') }}">{{ 'joinrequest.created.text.4'|trans }}</a>“ {{ 'joinrequest.created.text.5'|trans }}
+    .</p>
+<p></p>
+<div>
+    <a href="{{ path('joinrequest_accept', { 'hash': JR.hash }) }}">
+        <button id="submit-btn" class="btn btn-lg btn-success" type="submit">
+            {{ 'joinrequest.accepted.submit'|trans }}
+        </button>
+    </a>
+</div>
+
+<p>- {{ 'joinrequest.mail.yourteam'|trans }}</p>
+

@@ -1,0 +1,7 @@
+# #########################################
+# FOSMessaging
+# #########################################
+fos_message:
+    db_driver: orm
+    thread_class: Mealmatch\ApiBundle\Entity\Messages\Thread
+    message_class: Mealmatch\ApiBundle\Entity\Messages\Message

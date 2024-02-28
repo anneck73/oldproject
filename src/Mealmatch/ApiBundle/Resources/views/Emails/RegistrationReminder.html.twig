@@ -1,0 +1,11 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>Hallo {{ user.profile.firstname }},</p>
+<p>du hast bei uns eine Registrierung gestartet, doch nicht erfolreich abgeschlossen. </p>
+<p></p>
+<p>
+    Du kannst die Registrierung über diesen <a href="{{ url('fos_user_registration_confirm', {'token': user.confirmationToken }) }}">Link</a> nocheinmal starten.
+</p>
+<p>URL: {{ url('fos_user_registration_confirm', {'token': user.confirmationToken }) }}</p>
+<p></p>
+<p>- Das Mealmatch-Team</p>
+{{ include('@Api/Emails/footer.html.twig') }}

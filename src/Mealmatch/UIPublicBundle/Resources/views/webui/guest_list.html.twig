@@ -1,0 +1,15 @@
+<div class="guest">
+<a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+    {% if guest.profile.imageName == "image/udefault.png" %}
+        <img class="guset-pic" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+    {% else %}
+        <img class="guset-pic" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+    {% endif %}
+    {% set mealOffers = restaurant_service.getSelectedMealOffers(meal, guest) %}
+    {% for mealOffer in mealOffers %}
+        <p class="guest-offer">{{ mealOffer.name }} <br> {{ mealOffer.price|number_format(2) }} {{ mealOffer.currency }}</p>
+    {% else %}
+            <p class="meal-noselected"> -- NO SELECTED MEAL OFFER FOUND --</p>
+    {% endfor %}
+</a>
+</div>

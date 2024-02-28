@@ -1,0 +1,16 @@
+<form method="get" action="{{ path('search_do') }}">
+    <div class="row">
+        <div class="mm-search-wrap">
+            <div class="input-group">
+                <input name="searchLocation"
+                       type="text" class="form-control"
+                       placeholder="{{ 'search.submit'|trans({}, 'Mealmatch') }}">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- / searchWrap -->
+    </div><!-- /.row -->
+</form>

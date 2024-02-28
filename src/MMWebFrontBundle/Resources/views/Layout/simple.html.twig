@@ -1,0 +1,47 @@
+{% extends "@MMWebFront/twbs3-base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{#
+The simple layout is documented here: @todo
+The following 2 blocks are defined and arranged in this template:
+    - MAIN_CONTENT
+    - MAIN_BOTTOM
+Variables used by the template, can be overriden when extended.
+#}
+{% if viewDataImage is not defined %}{% set viewDataImage %}{{ asset('bundles/mmwebfront/images/mm/mealmatch_header.jpg') }}{% endset %}{% endif %}
+{% if viewData.title is not defined %}{% set viewData = {'title': '<!--// NO VIEW DATA TITLE //-->'} %}{% endif %}
+{% if left_icon is not defined %}{% set left_icon %}<span
+        class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}{% endif %}
+{% if main_header_title is not defined %}{% set main_header_title %}{{ viewData.title }}{% endset %}{% endif %}
+{% if main_header_subtitle is not defined %}{% set main_header_subtitle %}MAIN_HEADER_SUB_TITLE{% endset %}{% endif %}
+{% if main_header_action_path is not defined %}{% set main_header_action_path %}MAIN_HEADER_ACTION_PATH{% endset %}{% endif %}
+{% if main_header_action_label is not defined %}{% set main_header_action_label %}MAIN_HEADER_ACTION_LABEL{% endset %}{% endif %}
+{# Layout
+The simple layout only defines a fixed custom header with flexible image and title!
+#}
+{% block body %}
+    <!--// main_header
+    Not variable by template, always fixed.
+    //-->
+    <div class="mm-layout mm-layout-main-header no-margin">
+        <div class="mm-layout-main-header-box">
+            <h1 class="text-center mm-layout-header-title">{{ main_header_title }}</h1>
+        </div>
+        <img class="img-responsive center-block" src="{{ viewDataImage }}" alt="Mealmatch"/>
+    </div>
+    <!--// main_content
+    Just a container with a row, everything inside the row is main_content.
+    //-->
+    <div id="mm-content" class="mm-layout container">
+        <!--div class="row"--> <!--rp test-->
+            {% block main_content %}
+                <!--// simple/main_content //-->
+            {% endblock %}
+        <!--/div-->
+    </div>
+    <!--// main_bottom
+    Below main_content "anything! can be attached, no layout enforced for main_bottom.
+    //-->
+    {% block main_bottom %}
+        <!--// There is no default for block bottom //-->
+    {% endblock %}
+{% endblock body %}

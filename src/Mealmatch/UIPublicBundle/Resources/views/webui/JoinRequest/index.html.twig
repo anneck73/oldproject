@@ -1,0 +1,38 @@
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}MealMatch: {{ 'joinrequest.index.title_tag'|trans }} {% endblock %}
+{% set main_header_title %}{{ 'joinrequest.index.title_tag'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'joinrequest.index.subtitle'|trans }}{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-matches-circle"></span>{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    <div class="res-menu card match-card">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#meals" aria-controls="meals" role="tab" data-toggle="tab">
+                    <i class="fa fa-users" aria-hidden="true"></i><span class="tab-heading">{{ 'joinrequest.index.title'|trans }}</span></a></li>
+            <li role="presentation"><a href="#over" aria-controls="over" role="tab" data-toggle="tab">
+                    <i class="fa fa-user" aria-hidden="true"></i><span class="tab-heading">{{ 'joinrequest.index.hosting.title'|trans }}</span></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="meals">
+                <div class="col-md-12">
+                    <div class="mela-manager-table table-responsive">
+                        {{ include('@WEBUI/JoinRequest/index_content_guest_ui.html.twig') }}
+                        <br><br>
+                        <h3 class="pad-meal-tct">{{ 'joinrequest.index.subtitle.mealtickets'|trans }}</h3>
+                        {{ include('@WEBUI/JoinRequest/index_content_guest_tickets_ui.html.twig') }}
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="over">
+                <div class="col-md-12">
+                    <div class="mela-manager-table table-responsive">
+                        {{ include('@WEBUI/JoinRequest/index_content_host_ui.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

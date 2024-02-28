@@ -1,0 +1,22 @@
+{#
+This is the public ProMeal Page, it should be SEO optimized!
+#}
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ proMeal.tableTopic }}{% endblock %}
+{% block fbOpenGraphHead %}
+    <!-- FB-OG -->
+    <meta property="og:url" content="{{ app.request.uri }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="mealmatch"/>
+    <meta property="og:title" content="{{ proMeal.tableTopic }}"/>
+    <meta property="og:description" content="Mealmatch | HomeMeal: {{ proMeal.description }}"/>
+    <meta property="og:image" content="{ app.request.getSchemeAndHttpHost() ~ asset('bundles/mmwebfront/images/mm/mealmatch-logo.png') }}" />
+{% endblock %}
+
+{% block body %}
+    {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

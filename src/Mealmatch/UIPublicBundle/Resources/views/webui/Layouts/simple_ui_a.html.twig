@@ -1,0 +1,63 @@
+{% extends "@WEBUI/newUI-Base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+
+{#
+The simple layout is documented here: @todo
+The following 2 blocks are defined and arranged in this template:
+    - MAIN_CONTENT
+    - MAIN_BOTTOM
+Variables used by the template, can be overriden when extended.
+#}
+{% if page is not defined %}{% set page %}undefined-page-class{% endset %}{% endif %}
+{% if viewDataImage is not defined %}{% set viewDataImage %}{{ asset('bundles/uipublic/images/mm/mealmatch_header.jpg') }}{% endset %}{% endif %}
+{% if viewData.title is not defined %}{% set viewData = {'title': '<!--// NO VIEW DATA TITLE //-->'} %}{% endif %}
+{% if left_icon is not defined %}{% set left_icon %}<span
+        class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}{% endif %}
+{% if main_header_title is not defined %}{% set main_header_title %}{{ viewData.title }}{% endset %}{% endif %}
+{% if main_header_subtitle is not defined %}{% set main_header_subtitle %}{% endset %}{% endif %}
+{% if main_header_action_path is not defined %}{% set main_header_action_path %}MAIN_HEADER_ACTION_PATH{% endset %}{% endif %}
+{% if main_header_action_label is not defined %}{% set main_header_action_label %}MAIN_HEADER_ACTION_LABEL{% endset %}{% endif %}
+{# Layout
+The simple layout only defines a fixed custom header with flexible image and title!
+#}
+{% block body %}
+    <div class="mm-layout mm-layout-main-header hidden-xs">
+        <div class="mm-layout-main-header-box">
+            <h1 class="main_header_title">{{ main_header_title }}</h1>
+        </div>
+        <div><img class="img-responsive center-block" src="{{ viewDataImage }}" alt="Mealmatch"/></div>
+    </div>
+
+    <div class={{ page }}>
+
+        <div class="container">
+
+{#            <div class="heading-div text-center">#}
+{#                {% block sub_title %}#}
+{#                    {% if main_header_subtitle is not empty %}#}
+{#                        <p class="heading-text">{{ main_header_subtitle }}</p>#}
+{#                    {% endif %}#}
+{#                {% endblock %}#}
+{#            </div>#}
+
+            <div class="main-width">
+
+                {% block main_content %}
+                    <div class="row">
+LAYOUT DEFAULT IS EMPTY!!!!
+                    </div>
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+    {% block main_bottom %}
+        <!--// There is no default for block bottom //-->
+    {% endblock %}
+{% endblock body %}
+
+{#{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profileJS') }}
+{% endblock %}#}

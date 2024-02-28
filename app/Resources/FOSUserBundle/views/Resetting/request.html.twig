@@ -1,0 +1,9 @@
+{% extends "@WEBUI/Layouts/main_layout.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'resetting.request.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_title %} {{ 'resetting.request.title'|trans }} {% endset %}
+{% set main_header_subtitle %}{{ 'resetting.request.title'|trans }}{% endset %}
+{% block staticPages %}
+   {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock %}

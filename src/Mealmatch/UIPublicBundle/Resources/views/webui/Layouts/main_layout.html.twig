@@ -1,0 +1,55 @@
+{% extends "@WEBUI/newUI-Base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{#
+Variables used by the template, can be overriden when extended.
+#}
+{% if colLeft is not defined %}{% set colLeft %}col-sm-2 col-xs-12{% endset %}{% endif %}
+{% if colRight is not defined %}{% set colRight %}col-sm-10 col-xs-12{% endset %}{% endif %}
+{% if viewDataImage is not defined %}{% set viewDataImage %}{{ asset('bundles/uipublic/images/mm/mealmatch_header.jpg') }}{% endset %}{% endif %}
+{% if viewDataImageXS is not defined %}{% set viewDataImageXS %}{{ asset('bundles/uipublic/images/mm/mealmatch_header_xs.jpg') }}{% endset %}{% endif %}
+{% if viewData.title is not defined %}{% set viewData = {'title': '<!--// NO VIEW DATA TITLE //-->'} %}{% endif %}
+{% if left_icon is not defined %}{% set left_icon %}<span
+        class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}{% endif %}
+{% if main_header_title is not defined %}{% set main_header_title %}{{ viewData.title }}{% endset %}{% endif %}
+{% if main_header_subtitle is not defined %}{% set main_header_subtitle %}MAIN_HEADER_SUB_TITLE{% endset %}{% endif %}
+{# Layout #}
+{% block body %}
+    <div class="header-container findmeal-banner">
+        <div class="search-sec">
+            <h3>{{ main_header_title }}</h3>
+        </div>
+    </div>
+
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        {{ left_icon }}
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="title">{{ main_header_title }}</h3>
+                        {% if main_header_subtitle is not empty %}
+                            <p class="margin-bottom1">{{ main_header_subtitle }}</p>
+                        {% endif %}
+
+                        <div class=" cont-font">
+                            {% block staticPages %}
+                                {% if viewData.text is defined %}{{ viewData.text|raw }}{% endif %}
+                            {% endblock %}
+                            {% block main_content %}
+                                <!--// Main CONTENT Block from main_layout
+                                Default is empty, is to be filled by content templates.
+                                //-->
+                            {% endblock %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block main_bottom %}
+        <!--// There is no default for block bottom //-->
+    {% endblock %}
+{% endblock body %}

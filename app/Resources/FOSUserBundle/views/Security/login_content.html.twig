@@ -1,0 +1,37 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="restaurant-profile-page user-profilepage">
+<div class="container">
+    <div class=" main-width">
+    <div class="form-bg">
+        <div class="for-padding">
+            {% if error %}
+                <div class="text-danger message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="username" class="required">{{ 'security.login.username'|trans }}</label>
+                            <input type="text" class="form-control tbox" id="username_ui" name="_username" value="{{ last_username }}" required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="required">{{ 'security.login.password'|trans }}</label>
+                            <input type="password" id="password_ui" class="form-control tbox" name="_password" required="required"/>
+                            <p class="pull-left new-user">New User ? <a href="{{ path('fos_user_registration_register') }}"><span class="user-color">Create account</span></a></p>
+                            <p class="pull-right new-user"><a href="#">Forgot password ?</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-div text-center">
+                    <button type="submit" class="main-btn" id="_submit_ui" name="_submit">{{ 'security.login.submit'|trans }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

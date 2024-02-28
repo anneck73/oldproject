@@ -1,0 +1,37 @@
+{% extends 'MMWebFrontBundle::twbs3-base.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+
+
+{% block body %}
+    <div class="visible-lg">
+        {% include '@WEBUI/Partials/mm-headerbild.partial.html.twig' %}
+        <div id="search-results" class="col-xs-5">
+            {% block search_panel %}
+            {% endblock %}
+            <!-- // search // -->
+            {% block search_results %}
+            {% endblock %}
+        </div>
+        <div class="container-fluid mm-layout-search-container col-xs-7">
+          <div id="map-canvas"></div>
+        </div>
+    </div>
+    <div class="visible-xs container-fluid">
+        <div id="search-results-xs" class="row">
+            <div class="col-xs-12 padding-top">
+                {% block search_panel_xs %}
+                {% endblock %}
+                <!-- // search // -->
+                {% block search_results_xs %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="map-canvas"></div>
+        </div>
+    </div>
+
+{% endblock %}

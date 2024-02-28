@@ -1,0 +1,4 @@
+services:
+#    mealmatch_meme_memory.example:
+#        class: Mealmatch\MemeMemoryBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,8 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>{{ 'mail.salutation'|trans({'%firstname%': GUEST.profile.firstname, '%lastname%': GUEST.profile.lastname }) }}</p>
+<p>es sind noch 2 Tage bis zu deinem Meal bei {{ HOST.username }},
+    bitte vergiss nicht, dass du für das Meal noch nicht verbindlich zugesagt hast.</p>
+<p>Um deine Zusage zu bestätigen, folge einfach diesem Link:</p>
+<p><a href="{{ path('joinrequest_payed', {'hash': JR.hash}) }}">Link</a></p>
+<p>{{ 'mail.yourteam'|trans }}</p>
+{{ include('@MMApi/Emails/footer.html.twig') }}

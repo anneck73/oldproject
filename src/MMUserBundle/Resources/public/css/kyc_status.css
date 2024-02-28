@@ -1,0 +1,34 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #86bc2575;
+}
+.unselectable{
+    cursor: not-allowed;
+}
+
+.card-infos.grid th {
+    background-color: #86bc25;
+    color: #fff;
+}
+
+.card-infos.grid tr {
+    background-color: #fff;
+
+}
+
+.card-title h2 {
+    padding: 10px 0;
+    margin-bottom: 0;
+    font-weight: 500;
+}

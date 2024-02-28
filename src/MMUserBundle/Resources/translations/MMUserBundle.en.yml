@@ -1,0 +1,23 @@
+profile.registration.first_name: 'First name'
+profile.registration.last_name: 'Last name'
+profile.registration.profile_photo: 'Profile picture'
+profile.registration.address.label: Address
+profile.registration.addressline1: 'Address line #1'
+profile.registration.addressline2: 'Address line #2'
+profile.registration.areacode: Zipcode
+profile.registration.city: Town
+profile.registration.state: State
+profile.registration.country: Country
+profile.registration.gender: Gender
+profile.registration.age: Age
+profile.registration.phone: 'Phone number'
+profile.registration.hobbies: Hobbies
+profile.registration.paypalemail: 'PayPal E-mail'
+profile.registration.selfdescription: Selfdescription
+profile.registration.male.label: Male
+profile.registration.female.label: Female
+profile.registration.submit.label: Save
+profile.title: 'Mealmatch Userprofile'
+profile.edit: 'Edit Userprofile'
+account.edit: 'Edit Account'
+account.text: 'Account'

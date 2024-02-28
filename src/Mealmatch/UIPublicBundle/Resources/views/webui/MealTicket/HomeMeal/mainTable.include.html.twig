@@ -1,0 +1,30 @@
+{% trans_default_domain 'Mealmatch' %}
+<table class="table payment-table">
+    <thead>
+    <tr>
+        <th class="th-left" >{{ 'meal.show.title'|trans }}</th>
+        <th class="th-right contribution-title">{{ 'meal.sharedcost.label'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="col-xs-10">
+            <p>{{ ticket.basemeal.title }}</p>
+            <p>{{ ticket.basemeal.mealMain }}</p>
+            {% if ticket.basemeal.mealStarter is not empty %}
+                <p>{{ ticket.basemeal.mealStarter }}</p>
+            {% endif %}
+            {% if ticket.basemeal.mealDesert is not empty %}
+                <p>{{ ticket.basemeal.mealDesert }}</p>
+            {% endif %}
+        </td>
+        <td class="col-xs-2 contribution-cost">{{ ticket.price|number_format(2, ".") }}</td>
+    </tr>
+    <tr>
+        <td class="col-xs-10">
+            <p>{{ 'mealticket.taxrate'|trans }} {{ ticket.host.restaurantprofile.taxRate }}%</p>
+        </td>
+        <td class="col-xs-2 contribution-cost">{{ (ticket.price * (ticket.host.restaurantprofile.taxRate/100))|number_format(2, ".") }}</td>
+    </tr>
+    </tbody>
+</table>

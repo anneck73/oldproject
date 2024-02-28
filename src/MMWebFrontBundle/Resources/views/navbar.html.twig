@@ -1,0 +1,30 @@
+{% spaceless %}
+    <!-- Mealmatch navbar -->
+    <div id="mm-navbar-switcher">
+
+        <div class="visible-lg">
+            {% if is_granted('ROLE_RESTAURANT_USER') %}
+                {% include('@WEBUI/NavBars/restaurant.navbar.html.twig') %}
+            {% else %}
+                {% if is_granted('ROLE_USER') %}
+                    {% include('@WEBUI/NavBars/user.navbar.html.twig') %}
+                {% else %}
+                    {% include('@WEBUI/NavBars/public.navbar.html.twig') %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="visible-xs visible-sm visible-md">
+            {% if is_granted('ROLE_RESTAURANT_USER') %}
+                {% include('@WEBUI/NavBars/user-xs.navbar.html.twig') %}
+            {% else %}
+                {% if is_granted('ROLE_USER') %}
+                    {% include('@WEBUI/NavBars/user-xs.navbar.html.twig') %}
+                {% else %}
+                    {% include('@WEBUI/NavBars/public-xs.navbar.html.twig') %}
+                {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
+    <!-- /Mealmatch navbar -->
+{% endspaceless %}

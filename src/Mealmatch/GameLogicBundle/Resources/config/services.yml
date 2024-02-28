@@ -1,0 +1,14 @@
+parameters:
+    event_dispatcher: Symfony\Component\EventDispatcher\EventDispatcher
+services:
+    mm_game_logic.game_event_subscriber:
+        class: Mealmatch\GameLogicBundle\EventSubscriber\LoginSubscriber
+        arguments: ["@logger", "@event_dispatcher"]
+        tags:
+          - { name: kernel.event_subscriber, event: security.interactive_login }
+
+    mm_game_logic.game_scored_subscriber:
+        class: Mealmatch\GameLogicBundle\EventSubscriber\ScoredSubscriber
+        arguments: ["@logger", "@event_dispatcher", "@doctrine.orm.entity_manager"]
+        tags:
+          - { name: kernel.event_subscriber, event: game.user.scored }

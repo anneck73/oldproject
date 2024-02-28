@@ -1,0 +1,7 @@
+version: 2
+post:
+    path: bin/console cron:startup
+sustained:
+    - vendor/
+    - web/static/prod/
+    - web/static/dev/

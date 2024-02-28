@@ -1,0 +1,189 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # FOOTER
+\*------------------------------------*/
+
+
+/* Base */
+.mm-footer-lg{
+    background-color: $light-white;
+    padding: 30px 15px 10px 15px;
+    color: $grey;
+
+    .nav>li>a {
+        padding: 0;
+        color: $grey;
+
+        &:hover {
+            padding: 0;
+            color: $green;
+            background: none;
+        }
+    }
+}
+
+
+/* H */
+.mm-footer-header {
+    font-size: $fs-xs;
+    color: $green;
+    text-transform: uppercase;
+}
+
+.mm-footer-text {
+    font-size: $fs-xxs;
+}
+
+
+
+/* Icons */
+.mm-footer-icons a{
+    margin-right: 10px;
+    color: $grey;
+
+    &:hover {
+        color: $green;
+    }
+}
+
+
+/* Copyright */
+
+.mm-footer-line{
+    border-top: 1px solid $green;
+    width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 3px;
+}
+
+.mm-footer-copyright {
+    font-size: $fs-xxs;
+    padding-top: 30px;
+}
+
+
+/* Mangopay-Logo */
+.mm-mangopay-logo-responsive {
+    display: block;
+    max-width: 80%;
+    height: auto;
+    margin-left: 0;
+    margin-right: auto;
+}
+.mm-mangopay-logo-div {
+    height: 2.5em;
+}
+
+/*------------------------------------*\
+  # KLASSEN UNKLAR
+\*------------------------------------*/
+
+
+.mm-footer {
+    background-color: $light-white;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font: bold 16px sans-serif;
+    padding: 55px 50px;
+}
+
+.mm-footer .footer-icons{
+    margin-top: 15px;
+}
+
+.mm-footer .footer-icons a{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-color:  #86bd24;
+    border-radius: 2px;
+
+    font-size: 20px;
+
+    text-align: center;
+    line-height: 35px;
+
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+#mm-footer {
+    background-color: #86bd24;
+    color: #ffffff;
+}
+
+#mm_footer_container > #mm_footer_row > div {
+    color: #000000;
+}
+
+#mm_footer_container > #mm_footer_row > div > a {
+    color: #000000;
+}
+
+
+
+.mm-footer-links {
+    margin-right: 5px;
+}
+
+.mm-footer-company-name {
+    margin-right: 5px;
+}
+
+
+
+
+
+#mm-footer-teaser-text {
+    text-align: justify;
+}
+
+
+
+.footer-btn {
+    color: #000000;
+}
+
+.mm-text-version {
+    padding-top: 15px;
+    font-size: 8px;
+}
+
+#mm-search-footer-xs {
+    max-height: 100px;
+}
+
+/* MediaQueries mm-footer*/
+@media (max-width: 767px) {
+    #mm-footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .mm-footer-line {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .mm-footer-line {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+@media (min-width: 1200px) {
+}

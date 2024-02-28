@@ -1,0 +1,43 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+<div id="mm-user-menu-modal" class="modal-menu modal fade" tabindex="-1" role="dialog">
+    
+    <div class="modal-dialog" role="navigation">
+        <div class="modal-content">
+            {# NAVIGATION #}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
+                <h4 class="modal-title">{{ 'user-menu.modal.title'|trans }}</h4>
+            </div>
+            
+            <div class="modal-body">
+                <ul class="nav navbar-nav">
+                    {# PRO #}
+                    {% if currentRoute != 'pro' %}
+                        <li><a href="{{ path("api_userprofile_manager") }}">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span>{{ 'navbar.profil.edit'|trans }}  
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {# USER PROFILE EDIT #}
+                    {% if currentRoute != 'fos_user_profile_edit' %}
+                        <li><a href="{{ path('fos_user_profile_edit') }}">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    {{ 'navbar.account.edit'|trans }}
+                                    
+                            </a></li>
+                    {% endif %}
+
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                                {{ 'layout.logout'|trans }}            
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endspaceless %}

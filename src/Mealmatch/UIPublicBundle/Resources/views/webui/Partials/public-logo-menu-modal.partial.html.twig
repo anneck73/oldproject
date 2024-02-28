@@ -1,0 +1,181 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+<div id="mm-public-logo-menu-modal" class="modal-menu modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="navigation">
+        <div class="modal-content">
+            
+            {# NAVIGATION #}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
+                <h4 class="modal-title">{{ 'public-logo-menu.modal.title'|trans }}</h4>
+            </div>
+            
+            <div class="modal-body">
+                <ul class="nav navbar-nav">
+
+                    {# STARTSEITE // ToDO: Check #}
+                    {% if currentRoute != 'home' %}
+                        <li>
+                            <a href="{{ path('home') }}">
+                                <span class="icon-home"></span>{{ 'layout.home'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {# USER #}
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            {# Get the number of new threads for the authenticated participant #}
+                            <a href="{{ path('fos_message_inbox') }}"><span>{{ fos_message_nb_unread() }}</span>Nachrichten</a>
+                        </li>
+                        {% if currentRoute != 'api_meal_index' %}
+                            <li>
+                                <a href="{{ path('api_meal_index') }}">
+                                    <span class="mm-icon-meals"></span>{{ 'navbar.mymeals'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    {# USER #}
+                        {% if currentRoute != 'joinrequest_index' %}
+                            <li>
+                                <a href="{{ path('joinrequest_index') }}">
+                                    <span class="mm-icon-matches"></span>{{ 'navbar.mymatches'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {# NO USER // LOGIN #}
+                    {% if not is_granted('ROLE_USER') %}
+                        {% if currentRoute != 'fos_user_security_login' %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                <span class="icon-key"></span>{{ 'layout.login'|trans }}
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {# NO USER // REGISTER #}
+                    {% if currentRoute != 'fos_user_registration_register' %}
+                        {% if not is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}"> 
+                                <span class="icon-pencil"></span>{{ 'navbar.register'|trans }}                
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {# USER // Mein Konto #}
+                    {# ToDO: ICON #}
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" id="dropdown-menu-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="icon-user"></span>Mein Konto <span class="fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown-menu-user">
+                                {% if is_granted('ROLE_RESTAURANT_USER') %}
+                                    <li><a href="{{ path("api_restaurant_profile_manager") }}">
+                                            {{ 'navbar.restaurant.profil.text'|trans }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{{ path("api_userprofile_manager") }}">
+                                            {{ 'navbar.profil.edit'|trans }}    
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% if currentRoute != 'fos_user_profile_edit' %}
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">
+                                            {{ 'navbar.account.edit'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        
+                    {% endif %}
+
+
+                    
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="dropdown-menu2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="mm-icon-help"></span>Hilfe <span class="fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown-menu2">
+
+                            {% if currentRoute != 'help' %}
+                                <li>
+                                    <a href="{{ path('help') }}">{{ 'help.title'|trans }}</a>
+                                </li>
+                            {% endif %}
+                            
+                            {% if currentRoute != 'become_host' %}
+                                <li><a href="{{ path('become_host') }}">{{ 'public-footer.becomeHost'|trans }}</a></li>
+                            {% endif %}
+
+                            {% if currentRoute != 'mm_how_it_works' %}
+                                <li><a href="{{ path('mm_how_it_works') }}">{{ 'public-footer.becomeGuest'|trans }}</a></li>
+                            {% endif %}
+
+                            {% if currentRoute != 'mm_how_to_host' %}
+                                <li><a href="{{ path('mm_how_to_host') }}">{{ 'public-footer.howToHost'|trans }}</a></li>
+                            {% endif %}
+
+                            {% if currentRoute != 'mm_trust_security' %}
+                                <li><a href="{{ path('mm_trust_security') }}">{{ 'public-footer.trustAndSecurity'|trans }}</a></li>
+                            {% endif %}
+
+                            {% if currentRoute != 'mm_events' %}
+                                <li><a href="{{ path('mm_events') }}">{{ 'public-footer.events'|trans }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="dropdown-menu1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="mm-icon-default"></span>{{ 'public-footer.head.mealmatch'|trans }} <span class="fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown-menu1">
+                            {% if currentRoute != 'mm_about' %}
+                                <li><a href="{{ path('mm_about') }}">{{ 'public-footer.about'|trans }}</a></li>
+                            {% endif %}   
+                            
+                            {% if currentRoute != 'mm_career' %}
+                                <li><a href="{{ path('mm_career') }}">{{ 'public-footer.career'|trans }}</a></li>
+                            {% endif %}
+                            
+                            {% if currentRoute != 'mm_press' %}
+                                <li><a href="{{ path('mm_press') }}">{{ 'public-footer.press'|trans }}</a></li>
+                            {% endif %}
+
+                            <li><a href="//blog.mealmatch.de">{{ 'public-footer.blog'|trans }}</a></li>
+                        </ul>
+                    </li>
+
+                    
+{# Triggers error in array merge ...
+                    <li>
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">
+                            <span class="icon-flag"></span>{{ 'public-footer.language-english'|trans }}</a>
+                    </li>
+#}
+
+                    {# USER // LOGOUT #}
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <span class="icon-logout"></span>{{ 'layout.logout'|trans }}            
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endspaceless %}

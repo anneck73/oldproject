@@ -1,0 +1,35 @@
+# #########################################
+# Twig Configuration
+# #########################################
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes: ['bootstrap_3_layout.html.twig']
+    globals:
+        mm: "%mm%"
+        mm_features: "%mm_features%"
+        fos_csrf_provider: "@security.csrf.token_manager"
+        app_version: "v%app_version%"
+        app_name: "%env(APP_NAME)%"
+        fb_app_id: "%facebook_app_id%"
+        GMAPS_API_KEY: "%gmaps_api_key%"
+        # Mealmatch Services ...
+        meal_service: "@api.meal.service"
+        meal_addr_service: "@api.geo_address.service"
+        home_meal_service: "@api.home_meal.service"
+        pro_meal_service: "@api.pro_meal.service"
+        restaurant_service: "@api.restaurant.service"
+        meal_ticket_service: "@api.meal_ticket.service"
+        mangopay_pub_service: "@PublicMangopayService"
+    exception_controller: MMWebFrontBundle:Exception:showException
+    paths:
+        # Local templates - for the local developer to overwrite ...
+        "%kernel.root_dir%/../src/Mealmatch/UIPublicBundle/Resources/views/local": "WEBUI"
+        # MAIN PUBLIC templates - Will be displayed on mealmatch.de !!!
+        "%kernel.root_dir%/../src/Mealmatch/UIPublicBundle/Resources/views/webui": "WEBUI"
+        # PUBLIC Community Templates have their own root - Will be displayed to all community users !!!
+        "%kernel.root_dir%/../src/Mealmatch/UIPublicBundle/Resources/views/communityui": "CUI"
+        # Old Fallback path in MMWebFront
+        "%kernel.root_dir%/../src/MMWebFrontBundle/Resources/views": "WEBUI"
+        # Specific templates - for the local developer to overwrite ...
+        "%kernel.root_dir%/../src/Mealmatch/UIPublicBundle/Resources/views": "UIVariant"

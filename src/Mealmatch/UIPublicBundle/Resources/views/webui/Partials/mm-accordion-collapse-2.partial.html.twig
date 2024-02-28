@@ -1,0 +1,63 @@
+{#
+Author: wizard@mealmatch.de
+Used in XS View of PublicSearchController
+Included in mealsearchJS.twig.html
+Using Route: public_search "/s/"
+#}
+{% trans_default_domain 'Mealmatch' %}
+{% set free = (meal.maxnumberofguest - meal.guests|length) %}
+{% set max = meal.maxnumberofguest %}
+{% spaceless %}
+    <!--//
+    mm-accordion-collapse-2.partial.html.twig
+    //-->
+<div class="mm-spacer"></div>
+<h2 class="mm-header">{{ meal.title }}</h2>
+<p class="mm-footer-text">{{ meal.description|raw }}</p>
+<ul class="nav">
+    {% if meal.starter is not empty %}
+        <li>Vorspeise: {{ meal.starter }}</li>{% endif %}
+    {% if meal.main is not empty %}
+        <li>Hauptgang: {{ meal.main }}</li>{% endif %}
+    {% if meal.desert is not empty %}
+        <li>Nachtisch:{{ meal.desert }}</li>{% endif %}
+    {% if meal.guests|length > 0 %}
+        <li>Gäste:
+            <ul class="nav nav-pills">
+                {% for guest in meal.guests %}
+                    <li>
+                        <a href="{{ path('public_user_by_hash', {'pHash': meal.host.hash}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                            {% else %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset(guest.profile.imageName, 's3img') }}"/>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
+    <button class="btn btn-success pull-left" type="button">Frei <span class="badge mm-bg-green">{{ free }}</span> Max
+        <span
+                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+    <div class="pull-right">
+        {% if free > 0 %}
+            <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+                <button class="btn btn-success" type="button">
+                    {{ 'meal.action.join'|trans }} {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+                </button>
+            </a>
+        {% endif %}
+</div>
+    <!--// EOF: mm-accordion-collapse-2.partial.html.twig //-->
+{% endspaceless %}
+

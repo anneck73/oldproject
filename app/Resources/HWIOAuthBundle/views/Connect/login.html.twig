@@ -1,0 +1,10 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{# THIS LOGIN IS USED DURING OAUTH e.g. FACEBOOG LOGIN #}
+{% block main_content %}
+    {% if error is defined and error %}
+        <span>{{ error }}</span>
+    {% endif %}
+    {% for owner in hwi_oauth_resource_owners() %}
+    <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
+    {% endfor %}
+{% endblock main_content %}

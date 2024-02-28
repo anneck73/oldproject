@@ -1,0 +1,14 @@
+# Mealmatch DEV settings
+# Configuration for SK Host
+# test.meal-match.com
+# Author: wizard@mealmatch.de
+# ################################################################################################
+imports:
+ - { resource: parameters.yml }
+
+parameters:
+    paypal_credentials:
+        live: false
+
+    router.request_context.host: test.meal-match.com
+

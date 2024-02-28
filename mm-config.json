@@ -1,0 +1,21 @@
+{
+  "targetHost": "localhost",
+  "host-config": {
+    "localhost": {
+      "baseURL": "http://127.0.0.1:8000/app_test.php/",
+      "headless": false
+    },
+    "mealmatch-dev": {
+      "baseURL": "https://mealmatch-dev.frb.io/",
+      "headless": true
+    },
+    "mealmatch-stage": {
+      "baseURL": "https://mealmatch-stage.frb.io/",
+      "headless": true
+    },
+    "mealmatch-live": {
+      "baseURL": "https://mealmatch.frb.io/",
+      "headless": true
+    }
+  }
+}

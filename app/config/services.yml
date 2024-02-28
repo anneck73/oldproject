@@ -1,0 +1,237 @@
+# Copyright MealMatch 2016 | http://mealmatch.de
+# ############################################
+# Loading Bundled Services ...
+# ############################################
+imports:
+#    - { resource: fos_user.yml }
+#    - { resource: security.yml }
+#    - { resource: services.yml }
+# ############################################
+# Global Service Specifications for MealMatch
+# ############################################
+parameters:
+    # ############################################
+    # Service Global Parameters
+    # ############################################
+    # parameter_name: value
+
+    # FOS User Provider is the argument class for mm_user_provider-service below
+    mm_user_provider.class: Mealmatch\ApiBundle\Security\Core\FOSUBUserProvider
+    mm_user_manager.class: Mealmatch\ApiBundle\MealMatch\UserManager
+
+services:
+    # Auto-DI-Magic ON!!!
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Mealmatch\ApiBundle\Services\Enterprise\PublicCommunityService:
+        public: true
+        arguments:
+            $translator: "@translator.default"
+            $entityManager: "@doctrine.orm.entity_manager"
+            $logger: "@logger"
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+
+    # the namespace prefix for classes (must end in \)
+    # All controllers in MMWebFront with auto-wiring enabled.
+    MMWebFrontBundle\Controller\DefaultController:
+        tags: ['controller.service_arguments']
+        calls:
+        - [setContainer, ["@service_container"]]
+        bind:
+            $seoPage: "@sonata.seo.page"
+
+    # the namespace prefix for classes (must end in \)
+    MMUserBundle\:
+        autowire: true
+        # create services for all the classes found in this directory...
+        resource: '../../src/MMUserBundle/'
+        # ...except for the classes located in these directories
+        # @todo: services should NOT be excluded, but for now we only need controller/ to be autowired.
+        exclude: '../../src/MMUserBundle/{Entity,Repository,EventSubscriber,Form,Tests,User,Services}'
+
+    # For some reason, auto-wiring stopped working, this enforces wiring and make old code work again?
+    # @todo: Migrate all services to Symfony 3.4!
+    # FOS User Bind ...
+    MMUserBundle\Controller\RegistrationController:
+        tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+        bind:
+            $formFactory: "@fos_user.profile.form.factory"
+            $tokenStorage: "@security.token_storage"
+
+    # UserProfileManager for Mealmatch
+    MMUserBundle\Controller\UserProfileManagerController:
+        tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    MMUserBundle\Controller\UserKycController:
+        arguments: ['%mangopay_credentials%', '@logger']
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+    MMUserBundle\Controller\UserKycStatusController:
+        calls:
+           - [setContainer, ["@service_container"]]
+
+    MMUserBundle\Controller\DisputeController:
+        arguments: ['%mangopay_credentials%', '@logger','@swiftmailer.mailer']
+        calls:
+           - [setContainer, ["@service_container"]]
+        tags:
+           - { name: monolog.logger, channel: mealmatch }
+
+#    # UserProfileManager for Mealmatch
+#    MMUserBundle\Controller\RestaurantProfileManagerController:
+#        tags: ['controller.service_arguments']
+#        calls:
+#            - [setContainer, ["@service_container"]]
+
+    # UserProfileManager for Mealmatch
+    MMUserBundle\Controller\MMRestaurantProfileController:
+        tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    # The provider is required for OAuth through FOS User Bundle
+    mm_user_provider:
+        public: true
+        class: "%mm_user_provider.class%"
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: ['@fos_user.user_manager', {facebook: facebook_id, google: google_id}, '@mm_user.image_uploader', '@logger']
+        calls:
+          - [setImageUploader, ['@mm_user.image_uploader']]
+
+    #AWS3 Client Service
+    mm.s3:
+        class: Aws\S3\S3Client
+        factory: [Aws\S3\S3Client, 'factory']
+        arguments:
+            -
+                version: latest
+                region: "%aws3_region%"
+                use_path_style_endpoint: true
+                endpoint: "https://%aws3_server%/%aws3_bucket%"
+                credentials:
+                    key: "%aws3_key%"
+                    secret: "%aws3_secret%"
+
+    # Pager ...
+    pagerfanta.view.default:
+        class: Pagerfanta\View\DefaultView
+        public: false
+        tags: [{ name: pagerfanta.view, alias: default }]
+
+    # since 0.1.3-dev
+    session.memcached:
+        class: Memcached
+
+    session.handler.memcached:
+        class: MMApiBundle\MealMatch\FortrabbitMemcachedSessionHandler
+        arguments: ["@session.memcached", { prefix: "%session_memcache_prefix%", expiretime: "%session_memcache_expire%" }]
+        calls:
+            - [ addServer, [ "%session_memcache_host_1%", "%session_memcache_port_1%" ]]
+            # if you are using a Memcache Production plan (with two nodes):
+            #- [ addServer, [ "%session_memcache_host_2%", "%session_memcache_port_2%" ]]
+
+    # Twig's ...
+    phpinfo.twig_extension:
+        class: MMApiBundle\MealMatch\Twig\PhpInfoExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    MMWebFrontBundle\Controller\ExceptionController:
+        public: true
+        arguments:
+            # forcing debug in exception controller
+            $debug: true
+            $logger: "@logger"
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+    web_admin.exporter_controller:
+        public: true
+        class: 'Mealmatch\WebAdminBundle\Controller\CSVExporterController'
+        arguments:
+            $cacheDir: "%kernel.cache_dir%"
+        tags:
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\ApiBundle\DataFixtures\:
+        resource: '../../src/Mealmatch/ApiBundle/DataFixtures'
+        tags: ['doctrine.fixture.orm']
+
+    Mealmatch\WorkflowBundle\Controller\MangoPayPaymentController:
+        arguments: ['%mangopay_credentials%', '@logger', '@fos_message.composer', '@fos_message.sender', '@templating']
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+
+
+    Mealmatch\WorkflowBundle\Controller\TransitionController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\ApiBundle\Controller\Meal\MealTicketController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\ApiBundle\Controller\ApiController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\MangopayBundle\Controller\PaymentHooksController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\ApiBundle\Controller\Restaurant\RestaurantProfileManagerController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\ApiBundle\Controller\Restaurant\RestaurantPaymentProcessingController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}
+
+    Mealmatch\UIPublicBundle\Controller\PublicStaticPagesController:
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+            - { name: 'controller.service_arguments'}

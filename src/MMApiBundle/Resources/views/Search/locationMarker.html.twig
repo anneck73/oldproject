@@ -1,0 +1,17 @@
+{% trans_default_domain 'Mealmatch' %}
+<div class="text-center">
+    <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+        {% if meal.host.profile.imageName == "image/udefault.png" %}
+            <img class="img-circle" width="35px" height="35px" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+        {% else %}
+            <img class="img-circle" width="35px" height="35px" src="{{ asset(meal.host.profile.imageName, 's3img') }}" />
+        {% endif %}
+    </a></div>
+<div><h4>{{ meal.getTitle() }}</h4></div>
+<div><a href="{{ path('api_homemeal_manager_show', {'id': meal.id}) }}">{{ meal.address.postalcode }} {{ meal.address.city }} | {{ meal.startDateTime|date('d.m.y H:i') }}</a></div>
+<div>
+    <button class="btn btn-success" type="button">{{ meal.sharedCost }} {{ meal.sharedCostCurrency }}</button>
+    <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+        <button class="btn btn-success pull-right" type="button">{{ 'meal.action.join'|trans }}</button>
+    </a>
+</div>

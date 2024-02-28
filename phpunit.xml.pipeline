@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017. Mealmatch UG
+  ~ Author: Wizard <wizard@mealmatch.de>
+  -->
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="app/autoload.php"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <server name="SYMFONY_ENV" value="pipeline"/>
+        <env name="SYMFONY_ENV" value="pipeline"/>
+        <env name="KERNEL_CLASS" value="AppKernel"/>
+        <env name="APP_ENV" value="pipeline"/>
+        <!-- <env name="APP_DEBUG" value="1" /> -->
+        <!-- <env name="SHELL_VERBOSITY" value="-1" /> -->
+        <!-- define your env variables for the test env here -->
+    </php>
+    <listeners>
+            <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitListener" />
+    </listeners>
+    <!-- Define "pipeline-specific" Testsuites -->
+    <testsuites>
+
+        <testsuite name="Mealmatch Tests that must run first">
+            <directory>tests/ApiBundle/Services</directory>
+        </testsuite>
+
+        <!-- Old structure Test Suites -->
+        <testsuite name="Old Mealmatch Test Suite">
+            <directory>tests/ApiBundle</directory>
+            <directory>tests/MMApiBundle</directory>
+            <directory>tests/MMUserBundle</directory>
+            <directory>tests/MMWebFrontBundle</directory>
+        </testsuite>
+
+        <!-- NEW structure Mealmatch Test Suites -->
+        <testsuite name="Mealmatch Test Suite">
+            <directory>tests/Mealmatch</directory>
+        </testsuite>
+
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/*Bundle/Resources</directory>
+                <directory>src/*/*Bundle/Resources</directory>
+                <directory>src/*/Bundle/*Bundle/Resources</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

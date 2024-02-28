@@ -1,0 +1,13 @@
+services:
+# ###########################################################
+# Search Service
+# ###########################################################
+    api.search.service:
+        class: Mealmatch\SearchBundle\Services\SearchService
+        arguments:
+            - '@logger'
+            - '@doctrine.orm.default_entity_manager'
+            - '@templating'
+            - '@serializer'
+        tags:
+            - { name: monolog.logger, channel: mealmatch }

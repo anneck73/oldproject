@@ -1,0 +1,59 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="panel-group" id="jr-accordion-xs" role="tablist" aria-multiselectable="true">
+    {% for joinRequest in joinReqH %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-{{ joinRequest.id }}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#jr-accordion-xs" href="#collapse-{{ joinRequest.id }}" aria-expanded="false" aria-controls="collapse-{{ joinRequest.id }}">
+                    {{ joinRequest.baseMeal.title }}
+                    {% if joinRequest.status == 'ACCEPTED'%}
+                        <span class="btn btn-success pull-right mm-btn-panel">{{ 'joinrequest.status.accepted'|trans }}</span>
+                    {% endif %}
+                    {% if joinRequest.status == 'DENIED'%}
+                        <span class="btn btn-danger pull-right mm-btn-panel">{{ 'joinrequest.status.denied'|trans }}</span>
+                    {% endif %}
+                    {% if joinRequest.status == 'CREATED'%}
+                        <span class="btn btn-primary pull-right mm-btn-panel">{{ 'joinrequest.status.created'|trans }}</span>
+                    {% endif %}
+                    {% if joinRequest.status == 'PAYED'%}
+                        <span class="btn btn-success pull-right mm-btn-panel">{{ 'joinrequest.status.payed'|trans }}</span>
+                    {% endif %}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-{{ joinRequest.id }}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="heading-{{ joinRequest.id }}">
+            <div class="panel-body">
+                <div class="pull-left">
+                    {% set uProfile = joinRequest.baseMeal.host.profile %}
+                    {% set uAccount = joinRequest.baseMeal.host %}
+                    {% if uProfile.imageName == "image/udefault.png" %}
+                        <img
+                                width="72px" height="72px" border="0" class="img-circle"
+                                src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" >
+                    {% else %}
+                        <img width="72px" height="72x" border="0" class="img-circle"
+                             src="{{ asset(uProfile.imageName, 's3img') }}">
+                    {% endif %}
+                </div>
+                <div class="pull-left">{{ joinRequest.messageToHost }}</div>
+                <div class="clearfix"></div>
+                <div class="">
+                    {% if joinRequest.status == 'CREATED'%}
+                        <a class="pull-left" href="{{ path('joinrequest_deny', { 'hash': joinRequest.hash }) }}">
+                            <button class="btn btn-danger">{{ 'joinrequest.index.deny.label'|trans }}</button>
+                        </a>
+                        <a class="pull-right" href="{{ path('joinrequest_accept', { 'hash': joinRequest.hash }) }}">
+                            <button class="btn btn-success pull-right">{{ 'joinrequest.index.accept.label'|trans }}</button>
+                        </a>
+                    {% endif %}
+                    {% if joinRequest.status == 'ACCEPTED'%}
+                        {{ 'joinrequest.waitingforpayment'|trans }}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

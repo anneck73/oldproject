@@ -1,0 +1,15 @@
+{% extends '@WEBUI/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% block stylesheets %}
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+    <div class="notification-content">
+        <h5>Something went wrong ...</h5><br>
+        <h6 style="font-size: 35px">Please try again later</h6>
+        <a href="{{ path('home') }}"><i class="fa fa-home"></i> back to home</a>
+    </div>
+{% endblock %}

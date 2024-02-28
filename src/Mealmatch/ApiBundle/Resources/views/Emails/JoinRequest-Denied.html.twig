@@ -1,0 +1,7 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<p>{{ 'joinrequest.mail.salutation'|trans({ '%createdby%': JR.createdBy }) }}</p>
+<p>{{ 'joinrequest.mail.denied'|trans({ '%firstname%': HOST.profile.firstName, '%lastname%': HOST.profile.lastName, '%mealtitle%': MEAL.title }) }}</p>
+<p>{{ 'joinrequest.mail.yourteam'|trans }}</p>
+
+{{ include('@Api/Emails/footer.html.twig') }}

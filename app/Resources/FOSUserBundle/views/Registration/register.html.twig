@@ -1,0 +1,10 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.title'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'registration.subtitle'|trans|raw }}{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set page = 'restaurant-profile-page' %}
+{% block main_content %}
+    {% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock %}

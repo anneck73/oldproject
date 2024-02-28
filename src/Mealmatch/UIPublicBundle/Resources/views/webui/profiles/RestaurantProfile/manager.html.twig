@@ -1,0 +1,253 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% set main_header_subtitle %}{% endset %}
+{% set imgclass %}{% endset %}
+{% block title %}Mealmatch | {{ 'restaurantprofile.manager.title'|trans }}{% endblock %}
+{% if app.user.profile.imageName == "image/udefault.png" %}
+    {% set profileImage %}{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}{% endset %}
+{% else %}
+    {% set profileImage %}{{ asset(app.user.profile.imageName, 's3img')}} {% endset %}
+{% endif %}
+
+{% set page = 'restaurant-profile-page' %}
+
+{% block main_content %}
+    <div class="panel-group res-profile " id="restaurantProfileManagerAccordion">
+        <div class="panel panel-default">
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                    <div class="form-bg">
+                        <div class="banner-bg">
+                            {{ form_start(formProfilePic) }}
+                            <div id="imageUpload" class="profile-img">
+                                <img class="img-responsive img-circle" height="150px" width="150px"
+                                     src="{{ profileImage }}" alt="ProfileImage">
+                            </div>
+                            {{ form_widget(formProfilePic) }}
+                            {{ form_end(formProfilePic) }}
+                        </div>
+                    </div>
+
+                    {{ form_start(formSinglePage) }}
+                    <div class="for-padding">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.name) }}
+                                    {{ form_widget(formSinglePage.name) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.companyName) }}
+                                    {{ form_widget(formSinglePage.companyName) }}
+                                </div>
+                                <div class="form-group" id = "datetimePicker1">
+                                    {{ form_label(formSinglePage.ownerBirthday) }}
+                                    {{ form_widget(formSinglePage.ownerBirthday) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.ownerCountry) }}
+                                    {{ form_widget(formSinglePage.ownerCountry) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.ownerNationality) }}
+                                    {{ form_widget(formSinglePage.ownerNationality) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.taxID) }}
+                                    {{ form_widget(formSinglePage.taxID) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.commercialRegisterNumber) }}
+                                    {{ form_widget(formSinglePage.commercialRegisterNumber) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.contactAddress) }}
+                                    {{ form_widget(formSinglePage.contactAddress) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                {#<div class="form-group">#}
+                                    {#{{ form_label(formSinglePage.holderName) }}#}
+                                    {#{{ form_widget(formSinglePage.holderName) }}#}
+                                {#</div>#}
+                                {#<div class="form-group">
+                                    {{ form_label(formSinglePage.locationString) }}
+                                    {{ form_widget(formSinglePage.locationString) }}
+                                </div>#}
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.contactPhone) }}
+                                    {{ form_widget(formSinglePage.contactPhone) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.bankIBAN) }}
+                                    {{ form_widget(formSinglePage.bankIBAN) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.defaultCurrency) }}
+                                    {{ form_widget(formSinglePage.defaultCurrency) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.taxRate) }}
+                                    {{ form_widget(formSinglePage.taxRate) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.firstName) }}
+                                    {{ form_widget(formSinglePage.firstName) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.lastName) }}
+                                    {{ form_widget(formSinglePage.lastName) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.addressLine1) }}
+                                    {{ form_widget(formSinglePage.addressLine1) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.addressLine2) }}
+                                    {{ form_widget(formSinglePage.addressLine2) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.legalRepresentativeCity) }}
+                                    {{ form_widget(formSinglePage.legalRepresentativeCity) }}
+
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.legalRepresentativePostalCode) }}
+                                    {{ form_widget(formSinglePage.legalRepresentativePostalCode) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.legalRepresentativeRegion) }}
+                                    {{ form_widget(formSinglePage.legalRepresentativeRegion) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.contactEmail) }}
+                                    {{ form_widget(formSinglePage.contactEmail) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{ form_label(formSinglePage.description) }}
+                                    {{ form_widget(formSinglePage.description) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-div text-center">
+                            <button id = "submit-button" class="main-btn" type="submit">
+                                {{ 'profile.registration.submit.label'|trans }}
+                            </button>
+                            <button class="main-btn nxt-btn" id="next" data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
+                                {{ 'profile.registration.next.label'|trans }}
+                            </button>
+                        </div>
+                    </div>
+
+                    {{ form_end(formSinglePage) }}
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div id="scrollTo" class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse">
+                <h4 class="panel-title meal-creation-title offer-title">
+                    Restaurant Images
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse {% if selectedTab == 4 %} in {% endif %}">
+                <div class="panel-body">
+                    {{ form_start(formUpdateProfilePic) }}
+                    {{ form_widget(formUpdateProfilePic) }}
+                    <button class="btn btn-lg btn-success btn-block">{{ 'restaurantprofile.manager.add.picture'|trans }}</button>
+                    {{ form_end(formUpdateProfilePic) }}
+                    <div class="mm-spacer"></div>
+                    <h3>{{ 'restaurantprofile.manager.imagesupload'|trans }}</h3>
+                    <ul class="img-upload">
+                        <div class="row">
+                            {% for pic in rProfile.pictures %}
+                                <div class="col-md-3 col-xs-6">
+                                    <li class="res-img-list">
+                                        <img class="img-thumbnail" src="{{ vich_uploader_asset(pic, 'fileData') }}" alt="{{ pic.fileName }}"/>
+                                        <a class="res-img-delete" href="{{ path('restaurant_profile_manager_delete_picture', { 'id': pic.id }) }}">
+                                            <span class="fa fa-close"></span>
+                                        </a>
+                                    </li>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+                <div class="button-div text-center">
+                    <button class="main-btn nxt-btn" id="next1" data-toggle="collapse" data-parent="#accordion1" href="#collapse3">
+                        {{ 'profile.registration.next.label'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title meal-creation-title offer-title">
+                    Restaurant Address
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse {% if selectedTab == 3 %} in {% endif %}">
+                <div class="panel-body">
+                    {{ form_start(formGeoLocation) }}
+                    {{ form_row(formGeoLocation.locationString, { 'attr' : { 'class': 'tbox' } }) }}
+                    <div class="button-div text-center"><button class="main-btn">Get coordinates</button></div>
+                    {{ form_end(formGeoLocation) }}
+                    <div id="restMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_js %}
+
+    <script type="text/javascript">
+
+        $('#next').click(function() {
+            window.scrollTo(2000,2000);
+        });
+
+        $("#imageUpload").click(function () {
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+
+        function initMap() {
+            var geo_address = {
+                lat: {{ geoAddress.lat }},
+                lng: {{ geoAddress.long }}
+            };
+            console.log('geoAddress: ' + geo_address.lat);
+            if (geo_address.length < 1) {
+                $("#restMap").hide();
+            } else {
+
+                // The location of restaurant
+                var latLng = { lat: geo_address['lat'], lng: geo_address['lng'] };
+
+                // The map centered at the restaurant location
+                var map = new google.maps.Map(document.getElementById('restMap'), {zoom: 10, center: latLng});
+
+                // The marker, positioned at the restaurant location
+                var marker = new google.maps.Marker({position: latLng, map: map, title: '{{ app.user.restaurantProfile.name }}' });
+            }
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GMAPS_API_KEY }}&callback=initMap"></script>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

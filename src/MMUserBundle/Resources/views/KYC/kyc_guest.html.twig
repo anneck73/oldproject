@@ -1,0 +1,53 @@
+{% extends '@WEBUI/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set viewDataImage %}{{ asset('bundles/mmwebfront/images/mm/mealmatch_header_xs.jpg') }}{% endset %}
+{% set main_header_title = 'kyc.about.title'|trans %}
+{% set main_header_subtitle = 'kyc.about.title'|trans %}
+
+{% block main_content %}
+    <div class="row">
+        <h1> </h1>
+    </div>
+
+    <h3><b>{{ 'kyc.docType.idProof'|trans }}</b></h3>
+    {% if kyc_status == null %}
+        {{ form_start(kyc_document_type) }}
+        {{ form_widget(kyc_document_type) }}
+
+        <div class="text-center">
+            <button class="btn btn-lg btn-success" type="submit">
+                <span class="glyphicon glyphicon-send"></span>
+                {{ 'kyc.submit.label'|trans }}
+            </button>
+        </div>
+
+        {{ form_end(kyc_document_type) }}
+    {% else %}
+        <div class="kyc-status">
+            {% if kyc_status == 'VALIDATION_ASKED' %}
+                <h1 class="heading">{{ 'kyc.file.status1'|trans }}</h1>
+            {% elseif kyc_status == 'VALIDATED' %}
+                <h1 class="heading">{{ 'kyc.file.status2'|trans }}</h1>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .heading{
+            line-height: 1.5;
+            font-size: 30px;
+            margin: 0;
+            font-weight: inherit;
+        }
+        .kyc-status{
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 15px 0;
+            box-shadow: 0 0 31px #00000030;
+        }
+
+    </style>
+{% endblock %}

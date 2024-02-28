@@ -1,0 +1,46 @@
+# #########################################
+# Filesystem simulation with Flysystem
+# #########################################
+oneup_flysystem:
+    adapters:
+        # BaseCategory Images
+        s3_bc_images_adapter:
+            awss3v3:
+                client: "mm.s3"
+                bucket: "%aws3_bucket%"
+                prefix: "images/b/c/"
+        # Restaurant Images
+        s3_r_images_adapter:
+            awss3v3:
+                client: "mm.s3"
+                bucket: "%aws3_bucket%"
+                prefix: "images/r/"
+        # Restaurant Files
+        s3_r_files_adapter:
+            awss3v3:
+                client: "mm.s3"
+                bucket: "%aws3_bucket%"
+                prefix: "files/r/"
+        # Images ... used for user profile images
+        s3_images_adapter:
+            awss3v3:
+                client: "mm.s3"
+                bucket: "%aws3_bucket%"
+                prefix: "images/"
+    # Bindind adapters to filesystems and mount
+    filesystems:
+        s3_images_fs:
+            adapter: s3_images_adapter
+            mount: s3_images_fs
+
+        s3_rimages_fs:
+            adapter: s3_r_images_adapter
+            mount: s3_rimages_fs
+
+        s3_rfiles_fs:
+            adapter: s3_r_files_adapter
+            mount: s3_rfiles_fs
+
+        s3_bcimages_fs:
+            adapter: s3_bc_images_adapter
+            mount: s3_bcimages_fs

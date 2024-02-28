@@ -1,0 +1,164 @@
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% set main_header_title = 'homemeal.manager.title'|trans %}
+{% set main_header_subtitle = 'homemeal.manager.edit.subtitle'|trans %}
+{% set main_header_action_path = path('api_homemeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-create-meal-circle"></span>{% endset %}
+
+{% block main_content %}
+
+    <div class="meal-creation">
+        <div class="main-width">
+            <div class="create-meal-accord">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse"  data-parent="#accordion1" href="#collapse1">
+                                    <h4 class="panel-title meal-creation-title">
+                                        {{ main_header_title }}
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse {% if selectedTab == 1 %} in {% endif %}">
+                                    {{ form_start(meal_page_form) }}
+                                    <div class="panel-body">
+                                        {{ form_row(meal_page_form.title, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(meal_page_form.maxNumberOfGuest, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(meal_page_form.sharedCost, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(meal_page_form.sharedCostCurrency, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(meal_page_form.description, { 'attr': {'class': 'tbox'} }) }}
+                                        <div class="button-div text-center">
+                                            <button class="main-btn" type="submit">
+                                                {{ 'profile.registration.submit.label'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(meal_page_form) }}
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse"  data-parent="#accordion2" href="#collapse2">
+                                    <h4 class="panel-title meal-creation-title">
+                                    GeoLoc
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse {% if selectedTab == 1 %} in {% endif %}">
+                                    {{ form_start(address_form) }}
+                                    <div class="panel-body">
+
+                                        {{ form_row(address_form.locationString, { 'help': 'mealaddress.locationstring.help'|trans }) }}
+                                        {% if address_form.bellSign is defined %}
+                                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'info'} %}
+                                                {% block message %}
+                                                    <p>Wir haben folgende Koordinaten für die von Dir genannte Addresszeile gefunden. Bitte überprüfe das Ergebnis:</p>
+                                                {% endblock %}
+                                            {% endembed %}
+                                            <h2>{{ 'mealaddress.address'|trans }}</h2>
+                                            {% include '@WEBUI/Partials/mealAddress.html.twig' with {'addr': homeMeal.address} %}
+                                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'info'} %}
+                                                {% block message %}
+                                                    <p>Um Deinen Gästen zu helfen Deine Wohnung besser zu finden kannst Du hier noch den Text an Deinem Klingelschild eintragen.</p>
+                                                {% endblock %}
+                                            {% endembed %}
+                                            <div class="mm-spacer"></div>
+                                            {{ form_row(address_form.bellSign, { 'help': 'mealaddress.bellsign.help'|trans }) }}
+                                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'warning'} %}
+                                                {% block message %}
+                                                    <p>Nur von Dir akzeptierte Gäste sehen all deine Angaben. In den Suchergebnisse wird
+                                                        nur die <b>Straße</b> ausgewiesen.</p>
+                                                {% endblock %}
+                                            {% endembed %}
+                                        {% endif %}
+
+
+                                        <div class="button-div text-center">
+                                            <button class="main-btn" type="submit">
+                                                {{ 'profile.registration.submit.label'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(address_form) }}
+                                </div>
+                            </div>
+                            <!--// END GeoLoc (2) //-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion3" class="" href="#collapse3">
+                                    <h4 class="panel-title meal-creation-title date-title">
+                                        Date and Time
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse {% if selectedTab == 4 %} in {% endif %}">
+                                    {#<div id="collapse3" class="panel-collapse collapse in">#}
+                                    <div class="panel-body">
+                                        <div class="date-table table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ 'events.from'|trans }}</th>
+                                                    <th>{{ 'events.to'|trans }}</th>
+                                                    <th>{{ 'meal.index.available.actions.label'|trans }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% if homeMeal.mealEvents.count > 0 %}
+                                                    {% for mealEvent in homeMeal.mealEvents %}
+                                                        {{ form_start(eventForms[loop.index0]) }}
+                                                        <tr>
+                                                            <td>{{ form_widget(eventForms[loop.index0].startDateTime) }}</td>
+                                                            <td>{{ form_widget(eventForms[loop.index0].endDateTime) }}</td>
+                                                            <td>{{ include('@WEBUI/MealCreation/safeOrRemove.html.twig',
+                                                                    {'idx': loop.index0, 'eventID': mealEvent.id, 'mealID': homeMeal.id}) }}</td>
+                                                        </tr>
+                                                        {{ form_end(eventForms[loop.index0]) }}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if homeMeal.isRootNode and homeMeal.mealEvents.count < 5 %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-center">
+                                                            <div class="add-period">
+                                                                <a href="{{ path('api_homemeal_manager_addEvent', { 'id': homeMeal.id }) }}">
+                                                                    <button class="period-btn" type="button"> <span class="add-icon"> <i class="fa fa-plus"></i></span> {{ 'promeal.addEvent.label'|trans }}</button>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-div text-center">
+                                {% for transition in workflow_transitions(homeMeal) %}
+                                    <a href="{{ path('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': transition.name }) }}">
+                                        <button class="main-btn" style="background-color: #205081">
+                                            {{ ('transition.' ~ transition.name)|trans }}
+                                        </button>
+                                    </a>
+                                {% else %}
+                                     No actions available.
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="button-div text-center">
+                            {% for transition in workflow_transitions(homeMeal) %}
+                                <a href="{{ path('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': transition.name }) }}">
+                                    <button class="main-btn" style="background-color: #205081">
+                                        {{ ('transition.' ~ transition.name)|trans }}
+                                    </button>
+                                </a>
+                            {% else %}
+                                <!--// No actions available. //-->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

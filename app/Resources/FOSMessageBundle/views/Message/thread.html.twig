@@ -1,0 +1,50 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set title %}{% trans from 'FOSMessageBundle' %}messages{% endtrans %}{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-message-circle"></span>{% endset %}
+{% set viewData = {
+    'title': title
+} %}
+
+{% block title %}MealMatch |{% trans from 'FOSMessageBundle' %}messages{% endtrans %} {% endblock %}
+{% set main_header_title %}{{ 'navabar.inbox'|trans }}{% endset %}
+{% set main_header_subtitle %}
+    {% trans with {'%sender%': thread.firstMessage.sender|e, '%date%': thread.firstMessage.createdAt|date} from 'FOSMessageBundle' %}
+        message_info{% endtrans %}
+{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block staticPages %}
+    <ul class="nav nav-tabs-justified">
+        {% for message in thread.messages %}
+            <li>
+                <p class="messenger_thread_message_body" id="message_{{ message.id }}">
+                    {{ message.body|raw }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block layout_body %}
+    <div class="mm-header">
+        <h3>{{ thread.subject }}</h3>
+    </div>
+
+    <div class="mm-well">
+        <ul class="nav nav-tabs-justified">
+            {% for message in thread.messages %}
+                <li>
+
+                    <p class="messenger_thread_message_body" id="message_{{ message.id }}">
+                        {{ message.body|raw }}</p>
+                    <span class="messenger_thread_message_info">
+                        {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}
+                            message_info{% endtrans %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

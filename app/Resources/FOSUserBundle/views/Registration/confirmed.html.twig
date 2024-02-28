@@ -1,0 +1,13 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.confirmed.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.confirmed.title'|trans }}{% endset %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    <p class="text-center">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    <p class="text-center">{{ 'mm.registration.welcome-msg'|trans }}</p>
+    {% if targetUrl %}
+        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock %}

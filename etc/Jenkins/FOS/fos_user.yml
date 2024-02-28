@@ -1,0 +1,24 @@
+# #########################################
+# FOSUser
+# #########################################
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: MMUserBundle\Entity\MMUser
+    profile:
+        form:
+            type: MMUserBundle\Form\MMProfileType
+    registration:
+        form:
+            type: MMUserBundle\Form\MMRegistrationType
+        confirmation:
+            enabled: true
+            template: MMUserBundle:Registration:email.txt.twig
+
+    service:
+        user_manager: api.user_manager
+        mailer: fos_user.mailer.twig_swift
+
+    from_email:
+        address:        mailer@mealmatch.de
+        sender_name:    Mealmatch Mailer Service

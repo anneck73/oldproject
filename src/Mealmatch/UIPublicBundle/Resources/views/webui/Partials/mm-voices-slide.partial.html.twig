@@ -1,0 +1,32 @@
+{% trans_default_domain 'Mealmatch' %}
+<div id="mm-voices-slider" class="carousel slide col-lg-8 col-lg-offset-2" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        <div id="voice-slide-1" class="item active">
+            <img class="img-responsive center-block"
+                 src="{{ asset('bundles/uipublic/images/voices/benhammer_rund.png') }}" alt="Lisa"/>
+            <p class="mm-voice-text">"{{ 'voices.voice1.text'|trans }}"</p>
+            <p class="mm-voice-name text-right">{{ 'voices.voice1.signature'|trans }}</p>
+        </div>
+        <div id="voice-slide-2" class="item">
+            <img class="img-responsive center-block"
+                 src="{{ asset('bundles/uipublic/images/voices/mukeshkumarsingh_rund.png') }}" alt="Peter"/>
+            <p class="mm-voice-text">"{{ 'voices.voice2.text'|trans }}"</p>
+            <p class="mm-voice-name text-right">{{ 'voices.voice2.signature'|trans }}</p>
+        </div>
+        <div id="voice-slide-3" class="item">
+            <img class="img-responsive center-block"
+                 src="{{ asset('bundles/uipublic/images/voices/ramonakrieger_rund.png') }}" alt="Waltraud"/>
+            <p class="mm-voice-text">"{{ 'voices.voice3.text'|trans }}"</p>
+            <p class="mm-voice-name text-right">{{ 'voices.voice3.signature'|trans }}</p>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#mm-voices-slider" role="button" data-slide="prev">
+        <i class="fa fa-angle-left " aria-hidden="true"></i>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#mm-voices-slider" role="button" data-slide="next">
+        <i class="fa fa-angle-right " aria-hidden="true"></i>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

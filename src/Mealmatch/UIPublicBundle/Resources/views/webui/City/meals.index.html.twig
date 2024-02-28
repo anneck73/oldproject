@@ -1,0 +1,29 @@
+{% extends "@WEBUI/Layouts/mealmanager_main_layout.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% set viewData = {'title': 'Meals in ' ~ city} %}
+{% block doubleHeader %}{% endblock %}
+{% block main_content %}
+    <div class="breadcrumb">
+        <span class="icon-direction"></span>&nbsp;
+        <a href="{{ path('public_meals_index') }}">Social-Dining</a> /
+        <a href="{{ path('public_meals_country_index', {'country': country|upper}) }}">{{ country|upper }}</a> /
+        <a href="{{ path('public_meals_city', {'country': country|upper, 'city': city}) }}">{{ city }}</a>
+    </div>
+
+    <div class="pull-right"><span class="label label-danger beta-badge">Beta</span></div>
+
+    <p class="mm-spacer"></p>
+    <p class="mm-spacer"></p>
+    <div class="meal-grid pull-left">
+        <div class="meal-grid-sizer"></div>
+        {% for meal in cityMeals %}
+            {% if meal.mealType == 'ProMeal' %}
+                {% set proMeal = meal %}
+                <div class="meal-grid-item">{{ include('@WEBUI/Search/gmaps/mealResult-Card-ProMeal.html.twig') }}</div>
+            {% else %}
+                {% set homeMeal = meal %}
+                <div class="meal-grid-item">{{ include('@WEBUI/Search/gmaps/mealResult-Card-HomeMeal.html.twig') }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

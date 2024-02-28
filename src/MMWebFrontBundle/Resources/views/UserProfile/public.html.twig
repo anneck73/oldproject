@@ -1,0 +1,223 @@
+{% extends '@WEBUI/Layout/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch Home: {{ uAccount.username }}{% endblock %}
+{% set main_header_title = uAccount.username %}
+{% set main_header_subtitle = 'userprofile.public.subtitle'|trans %}
+{% block main_content %}
+    <div id="mm-public-profile">
+        <div class="row">
+            <div class="col-xs-9 col-xs-offset-3">
+                <ul class="mm-nav-public-profile" role="tablist">
+                    <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}"
+                        data-trigger="showPublicProfileFooter">
+                        <a href="#menus" role="tab" data-toggle="tab"><span class="mm-icon-meals mm-green"></span>
+                            Meals
+                        </a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}"
+                        data-trigger="showPublicProfileFooter">
+                        <a href="#about" role="tab" data-toggle="tab"><span class="mm-icon-about mm-green"></span>
+                            Über
+                        </a>
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}"
+                        data-trigger="showPublicProfileFooter">
+                        <a href="#address" role="tab" data-toggle="tab"><span class="icon-location-pin mm-green"></span>
+                            Adresse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row margin-bottom3">
+            <div class="col-xs-3">
+                <div class="mm-user-image center-block"><!--center-block?? -->
+                    {% if uAccount.profile.imageName != "image/udefault.png" %}
+                        <img class="img-responsive img-circle"
+                             src="{{ asset(uAccount.profile.imageName, 's3img') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="img-responsive img-circle"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xs-9">
+                <!--// NAV PANES //-->
+                <div class="tab-content nav-tabs-justified">
+                    <!-- TAB 1: Meals -->
+                    <div id="menus" role="tabpanel" class="tab-pane fade mm-tab-content in active">
+                        <p></p>{# to enforce a row-break #}
+                        <h2>{{ uAccount.username }}'s {{ 'userprofile.meals'|trans }}</h2>
+                        <table class="mm-table">
+                            <thead>
+                            <th class="col-xs-6">{{ 'meal.show.title'|trans }}</th>
+                            <th class="col-xs-4">{{ 'meal.guests'|trans }}</th>
+                            <th class="col-xs-2">{{ 'meal.index.available.actions.label'|trans }}</th>
+                            </thead>
+
+                            <tbody>
+                            {% for meal in mHosted %}
+                                <tr>
+                                    <!-- Meal -->
+                                    <td class="col-xs-6">
+                                        <div class="flexbox">
+                                            <img class="mm-img-meal-q-small margin-right-half"
+                                                 src="{{ asset('bundles/uipublic/images/cards/card-picture.jpg') }}">
+                                            <div>
+                                                <p class="font-weight-300">
+                                                    <a href="#" data-toggle="modal" data-target="#homeMealModal-{{ meal.id }}">{{ meal.title }}</a>
+                                                </p>
+                                                <p>{{ meal.startDateTime|date('d.m.Y - H:i') }} Uhr</p>
+                                                {% set freeSeats =  meal.maxNumberOfGuest - meal.guests.count %}
+                                                <p>{{ meal.guests|length }} {{ 'meal.seats.taken'|trans }}
+                                                    | {{ freeSeats }} {{ 'meal.seats.free'|trans }}</p>
+                                            </div>
+                                        </div>
+                                        <!-- HomeMealModal#{{ meal.id }} -->
+                                        <div class="modal fade" id="homeMealModal-{{ meal.id }}" tabindex="-1" role="dialog" aria-labelledby="homeMealModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        {% set homeMeal = meal %}
+                                                        {% set rProfile = meal.host.restaurantprofile %}
+                                                        {{ include('@WEBUI/HomeMeal/Card/homemeal.html5.twig') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="col-xs-4">
+                                        <div class="flexbox fl-wrap mm-user-icon-list">
+                                            {% for guest in meal.guests %}
+                                                <a href="{{ path('public_user_by_username', {'pName': guest}) }}">
+                                                    {% set uProfile = guest.profile %}
+                                                    {% set uAccount = guest %}
+                                                    {% if uProfile.imageName == "image/udefault.png" %}
+                                                        <img
+                                                                width="72px" height="72px" border="0"
+                                                                class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                                                src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}">
+                                                    {% else %}
+                                                        <img width="72px" height="72px" border="0"
+                                                             class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                                             src="{{ asset(uProfile.imageName, 's3img') }}">
+                                                    {% endif %}
+                                                </a>
+                                            {% else %}
+                                                ---
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+
+                                    <td class="col-xs-2">
+                                        <a target="_blank" href="{{ path('meal_add_join_request', {'id': meal.id}) }}">
+                                            <button class="btn btn-success btn-155">Teilnehmen</button>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="3">{{ 'userprofile.no_meals'|trans }}</td></tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <!-- TAB 2: Ueber -->
+                    <div id="about" role="tabpanel" class="tab-pane fade mm-tab-content">
+                        <p></p>{# to enforce a row-break #}
+                        {% if app.user %}
+                            <h2>{{ 'userprofile.public.subtitle'|trans }}</h2>
+                            <p>{{ uAccount.profile.firstname }} {{ uAccount.profile.lastname }}, {{ uAccount.profile.age }}</p>
+                            <h3>{{ 'profile.registration.hobbies'|trans }}</h3>
+                            <p>{{ uAccount.profile.hobbies }}</p>
+                            <h3>{{ 'help.user.profile.selfDescription'|trans }}</h3>
+                            <p>{{ uAccount.profile.selfDescription|raw }}</p>
+                        {% else %}
+                            <p>{{ 'userprofile.public.error'|trans }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- TAB 3: Adresse -->
+                    <div id="address" role="tabpanel" class="tab-pane fade mm-tab-content">
+                        <p></p>{# to enforce a row-break #}
+                        <h2>{{ 'userprofile.public.destination.description'|trans }}</h2>
+                        <p>
+                            <span class="font-weight-300">Adresse</span><br/>
+                            {% if app.user %}
+                                {# User is logged in #}
+                                {% if meal_service.isUserGuestOfHost(app.user, uAccount) %}
+                                    {# User is a guest in one of the meals of the host ...  #}
+                                    {{ uAccount.profile.firstname }} {{ uAccount.profile.lastname }} <br/>
+                                    {{ uAccount.profile.addressLine1 }}<br/>
+                                    {% if uAccount.profile.addressLine2 != null %}
+                                        {{ uAccount.profile.addressLine2 }}<br/>
+                                    {% endif %}
+                                {% endif %}
+                            {% else %}
+                            <p>{{ 'userprofile.public.error'|trans }}</p>
+                            {% endif %}
+                            {{ uAccount.profile.areaCode }} {{ uAccount.profile.city }}
+                        </p>
+                        <p>
+                            {% if app.user %}
+                                {# User is logged in #}
+                                {% if meal_service.isUserGuestOfHost(currentUser, uAccount) %}
+                                    <a target="_blank"
+                                        href="https://www.google.com/maps/dir/Current+Location/{{ uAccount.profile.addressLine1 }},  {{ uAccount.profile.areaCode }} {{ uAccount.profile.city }}">
+                                        <button class="btn btn-success btn-block">
+                                            {{ 'joinrequest.index.show_location.label'|trans }}
+                                        </button>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% block stylesheets %}
+    {% stylesheets
+        '@MMWebFrontBundle/Resources/public/css/bootstrap-switch.css'
+        output='css/bootstrap-switch.css'
+        filter='?scssphp' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block page_js %}
+    {% javascripts
+        '@MMWebFrontBundle/Resources/public/js/bootstrap-switch.js'
+        output='js/bootstrap-switch.min.js'
+        filter='?jsqueeze' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $("[name='mmuserbundle_mmusersettings[emailNotification]']").bootstrapSwitch();
+        $("[name='mmuserbundle_mmusersettings[uiHints]']").bootstrapSwitch();
+        $("#imageUpload").click(function () {
+            console.log('foo');
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+
+        $(function () {
+            $('#mmuserbundle_mmuserprofile_basic_birthday').datetimepicker({
+                locale: 'de',
+                format: 'D.M.YYYY'
+            });
+        });
+
+    </script>
+
+{% endblock %}

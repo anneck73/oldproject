@@ -1,0 +1,116 @@
+{% set currentRoute = app.request.get('_route') %}
+{% trans_default_domain 'Mealmatch' %}
+<div id="mm-becomehost-popover-html" class="hidden popover">
+    <div class="mm-popover-template">
+        <div class="popover-titel">{{ 'navbar.becomeHost.link'|trans }}</div>
+        <div class="popover-content text-justify">
+            {{ 'navbar.becomeHost.popover-text'|trans|raw }}
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-fixed-top mm-navbar-public header-navbar" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mm-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img src="{{ asset('bundles/uipublic/images/mm/mealmatch-logo-h45.png') }}" alt="Mealmatch"
+                 class="pull-left mm-navbar-logo">
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="mm-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                {% if currentRoute != 'home' %}
+                <form class="navbar-form" role="search" method="get" action="{{ path('search_do') }}">
+                    <div class="input-group">
+                        <input name="searchLocation"
+                               type="text" class="form-control"
+                               placeholder="{{ 'search.submit'|trans({}, 'Mealmatch') }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+                {% endif %}
+
+            </li>
+            {% if currentRoute == 'fos_user_registration_register' %}
+                <li class="active"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    <a href="{{ path(currentRoute) }}">{{ 'registration.submit'|trans }}</a>
+                </li>
+            {% else %}
+                <li><span class="icon-pencil" aria-hidden="true"></span>
+                    <a href="{{ path('fos_user_registration_register') }}">{{ 'registration.submit'|trans }}</a>
+                </li>
+            {% endif %}
+            {#<li><a href="{{ path('fos_user_security_login') }}">Login</a></li>#}
+            {#<li><a href="#" data-toggle="modal" data-target="#mm-reg-modal">Registrieren</a> </li>#}
+            <li><span class="icon-key" aria-hidden="true"></span>
+                <a href="#" data-toggle="modal" data-target="#mm-login-modal">{{ 'layout.login'|trans }}</a>
+            </li>
+
+            {% if app.request.get('_route') %}
+                {% if app.request.get('_locale') %}
+                    {% if app.request.get('_route_params') %}
+                    <li class="dropdown fade in">
+                        <span class="icon-menu"></span>
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">Language</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'de'})) }}">{{ 'public-footer.language-german'|trans }}</a></li>
+                            <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'public-footer.language-english'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<div id="mm-login-modal" class="modal fade" tabindex="-1" role="dialog">
+
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{ 'layout.login'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.getToken('authenticate') }}"/>
+                <label for="username">{{ 'security.login.username'|trans }}</label>
+                <input type="text" class="form-control" id="username" name="_username" value="" required="required" autofocus/>
+                <br/>
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" class="form-control" name="_password" required="required"/>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit">
+                    {{ 'security.login.submit'|trans }}
+                </button>
+            </div>
+            </form>
+            {% for owner in hwi_oauth_resource_owners() %}
+                {% if mm_features[owner ~ '_login'] is defined and mm_features[owner ~ '_login'] %}
+                    <div class="modal-footer">
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': owner }) }}">
+                            <button class="btn btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span> Login
+                                with {{ owner }}</button>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->

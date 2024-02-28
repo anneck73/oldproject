@@ -1,0 +1,12 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currencySymbol = 'glyphicon-eur' %}
+<table class="table table-bordered">
+    <tbody>
+    <tr class="payment-sum">
+        <td class="col-xs-10">
+            <p>{{ 'mealticket.sum'|trans }}</p>
+        </td>
+        <td class="col-xs-2 text-center"><span class="glyphicon {{ currencySymbol }}"></span> {{ ticket.totalprice |number_format(2, ".") }}</td>
+    </tr>
+    </tbody>
+</table>

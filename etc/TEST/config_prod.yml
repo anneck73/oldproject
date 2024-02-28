@@ -1,0 +1,17 @@
+# Mealmatch 2017
+# Author: wizard@mealmatch.de
+# (!) Note: Host specific production settings are loaded through parameters_prod.php
+imports:
+    - { resource: config.yml }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  error_log
+            level: debug
+        console:
+            type:  console

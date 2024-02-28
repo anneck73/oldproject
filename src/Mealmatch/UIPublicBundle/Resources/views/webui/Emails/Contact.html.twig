@@ -1,0 +1,8 @@
+<h1>Mealmatch Kontaktformular</h1>
+<p>Absender {{ FORM_DATA.name }} ({{ FORM_DATA.email }})</p>
+<p>Betreff: {{ FORM_DATA.subject }}</p>
+<p></p>
+<p>Nachricht:</p>
+<p></p>
+{{ FORM_DATA.message|raw }}
+<p></p>

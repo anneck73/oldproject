@@ -1,0 +1,16 @@
+{% trans_default_domain 'Mealmatch' %}
+<div class="text-center">
+    {{ ticket.meal.title }}
+</div>
+<div class="mm-font pull-right text-right" style="font-size: small">
+    <p>{{ 'mealticket.created.at'|trans }}: {{ ticket.createdAt|date('d.m.y') }}</p>
+</div>
+
+<div class="mm-font" style="font-size: small">
+    <p>{{ ticket.host.profile.lastname }}, {{ ticket.host.profile.firstname }}</p>
+    <p>{{ ticket.meal.address.locationString }}</p>
+</div>
+
+<div class="mm-font pull-right" style="font-size: small">
+    <p>Gast: {{ ticket.guest.profile.lastname }}, {{ ticket.guest.profile.firstname }}</p>
+</div>

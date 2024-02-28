@@ -1,0 +1,1174 @@
+# Mealmatch Domain Translation File
+about.title: 'About Mealmatch'
+about.text: "<p>MEALMATCH ME!</p> <p> One of the most beautiful times in your life is the time you spend in good company. Mealmatch focuses on the human being. The idea for Mealmatch was born out of a conversation between co-founder Olaf and a friend about a recipe. The friend didn't like the idea of having to cook and eat exclusively for himself. And we found out that many people know loneliness and the consequences of it on body and soul are more serious than those of strong overweight and smoking. Today, experts already speak of a megatrend and the future widespread disease No. 1! As a result, we decided in 2016 to develop a social dining platform to bring people together for a meal and into a personal conversation.</p> <p>NEVER EAT ALONE</p> <p> In restaurants, hotels and at private hosts, participants find new friends in several cities, make new acquaintances or make business contacts at a joint Meal. Mealmatch is well received and we are constantly working on bringing people together in even more cities - in Germany and also in other countries around the world.</p> <p>OUR VISION AND MOTIVATION </p> <p> What kind of society do we want to live in? </p> <p>The importance of family and social cohesion has diminished, and urbanization and the use of (social) media are driving this development. 100 friends on Facebook do not replace one friend in real life, but all actions and opportunities that bring us closer with other people work against loneliness and improve the quality of life. With Mealmatch we have developed a platform that connects people with each other. And if everything runs fantastically, then in five years at the latest it will be a matter of course to meet people at Mealmatch worldwide at a joint meal. It would be wonderful if we could make our contribution with Mealmatch to bring people out of the hut and back into life or bring life into the hut. </p>"
+about.seo.title: 'Mealmatch Social-Dining | About us'
+about.mealmatch.title: 'MEALMATCH ME!'
+about.mealmatch.content: 'One of the most beautiful times in your life is the time you spend in good company. Mealmatch focuses on the human being. The idea for Mealmatch was born out of a conversation between co-founder Olaf and a friend about a recipe. The friend didn''t like the idea of having to cook and eat exclusively for himself. And we found out that many people know loneliness and the consequences of it on body and soul are more serious than those of strong overweight and smoking. Today, experts already speak of a megatrend and the future widespread disease <b>No. 1!</b> As a result, we decided in 2016 to develop a social dining platform to bring people together for a meal and into a personal conversation.'
+about.eatalone.title: 'NEVER EAT ALONE'
+about.eatalone.content: 'In restaurants, hotels and at private hosts, participants find new friends in several cities, make new acquaintances or make business contacts at a joint Meal. <br/><br/>Mealmatch is well received and we are constantly working on bringing people together in even more cities - in Germany and also in other countries around the world.'
+about.vision.title: 'OUR VISION AND MOTIVATION'
+about.vision.content: '<p> <b>What kind of society do we want to live in?</b> <br/><p>The importance of family and social cohesion has diminished, and urbanization and the use of (social) media are driving this development. 100 friends on Facebook do not replace one friend in real life, but all actions and opportunities that bring us closer with other people work against loneliness and improve the quality of life. With Mealmatch we have developed a platform that connects people with each other. And if everything runs fantastically, then in five years at the latest it will be a matter of course to meet people at Mealmatch worldwide at a joint meal. It would be wonderful if we could make our contribution with Mealmatch to bring people out of the hut and back into life or bring life into the hut.</p><br/>'
+about.seo.description: 'Mealmatch ist eine Social-Dining-Plattform, die Menschen weltweit zu einem gemeinsamen Meal zusammenbringt.'
+about.seo.keywords: 'Mealmatch social-dining About us'
+meal.title.label: Title
+meal.title.help: 'The title of your Meal! Give your Meal a talking title with a maximum of 250 characters.'
+meal.main.label: Main course
+meal.main.help: Describe the main course of your Meal with max 250 characters.
+meal.starter.label: Starter
+meal.starter.help: Describe your starter with max 250 characters.
+meal.dessert.label: Dessert
+meal.dessert.help: Describe your dessert with max 250 characters.
+meal.category.label: Ingredient categories
+#meal.category.help: You can select up to 3 categories! Please choose at least one!
+meal.category.help: 'missing'
+meal.countryCategory.label: Country specific preparation
+#meal.countryCategory.help: You can select up to 3 categories! Please choose at least one!
+meal.countryCategory.help: 'missing'
+meal.maxguest.label: 'Maximum number of guests'
+meal.maxguest.help: Minimum 1 guest and maximum 15 guests for your meal.
+meal.sharedcost.label: Contribution to costs
+meal.sharedcost.help: Define a cost contribution. You can use the detailed description of your meal to make the cost contribution transparent for your guests.
+meal.currency.label: Currency
+meal.currency.help: Set the currency.
+meal.locationaddress.label: 'The full address in one line'
+meal.locationaddress.help: 'For example: Musterstraße 112a, 12345 Musterstadt. Note: This address line is also used to determine the position of the Meal on the map! Only the guests of the meal will have full access to this information! The display on the map corresponds only to the approximate location.'
+meal.backto.index: 'To overview'
+meal.delete: Delete
+meal.status.label: Status
+meal.status.created: New
+meal.status.ready: Ready
+meal.status.running: Activ
+meal.status.stopped: Inactiv
+meal.status.finished: Finished
+meal.action.join: Join for
+meal.action.joinminimum: Join from
+meal.action.edit: Edit
+meal.free.guestplaces: Free
+meal.index.title: 'Manage My Home Meals'
+meal.index.subtitle: 'Here you can see all your home meals and edit them.'
+meal.index.available.actions.label: Actions
+meal.index.message.label: Message
+meal.index.status.label: Status
+meal.index.host.label: Host
+meal.index.guest.label: Guest
+meal.create.label: 'Add and Publish Meal'
+meal.create.btn.label: +
+meal.create.title: 'Create new Meal'
+meal.create.subtitle: ...
+meal.create.failed: 'The Meal could not be created!'
+meal.edit.btn.label: 'Edit and Publish'
+meal.edit.subtitle: 'Here you can edit the Meal and update it, or delete it.'
+meal.edit.title: 'Edit Meal'
+meal.start.btn.label: 'Offer Meal!'
+meal.start.title: 'Publish offer'
+meal.start.subtitle: 'Your Meal will be published in the search results and guests can join.'
+meal.start.submit: 'List offer'
+meal.startdatetime.label: 'Starting time'
+meal.startdatetime.help: The point of time your meal is going to start.
+meal.btn.delete.label: 'Delete Meal'
+meal.btn.backto-index.label: 'Back to overview'
+meal.btn.safe.label: save
+meal.show.title: Meal
+meal.stop.btn.label: 'Stop Meal'
+meal.stop.btn.label.xs: stop
+meal.host.label: Host
+meal.geocode.failed: 'Attention! Your menu does not appear on the map because unfortunately no geocoordinates could be determined for the address: "%locAddress%"!'
+mealmatch.geocode.failed.streetname.isempty: 'Attention! no street name could be determined from the address'
+meal.description.help: 'A description of the whole Meal. Max. 500 words.'
+meal.description.label: Description
+meal.desert.label: Dessert
+meal.desert.help: 'Description of the dessert'
+meal:
+  create:
+    paypal:
+      missing: 'Unfortunately you do not have a PayPal email address! Please add a valid PayPal email address to your profile to become a host!'
+    success: 'Your Meal has been successfully created and published!'
+  share: 'Share'
+  join:
+    own:
+      meal: 'You cannot take part in your own meal as a guest!'
+  status:
+    failure:
+      start: 'The menu cannot be set to in the status '
+      end: ' can be started.'
+    new: 'NEW'
+  edit:
+    error:
+      not_owner: "You're not the host of this Meal."
+      is_running: 'An active meal cannot be edited.'
+  btn:
+    validate:
+      label: 'Validate'
+    create:
+      label: 'Create'
+    preview:
+      label: 'Preview'
+    start:
+      label: 'Start'
+  not_found: 'The Meal %mealid% could not be found.'
+  seats:
+    taken: 'taken'
+    free: 'free'
+  index:
+    time: 'Time of day'
+    informations: 'Informations'
+joinrequest.index.title_tag: 'My Matches'
+joinrequest.index.title: 'You are a guest'
+joinrequest.index.subtitle: 'Here are your requests listed'
+joinrequest.index.subtitle.mealtickets: 'Your Meal tickets'
+joinrequest.index.hosting.title: 'You are a host'
+joinrequest.index.hosting.subtitle: 'Here are the requests from guests for your Meals listed'
+joinrequest.index.tab1.label: 'Request as a guest'
+joinrequest.index.tab2.label: 'Request as a host'
+joinrequest.index.accept.label: Accept
+joinrequest.index.deny.label: Decline
+joinrequest.index.pay.label: 'Confirm payment obligation'
+joinrequest.index.joinfree.label: 'Confirm free of charge'
+joinrequest.index.show_location.label: 'How to get to the Meal'
+joinrequest.deny.submit: 'Decline request'
+joinrequest.deny.form.title: 'Request of a guest'
+joinrequest.deny.text-to-host: 'Hereby you decline the inquiry of the guest. Please write him a short message.'
+joinrequest.accepted.submit: 'Accept request'
+joinrequest.accept.form.title: 'Accept request'
+joinrequest.accept.text-to-host: 'Herewith you accept the request of the guest. Please write him a short message.'
+joinrequest.waitingforpayment: 'Waiting for payment'
+joinrequest.waitingforhost: 'Waiting for the answer from the host'
+joinrequest.payed: 'Ticket has been paid'
+joinrequest.denied: 'The guest was declined.'
+joinrequest.denied_response_to_guest: 'Your request has been declined'
+joinrequest.error: 'Payment process failed'
+joinrequest.status.accepted: Accepted
+joinrequest.status.denied: Declined
+joinrequest.status.created: New
+joinrequest.status.payed: Payed
+joinrequest.status.payment_failed: Error
+joinrequest.label: Requests
+joinrequest.create.title: 'Request for participation'
+joinrequest.create.label: Request
+joinrequest.create.subtitle: 'Formulate a friendly request.'
+joinrequest.create.submit: 'Send request'
+joinrequest.create.message: 'Friendly message'
+form.paypal.email: 'PayPal EMail'
+user.profile.paypalemail: 'PayPal EMail'
+user.profile.phone: Phone
+user.profile.selfDescription: Self-description
+location: Location
+meal.btn.delete.label.xs: delete
+meal.btn.backto-index.label.xs: back
+meal.guests: Guests
+meal.status.deleted: deleted
+meal.start.future: 'The start time should be at least 3 hours in the future!'
+meal.already.requested.to.join: 'You have already made a request.'
+meal.host.has.no.paypal: 'The host has not provided a PayPal email!'
+meals:
+  finished:
+    title: 'Finished Meals'
+  deleted:
+    title: 'Deleted Meals'
+  running:
+    title: 'Current Meals'
+  new:
+    title: 'New Meals'
+help: 'Help'
+joinrequest:
+  mail:
+    salutation: 'Hello %createdby%, '
+    denied: '%firstname% %lastname% has declined your request for "%mealtitle%".'
+    yourteam: '- The Mealmatch-Team'
+  created:
+    mail:
+      salutation: 'Hello %hostusername%, '
+      subject: '[Request for participation] - '
+    text:
+      1: 'The User '
+      2: 'has requested %number% seat for your Mealmatch offer: "%mealtitle%".'
+      3: 'You can accept or decline the request with 1 click on'
+      4: 'My Matches'
+
+  accepted:
+    mail:
+      subject: '[Request Accepted] - '
+      text:
+        1: '%hostusername% approved your request for "%mealtitle%".'
+        pay: 'You can pay the request under the menu item "My Mealmatches" or follow this link:'
+        pay2: 'Participate at cost'
+        free: 'You can complete the request under the menu item "My Mealmatches" and participate or follow this link:'
+        free2: 'Join'
+      salutation: 'Hello %u%, '
+    message:
+      from:
+        guest-title: 'Message from the guest'
+  status:
+    pending: 'in process ...'
+    failed: 'Payment process</br> failed'
+    joined_free: 'Guest'
+  accept:
+    title: 'Accept request'
+    subltitle: "Here you can confirm the guest's request."
+    extraguests:
+      notice: 'Mealmatch'
+      label: 'Mealmatch'
+  deny:
+    title: 'Decline request'
+    subltitle: "Here you can decline the guest's request."
+adjust:
+  search: 'Customize Search'
+
+JR:
+  meal:
+    location:
+      text: 'The meal takes place at the following place'
+    wayto:
+      text:
+        start: 'You can also find the way there via Google-Maps, just follow this link'
+        end: 'link'
+    route: 'missing'
+mail:
+  salutation: 'Hello %firstname% %lastname%, '
+  yourteam: '- The Mealmatch Team'
+
+mealticket.status.created: Created
+mealticket.status.payed: Payed
+mealticket.status.processing: Editing
+mealticket.status.error: Error
+mealticket.status.cancelled: Cancelled
+mealticket.status.used: Used
+mealticket.payment.options: 'Payment Options'
+mealticket.paymentoption.card: 'Credit Card'
+mealticket.paymentoption.giropay: 'Bank Transfer (Giropay)'
+mealticket.paymentoption.sofort: 'Bank Transfer (Sofort)'
+mealticket:
+  processing: 'The payment process is being processed. ...'
+  show:
+    title: 'Payment process'
+    subtitle: 'Pay for the selected meal or make a change'
+    ProMeal:
+      CREATED:
+        title: 'Payment process'
+        subtitle: 'Pay for the selected Meal'
+      PROCESSING_PAYMENT:
+        title: 'Payment process'
+        subtitle: 'The payment process is in progress and can be restarted.'
+      PAYED:
+        title: 'Booking'
+        subtitle: 'Your already paid booking'
+      PAYMENT_ERROR:
+        title: 'Payment Error'
+        subtitle: 'The payment process has failed.'
+      CANCELLED:
+        title: 'Cancelled'
+        subtitle: 'This meal has been cancelled.'
+      PREPARE_PAYMENT:
+        title: 'Prepare Payment'
+        button: 'Submit'
+      USED:
+        title: 'missing'
+    HomeMeal:
+      CREATED:
+        title: 'Payment process'
+        subtitle: 'Confirm with costs and thus confirm bindingly.'
+      PROCESSING_PAYMENT:
+        title: 'Payment process'
+        subtitle: 'The payment process is in progress and can be restarted.'
+      PAYED:
+        title: 'Payed'
+        subtitle: 'Your already payed Meal.'
+      PAYMENT_ERROR:
+        title: 'Error'
+        subtitle: 'The payment process has failed.'
+      CANCELLED:
+        title: 'Cancelled'
+        subtitle: 'This Meal was cancelled.'
+  sum: 'Sum'
+  taxrate: 'VAT'
+  created:
+    at: 'Created on'
+  payed:
+    at: 'Payed on'
+  guest: 'Guest'
+#  PROMEAL ...
+promeal:
+  title:
+    label: 'Meal title'
+  maxnumberofguests:
+    label: 'Max. number of guests'
+  addEvent:
+    title: 'Meal time period'
+    subtitle: 'Set a time period for your meal.'
+    label: 'Add time period'
+  startdatetime:
+    label: 'Starting time'
+    help: 'The starting time determines the point in time of the start including the date.'
+  addOffer:
+    label: 'Add offer'
+    title: 'Add offer'
+    subtitle: 'Add another menu option.'
+    price:
+      help: 'Price'
+      label: 'Price'
+    description:
+      help: 'Specification'
+      label: 'Specification'
+    name:
+      help: 'The name of the offer is a short and clear summary. It is advisable to start with the main course, because on small display devices the text is shortened from back to front. This is done on the respective end device in landscape format, depending on the space available on the screen!'
+      label: 'Name of the offer.'
+      helptitle: 'Name (max. 500 characters)'
+  enddatetime:
+    label: 'Ending time'
+    help: 'Ending time incl. date.'
+  addAddress:
+    title: 'Insert address / location'
+    subtitle: 'Set the location.'
+    edit:
+      label: 'Edit address'
+  new:
+    title: 'New Meal'
+    subtitle: 'Create new Meal.'
+  tabletopic:
+    label: 'Table topic'
+    help: 'The table topic for the evening.'
+  specials:
+    label: 'Special features'
+    help: 'e.g. afterwards dance evening, playing darts possible, billiards, etc.'
+  mealoffernotes:
+    label: 'Ingredients and additives subject to labelling requirements'
+  countryoffernotes:
+    label: 'Country-specific labelling requirements Information'
+  description:
+    help: 'Description of the Meal'
+  maxguest:
+    help: 'The maximum number of guests for all offers.'
+  titel:
+    help: 'The Meal title.'
+  offer:
+    delete: 'Delete'
+  manager:
+    title: 'Meal Manager'
+    subtitle: 'Here you can edit the displayed Meal.'
+    tab:
+      meal:
+        label: 'Meal'
+    show:
+      subtitle: 'Here you see a preview for your Meal.'
+    card:
+      join: 'Join'
+      entree: 'Main course'
+      seats_max: '{1}Seat max|{0}Seats max|]0,Inf[ Seats max'
+      seats_free: '{1}Seat free|{0}Seats free|]1,Inf] Seats free|[-Inf,-1] Seats free'
+      seats_taken: '{1}Seat taken|{0}Seats taken|]0,Inf[ Seats taken'
+  create:
+    label: 'Create Meal'
+  offers: 'Offers'
+  notes: 'Labelling requirements'
+  events: 'Dates'
+  index:
+    title: 'Manage your Restaurant Meals'
+    subtitle: 'Here you can edit your restaurant meals and create new ones.'
+  search:
+    title: 'Find your restaurant Meal'
+  running:
+    promeal:
+      action:
+        claim: 'Promote your restaurant Meal!'
+  dates.note: 'missing'
+mealoffer:
+  price:
+    label: 'Price'
+  description:
+    label: 'Description of the menu'
+  edit:
+    label: 'Edit a menu part'
+mealevent:
+  edit:
+    label: 'Edit time period'
+  missing: 'No time periods defined'
+mealaddress:
+  edit:
+    title: 'Edit address and location'
+    subtitle: 'The given address can be updated here.'
+  locationstring:
+    label: 'The entire address in one line.'
+    help: 'For example: Baker Street 112, 12345 Baker City'
+    #message1: 'missing'
+    #message2: 'missing'
+  bellsign:
+    label: 'Doorbell shield'
+    help: 'Here you can enter what is written on your doorbell shield if it is not clear from your address.'
+  address: 'Address'
+homemeal:
+  manager:
+    title: 'Manage Home-Meals'
+    card:
+      join: 'Join'
+      entree: 'Main course'
+      seats_max: '{1}Seat max|{0}Seats max|]0,Inf[ Seats max'
+      seats_free: '{1}Seat free|{0}Seats free|]1,Inf] Seats free|[-Inf,-1] Seats free'
+      seats_taken: '{1}Seat taken|{0}Seats taken|]0,Inf[ Seats taken'
+
+    create:
+      subtitle: 'Here you can create a new Home-Meal.'
+    show:
+      subtitle: 'Here you see a Home-Meal.'
+      title: 'Home-Meal Vorschau'
+    edit:
+      subtitle: 'Here you can edit your Home-Meal.'
+    editRoot:
+      subtitle: 'Here you can edit your Home-Meal.'
+    running:
+      subtitle: 'Here you can edit your Home-Meal.'
+    # Wird nicht gebraucht   tab_one: 'Meal (Inaktiv)'
+    tab_two: 'Guests | Costs | Categories'
+    tab_three: 'Location | Address'
+    tab_four: 'Dates'
+  create:
+    label: 'Create new Home Meals'
+  addEvent:
+    label: 'Add date'
+  removeEvent:
+    label: 'Delete date'
+  list:
+    title: 'Home-Meals'
+  label: 'Home-Meal'
+  dates.note: 'missing'
+userprofile:
+  manager:
+    title: 'User profile'
+    subtitle: 'Here you can edit your user profile.'
+  image:
+    label: 'Profile picture'
+  public:
+    subtitle: 'Mealmatch user profile'
+    error: 'You must be logged in to view user details.'
+    destination: 'Your way to me'
+  meals: 'Current home Meal offers'
+  no_meals: 'This Mealmatch user has no current Home Meal offers.'
+  validation:
+    nok: 'missing'
+btn:
+  safe:
+    label: 'Save'
+  delete:
+    label: 'Delete'
+  preview:
+    label: 'Preview'
+  valdiate:
+    label: 'Validate'
+  create:
+    label: 'Create'
+basemeal:
+  req:
+    not-meet: 'Validation failed!'
+  status:
+    CREATED:
+      label: 'New'
+      description: 'A new Meal that is currently being created.'
+      help: 'You can edit this meal until you have created a series of meals based on your given time periods.'
+    READY:
+      label: 'Ready'
+      description: 'This Meal is ready for publication.'
+      help: 'Each Meal can be changed individually before it is published.'
+    RUNNING:
+      label: 'Active'
+      description: 'This Meal is active and can be joined.'
+      help: "A meal that's taking place right now."
+    STOPPED:
+      label: 'Stopped'
+      description: 'This Meal was stopped.'
+      help: 'A Meal which was stopped.'
+    FINISHED:
+      label: 'Ended'
+      description: 'The time period for the meal has expired.'
+      help: 'This Meal has been ended.'
+    CLOSED:
+      label: 'Archived'
+      description: 'The Meal was archived.'
+      help: 'A Meal which was archived.'
+    DELETED:
+      label: 'Deleted'
+      description: 'The Meal was deleted.'
+      help: 'A meal which was deleted.'
+transition:
+  create_meals: 'Create'
+  restart_meal: 'Deploy'
+  start_meal: 'Publish'
+  stop_meal: 'Stop'
+  archive_meal: 'Archive'
+  finish_meal: 'Finalize'
+  pay_ticket: 'Pay'
+  payment_retry: 'Restart payment process'
+  use_ticket: 'Use'
+  cancel_ticket: 'Cancel Meal'
+  pay_prepare: 'missing'
+  finish_pay_prepare: 'missing'
+  redeem_created: 'Redeem Coupon code'
+meal.details.title: 'Meal Details'
+profile.registration.completion_one: So far, you've
+profile.registration.completion_two: completed your profile.
+profile.registration.tab_one: Who are you?
+profile.registration.tab_two: Where are you from?
+profile.registration.tab_three: Tell us about yourself...
+profile.registration.tab_four: Settings
+profile.registration.tab_five: Payment
+profile.registration.first_name: First name
+profile.registration.last_name: Last name
+profile.registration.profile_photo: Profile picture
+profile.registration.addresse.label: Address
+profile.registration.addressline1: 'Street'
+profile.registration.addressline2: 'Additional address'
+profile.registration.areacode: ZIP CODE
+profile.registration.city: City
+profile.registration.state: State
+profile.registration.country: Country
+profile.registration.gender: Gender
+profile.registration.age: Age
+profile.registration.phone: Phone number
+profile.registration.hobbies: Hobbies
+profile.registration.paypalemail: 'PayPal Email'
+profile.registration.selfdescription: About You
+profile.registration.gender.select: - Select gender -
+profile.registration.male.label: Man
+profile.registration.female.label: Woman
+profile.registration.anytype.label: '*'
+profile.registration.birthday.label: 'Date of birth'
+profile.registration.submit.label: Save
+profile.registration.next.label: 'Next'
+profile.registration.nationality: 'Nationality'
+profile.registration.postalAddress: 'Postal address'
+profile.registration.birthday: 'Date of birth'
+profile.title: 'Mealmatch user profile'
+profile.edit: 'Edit profile'
+account.edit: 'Edit account'
+account.text: Account
+restaurantprofile.name.label: Restaurant Name
+restaurantprofile.company.label: Holder Name
+restaurantprofile.type.label: Restaurant type
+restaurantprofile.description.label: Short description of the restaurant
+restaurantprofile.regnumber.label: Commercial Register Number
+restaurantprofile.registration.name: Restaurant Name
+restaurantprofile.registration.company: Company
+restaurantprofile.taxid.label: Value added Tax ID
+restaurantprofile.authorized.label: Authorised representative
+restaurantprofile.paypalemail.label: PayPal Email address
+restaurantprofile.iban.label: IBAN
+restaurantprofile.bic.label: BIC
+restaurantprofile.contactaddress.label: Contact address
+restaurantprofile.contactphone.label: Phone number
+restaurantprofile.contactemail.label: Contact Email
+restaurantprofile.locationstring.label: 'The restaurant address in one line'
+restaurantprofile.edit: 'Edit restaurant profile'
+restaurantprofile.business.data.dropdown.businessregistration: Business registration
+restaurantprofile.business.data.dropdown.other: Other
+restaurantprofile.taxrate.label: VAT rate
+restaurantprofile.default-currency.label: Currency
+restaurantprofile.validation.nok: 'The restaurant profile is not valid!'
+restaurantprofile.notvalid.toaster: 'The restaurant profile is not valid!'
+restaurantprofile.destination.title: 'Your way to us'
+restaurantprofile.destination.map.title: 'Your way to us(gmaps)'
+profile.settings.email.notification: 'Receive Email notifications.'
+profile.settings.email.notification.help: 'Check box to switch the sending of Mealmatch emails on or off.'
+profile.settings.ui.hints: 'Display input instructions.'
+profile.settings.ui.hints.help: 'Here you can switch the input hints on or off.'
+legalfile.file: 'File'
+legalfile.files: 'Files'
+workflow.message.label: 'System message'
+mm.registration.welcome-msg: 'Welcome to Mealmatch. Your social dining platform and community.'
+slider.slide1.text: 'Never eat alone.'
+slider.slide2.text: 'Come together.'
+slider.slide3.text: 'Make new friends.'
+slider.slide4.text: 'Connect people.'
+slider.slide5.text: 'No canteen? No problem.'
+voices.label: 'Testimonials'
+voices.voice1.text: 'Awesome platform! We had a really nice Raclette evening in the studio Benhammer until the morning hours with mostly unfamiliar people. Thanks for bringing them together.'
+voices.voice1.signature: 'Ben H., Köln'
+voices.voice2.text: 'A superb idea! Highly recommended to use this application to all my friends and network.'
+voices.voice2.signature: 'Mukesh K. S., Indore (Indien)'
+voices.voice3.text: 'What a great idea and it works so well! Had another wonderful evening with tasty food and exciting conversations. Thanks Mealmatch!'
+voices.voice3.signature: 'Ramona K., Köln'
+help.title: 'Help and FAQ'
+help.subtitle: 'Help and frequently asked questions'
+help.seo.title: 'Mealmatch Social-Dining | Help and frequently asked questions'
+help.seo.description: 'Help and frequently asked questions'
+help.seo.keywords: 'Mealmatch social-dining help frequently asked questions'
+help.user.profile.paypal: 'To receive money from your guests or to send money as a guest to the host, you need to provide your PayPal address.'
+help.paragraph1.head: 'General information'
+help.paragraph1.title1: 'What is Mealmatch?'
+help.paragraph1.text1: 'Mealmatch is an online platform that connects people for a joint meal - in restaurants, hotels and with private hosts.'
+help.paragraph1.title2: 'How does Mealmatch work?'
+help.paragraph1.text2: 'Simply register and create a free profile within a few minutes, choose your favorite meal and book a seat at the table or send a message to private hosts requesting participation in their meal. In participating restaurants and hotels you can pay directly online and book a place at the table, for private Meals the host decides after your request whether you can participate in the Meal or not, afterwards you can pay online safely.'
+help.paragraph1.title3: 'Which costs can occur during the use of Mealmatch?'
+help.paragraph1.text3: 'The registration and the creation of Meals as a host is and remains free of charge at the Mealmatch platform. Mealmatch receives only a fair commission of 15% of the Meal price on the platform for participating in a Meal. For example, if a Meal is offered for EUR 10, Mealmatch automatically receives EUR 1.50 - the remaining amount of EUR 8.50 is paid directly to the host of the Meal.'
+help.paragraph1.title4: 'How can I pay for a Meal?'
+help.paragraph1.text4: "All payments are securely processed through Mealmatch's online payment system. Participants pay when a booking is made and the hosts automatically receive the money to your account. You can currently choose between Direct Debit (SofortÜberweisung), GiroPay and credit card payment."
+help.paragraph1.title5: 'What can I do if I have forgotten my password?'
+help.paragraph1.text5: 'You can always use the URL: https://www.mealmatch.de/resetting/request to receive a new password by email.'
+help.paragraph2.head: 'For hosts'
+help.paragraph2.title1: 'How do I create a Meal?'
+help.paragraph2.text1: 'After the registration at Mealmatch every host can create and publish his own Meal. The host can choose what and how many courses he wants to offer his guests and how high the cost contribution per guest will be.'
+help.paragraph2.title2: 'How much is a Meal allowed to cost?'
+help.paragraph2.text2: 'Which price you calculate is and remains your free decision. For your pricing you can orientate yourself on the existing Meals. '
+help.paragraph2.title3: 'Who can be a host at the Mealmatch platform?'
+help.paragraph2.text3: 'It is very easy for a private person to become a Mealmatch host. Simply register directly in a few minutes and create an account. It is and always will be free to create a Meal at the Mealmatch platform.Restaurants and hotels who would like to become partners should address their enquiries directly to our partner management via the contact form.'
+help.paragraph3.head: 'For guests'
+help.paragraph3.title1: 'Why do I need a Mealmatch account?'
+help.paragraph3.text1: 'Without registering you can search for Meals and look around on the Mealmatch platform. You need a Mealmatch account to participate in a Meal or to create a Meal as a host and especially to keep track of your booked Meals and your matches.'
+help.paragraph4.head: 'Payment:'
+help.paragraph4.title1: 'How can I register at Mealmatch?'
+help.paragraph4.text1: 'As a private person you can simply register via the menu item <a href= "https://www.mealmatch.de/register/" target= "_blank">"Sign Up" </a>in the top right corner of the navigation bar and create a profile there. Restaurants and hotels who would like to become partners should address their enquiries directly to our partner management via the contact form.'
+help.paragraph4.title2: 'Can I edit my profile details?'
+help.paragraph4.text2: 'Of course you can modify and edit your profile at any time. Just visit your personal profile and update your data.'
+help.paragraph_security.head: 'Miscellaneous:'
+help.paragraph_security.title1: 'If you have any questions or suggestions, or if you want to report technical problems, please send us an email:'
+help.paragraph_security.text1: 'info@mealmatch.de'
+help.paragraph_security.title2: 'You would rather write us a letter or send us a postcard?'
+help.paragraph_security.text2: 'Mealmatch GmbH, Brühler Straße 30, 5069 Köln'
+help.user.profile.image: Upload your profile picture here.
+help.user.profile.firstname: Enter your first name here.
+help.user.profile.lastname: Enter your last name here.
+help.user.profile.birthday: Select your date of birth.
+help.user.profile.gender: Select your gender.
+help.user.profile.addressLine1: Enter your address here, street and house number.
+help.user.profile.addressLine2: If the first address line is not sufficient, you can enter further information here.
+help.user.profile.areaCode: Enter your zip code here.
+help.user.profile.city: Enter your hometown here.
+help.user.profile.country: Enter your home country here.
+help.user.profile.state: Enter your state here.
+help.user.profile.hobbies: Enter your hobbies here.
+help.user.profile.phone: Enter your phone number here.
+help.user.profile.selfDescription: Describe yourself in a few sentences.
+help.user.profile.nationality: Nationality.
+invite.form.email.label: "Your friend's email address"
+invite.form.button.label: 'Send invitation'
+imprint.text: Imprint
+imprint.title: Imprint
+imprint.label: Imprint
+imprint.seo.title: 'Mealmatch Social-Dining | Imprint'
+imprint.seo.description: 'Mealmatch Social-Dining Imprint'
+imprint.seo.keywords: 'Mealmatch Social-Dining Imprint'
+imprint.fulltext: '<span>Mealmatch GmbH</span></br>
+                   <span>Brühler Str. 30</span></br>
+                   <span>50968 Köln</span></br>
+                   <span>Deutschland</span></br>
+                   <p></p>
+                   <span>Managing Director: 				     Thomas Fiedler, Olaf Steinebach</span></br>
+                   <span>VAT identification number:         DE308440126</span></br>
+                   <span>Commercial register number:              HRB 88598</span></br>
+                   <span>Local Court:                        Köln</span></br>
+                   <span>Company domicile:              Köln</span></br>
+                   <p class="mm-spacer"></p>
+                   <p>Mealmatch&#174; German trademark, Register-nr.:  30 2016 222 956.3 / 38</p>
+                   <p>Mealmatch&#174; US Trade Mark, Register-nr.: 5.314.364; Service-nr.: 79-203.779</p>
+                   <p class="mm-spacer"></p>
+                   <span>Contact:</span></br>
+                   <span>+49 (0)221-283 36 54 | <a href="mailto:info@mealmatch.de">info@mealmatch.de</a></span></br>
+                   <p class="mm-spacer"></p>
+                   <span>EU Commission website on online dispute resolution:</span></br>
+                   <span><a target="_blank" href="http://ec.europa.eu/consumers/odr">http://ec.europa.eu/consumers/odr</a></span></br>
+                   <p class="mm-spacer"></p>
+                   <span><a target="_blank" href="https://netkin.de">Suchmaschinenwerbung</a> durch netkin® Digital Marketing aus Köln, </span></br>
+                   <span>Inh. Olaf de los Santos</span>'
+imprint.content: '<p class="career-left">Managing Director: Thomas Fiedler, Olaf Steinebach<br/>
+                              VAT identification number: DE308440126<br/>
+                              Commercial register number: HRB 88598<br/>
+                              Local Court: Cologne<br/>
+                              Company domicile: Cologne</p>
+                          <p class="career-left">Mealmatch® German trademark, Register-nr.: 30 2016 222 956.3 / 38</p>
+                          <p class="career-left">Mealmatch® US Trade Mark, Register-nr.: 5.314.364; Service-nr.: 79-203.779</p>
+
+                          <h3 class="contact-title career-left">Contact :</h3>
+                          <span class="contact-details career-left"><i class="fa fa-map-marker dot-color"></i> <p>Mealmatch GmbH,Brühler Str. 30 50968 Cologne Germany</p></span>
+                          <span class="contact-details career-left"><a href="tel: +49 (0) 221-283 36 54"><i class="fa fa-phone dot-color"></i> +49 (0) 221-283 36 54</a></span>
+                          <span class="contact-details career-left"><a href="mailto:info@mealmatch.de"><i class="fa fa-envelope-o dot-color"></i> info@mealmatch.de</a></span>
+                          <span class="contact-details career-left"><p>Website of the European Commission on online dispute resolution: </p></span>
+                          <span class="contact-details career-left"><a href="http://ec.europa.eu/consumers/odr" target="_blank">
+                          <i class="fa fa-globe dot-color "></i> http://ec.europa.eu/consumers/odr</a></span>
+                      '
+terms.label: 'ToS'
+terms.title: 'Terms of service'
+terms.text: 'I have read and agree to the terms of service.'
+terms.not_true: 'Please accept the terms of service.'
+terms.seo.title: 'Mealmatch Social-Dining | Terms of Service'
+terms.seo.description: 'Terms of Service'
+terms.seo.keywords: 'Terms of Service'
+privacy.seo.title: 'Mealmatch Social-Dining | Privacy policy'
+privacy.seo.description: 'Privacy policy'
+privacy.seo.keywords: 'Privacy policy'
+privacy.label: 'Privacy policy'
+privacy.title: 'Privacy policy'
+privacy.text: 'Privacy policy'
+over18.label: Full-aged
+over18.title: 'Over 18'
+over18.text: 'YES, I confirm that I am at least 18 years old.'
+over18.not_true: 'Please confirm that you are of legal age.'
+data.privacy.statement.label: 'Privacy policy'
+invite.friend.label: 'Invite a friend'
+invite.form.title: 'Invite a friend'
+contact.label: Email contact
+contact.form.title: Contact form
+contact.form.button.label: 'Send message'
+contact.form.message.label: 'Your message for us:'
+contact.form.message.placeholder: '... write to us!'
+contact.form.message.error: 'Please enter your message!'
+contact.form.email.label: 'Your EMail address:'
+account.edit.submit: Update
+becomeHost.title: 'Become a host'
+becomeHost.headline: 'Become a host'
+becomeHost.popover: 'Become a host'
+becomeHost.seo.title: 'Mealmatch Social-Dining | Become a Mealmatch Host'
+becomeHost.seo.description: 'Create your own menus and publish them on the Mealmatch platform.'
+becomeHost.seo.keywords: 'Mealmatch social dining supperclub'
+navbar.becomeHost.link: 'Become a Mealmatch Host'
+navbar.becomeHost.popover-text: '<p></p>
+                                 <p></p>
+                                 <p></p>'
+doHost.text: Hosting
+group.edit.submit: 'Update group'
+group.show.name: Group name
+group.new.submit: 'Create Group'
+group.flash.updated: 'The group has been updated.'
+group.flash.created: 'The group has been created.'
+group.flash.deleted: 'The group has been deleted.'
+security.login.username: Username
+security.login.password: Password
+security.login.remember_me: 'Remember me'
+security.login.submit: Log in
+profile.show.username: Username
+profile.show.email: Email
+profile.edit.submit: 'Update user'
+profile.flash.updated: 'The user profile has been updated.'
+change_password.submit: 'Change password'
+change_password.flash.success: 'The password has been changed.'
+registration.title: Registration
+registration.response: 'Thank you for Registering!'
+registration.check_email: 'An Email has been sent to %email%. It contains a link that you must click to confirm your account.'
+registration.confirmed: 'Congratulations %username%, your account is now activated.'
+registration.back: 'Back to the original page.'
+registration.submit: Create an account
+registration.flash.user_created: 'The user was successfully created.'
+registration.email.subject: 'Welcome %username%!'
+registration.email.message: '<h2>Hello %username%,</h2><h3>Welcome to Mealmatch!</h3><p></p><p>To complete the registration, Mealmatch needs to verify your email address.</p><p>To verify your e-mail address please click the following link:</p><p><a href="%confirmationUrl%">Verification link</a>.</p><p></p><p>Thank you!</br>The Mealmatch-Team</p>'
+resetting.check_email: "An e-mail has been sent. It contains a link to reset your password. <br>Note: A new password can only be requested every %tokenLifetime% hours.\n\nThis email may have been marked as spam if it did not arrive.\n"
+resetting.check_email2: 'missing'
+resetting.request.username: 'Username or Email address'
+resetting.request.submit: 'Reset password'
+resetting.request.title: 'Reset password'
+resetting.request.subtitle: 'Request to reset the password.'
+resetting.reset.submit: 'Change password'
+resetting.flash.success: 'The password has been reset successfully.'
+resetting.email.subject: 'Reset password'
+resetting.email.message: "Hello %username%!\n\nPlease visit the following page to reset your password: %confirmationUrl%\n\nWith best regards,\nThe Mealmatch Team.\n"
+layout.logout: Log out
+layout.login: Log In
+layout.register: Create an account
+layout.logged_in_as: 'Signed in as %username%'
+layout.home: Homepage
+form.group_name: Group name
+form.username: Username
+form.email: Email address
+form.current_password: 'Current password'
+form.password: Password
+form.password_confirmation: 'Verify password'
+form.new_password: 'New password'
+form.new_password_confirmation: 'Verify new password'
+search.submit: 'London'
+user-menu.modal.title: User menu
+public-logo-menu.modal.title: Navigation
+navbar.language-english: EN
+navbar.toggle.navigation: Navigation switch
+navbar.account.edit: User account
+navbar.help: Help
+navbar.profil.edit: 'Edit profile'
+navbar.profil.text: Profile
+navbar.register: Create an account
+navbar.mymeals: 'My Meals'
+navbar.mymatches: 'My Matches'
+public-search-config.modal.title: 'Customize search'
+public-footer.modal.title: Legal matters
+public-footer.teaser.text: '<p>Mealmatch connects people for a joint Meal.</p><p>Registration at Mealmatch is for free.</p>'
+career.title: Career
+career.text: '<p>WE’LL CHANGE THE WAY HOW PEOPLE WILL EAT TOGETHER IN THE FUTURE FROM SCRATCH.</p>
+             <p>You have goals and would like to work with pleasure on our beautiful project with us?</p>
+             <p>Are you ready to grow with Mealmatch and your tasks?</p>
+             <p>We would like to work with people who want to explore new paths.</p>
+             <p>In addition to exciting challenges, we offer you individual training and an unusual working environment.</p>
+             <p></p>
+             <p>Become part of our team and join us on this path.</p>'
+career.content: '<p class="career-left">We’ll change the way how people will eat together in the future from scratch!</p>
+            <p class="career-left">You have goals and would like to work with pleasure on our beautiful project with us?</p>
+            <p class="career-left">Are you ready to grow with Mealmatch and your tasks?</p>
+            <p class="career-left">We would like to work with people who want to explore new paths.</p>
+            <p class="career-left">In addition to exciting challenges, we offer you individual training and an unusual working environment.</p>
+            <p class="career-left">Become part of our team and join us on this path.</p>'
+career.seo.title: 'Mealmatch Social-Dining | Career'
+career.seo.description: 'Become part of our team and join us on this path.'
+career.seo.keywords: 'Mealmatch social-dining karriere software ingenieur UX/UI Designer praktikum community manager'
+footer.legal: 'Imprint|ToS|Data Protection & Privacy'
+invide.form.title: 'Invite friends'
+howToHost.title: 'Gelungen Gastgeben'
+howToHost.text: '<h1>Die 9 Gebote guten Gastgebens:</h1>
+                    <p>1. Behandle deine Gäste so, wie Du selbst gerne als Gast behandelt werden möchtest.</p>
+                    <p>2. Ein vollständiges Profil ist ein gutes Profil.</p>
+                    <p>3. Beschreib dein Meal so ausführlich wie möglich.</p>
+                    <p>4. Lass deine Gäste wissen, was du Ihnen zum trinken anbieten willst.</p>
+                    <p>5. Bereite so viel wie möglich vor, um unnötigen Stress zu vermeiden.</p>
+                    <p>6. Sei Achtsam bezüglich möglicher Allergien und Unverträglichkeiten deiner Gäste.</p>
+                    <p>7. Ein gelungenes Meal hängt vom Wohlfühlfaktor ab, deinem eigenen und dem deiner Gäste.</p>
+                    <p>8. Du musst dir nicht alles von deinen Gästen gefallen lassen – dein Heim, deine Regeln.</p>
+                    <p>9. Hab Spaß und genieße dein Meal gemeinsam mit deinen Gästen.</p>'
+howToHost.seo.title: 'Mealmatch Social-Dining | Gelungen Gastgeben'
+howToHost.seo.keywords: 'Mealmatch social-dining gelungen gastgeben supperclub home dinner'
+howToHost.seo.description: 'Die 9 Gebote guten Gastgebens.'
+howItWorks.title: 'How it works'
+howItWorks.text: '<p>Simply register now, quickly create a profile and get to know nice people over a tasty meal.</p><p>To participate in a Meal you need a profile - and that is done in no time. </p><p>Simply register quickly and specify in your profile what you want to announce about yourself.</p><p>And already you can actively participate in Meals and get to know people near you.</p>
+                   <p></p><p>Find a meal to your taste using the search function, choose WHERE, WHEN and WHAT you would like to eat.</p><p>Once you have decided on a Meal, register and create a profile.</p>
+                   <p>In a participating restaurant or hotel you can reserve a seat at the table directly. </p>
+                   <p>For your participation in a Meal with a private host, you simply formulate a friendly request for a seat at your desired Meal. After the host has accepted your request, you can pay the meal immediately.</p>
+                   <p>After completion of the payment process you will be informed about the address of the host.</p>
+                   <p>Much Love and Lasagne!</p>'
+howItWorks.content: '<p class="career-left"> Simply register now, quickly create a profile and get to know nice people over a delicious meal.</p>
+                             <p class="career-left"> To take part in a meal, you need a profile - and that''s done quickly.</p>
+                             <p class="career-left">Simply register for a short time and specify in your profile what you want to announce about you.</p>
+                             <p class="career-left"> And you can actively participate in meals and get to know people near you ..</p>
+                             <p class="career-left"> Find a meal to your taste with the help of the search function, select WHERE, WHEN and WHAT you would like to eat.</p>
+                             <p class="career-left"> Once you''ve decided on a meal, register and create a profile.</p>
+                             <p class="career-left">In a participating restaurant or hotel, you can book directly at the table.</p>
+                             <p class="career-left"> To participate in a meal with a private host, you simply formulate a friendly request for a place at your desired estate. After the host has accepted your request, you can pay the meal directly.</p>
+                             <p class="career-left"> After completing the payment process, you will be notified of the host''s address.</p>
+                             <p class="career-left">Much Love and Lasagna!</p><'
+howItWorks.seo.title: 'Mealmatch Social-Dining | How it works'
+howItWorks.seo.description: '<p>Find a meal to your taste using the search function, choose WHERE, WHEN and WHAT you would like to eat. Once you have decided on a Meal, register and create a profile. Contact the host and formulate your request for a seat at your desired Meal. After the host has accepted your request, you can pay the meal immediately. After completion of the payment process you will be given the address of the host. Have fun and enjoy your meal.'
+howItWorks.seo.keywords: 'Mealmatch social-dining help explanation functional description'
+contact.form.send.message: 'Thank you very much! Your message was successfully forwarded to the Mealmatch team.'
+contact.form.send.title: 'Message sent!'
+contact.form.subject.label: 'Subject'
+invite.form.send.title: 'Invitation sent'
+invite.form.send.message: 'Thank you very much! Your invitation was sent successfully!'
+events.title: 'Campaigns'
+events.from: 'missing'
+events.to: 'missing'
+events.text: "<p>Here you can find permanent and temporary campaigns.</p> <p> </p> <p>#human</p> <p> Mealmatch supports the initiative #mensch und #MenschTuWas. The initiative is from and for interested and engaged people, who want to discuss current topics around the social change in society with like-minded people. Mealmatch organizes tables for the exchange for the initiative #mensch.</p> <p></p> <p>It's rewarding to be the first.</p> <p>Be the first to join a table and benefit from a 50% discount - so the first will only pay half the price of the meal. Directly after the meal we will refund you 50%. We will transfer half of the price you paid online via Mealmatch to your account. </p> <p> </p><p>Tell us your story!  </p><p>You have ideas for a topic? Tell us your story or your idea for an event. For the most exciting ideas we would be happy to organize a table with you as TableCaptain and invite you as idea provider to join us.</p>"
+events.text.ui: '<p class="career-left">Here you can find permanent and temporary actions.</p>
+                 <p class="career-left">#human</p>
+                 <p class="career-left">Mealmatch supports the initiative #mensch and #MenschTuWas. The initiative is by and for interested and committed people who want to exchange views on current social change in society with like-minded people. Mealmatch organizes tables for sharing with the #human initiative.</p>
+                 <p class="career-left">It''s worth to be the first.</p>
+                 <p class="career-left">Be the first participant at a table and benefit from a hefty 50% discount - the first pays only half the price of the meal. Immediately after the meal we will refund you 50%. We will transfer half of the price you paid online via Mealmatch to your account.</p>
+                 <p class="career-left">Tell us your story!</p>
+                 <p class="career-left">Do you have ideas for a topic? Tell us your story or your idea for an action. For the most exciting ideas, we are happy to organize a table with you as TableCaptain and cordially invite you as the source of ideas.</p>'
+events.seo.title: 'Mealmatch Social-Dining | Campaigns, Events'
+events.seo.description: 'Turn your Meal into an unforgettable event'
+events.seo.keywords: 'Mealmatch social-dining events'
+trustAndSecurity.title: 'Trust requires security'
+trustAndSecurity.text: '<p>Mealmatch has standards that benefit the community and each individual.</p><p> We have set up processes to ensure more security in our community and to help everyone at Mealmatch to feel good about being a guest or hosting a Mealmatch event.</p> <p>A complete profile description helps each other to get a first impression of the participants before the meal. </p><p></p> <p>And as in other areas of life, personal assessment and life experience are good advisors. So you can feel good and spend a nice time with nice people in good company. </p>'
+trustAndSecurity.content: '<p class="career-left"> Mealmatch has standards that benefit the community and each individual.</p>
+                           <p class="career-left"> We have set up processes to make our community safer and to help everyone at Mealmatch be a guest and a guest of honor.</p>
+                           <p class="career-left"> Full profile descriptions help one another to get a first impression of the participants before the meal.</p>
+                           <p class="career-left">And as in life, personal assessment and life experience are good guides. So you can feel good and spend nice time with nice people in good company.</p>'
+trustAndSecurity.seo.title: 'Mealmatch Social-Dining | Trust requires security'
+trustAndSecurity.seo.description: 'Mealmatch has standards that benefit the community and each individual. <</p><p> We have set up processes to ensure more security in our community and to help everyone at Mealmatch to feel good about being a guest or hosting a Mealmatch event.</p> <p>A complete profile description helps each other to get a first impression of the participants before the meal. </p><p></p> <p>And as in other areas of life, personal assessment and life experience are good advisors. So you can feel good and spend a nice time with nice people in good company. </p>'
+trustAndSecurity.seo.keywords: 'Mealmatch social-dining trust security standards community process'
+navbar.messages: 'Messages'
+navabar.inbox: 'Message inbox'
+navabar.sent: 'Sent messages'
+email.reset: 'Reset Email'
+public-footer.head.about: 'About'
+public-footer.head.mealmatch: 'Mealmatch'
+public-footer.head.hosts: 'Hosts & Guests'
+public-footer.head.legal: 'Legal matters'
+public-footer.head.contactform: 'Contact'
+public-footer.head.invidefriends: 'Invite your friends'
+public-footer.about: 'About'
+public-footer.career: 'Career'
+public-footer.press: 'Press'
+public-footer.events: 'Activities'
+public-footer.trustAndSecurity: 'Trust & Safety'
+public-footer.howItWorks: 'How it works'
+public-footer.becomeHost: 'Become a host'
+public-footer.becomeGuest: 'Become a guest'
+public-footer.howToHost: 'Successful hosting'
+security:
+  login:
+    passwordreset:
+      txt: 'Reset Password'
+becomeHost:
+  text: "<p>Mealmatch allows you to become a chef and share your cooking skills with other people.</p>
+        <p>Create your own menus and publish them on the Mealmatch platform.</p>
+        <p>Create an extraordinary experience for your guests and make them new friends.</p>
+        <p>CREATE YOUR OWN MENU - What, when and how much it will cost.</p>
+        <p>BE A MEMBER Of THE GROWING MEALMATCH COMMUNITY - Good food, nice people, interesting conversations - be smart, take part!</p>
+        <p>HELP TO KEEP ALIFE THE TRADITIONAL COOKING AND EATING CULTURE - Share your knowledge and cooking skills with other people.</p>
+        <p>USE FOOD RESOURCES SUSTAINABLE AND RESPONSIBLE - Counteracting today's disposable society.</p>"
+email:
+  footer: '
+          ------------------------------------------------------------------------------------
+          Please do not reply to this email. This mailbox is not monitored, so you will not receive a reply. If you need help, log into your Mealmatch account and click on the "Help" link in the top right corner of any Mealmatch page.
+
+          Copyright © 2016 Mealmatch All rights reserved.
+
+          Mealmatch GmbH
+          Brühler Str. 30
+          50968 Köln
+          Deutschland
+
+          USt. Id–Nr.: DE 308440126 | HRB: 88598 | Registered office of the company: Köln | Local Court: Köln | Managing Director: Thomas Fiedler'
+registration:
+  check_email:
+    title: 'Verify user account'
+  confirmed:
+    title: 'Registration complete and successful'
+  subtitle: 'Hereby you sign up at Mealmatch!
+  <br>
+  Hotels and restaurants that want to become partners, just contact us via the <a href="/en/contact">contact form</a>
+  '
+  pro:
+    subtitle: 'Herewith you register as a restaurant.'
+    title: 'Restaurant Registration'
+invite:
+  email:
+    text: '<p>Hello %email%,</p>
+           <p>%username% invites you to discover Mealmatch together.</p>
+           <p>Are you a good cook or do you like to eat well?</p>
+           <p>Then Mealmatch is just the thing for you.</p>
+           <p>Sign up now for free and try it out.</p>'
+    text2: '<p>Enjoy your mealmatching!</p><p>The Mealmatch Team</p>'
+    failed: 'Unfortunately an error occurred while sending the invitation.'
+    already:
+      done: 'An invitation has already been sent to this email address.'
+  text:
+    salutation: 'Hello %username%, '
+    main: 'You have friends who are good at cooking, who like to eat well and who might like Mealmatch? Just send them an invitation and discover Mealmatch together with them.'
+    footer: '- Your Mealmatch Team'
+public-footer:
+  blog: 'BLOG'
+  language: 'Languages'
+  language-german: 'German'
+  language-english: 'English'
+  help: 'Help & FAQ'
+  cities: 'Cities'
+  blog-UpAndLowercase: 'Blog'
+  secure-mealmatching: 'Secure Mealmatching'
+  writeUs: 'Write us!'
+  team-mealmatching: 'MEALMATCH WITH'
+search:
+  where: 'Where'
+  when: 'When'
+  category: 'Category'
+  start: 'Find a Meal'
+  startPageWithCards: ' Search Meal '
+  map:
+    label: 'Map'
+  list:
+    label: 'List'
+  pro:
+    label: 'Restaurant-Meals'
+    description: 'missing'
+  home:
+    label: 'Home-Meals'
+    description: 'missing'
+  select: 'missing'
+  choose: 'Mealmatch'
+  found: 'Found'
+  deals: 'missing'
+press.title: 'Press'
+press:
+  contact-for-journalist: 'Contact for press'
+  contact-text: "Our press office is at the journalists' service for information and interview requests:"
+  and: 'and'
+  text: "Our press office is at the journalists' service for information and interview requests."
+press.seo.title: 'Mealmatch Social-Dining Marketplace und Community | Press'
+press.seo.description: "Our press office is at the journalists' service for information and interview requests."
+press.seo.keywords: 'Mealmatch socialdining marketplace community gemeinschaft restaurants events supperclubs in deutschland press info press kit interviews'
+navbar:
+  restaurant:
+    profil:
+      text: 'Restaurant profile'
+    link:
+      text: 'My Restaurant'
+restaurant:
+  title: 'Your Restaurant'
+restaurantview:
+  served-next:
+    label: All guests with tickets paid
+  tickets-sold-last:
+    label: Last payment transactions
+  action:
+    ticket:
+      label:
+        mealticket: To the Meal ticket
+        guestprofile: To the Profile of the guest
+  tablehead:
+    payed: Status
+    meal: Restaurant-Meal
+    offer: Selected offer
+    guest: Guests
+    actions:
+      label: Campaigns
+restaurantprofile:
+  paymentprofile:
+    validation:
+      nok: "The Paymentprofile has no Mangopay Id's"
+  manager:
+    title: 'Restaurant profile'
+    subtitle: 'Here you can edit your restaurant profile'
+    add:
+      picture: 'Upload picture'
+      document:
+        label: Upload documents'
+    myrestaurant: 'My Restaurant'
+    businessdata: 'Business information'
+    location: 'Location'
+    images: 'Pictures'
+    settings: 'Settings'
+    restaurantimages: 'Restaurant pictures'
+    imagesupload: 'Uploaded pictures'
+    documents: 'Documents'
+  legalfile:
+    label:  'Document'
+  legalfiletype:
+    label: 'Type of document'
+  image:
+    label: 'Picture'
+  meals: 'active Restaurant Meals'
+  registration.name: 'Restaurant name (as displayed)'
+  registration.company: 'Company name (payment information)'
+  registration.type: 'Restaurant type'
+  edit: 'Edit Restaurantprofile'
+
+profile:
+  registration:
+    pro:
+      title: 'Register as a Restaurant'
+    address:
+      label: 'Address'
+
+error.404.title: 'Not found'
+error.404.text: "We couldn't find the page you were looking for."
+error.403.title: 'Access denied'
+error.403.text: 'Unfortunately you are not authorized to see this page.'
+error.405.title: 'Access denied'
+error.405.text: 'Unfortunately you are not authorized to see this page.'
+error.500.title: 'An error occurred'
+error.500.text: 'Please excuse us, an internal error has occurred.'
+your: 'Your'
+update: 'refresh'
+meal.search: Find a Meal
+time: 'time'
+menu: 'Menu'
+systemmsg:
+  status:
+    finished:
+      text: 'Your Meal offer has now expired and has been removed from the active Meals.'
+    running:
+      text: 'Your Meal offer will now be listed in the search results.'
+startpage:
+  teaser:
+    headline: 'Sign up for free'
+  info:
+    block1: 'Mealmatch connects people at a joint meal - in restaurants, hotels and at private hosts. This way you can make new friends in your city and eat delicious meals with nice people on holiday and business trips.'
+    block2: 'Everyone can register for free and make new contacts at a meal or cook a delicious meal as a host that he would like to share with others.'
+  info2:
+    block1: |
+      Get to know new interesting people
+      at a Meal as...
+    block2: |
+      Guest in fantastic
+      restaurants
+    block3: |
+      Guest at someone''s
+      home
+    block4: |
+      Host at your
+      home
+
+  mealcard:
+    join: 'Join now'
+    price:
+      from: 'from'
+  search:
+    top:
+      teaser: 'Search for interesting Meals in your city'
+public:
+  promeal:
+    choose_offer: 'Choose a Meal'
+note: 'Note'
+mealmananger:
+  settings:
+    note1: 'missing'
+    note2: 'missing'
+  meal:
+    preview: 'Preview Meal'
+  share:
+    facebook: 'Share via Facebook'
+startpageWithCards:
+  teaser:
+    headline: 'Best Meals in Cologne. Be there!'
+kyc.about.title: 'Complete your KYC'
+kyc.docType.idProof: 'IDENTITY PROOF'
+kyc.docType.addrProof: 'Address Proof'
+kyc.docType.regProof: 'REGISTRATION PROOF'
+kyc.docType.articleAss: 'ARTICLES OF ASSOCIATION'
+kyc.docType.shareHolderDeclaration: 'SHAREHOLDER DECLARATION'
+kyc.document: 'Document Type'
+kyc.file: 'Select file'
+kyc.submit.label: 'Submit'
+kyc.idproof.id: 'ID Card'
+kyc.idproof.passport: 'Passport'
+kyc.idproof.drivingLicense: 'Driving License'
+kyc.status.title: 'User KYC Status'
+kyc.about.intro: '<b>KYC (Know Your Customer)</b> procedure is a standard verification process to ensure compliance with local regulation
+                              and are necessary in order to fight fraud, money laundering and financing of terrorism. '
+kyc.guest.about: '<h2>Documents needed for a guest</h2> <p> As a guest, you need to upload only "IDENTITY PROOF". (ie.)ID Card, Passport (Front AND Back (Valid)) or driving licence for SEPA area.
+                  Passport or driving licence for the UK, USA and Canada. For other nationalities a passport is required. </p>'
+kyc.doc.type: 'Document type'
+kyc.doc.usage: 'Usage'
+kyc.usage.idproof: 'ID Card, Passport (Front AND Back (Valid)) or driving licence for SEPA area. Passport or driving licence for the UK, USA and Canada. For other nationalities a passport is required.'
+kyc.complete.link: 'Complete your KYC here'
+kyc.host.about: '<h2 class="title">Documents needed for a host </h2>  <p class="content">As a Host, you need to upload the following documents.</p>'
+kyc.hostusage.idproof: 'ID Card, Passport (Front AND Back (Valid)) or driving licence for SEPA area. Passport or driving licence for the UK, USA and Canada. For other nationalities a passport is required.
+                                                In the case of a host user, this document should refer to the individual duly empowered to act on behalf of the legal entity.'
+kyc.usage.aa: 'Certified articles of association (Statute) - formal memorandum stated by the entrepreneurs,
+                                       in which the following information is mentioned: business name, activity, registered address, shareholding…'
+kyc.usage.regproof: 'Extract from the Company Register issued within the last three months.'
+kyc.usage.shareDec: 'Send information referring to the shareholder declaration <a href="https://www.mangopay.com/terms/shareholder-declaration/Shareholder_Declaration-EN.pdf"><i>like this.</i></a>'
+kyc.file.help: 'The maximum size per page is about 10Mb. Accepted formats: .pdf, .jpeg, .jpg, .gif and .png. The minimum size is 1Kb.</br>'
+kyc.modal.title: 'KYC Details for the user'
+kyc.about.dont1: 'Submit document copies that are damaged, blurred or distorted.'
+kyc.about.dont2: 'Submit documents that are password-protected.'
+kyc.about.dont3: 'Enter personal details when business details are needed, or vice versa.'
+kyc.about.do1: 'Submit both sides of the documents if there are details on either side (Eg. Id Card, Driving License, Passport, etc.)'
+kyc.about.do2: 'Make sure the file type and size before submit(The maximum size per page is about 7Mb.
+                Accepted file types : .pdf, .jpeg, .jpg, .gif and .png and the minimum file size is 1Kb.) '
+kyc.status.details: 'Details'
+kyc.status.userId: 'User ID'
+kyc.status.mangopayId: 'Mangopay UserID'
+kyc.status.overall: 'Overall Status'
+kyc.status.select: 'Click here'
+kyc.file.status1: 'Your submitted document is under validation!'
+kyc.file.status2: 'Your submitted document was validated successfully!'
+payin.reg.response: 'Registration details are needed to proceed the payment!'
+payin.reg.response1: 'fill registration details...'
+payin.error.msg: 'Something went wrong ...'
+payin.error.msg1: 'Please try again later'
+payin.response.home: 'back to home'
+payin.success.msg: 'Your transaction was successful!'
+payout.restaurant.error: 'But something went wrong at the restaurant side.<br>We will investigate and let you know the status.'
+
+flashbag:
+  missing:
+    whoareyou: 'Missing entries in "Who are you?"'
+    country: 'Missing entries in "Where are you from?"'
+  ok:
+    homeuservalidation: 'Homeuser Role Validation succesful!'
+    restaurantuservalidation: 'Restaurant Role Validation succesful!'
+  error:
+    homeuservalidation: 'The Userprofile failed to validate for the homeuser role'
+    restaurantuservalidation: 'The Userprofile failed to validate for the restaurant role'
+contactform:
+  name: 'Your Name'
+  addr: 'Your Email Address'
+  subject: 'Subject of the message'
+
+paymentprofile.validation.nok: 'Validation of payment data values failed!'
+homehostprofile:
+  payment:
+    addNaturalUser: 'Mealmatch'
+  manager:
+    title: 'Gastgeber Einstellungen'

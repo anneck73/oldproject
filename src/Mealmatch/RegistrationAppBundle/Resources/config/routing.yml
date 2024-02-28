@@ -1,0 +1,3 @@
+mealmatch_registration_app_homepage:
+    path:     /
+    defaults: { _controller: MealmatchRegistrationAppBundle:Default:index }

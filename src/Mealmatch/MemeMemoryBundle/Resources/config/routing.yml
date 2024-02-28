@@ -1,0 +1,3 @@
+mealmatch_meme_memory_homepage:
+    path:     /
+    defaults: { _controller: MealmatchMemeMemoryBundle:Default:index }

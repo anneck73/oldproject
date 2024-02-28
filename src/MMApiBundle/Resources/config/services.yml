@@ -1,0 +1,42 @@
+# Mealmatch API Services
+services:
+
+# ###########################################################
+# Address Business Logic Service
+# Alias: @mm.address
+# ###########################################################
+    mm_api.address_service:
+        class: MMApiBundle\MMAddress
+        arguments: ['@doctrine.orm.entity_manager', '@bazinga_geocoder.geocoder', '@logger']
+    # The Alias must match mm.{servicename}
+    mm.address:
+        alias: mm_api.address_service
+
+# ###########################################################
+# MessageSubscriber for Messaging
+# ###########################################################
+    mm_user.messages_subscriber:
+        class: MMApiBundle\EventSubscriber\MessagesSubscriber
+        arguments: ["@session.flash_bag", "@swiftmailer.mailer", "@templating"]
+        tags:
+            - { name: kernel.event_subscriber }
+# ###########################################################
+# Meal Search Service
+# Alias: @mm.meal_search
+# ###########################################################
+    mm_api.meal_search_service:
+        class: MMApiBundle\MMMealSearch
+        arguments: ['@doctrine.orm.entity_manager', '@bazinga_geocoder.geocoder', '@logger', '@templating']
+    # The Alias must match mm.{servicename}
+    mm.meal_search:
+        alias: mm_api.meal_search_service
+# ###########################################################
+# Meal Service
+# Alias: @mm.meal
+# ###########################################################
+    mm_api.meal:
+      class: MMApiBundle\MMMeal
+      arguments: ['@logger', '@doctrine.orm.entity_manager']
+    # The Alias must match mm.{servicename}
+    mm.meal:
+      alias: mm_api.meal

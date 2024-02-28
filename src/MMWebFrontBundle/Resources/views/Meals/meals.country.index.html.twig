@@ -1,0 +1,31 @@
+{% extends "@MMWebFront/Layout/landingpage.html.twig" %}
+{% set countryNames = {
+    'de': 'Deutschland', 'DE': 'Deutschland',
+    'uk': 'Großbritannien', 'UK': 'Großbritannien',
+    'fr': 'Frankreich', 'FR': 'Frankreich'
+} %}
+{% trans_default_domain "Mealmatch" %}
+{% set viewData = {'title': 'Meals in ' ~ countryNames[country] ~ '(' ~ country ~ ')'} %}
+{% block main_content %}
+    <div class="breadcrumb">
+        <span class="icon-direction"></span>&nbsp;
+        <a href="{{ path('public_meals_country_index', {'country': country}) }}">social-dining</a> / {{ country|upper }}
+    </div>
+
+    <p></p>
+    <div class="pull-right"><span class="label label-danger beta-badge">Beta</span></div>
+    <h2 class="pull-left no-margin">Meals in {{ countryNames[country] }} ({{ country }})</h2>
+    <p class="mm-spacer"></p>
+    <div class="meal-grid pull-left">
+        <div class="meal-grid-sizer"></div>
+        {% for meal in allMeals %}
+            {% if meal.mealType == 'ProMeal' %}
+                {% set proMeal = meal %}
+                <div class="meal-grid-item">{{ include('@WEBUI/ProMeal/index.card.include.html.twig') }}</div>
+            {% else %}
+                {% set homeMeal = meal %}
+                <div class="meal-grid-item">{{ include('@WEBUI/HomeMeal/index.card.include.html.twig') }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

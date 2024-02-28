@@ -1,0 +1,34 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set swtTitle %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('api_restaurant_profile_manager') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Restaurant Unternehmensdaten</p>
+                        </h3>
+                        {{ form_start(companyForm) }}
+                        {{ form_row(companyForm.contactAddress, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.contactPhone, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.contactEmail, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.taxID, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.commercialRegisterNumber, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.defaultCurrency, { 'attr' : { 'class': 'tbox' } }) }}
+                        {{ form_row(companyForm.taxRate, { 'attr' : { 'class': 'tbox' } }) }}
+                        <div class="button-div text-center"><button class="main-btn">{{ 'btn.safe.label'|trans }}</button></div>
+                        {{ form_end(companyForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

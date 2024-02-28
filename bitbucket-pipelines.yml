@@ -1,0 +1,768 @@
+# This is the mealmatch specific build configuration for MMWebApp.
+# -----
+image: php:7.2.11
+# -----
+# Limt the time the pipline could run
+options:
+  max-time: 20
+# Pipelines
+pipelines:
+  # Catch all, to save build time
+  default:
+    - step:
+        script:
+          - echo "If you want your branch to deploy add it to the named branches below"
+  # Pull Request specific pipelines
+  pull-requests:
+    '**': #this runs as default for any branch not elsewhere defined
+      - step:
+          script:
+            - echo "If you want your pull request to deploy add it to the named pull requests below"
+    feature/*: #any branch with a feature prefix
+      - step:
+          name: Feature PR Build
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/feature/prepareBuild.sh || true
+          services:
+            - mysql
+      - step:
+          name: Prepare parallel steps
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/feature/prepareParallelSteps.sh || true
+          services:
+            - mysql
+      # -----------------------------------------
+      - parallel:
+          - step:
+              name: PHP Unit
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/feature/stepPHPUNIT.sh || true
+              services:
+                - mysql
+          - step:
+              name: Mocha Puppet
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepMochaPuppeteer.sh || true
+              services:
+                - mysql
+          - step:
+              name: PHP Metrics
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepPHPMETRICS.sh || true
+
+      - step:
+          name: Feature PR Reporting
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+      - step:
+          name:       Deploy to DEV
+          deployment: test
+          trigger:    manual
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip rsync zip zlib1g-dev
+            - php deploy_to_mealmatch-dev.php
+      - step:
+          name:       Deploy to STAGE
+          deployment: staging
+          trigger:    manual
+          script:
+            - php deploy_to_mealmatch-stage.php
+  # ----------------------------------------------------------------------------------------------------------
+  # Per Branch configs
+  # ----------------------------------------------------------------------------------------------------------
+  branches:
+    # ----------------------------------------------------------------------------------------------------------
+    # Release Branch 0.2.19, auto deployment to stage, full test cycle, reporting on!
+    # ----------------------------------------------------------------------------------------------------------
+    'release/0.2.19**':
+      - step:
+          name: Release Build
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/dev/prepareBuild.sh || true
+          services:
+            - mysql
+      - step:
+          name: DEV Prepare parallel steps
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/dev/prepareParallelSteps.sh || true
+          services:
+            - mysql
+      # -----------------------------------------
+      - parallel:
+          - step:
+              name: Unit Tests
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepPHPUNIT.sh || true
+                - bin/pipe/dev/stepMochaPuppeteer.sh || true
+              services:
+                - mysql
+          - step:
+              name: phpmetrics
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepPHPMETRICS.sh || true
+          - step:
+              name: phpmd
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,naming,unusedcode --reportfile build/phpmd/index.html || true
+
+          - step:
+              name: pdepend
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/pdepend --summary-xml=build/pdepend/summary.xml ./src/Mealmatch || true
+
+          - step:
+              name: phpcs
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpcs -d memory_limit=1G -p --report=checkstyle --report-file=build/phpcs/checkstyle.xml ./src/Mealmatch || true
+
+      - step:
+          name: Release Build Reporting
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+      - step:
+          name: Deploy to STAGE
+          deployment: staging
+          # trigger:    manual
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            - php deploy_to_mealmatch-stage.php
+      - step:
+          name: Deploy to LIVE
+          deployment: production
+          trigger: manual
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            - php deploy_to_mealmatch-live.php
+
+
+
+
+    # ----------------------------------------------------------------------------------------------------------
+    # Main Dev Build for 0.2.17
+    # Scheduled for auto build every night, deploys to mealmatch-stage.
+    # ----------------------------------------------------------------------------------------------------------
+    '0.2.19-dev':
+      - step:
+          name: DEV Build
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/dev/prepareBuild.sh || true
+          services:
+            - mysql
+      - step:
+          name: DEV Prepare parallel steps
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/dev/prepareParallelSteps.sh || true
+          services:
+            - mysql
+      # -----------------------------------------
+      - parallel:
+          - step:
+              name: phpunit
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepPHPUNIT.sh || true
+                - bin/pipe/dev/stepMochaPuppeteer.sh || true
+              services:
+                - mysql
+          - step:
+              name: phpmetrics
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/dev/stepPHPMETRICS.sh || true
+          - step:
+              name: phpmd
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,naming,unusedcode --reportfile build/phpmd/index.html || true
+
+          - step:
+              name: pdepend
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/pdepend --summary-xml=build/pdepend/summary.xml ./src/Mealmatch || true
+
+          - step:
+              name: phpcs
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpcs -d memory_limit=1G -p --report=checkstyle --report-file=build/phpcs/checkstyle.xml ./src/Mealmatch || true
+
+      - step:
+          name: DEV Build Reporting
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+      - step:
+          name:       Deploy to DEV
+          deployment: test
+          trigger:    manual
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip rsync zip zlib1g-dev
+            - php deploy_to_mealmatch-dev.php
+      - step:
+          name:       Deploy to STAGE
+          deployment: staging
+          trigger:    manual
+          script:
+            - php deploy_to_mealmatch-stage.php
+      #- step:
+      #    name: Deploy to LIVE
+      #    deployment: production
+      #    trigger: manual
+      #    script:
+      #      - php deploy_to_mealmatch-live.php
+
+    # ----------------------------------------------------------------------------------------------------------
+    # Developer Branches
+    # wizard|andre
+    # working on an issue.
+    # ----------------------------------------------------------------------------------------------------------
+    'andre/**':
+      - step:
+          name: Andre Prepare Build
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/andre/prepareBuild.sh || true
+          services:
+            - mysql
+      - step:
+          name: Andre Prepare parallel steps
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/andre/prepareParallelSteps.sh || true
+          services:
+            - mysql
+      # -----------------------------------------
+      - parallel:
+          - step:
+              name: phpunit
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+                - vendor/**
+              script:
+                - bin/pipe/andre/stepPHPUNIT.sh || true
+              services:
+                - mysql
+          - step:
+              name: phpmetrics
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - bin/pipe/andre/stepPHPMETRICS.sh || true
+          - step:
+              name: phpmd
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,naming,unusedcode --reportfile build/phpmd/index.html || true
+
+          - step:
+              name: pdepend
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/pdepend --summary-xml=build/pdepend/summary.xml ./src/Mealmatch || true
+
+          - step:
+              name: phpcs
+              caches:
+                - composer
+                - build
+                - vendor
+              artifacts:
+                - build/**
+              script:
+                - vendor/bin/phpcs -d memory_limit=1G -p --report=checkstyle --report-file=build/phpcs/checkstyle.xml ./src/Mealmatch || true
+
+      - step:
+          name: DEV Build Reporting
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+      - step:
+          name:       Deploy to DEV
+          deployment: test
+          trigger:    manual
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip rsync zip zlib1g-dev
+            - php deploy_to_mealmatch-dev.php
+      - step:
+          name:       Deploy to STAGE
+          deployment: staging
+          trigger:    manual
+          script:
+            - php deploy_to_mealmatch-stage.php
+      #- step:
+      #    name: Deploy to LIVE
+      #    deployment: production
+      #    trigger: manual
+      #    script:
+      #      - php deploy_to_mealmatch-live.php
+    # ---------------------------------------------------------------------------------------------------------
+    '**-Andre*':
+      - step:
+          name:       Andre DEV delivery
+          deployment: test
+          caches:
+            - composer
+          script:
+            - apt-get update && apt-get install -y unzip git rsync
+            - php deploy_to_mealmatch-dev.php
+            - echo "Andre test ... delivered to https://mealmatch-dev.frb.io."
+    # ----------------------------------------------------------------------------------------------------------
+    # Simple 2 Step Templates build and manual deploy
+    # ...
+    # ----------------------------------------------------------------------------------------------------------
+    '**-YOUR_NAME':
+      - step:
+          name:       YOUR NAME DEV-BUILD
+          deployment: test
+          caches:
+            - composer
+          script:
+            # Prepare the image
+            - apt-get update && apt-get install -y git unzip rsync zip
+            # Prepare Composer
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            # Composer install for pipeline environment
+            - composer install -v --no-interaction --no-scripts --no-progress
+            - echo "YOUR NAME - composer build done!"
+      - step:
+          name:       YOUR NAME DEV-DEPLOY
+          trigger:    manual
+          deployment: staging
+          script:
+            - echo "YOUR NAME - starting delivery to mealmatch-dev ..."
+            # Deployment via SSH + git push to https://mealmatch-dev.frb.io.
+            - php deploy_to_mealmatch-dev.php
+            - echo "YOUR NAME - delivery to https://mealmatch-dev.frb.io done!"
+
+    # ----------------------------------------------------------------------------------------------------------
+
+    # INSERT YOUR OWEN DEV DEPLOYMENT HERE PLEASE !!!!
+
+    'feature/WEBAPP-348-E2ETestsToCypress':
+      - step:
+          name: Feature PR Build
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - bin/pipe/dev/prepareBuild.sh || true
+          services:
+            - mysql
+#      - step:
+#          name: Prepare parallel steps
+#          caches:
+#            - composer
+#            - build
+#          artifacts:
+#            - vendor/**
+#          script:
+#            - bin/pipe/feature/prepareParallelSteps.sh || true
+#          services:
+#            - mysql
+      # -----------------------------------------
+#      - parallel:
+#          - step:
+#              name: phpunit
+#              caches:
+#                - composer
+#                - build
+#                - vendor
+#              artifacts:
+#                - build/**
+#              script:
+#                - bin/pipe/feature/stepPHPUNIT.sh || true
+#              services:
+#                - mysql
+#          - step:
+#              name: phpmetrics
+#              caches:
+#                - composer
+#                - build
+#                - vendor
+#              artifacts:
+#                - build/**
+#              script:
+#                - bin/pipe/feature/stepPHPMETRICS.sh || true
+#          - step:
+#              name: phpmd
+#              caches:
+#                - composer
+#                - build
+#                - vendor
+#              artifacts:
+#                - build/**
+#              script:
+#                - vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,naming,unusedcode --reportfile build/phpmd/index.html || true
+#
+#          - step:
+#              name: pdepend
+#              caches:
+#                - composer
+#                - build
+#                - vendor
+#              artifacts:
+#                - build/**
+#              script:
+#                - vendor/bin/pdepend --summary-xml=build/pdepend/summary.xml ./src/Mealmatch || true
+#
+#          - step:
+#              name: phpcs
+#              caches:
+#                - composer
+#                - build
+#                - vendor
+#              artifacts:
+#                - build/**
+#              script:
+#                - vendor/bin/phpcs -d memory_limit=1G -p --report=checkstyle --report-file=build/phpcs/checkstyle.xml ./src/Mealmatch || true
+#
+
+#      - step:
+#          name:       Deploy to DEV
+#          deployment: test
+#          trigger:    manual
+#          script:
+#            - apt-get update && apt-get install -y git gnupg unzip rsync zip zlib1g-dev
+#            - php deploy_to_mealmatch-dev.php
+#      - step:
+#          name: Run Mocha/Puppeteer Tests on mealmatch-dev.frb.io
+#          artifacts:
+#            - build/**
+#          trigger: manual
+#          script:
+#            - bin/pipe/dev/stepMochaPuppeteerForMMDev.sh || true
+#      - step:
+#          name:    Run Mocha/Puppeteer Tests on mealmatch-stage.frb.io
+#          artifacts:
+#            - build/**
+#          trigger: manual
+#          script:
+#            - bin/pipe/dev/stepMochaPuppeteerForMMStage.sh || true
+      - step:
+          name: E2E tests
+          artifacts:
+            - build/**
+          image: cypress/base:10
+          script:
+            - yarn install
+            - yarn run cypress:run
+            - mkdir build/mocha/html/
+            - npx mochawesome-merge --reportDir build/mocha/JSON > build/mocha/html/mochawesome.json
+            - npx mochawesome-report-generator --reportDir build/mocha/html/ build/mocha/html/mochawesome.json
+      - step:
+          name: Feature PR Reporting
+          caches:
+            - composer
+            - build
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip zip
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+      - step:
+          name:       Deploy to STAGE
+          deployment: staging
+          trigger:    manual
+          script:
+            - php deploy_to_mealmatch-stage.php
+    # ----------------------------------------------------------------------------------------------------------
+    # Make a working setup
+    # feature/WEBAPP-252-we-need-more-testing
+    # ----------------------------------------------------------------------------------------------------------
+    'feature/WEBAPP-285-JoinRestaurantMealAsGuestTest':
+      - step:
+          name: Testing
+          caches:
+            - composer
+          artifacts:
+            - vendor/**
+          script:
+            - apt-get update && apt-get install -y git gnupg unzip rsync zip mysql-client libfreetype6-dev libjpeg62-turbo-dev libmemcached-dev zlib1g-dev
+            - docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+            - docker-php-ext-install -j$(nproc) gd
+            - docker-php-ext-install pdo pdo_mysql
+            #          - pecl install memcached
+            #          - docker-php-ext-enable memcached
+            # Prepare Composer
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - # First rebuild auto-loader ...
+            - composer dump-autoload
+            # Install actual nodejs LTS
+            - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+            - apt-get install -y nodejs
+            # Install webpack-encore via yarn
+            - curl -o- -L https://yarnpkg.com/install.sh | bash
+            - export PATH=$HOME/.yarn/bin:$PATH
+            - yarn
+            - yarn add @symfony/webpack-encore --dev
+            - yarn run encore dev
+            # Composer install for pipeline environment
+            - composer install -v --no-interaction --no-scripts --no-progress
+            - php bin/console app:version:status --env=pipeline
+            ## - php bin/console cache:clear --env=pipeline --no-debug
+            # Enforcing clean database for pipeline db
+            - php bin/console doctrine:database:drop --force --env=pipeline
+            - php bin/console doctrine:database:create --env=pipeline
+            - php bin/console doctrine:schema:create --env=pipeline
+            # Enforcing migrations and fixtures for pipeline db
+            - php bin/console doctrine:migrations:migrate -n --env=pipeline
+            - php bin/console doctrine:fixtures:load -n --env=pipeline -vvv
+            # Prepare phpunit
+            - mkdir -p build/test-reports/phpunit/
+            # turn "fail on error" OFF
+            - set +e
+            # PHPUnit
+            - vendor/bin/phpunit -d memory_limit=1G -c phpunit.xml.pipeline --log-junit build/test-reports/phpunit/phpunit.xml --testdox-html build/test-reports/phpunit/phpunit.html
+            # PHPMetrics
+            - curl -L https://github.com/phpmetrics/PhpMetrics/releases/download/v2.4.1/phpmetrics.phar --output phpmetrics.phar
+            - curl -L https://raw.githubusercontent.com/phpmetrics/ComposerExtension/master/composer-extension.phar --output composer-extension.phar
+            - mkdir -p build/phpmetrics/
+            - php phpmetrics.phar --plugins=symfony-extension.phar,composer-extension.phar --report-html=build/phpmetrics/index.html ./
+            # PHPCheckstyle
+            #          - echo "PHPCS Checkstyle ..."
+            #          - mkdir -p build/phpcs/
+            #          - vendor/bin/phpcs --config-set installed_paths vendor/endouble/symfony3-custom-coding-standard
+            #          - vendor/bin/phpcs -d memory_limit=1G -p --report=checkstyle --standard=Symfony3Custom --report-file=build/phpcs/checkstyle.xml ./
+            #PHPMD
+            - mkdir -p build/phpmd/
+            - vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,naming,unusedcode --reportfile build/phpmd/index.html
+            # PHP SPEC
+            - vendor/bin/phpspec run
+            # pDepend
+            #          - mkdir -p build/pdepend/
+            #          - vendor/bin/pdepend --summary-xml=build/pdepend/summary.xml ./
+            # turn "fail on error" back on
+            - set -e
+            # Create and send a report into the downloads section of the repository
+            # We need to to change the special character / with --
+            - branch_name=$(echo $BITBUCKET_BRANCH | sed -e 's/\//--/')
+            # Zip everything in build/ and put it into named reports.zip
+            - zip -r "build-${branch_name}-reports.zip" build/
+            # Deliver to downloads section of mmwebapp repository.
+            # To enable this, you have to set the BB_AUTH_STRING environment variable for your bitbucket user!
+            - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"build-${branch_name}-reports.zip"
+          services:
+            - mysql
+
+# ----------------------------------------------------------------------------------------------------------
+# Definitions
+# ----------------------------------------------------------------------------------------------------------
+definitions:
+  # ----------------------------------------------------------------------------------------------------------
+  caches:
+    vendor: 'vendor/'
+    build:  'build/'
+#    npm: $HOME/.npm
+#    cypress: $HOME/.cache/Cypress
+  #### Should be a directory
+  #    phpmetrics: phpmetrics.phar
+  #    phpmetrics-composer-extension: composer-extension.phar
+  # ----------------------------------------------------------------------------------------------------------
+  services:
+    mysql:
+      image: mysql:5.7.24
+      environment:
+        MYSQL_HOST:                 '127.0.0.1'
+        MYSQL_DATABASE:             'mealmatch-pipeline'
+        MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+        MYSQL_USER:                 'db'
+        MYSQL_PASSWORD:             'MM123'

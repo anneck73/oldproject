@@ -1,0 +1,105 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+<form role="search" method="get" action="{{ path('search_do') }}">
+    <div class="mm-search-panel-content">
+        <div class="panel-group" id="search-accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading mm-panel-heading" role="tab" id="search-heading">
+                    <a role="button" data-toggle="collapse"
+                       data-parent="#search-accordion" href="#search-collapse"
+                       aria-expanded="false" aria-controls="search-collapse"
+                       style="display: block">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <span class="glyphicon glyphicon-search"></span> {{ 'adjust.search'|trans }}
+                        </button>
+                    </a>
+                </div>
+                <div id="search-collapse" class="panel-collapse collapse out" role="tabpanel"
+                     aria-labelledby="search-heading">
+                    <div class="panel-body mm-panel-body text-center">
+                        <div class="mm-search-wrap">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="mm-spacer"></div>
+                                    Es wurden {{ searchPanel.results }} Meals gefunden.
+                                    {% if searchPanel.location is not empty %}Gesucht wurde im Ort: {{ searchPanel.location }}{% endif %}
+                                    <p>mit einem Startzeitpunkt ab {{ searchPanel.modDatetime }}</p>
+                                    {% if searchPanel.categories is not empty %}<p>in der/den Kategorie(en):
+                                        {% for cat in searchPanel.categories %}
+                                            {{ cat|e }}
+                                        {% endfor %}
+                                        </p>{% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="control-label required" for="mmapibundle_meal_category">Wo</label>
+                                    <input value="{{ searchPanel.location }}"
+                                           name="searchLocation" type="text" class="form-control input"
+                                           placeholder="{{ 'search.submit'|trans({}, 'Mealmatch') }}">
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="space-30"></div>
+                                    <label class="control-label required" for="mmapibundle_meal_category">Wann</label>
+                                    <div class="form-group">
+                                        <div class="input-group date" id="mm-search-datetimepicker-mod">
+                                            <input value="{{ searchPanel.modDatetime }}"
+                                                   name="datetimeMod" type="text" class="form-control input"/>
+                                            <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                        {#
+                                        <div class="input-group date" id="mm-search-datetimepicker-max">
+                                            <input value="{{ searchPanel.maxDatetime }}"
+                                                    name="datetimeMax" type="text" class="form-control input"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        #}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label
+                                            class="control-label required"
+                                            for="mmapibundle_meal_category">Kategorie</label>
+                                    <p></p>
+                                    <input id="mm-search-cat"
+                                           data-provide="typeahead"
+                                           name="searchCategory"
+                                           type="text"
+                                           class="form-control input"
+                                           placeholder="Vegan">
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="space-30"></div>
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <span class="glyphicon glyphicon-send"></span> Aktualisieren
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //
+    <p>Results: {{ searchPanel.results }}</p>
+
+
+    {% if searchPanel.location is not empty %}
+    <p>Ort: {{ searchPanel.location }}</p>
+    {% endif %}
+
+    {% if searchPanel.datetime is not empty %}
+    <p>Startzeit: {{ searchPanel.datetime }}</p>
+    <p>Startzeit (mod): {{ searchPanel.modDatetime }}</p>
+    <p>Startzeit (max): {{ searchPanel.maxDatetime }}</p>
+    {% endif %}
+
+    {% if searchPanel.categories is not empty %}
+    <p>Kategorie(en): {{ searchPanel.categories[0] }}</p>
+    {% endif %}
+    //-->
+
+    </div>
+</form>{% endspaceless %}

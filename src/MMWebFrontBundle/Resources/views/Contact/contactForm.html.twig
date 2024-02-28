@@ -1,0 +1,16 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'contact.form.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% block main_content %}
+    {{ form_start(contact_form) }}
+    {{ form_widget(contact_form) }}
+    <div class="text-center">
+        <button class="btn btn-lg btn-success" type="submit">
+            <span class="glyphicon glyphicon-send"></span>
+            {{ 'contact.form.button.label'|trans }}
+        </button>
+    </div>
+    {{ form_end(contact_form) }}
+{% endblock %}

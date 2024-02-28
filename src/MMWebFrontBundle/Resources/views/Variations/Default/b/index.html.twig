@@ -1,0 +1,145 @@
+{% extends 'MMWebFrontBundle::twbs3-base.html.twig' %}
+{% import '@WEBUI/Widgets/mealmatch.macros.html.twig' as widget %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% block body %}
+
+    <div class="visible-xs" xmlns="http://www.w3.org/1999/html">
+        {{ include('MMWebFrontBundle:Partials:bigSlide-xs.partial.html.twig') }}
+        {{ include('MMWebFrontBundle:Default/index:body-xs.html.twig') }}
+    </div>
+    <div class="hidden-xs">
+
+        <div id="top-image">
+            <img class="img-responsive center-block"
+                 src="{{ asset('bundles/uipublic/images/slider/slider4_B-crop.jpg') }}"
+                 alt="Snacks"/>
+        </div>
+
+        <div id="mm-search-startpage-with-cards" class="container-fluid">
+            <div id="searchslogan">
+                <span class="search-meals-in-your-city"> {{ 'startpage.search.top.teaser'|trans }} </span>
+            </div>
+
+            <form role="search" method="get" action="{{ path('search_do') }}">
+                <div class="row mm-search-row-startpage">
+                    <div class="col-xs-12">
+
+                        <div class="row">
+
+                            <div class="flexbox fl-center">
+
+                                <div id="completeSearchRow">
+                                    <div class="flexbox fl-center">
+                                        <div>
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </div>
+
+                                        <div class="mm-search-input">
+                                            <input name="searchLocation" type="text" class="form-control input"
+                                                   placeholder="{{ 'search.submit'|trans }}">
+                                        </div>
+
+
+                                        <div id="mm-search-btn" class="button mm-button">
+                                            <button type="submit" class="btn btn-success btn-lg mm-search-row-btn">
+                                                {{ 'search.startPageWithCards'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+            {{ widget.mealcardsHorizontal(mealsInCityStartingToday, 'startpageWithCards.teaser.headline'|trans) }}
+    </div>
+
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+
+    {# Herz-Strich-Trennlinie #}
+    {{ widget.heartline }}
+
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+
+    {# Teaser Box - Slogan #}
+    <div id="mm-content-startpage-2" class="container-fluid">
+        <div class="col-lg-6 col-lg-offset-3 text-center">
+            <h1 class="font-weight-200">{{ 'startpage.info2.block1'|trans|nl2br }}</h1>
+        </div>
+    </div>
+
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+
+    {# Teaser Box - Restaurant Guest, Home Guest, Host Home #}
+    <div id="mm-content-startpage-3" class="container-fluid">
+        <div class="col-lg-12">
+            <div class="flexbox">
+                <div class="text-center">
+                    <span class="mm-circle-icon mm-icon-host-circle"></span>
+                    <p>{{ 'startpage.info2.block2'|trans|nl2br }}</p>
+                </div>
+                <div class="text-center">
+                    <span class="mm-circle-icon mm-icon-guest-circle"></span>
+                    <p>{{ 'startpage.info2.block3'|trans|nl2br }}</p>
+                </div>
+                <div class="text-center">
+                    <span class="mm-circle-icon mm-icon-create-meal-circle"></span>
+                    <p>{{ 'startpage.info2.block4'|trans|nl2br }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    {{ widget.heartline }}
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+
+    {# Teaser Box - Register now#}
+    <div id="mm-content-startpage" class="container-fluid mm-content">
+        <div class="col-lg-12">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <h1 class="font-weight-200"><a href="{{ path('fos_user_registration_register') }}">
+                        {{ 'startpage.teaser.headline'|trans }}
+                    </a></h1>
+                <div class="text-justify">
+                    <p>{{ 'startpage.info.block1'|trans }}</p>
+                    <p>{{ 'startpage.info.block2'|trans }}</p>
+                </div>
+                {% include('MMWebFrontBundle:Partials:mm-voices-slide.partial.html.twig') %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}{{ include('@WEBUI/footer.html.twig') }}{% endblock %}
+
+
+{% block GA_inner %}
+    {{ parent() }}
+    ga('variationsTracker.set', 'variation', 'b');
+
+    {% if is_granted('ROLE_USER') %}
+        ga('variationsTracker.set', 'userid', '{{ app.user.id }}');
+    {% endif %}
+
+    ga('variationsTracker.send');
+{% endblock GA_inner %}

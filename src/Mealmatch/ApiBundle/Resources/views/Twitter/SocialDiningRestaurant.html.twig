@@ -1,0 +1,6 @@
+{% set currencySymbol = '€' %}
+{% if currency == 'USD' %}
+    {% set currencySymbol = '$' %}
+{% endif %}
+Mealmatch Service für #{{ city }} #{{ subLocality }}. Finde dein Mealmatch z.B. am {{ startDate }} am Tisch #{{ tableTopic|replace({' ':''})}}.
+Angeboten von "{{ restaurantName }}", ab {{ minOffer|number_format(2) }} {{ currencySymbol }}. https://mealmatch.de/p/restaurant-meal/{{ mealID }} #socialdining #social #dining

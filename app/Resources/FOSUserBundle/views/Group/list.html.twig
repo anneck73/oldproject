@@ -1,0 +1,12 @@
+{% extends "@WEBUI/Layouts/simple_ui_a.html.twig" %}
+
+{% block main_content %}
+    <div class="mm-layout-header-title">Community Groups</div>
+    <div class="fos_user_group_list">
+        <ul>
+            {% for group in groups %}
+                <li><a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}">{{ group.getName() }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

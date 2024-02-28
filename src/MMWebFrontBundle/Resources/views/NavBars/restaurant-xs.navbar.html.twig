@@ -1,0 +1,47 @@
+{% set currentRoute = app.request.get('_route') %}
+{% trans_default_domain 'Mealmatch' %}
+{{ include('@WEBUI/Partials/public-logo-menu-modal.partial.html.twig') }}
+{{ include('@WEBUI/Partials/user-menu-modal.partial.html.twig') }}
+{% spaceless %}
+<!-- /restaurant-xs navbar / -->
+<nav class="navbar navbar-fixed-top mm-navbar-xs-public" role="navigation">
+    <div class="navbar-header">
+        <div class="text-center">
+            <a class="navbar-brand" href="#"
+               data-toggle="modal" data-target="#mm-public-logo-menu-modal">
+                {% if currentRoute != 'search_do' %}
+                    <img src="{{ asset('bundles/uipublic/images/mm/mealmatch-logo.png') }}" alt="Mealmatch"
+                         class="pull-left mm-navbar-logo">
+                {% else %}
+                    <img src="{{ asset('bundles/uipublic/images/mm/Logo_mm_48px_bild.jpg') }}" alt="Mealmatch" class="pull-left mm-navbar-logo">
+                {% endif %}
+            </a>
+            {% if currentRoute == 'search_do' %}
+                <button id="navbarSearchBtn" data-toggle="modal" data-target="#mm-public-search-config-modal" class="btn btn-success">
+                    Suche anpassen <span class="glyphicon glyphicon-search"></span>
+                </button>
+                {% else %}
+            {% endif %}
+
+            <div class="pull-right mm-user-menu-xs-navbar">
+                <a href="#" class="" data-toggle="modal" data-target="#mm-user-menu-modal" role="button">
+                    {% if app.user.profile.imageName == "image/udefault.png" %}
+                        <img class="img-responsive img-circle" height="48px" width="48px"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+                    {% else %}
+                        <img class="img-responsive img-circle" height="48px" width="48px"
+                             src="{{ asset(app.user.profile.imageName, 's3img') }}" alt="Profileimage" />
+                    {% endif %}
+                </a>
+            </div>
+            {% if currentRoute != 'home' %}
+                {% if currentRoute != 'search_do' %}
+                    <div class="mm-search-form-xs pull-left">
+                        {{ include('@WEBUI/Partials/searchNavbar.partial.html.twig') }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endspaceless %}

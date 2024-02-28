@@ -1,0 +1,258 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # BASE
+\*------------------------------------*/
+
+#mm-public-profile {
+
+  .mm-tab-content {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .mm-user-image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+ul.mm-nav-public-profile {
+
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    float: left;
+    width: 9rem; // rp test
+    height: 5rem; // rp test
+    margin-bottom: 2rem;
+    font-size: $fs-xs;
+    border-radius: 0 0 2px 2px;
+
+    position: relative;
+
+    a {
+      height: 100%;
+      @include flexbox();
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+
+      &:hover, &:active, &:focus, &:visited {
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: $green;
+        color: $white;
+
+        width: 182px; // beim Hover sollen die Linien überdeckt werden
+        position: absolute;
+        left: -1px;
+
+        span, span:before {
+          color: $white;
+        }
+      }
+
+      span {
+        margin-bottom: 10px;
+        font-size: $fs-m;
+      }
+
+    }
+
+    &.active {
+      position: relative;
+      background: $light-white;
+      border: 1px solid rgba($green, 0.5);
+      border-top: 0;
+
+      &:after, &:before {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      &:after {
+        border-color: rgba(244, 244, 244, 0);
+        border-top-color: $light-white;
+        border-width: 20px;
+        margin-left: -20px;
+      }
+      &:before {
+        border-color: rgba(134, 188, 36, 0);
+        border-top-color: rgba($green, 0.8);
+        border-width: 21px;
+        margin-left: -21px;
+      }
+
+      &:hover:after {
+        border-top-color: $green;
+      }
+
+    }
+
+    &.active:nth-child(n) + li:not(:last-child):after,
+    &:not(.active):nth-child(2):before {
+      content: '';
+      height: 40%;
+      width: 1px;
+      position: absolute;
+      top: 30%;
+      background-color: $green;
+    }
+
+    &.active:nth-child(n) + li:not(:last-child):after { // aktuelles Kind aktiv -> nächstes Kind (jedoch nicht das letzte): Linie rechts
+      right: 0; // 1. Element aktiv -> 2. Element: Linie rechts -> 3. Element: nichts (da letztes)
+    }
+
+    &:not(.active):nth-child(2):before { // das 2. Element: Linie links, jedoch nur wenn nicht aktiv
+      left: 0;
+
+    }
+
+    &.active:first-child + li:before { // Ist das erste Element atkiv, soll das 2. Element keine Linie (links) erhalten
+      height: 0;
+    }
+
+  }
+
+}
+
+.mm-public-profile-img-slide,
+.mm-public-profile-maps {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.mm-public-profile-img-slide {
+  height: 250px;
+
+  img {
+    height: 250px;
+    width: auto;
+    object-fit: cover;
+  }
+
+}
+
+.mm-public-profile-maps {
+  text-align: center;
+
+  img {
+    height: 400px;
+    width: 100%;
+  }
+}
+
+.restaurant-carousel-public .carousel-control {
+  width: 4%;
+  background-image: none;
+}
+.restaurant-carousel-public .carousel-control.left {
+  margin-left: 15px;
+}
+.restaurant-carousel-public .carousel-control.right {
+  margin-right: 15px;
+}
+.restaurant-carousel-public .cloneditem-1,
+.restaurant-carousel-public .cloneditem-2,
+.restaurant-carousel-public .cloneditem-3,
+.restaurant-carousel-public .cloneditem-4,
+.restaurant-carousel-public .cloneditem-5 {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .restaurant-carousel-public .carousel-inner > .active.left,
+  .restaurant-carousel-public .carousel-inner > .prev {
+    left: -33.333%;
+  }
+  .restaurant-carousel-public .carousel-inner > .active.right,
+  .restaurant-carousel-public .carousel-inner > .next {
+    left: 33.333%;
+  }
+  .restaurant-carousel-public .carousel-inner > .left,
+  .restaurant-carousel-public .carousel-inner > .prev.right,
+  .restaurant-carousel-public .carousel-inner > .active {
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner .cloneditem-1,
+  .restaurant-carousel-public .carousel-inner .cloneditem-2 {
+    display: block;
+  }
+}
+@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+  .restaurant-carousel-public .carousel-inner > .item.active.right,
+  .restaurant-carousel-public .carousel-inner > .item.next {
+    -webkit-transform: translate3d(33.333%, 0, 0);
+    transform: translate3d(33.333%, 0, 0);
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner > .item.active.left,
+  .restaurant-carousel-public .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-33.333%, 0, 0);
+    transform: translate3d(-33.333%, 0, 0);
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner > .item.left,
+  .restaurant-carousel-public .carousel-inner > .item.prev.right,
+  .restaurant-carousel-public .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+@media all and (min-width: 992px) {
+  .restaurant-carousel-public .carousel-inner > .active.left,
+  .restaurant-carousel-public .carousel-inner > .prev {
+    left: -16.666%;
+  }
+  .restaurant-carousel-public .carousel-inner > .active.right,
+  .restaurant-carousel-public .carousel-inner > .next {
+    left: 16.666%;
+  }
+  .restaurant-carousel-public .carousel-inner > .left,
+  .restaurant-carousel-public .carousel-inner > .prev.right,
+  .restaurant-carousel-public .carousel-inner > .active {
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner .cloneditem-3,
+  .restaurant-carousel-public .carousel-inner .cloneditem-4,
+  .restaurant-carousel-public .carousel-inner .cloneditem-5 {
+    display: block;
+  }
+}
+@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+  .restaurant-carousel-public .carousel-inner > .item.active.right,
+  .restaurant-carousel-public .carousel-inner > .item.next {
+    -webkit-transform: translate3d(16.666%, 0, 0);
+    transform: translate3d(16.666%, 0, 0);
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner > .item.active.left,
+  .restaurant-carousel-public .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-16.666%, 0, 0);
+    transform: translate3d(-16.666%, 0, 0);
+    left: 0;
+  }
+  .restaurant-carousel-public .carousel-inner > .item.left,
+  .restaurant-carousel-public .carousel-inner > .item.prev.right,
+  .restaurant-carousel-public .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}

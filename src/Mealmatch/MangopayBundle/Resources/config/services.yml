@@ -1,0 +1,142 @@
+services:
+  # the namespace prefix for classes (must end in \)
+  Mealmatch\MangopayBundle\Services\:
+    autowire: true
+    autoconfigure: true
+    # create services for all the classes found in this directory...
+    resource: '../../Services'
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mangopay }
+
+  PublicMangopayService:
+    class: 'Mealmatch\MangopayBundle\Services\PublicMangopayService'
+    public: true
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mangopay }
+    arguments:
+      $logger: '@logger'
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $apiService: "@MangopayApiService"
+    calls:
+      - [setPayInService, ["@MangopayPayInService"]]
+      - [setPayOutService, ["@MangopayPayOutService"]]
+      - [setUserService, ["@MangopayUserService"]]
+      - [setBankAccountService, ["@MangopayBankAccountService"]]
+      - [setWalletService, ["@MangopayWalletService"]]
+
+  MangopayConfigService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayConfigService'
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mangopay }
+    arguments:
+      $logger: "@logger"
+      $container: "@service_container"
+
+  MangopayApiService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayApiService'
+    public: true
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mangopay }
+    arguments:
+      $logger: '@logger'
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $configService: "@MangopayConfigService"
+      $session: "@session"
+    calls:
+      - [setContainer, ["@service_container"]]
+
+  MangopayBankAccountService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayBankAccountService'
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mangopay }
+
+    arguments:
+      $mangopayApiService: "@MangopayApiService"
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+
+  PaymentHookService:
+    class: 'Mealmatch\MangopayBundle\Services\PaymentHookService'
+    arguments:
+      # $mangopayApiService: "@MangopayApiService"
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+    calls:
+      - [setWorkflow, ["@workflow.meal_ticket"]]
+      - [setTokenStorage, ["@security.token_storage"]]
+      - [setLoginManager, ["@fos_user.security.login_manager"]]
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+
+  MangopayStorage:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayStorage'
+    arguments:
+      $session: '@session'
+      $logger: '@logger'
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+      - { name: 'controller.service_arguments'}
+
+  MealticketTransactionService:
+    class: 'Mealmatch\MangopayBundle\Services\MealticketTransactionService'
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+      - { name: 'controller.service_arguments'}
+
+  MangopayPayOutService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayPayOutService'
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $mangopayApiService: "@MangopayApiService"
+      $restaurantService: "@api.restaurant.service"
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+      - { name: 'controller.service_arguments'}
+
+  MangopayPayInService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayPayInService'
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $mangopayApiService: "@MangopayApiService"
+      $mangopayWalletService: "@MangopayWalletService"
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+      - { name: 'controller.service_arguments'}
+
+  MangopayUserService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayUserService'
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $mangopayApiService: "@MangopayApiService"
+    tags:
+      - { name: monolog.logger, channel: mangopay }
+
+
+  MangopayWalletService:
+    class: 'Mealmatch\MangopayBundle\Services\MangopayWalletService'
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+      $mangopayApiService: "@MangopayApiService"
+    tags:
+      - { name: monolog.logger, channel: mangopay }

@@ -1,0 +1,199 @@
+# #########################################
+# Assetic
+# #########################################
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+        jsqueeze: ~
+
+    bundles: ['MMWebFrontBundle']
+    assets:
+        boostrap_css:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap.css'
+            output: 'css/bootstrap.css'
+        boostrap_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap.css.map'
+            output: 'css/bootstrap.css.map'
+        boostrap_min_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap.min.css.map'
+            output: 'css/bootstrap.min.css.map'
+        boostrap_theme_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap-theme.css.map'
+            output: 'css/bootstrap-theme.css.map'
+        boostrap_theme_min_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap-theme.min.css.map'
+            output: 'css/bootstrap-theme.min.css.map'
+
+        fa_webfont_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/fontawesome-webfont.woff2'
+            output: 'fonts/fontawesome-webfont.woff2'
+        fa_webfont_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/fontawesome-webfont.woff'
+            output: 'fonts/fontawesome-webfont.woff'
+        fa_webfont_ttf:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/fontawesome-webfont.ttf'
+            output: 'fonts/fontawesome-webfont.ttf'
+        fa_webfont_svg:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/fontawesome-webfont.svg'
+            output: 'fonts/fontawesome-webfont.svg'
+        fa_webfont_eot:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/fontawesome-webfont.eot'
+            output: 'fonts/fontawesome-webfont.eot'
+        fa_otf:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/FontAwesome.otf'
+            output: 'fonts/FontAwesome.otf'
+
+
+        montserrat_v10_latin_100_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-100.woff'
+            output: 'fonts/montserrat-v10-latin-100.woff' 
+        montserrat_v10_latin_100_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-100.woff2'
+            output: 'fonts/montserrat-v10-latin-100.woff2' 
+        montserrat_v10_latin_100_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-100italic.woff'
+            output: 'fonts/montserrat-v10-latin-100italic.woff' 
+        montserrat_v10_latin_100_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-100italic.woff2'
+            output: 'fonts/montserrat-v10-latin-100italic.woff2' 
+
+        montserrat_v10_latin_200_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-200.woff'
+            output: 'fonts/montserrat-v10-latin-200.woff' 
+        montserrat_v10_latin_200_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-200.woff2'
+            output: 'fonts/montserrat-v10-latin-200.woff2' 
+        montserrat_v10_latin_200_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-200italic.woff'
+            output: 'fonts/montserrat-v10-latin-200italic.woff' 
+        montserrat_v10_latin_200_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-200italic.woff2'
+            output: 'fonts/montserrat-v10-latin-200italic.woff2' 
+
+        montserrat_v10_latin_300_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-300.woff'
+            output: 'fonts/montserrat-v10-latin-300.woff' 
+        montserrat_v10_latin_300_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-300.woff2'
+            output: 'fonts/montserrat-v10-latin-300.woff2' 
+        montserrat_v10_latin_300_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-300italic.woff'
+            output: 'fonts/montserrat-v10-latin-300italic.woff' 
+        montserrat_v10_latin_300_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-300italic.woff2'
+            output: 'fonts/montserrat-v10-latin-300italic.woff2' 
+
+        montserrat_v10_latin_500_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-500.woff'
+            output: 'fonts/montserrat-v10-latin-500.woff' 
+        montserrat_v10_latin_500_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-500.woff2'
+            output: 'fonts/montserrat-v10-latin-500.woff2' 
+        montserrat_v10_latin_500_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-500italic.woff'
+            output: 'fonts/montserrat-v10-latin-500italic.woff' 
+        montserrat_v10_latin_500_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-500italic.woff2'
+            output: 'fonts/montserrat-v10-latin-500italic.woff2' 
+
+        montserrat_v10_latin_600_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-600.woff'
+            output: 'fonts/montserrat-v10-latin-600.woff' 
+        montserrat_v10_latin_600_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-600.woff2'
+            output: 'fonts/montserrat-v10-latin-600.woff2' 
+        montserrat_v10_latin_600_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-600italic.woff'
+            output: 'fonts/montserrat-v10-latin-600italic.woff' 
+        montserrat_v10_latin_600_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-600italic.woff2'
+            output: 'fonts/montserrat-v10-latin-600italic.woff2' 
+
+        montserrat_v10_latin_700_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-700.woff'
+            output: 'fonts/montserrat-v10-latin-700.woff' 
+        montserrat_v10_latin_700_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-700.woff2'
+            output: 'fonts/montserrat-v10-latin-700.woff2' 
+        montserrat_v10_latin_700_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-700italic.woff'
+            output: 'fonts/montserrat-v10-latin-700italic.woff' 
+        montserrat_v10_latin_700_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-700italic.woff2'
+            output: 'fonts/montserrat-v10-latin-700italic.woff2' 
+
+        montserrat_v10_latin_800_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-800.woff'
+            output: 'fonts/montserrat-v10-latin-800.woff' 
+        montserrat_v10_latin_800_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-800.woff2'
+            output: 'fonts/montserrat-v10-latin-800.woff2' 
+        montserrat_v10_latin_800_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-800italic.woff'
+            output: 'fonts/montserrat-v10-latin-800italic.woff' 
+        montserrat_v10_latin_800_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-800italic.woff2'
+            output: 'fonts/montserrat-v10-latin-800italic.woff2' 
+
+        montserrat_v10_latin_900_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-900.woff'
+            output: 'fonts/montserrat-v10-latin-900.woff' 
+        montserrat_v10_latin_900_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-900.woff2'
+            output: 'fonts/montserrat-v10-latin-900.woff2' 
+        montserrat_v10_latin_900_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-900italic.woff'
+            output: 'fonts/montserrat-v10-latin-900italic.woff' 
+        montserrat_v10_latin_900_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-900italic.woff2'
+            output: 'fonts/montserrat-v10-latin-900italic.woff2' 
+        
+        montserrat_v10_latin_italic_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-italic.woff'
+            output: 'fonts/montserrat-v10-latin-italic.woff'
+        montserrat_v10_latin_italic_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-italic.woff2'
+            output: 'fonts/montserrat-v10-latin-italic.woff2'
+
+        montserrat_v10_latin_regular_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-regular.woff'
+            output: 'fonts/montserrat-v10-latin-regular.woff'
+        montserrat_v10_latin_regular_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/montserrat-v10-latin-regular.woff2'
+            output: 'fonts/montserrat-v10-latin-regular.woff2'
+
+        glyphicons_eot:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.eot'
+            output: 'fonts/glyphicons-halflings-regular.eot'
+        glyphicons_svg:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.svg'
+            output: 'fonts/glyphicons-halflings-regular.svg'
+        glyphicons_ttf:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+            output: 'fonts/glyphicons-halflings-regular.ttf'
+        glyphicons_woff:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff'
+            output: 'fonts/glyphicons-halflings-regular.woff'
+        glyphicons_woff2:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2'
+            output: 'fonts/glyphicons-halflings-regular.woff2'
+        
+        simple_line_icons_eot:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/Simple-Line-Icons.eot'
+            output: 'fonts/Simple-Line-Icons.eot'
+        simple_line_icons_svg:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/Simple-Line-Icons.svg'
+            output: 'fonts/Simple-Line-Icons.svg'
+        simple_line_icons_ttf:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/Simple-Line-Icons.ttf'
+            output: 'fonts/Simple-Line-Icons.ttf'
+        simple_line_icons_woff:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/Simple-Line-Icons.woff'
+            output: 'fonts/Simple-Line-Icons.woff'
+        simple_line_icons_woff2:
+            inputs: '@MMWebFrontBundle/Resources/public/fonts/Simple-Line-Icons.woff2'
+            output: 'fonts/Simple-Line-Icons.woff2'

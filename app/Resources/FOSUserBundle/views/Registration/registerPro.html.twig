@@ -1,0 +1,9 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.pro.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.pro.title'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'registration.pro.subtitle'|trans }}{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock %}

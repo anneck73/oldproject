@@ -1,0 +1,37 @@
+{% extends "@WEBUI/twbs4-base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{# Layout
+The default layout only shows current version
+#}
+{% block body %}
+    <!--// main_header//-->
+    <div class="header-container findmeal-banner">
+        <div class="search-sec">
+            <h3>{% if viewData.title is defined %}{{ viewData.title|raw }}{% endif %}</h3>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="container container-cust">
+            <div class="row">
+                <div class="mm-default-main">
+                    {% block default_main %}
+                        <!--// twbs4-base/default_main //-->
+                        {% if viewData.text is defined %}{{ viewData.text|raw }}{% endif %}
+                        <ul>
+                            <li>Version: {{ viewData.mealmatch.version }}</li>
+                            <li>Route: {{ viewData.currentRoute }}</li>
+                        </ul>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

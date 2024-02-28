@@ -1,0 +1,12 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# SET VARIABLES #}
+{% set viewData = {'title': 'account.edit'|trans} %}
+{% set main_header_subtitle %}{{ 'userprofile.manager.subtitle'|trans }}{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-about-circle"></span>{% endset %}
+{# Overwrite BLOCKS from layout/main #}
+{% block title %}Mealmatch | {{ 'account.edit'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block staticPages %}
+    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock %}

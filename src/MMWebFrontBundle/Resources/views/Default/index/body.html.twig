@@ -1,0 +1,21 @@
+{% trans_default_domain 'Mealmatch' %}
+<!--// Body LG //-->
+<div id="mm-search-startpage" class="container-fluid mm-content">
+    {{ include('MMWebFrontBundle:Partials:search.partial.html.twig') }}
+</div>
+
+<div id="mm-content-startpage" class="container-fluid mm-content">
+    <div class="col-lg-12">
+        <div class="col-lg-6 col-lg-offset-3 text-center">
+            <h1 class="font-weight-200"><a href="{{ path('fos_user_registration_register') }}">
+                    {{ 'startpage.teaser.headline'|trans }}
+                </a></h1>
+            <div class="text-justify">
+                <p>{{ 'startpage.info.block1'|trans }}</p>
+                <p>{{ 'startpage.info.block2'|trans }}</p>
+            </div>
+            {% include('MMWebFrontBundle:Partials:mm-voices-slide.partial.html.twig') %}
+        </div>
+    </div>
+</div>
+<!--// END: Body LG //-->

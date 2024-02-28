@@ -1,0 +1,9 @@
+# alle user
+SELECT * FROM mm_user
+  LEFT JOIN m_m_user_profile
+    ON m_m_user_profile.id = mm_user.profile_id;
+
+# User mit profil
+SELECT u.username, u.email, u.enabled, p.gender, p.firstName, p.lastName, p.city, p.areaCode FROM mm_user as u
+  LEFT JOIN m_m_user_profile as p
+    ON p.id = u.profile_id;

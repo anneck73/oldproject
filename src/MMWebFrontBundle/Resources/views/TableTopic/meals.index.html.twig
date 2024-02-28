@@ -1,0 +1,45 @@
+{% extends "@MMWebFront/Layout/empty.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% block page_js %}
+    <script type="text/javascript">
+        $('.meal-grid').masonry({
+            itemSelector: '.meal-grid-item',
+            percentPosition: true
+        })
+    </script>
+{% endblock %}
+{% block empty_content %}
+    <style type="text/css">
+        .meal-grid-item {
+            float: left;
+            width: 360px;
+            max-height: 400px;
+            box-sizing: padding-box;
+            overflow: hidden;
+            margin: 1rem;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+        .beta-badge {
+            margin-top: -15px;
+        }
+    </style>
+    <div class="container-fluid">
+        <p></p>
+        <div class="pull-right"><span class="label label-danger">Beta</span></div>
+        <h2 class="pull-left no-margin">Meals TableTopic {{ tableTopic }}</h2>
+        <div class="meal-grid pull-left">
+            {% for meal in tableTopicMeals %}
+                {% if meal.mealType == 'ProMeal' %}
+                    {% set proMeal = meal %}
+                    <div class="meal-grid-item">{{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}</div>
+                {% else %}
+                    {% set homeMeal = meal %}
+                    <div class="meal-grid-item">{{ include('@WEBUI/HomeMeal/Card/homemeal.html5.twig') }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

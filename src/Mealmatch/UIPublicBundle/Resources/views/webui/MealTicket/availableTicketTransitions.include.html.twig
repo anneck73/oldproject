@@ -1,0 +1,43 @@
+{#
+    to be included ... shows all available actions for current BaseMealTicket.
+#}
+{% trans_default_domain 'Mealmatch' %}
+{% if workflow_can(ticket, 'pay_ticket') and ticket.isPayable %}
+    <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'pay_ticket' }) }}">
+        <button class="btn-lg btn-success btn-block">
+            {{ ('transition.pay_ticket')|trans }}
+        </button>
+    </a>
+{% endif %}
+{% if workflow_can(ticket, 'prepare_ticket') and not ticket.isPayable %}
+    <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'prepare_ticket' }) }}">
+        <button class="btn-lg btn-success btn-block">
+            {{ ('transition.pay_prepare')|trans }}
+        </button>
+    </a>
+{% endif %}
+{% if workflow_can(ticket, 'finish_prepare_ticket') and ticket.isPayable %}
+    <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'finish_prepare_ticket' }) }}">
+        <button class="btn-lg btn-success btn-block">
+            {{ ('transition.finish_pay_prepare')|trans }}
+        </button>
+    </a>
+{% endif %}
+{% if workflow_can(ticket, 'cancel_ticket') %}
+    <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'cancle_ticket' }) }}">
+        <button class="btn-lg btn-success btn-block">
+            {{ ('transition.cancel_ticket')|trans }}
+        </button>
+    </a>
+{% endif %}
+{% if workflow_can(ticket, 'payment_retry') %}
+    <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'payment_retry' }) }}">
+        <button class="btn-lg btn-success btn-block">
+            {{ ('transition.payment_retry')|trans }}
+        </button>
+    </a>
+{% endif %}
+<!--//
+<div>TICKET STATUS: {{ ticket.status }}</div>
+<div>TICKET payable: {% if ticket.isPayable %}YES{% else %}NO{% endif %}</div>
+//-->

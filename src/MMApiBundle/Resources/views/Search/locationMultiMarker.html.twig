@@ -1,0 +1,5 @@
+{% trans_default_domain 'Mealmatch' %}
+<div class="text-center">
+{#<div><h4>{{ loc }}</h4></div>#}
+<div><a href="{{ path('meal_by_loc_address', {'rLocAdd': loc}) }}">{{ locCount }} Meals an einem Ort</a></div>
+</div>

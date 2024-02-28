@@ -1,0 +1,102 @@
+# Mealmatch WebApp 0.2.x
+# WorkflowBundle specific service for the Mealmatch WebApp
+
+services:
+    # @todo: impement workflow registry with this service, maybe rename?
+    mm.workflow.basemeal.service:
+        class: Mealmatch\WorkflowBundle\Services\MealWorkflowService
+        arguments:
+            - '@logger'
+            - '@doctrine.orm.default_entity_manager'
+            - '@translator.default'
+        tags:
+            - { name: monolog.logger, channel: mealmatch }
+        calls:
+            - [addWorkflowService, ['@workflow.base_meal']]
+
+    # Guarding base_meal Workflow create_meals transition.
+    mm.workflow.basemeal.guard:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\MealCreateGuard
+        arguments: ["@session.flash_bag"]
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.base_meal.guard.create_meals }
+          - { name: monolog.logger, channel: mealmatch }
+
+    # EventSubscriber for the create_all transition
+    mm.workflow.basemeal.create_all:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\BaseMealCreateAllTransition
+        arguments:
+              - "@logger"
+              - "@doctrine.orm.entity_manager"
+              - "@api.meal.service"
+              - "@fos_message.composer"
+              - "@fos_message.sender"
+              - "@security.token_storage"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.enter }
+          - { name: monolog.logger, channel: mealmatch }
+
+    # EventSubscriber for all base_meal workflow.base_meal.entered.[PLACES]
+    mm.workflow.basemeal.entered_places:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\BaseMealEnteredPlaces
+        arguments:
+            - "@logger"
+            - "@doctrine.orm.entity_manager"
+            - "@api.meal.service"
+            - "@fos_message.composer"
+            - "@fos_message.sender"
+            - "@security.token_storage"
+            - "@templating"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.base_meal.entered }
+          - { name: monolog.logger, channel: mealmatch }
+
+    # EventSubscriber for the join_meal transition
+    #@todo: JoinRequest workflow should be triggered here ...
+    mm.workflow.basemeal.join_meal:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\BaseMealJoinMealTransition
+        arguments:
+              - "@logger"
+              - "@doctrine.orm.entity_manager"
+              - "@api.meal.service"
+              - "@fos_message.composer"
+              - "@fos_message.sender"
+              - "@security.token_storage"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.base_meal.transition.join_meal }
+          - { name: monolog.logger, channel: mealmatch }
+
+    # EventSubscriber for the BaseMealTicket places
+    mm.workflow.mealticket.entered_places:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\MealTicketPlaces
+        arguments:
+              - "@logger"
+              - "@doctrine.orm.entity_manager"
+              - "@api.meal_ticket.service"
+              - "@fos_message.composer"
+              - "@fos_message.sender"
+              - "@security.token_storage"
+              - "@templating"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.meal_ticket.entered }
+          - { name: monolog.logger, channel: mealmatch }
+
+    # EventSubscriber for the BaseMealTicket transitions
+    mm.workflow.mealticket.transitions:
+        class: Mealmatch\WorkflowBundle\Event\Subscriber\MealTicketActions
+        arguments:
+          $logger: "@logger"
+          $entityManager: "@doctrine.orm.entity_manager"
+          $mealTicketService: "@api.meal_ticket.service"
+          $mealticketTransactionService: "@MealticketTransactionService"
+          $mangopayApiService: "@MangopayApiService"
+          $mangopayService: "@PublicMangopayService"
+          $couponService: "@PublicCouponService"
+          $composer: "@fos_message.composer"
+          $sender: "@fos_message.sender"
+          $storage: "@security.token_storage"
+          $twigEngine: "@templating.engine.twig"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.meal_ticket.transition }
+          - { name: monolog.logger, channel: mealmatch }
+

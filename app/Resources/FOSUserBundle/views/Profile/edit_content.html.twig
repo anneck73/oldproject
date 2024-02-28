@@ -1,0 +1,12 @@
+{% trans_default_domain 'Mealmatch' %}
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+{{ form_errors(form) }}
+{{ form_row(form.username, {'attr': { 'class': 'tbox' }}) }}
+{{ form_row(form.email, {'attr': { 'class': 'tbox' }}) }}
+{{ form_row(form.current_password, {'attr': { 'class': 'tbox' }}) }}
+
+<p class="pull-right new-user"><a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.passwordreset.txt'|trans }}</a></p>
+<div class="button-div text-center">
+    <input type="submit" class="main-btn" value="{{ 'account.edit.submit'|trans }}" />
+</div>
+{{ form_end(form) }}

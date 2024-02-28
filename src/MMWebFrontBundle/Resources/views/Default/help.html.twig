@@ -1,0 +1,54 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'help.title'|trans }}{% endblock %}
+{% set currentTitle = 'help.title'|trans %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-help-circle"></span>{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}{{ 'help.subtitle'|trans }}{% endset %}
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+{% block main_content %}
+    <div>
+        <h2>{{ 'help.paragraph1.head'|trans }}</h2>
+        <h3>{{ 'help.paragraph1.title1'|trans }}</h3>
+        <p>{{ 'help.paragraph1.text1'|trans }}</p>
+
+        <h3>{{ 'help.paragraph1.title2'|trans }}</h3>
+        <p>{{ 'help.paragraph1.text2'|trans }}</p>
+
+        <h3>{{ 'help.paragraph1.title3'|trans }}</h3>
+        <p>{{ 'help.paragraph1.text3'|trans }}</p>
+{#
+        <h3>{{ 'help.paragraph1.title4'|trans }}</h3>
+        <p>{{ 'help.paragraph1.text4'|trans }}</p>
+
+        <h3>{{ 'help.paragraph1.title5'|trans }}</h3>
+        <p>{{ 'help.paragraph1.text5'|trans }}</p>
+#}
+        <h2>{{ 'help.paragraph2.head'|trans }}</h2>
+        <h3>{{ 'help.paragraph2.title1'|trans }}</h3>
+        <p>{{ 'help.paragraph2.text1'|trans }}</p>
+
+        <h3>{{ 'help.paragraph2.title2'|trans }}</h3>
+        <p>{{ 'help.paragraph2.text2'|trans }}</p>
+
+        <h3>{{ 'help.paragraph2.title3'|trans }}</h3>
+        <p>{{ 'help.paragraph2.text3'|trans }}</p>
+
+        <h2>{{ 'help.paragraph3.head'|trans }}</h2>
+        <h3>{{ 'help.paragraph3.title1'|trans }}</h3>
+        <p>{{ 'help.paragraph3.text1'|trans }}</p>
+
+        <h2>{{ 'help.paragraph4.head'|trans }}</h2>
+        <h3>{{ 'help.paragraph4.title1'|trans }}</h3>
+        <p>{{ 'help.paragraph4.text1'|trans }}</p>
+
+        <h3>{{ 'help.paragraph4.title2'|trans }}</h3>
+        <p>{{ 'help.paragraph4.text2'|trans }}</p>
+
+        <h2>{{ 'help.paragraph_security.head'|trans }}</h2>
+        <h3>{{ 'help.paragraph_security.title1'|trans }}</h3>
+        <p>{{ 'help.paragraph_security.text1'|trans |raw }}</p>
+    </div>
+{% endblock %}

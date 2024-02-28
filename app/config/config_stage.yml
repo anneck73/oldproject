@@ -1,0 +1,27 @@
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_stage.php }
+
+doctrine:
+    orm:
+        metadata_cache_driver: apcu
+        result_cache_driver: apcu
+        query_cache_driver: apcu
+
+framework:
+        session:
+            # set handler_id to null to use default session handler from php.ini (memcached)
+            handler_id: ~
+
+monolog:
+    channels: [mealmatch]
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: debug
+            handler:      nested
+        nested:
+            type:  error_log
+            level: debug
+        console:
+            type:  console

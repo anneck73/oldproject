@@ -1,0 +1,62 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+
+<form role="search" method="get" action="{{ path('search_do') }}">
+    <div class="row mm-search-row">
+        <div class="col-xs-12">
+
+            <div class="row">
+
+                <div class="flexbox fl-center">
+
+                    <div class="mm-search-input">
+                        <input name="searchLocation" type="text" class="form-control input" placeholder="{{ 'search.submit'|trans }}">
+                    </div>
+
+                    <div class="mm-radio-btns">
+                        <ul>
+                          <li id="mm-toggle-search-home">
+                            <input type="radio" id="mealTypeHome" name="mealType" value="home">
+                            <label for="h-option">{{ 'search.home.label'|trans }}</label>
+
+                            <div class="check"></div>
+                          </li>
+
+                          <li id="mm-toggle-search-pro">
+                            <input type="radio" id="mealTypePro" name="mealType" value="pro">
+                            <label for="p-option">{{ 'search.pro.label'|trans }}</label>
+
+                            <div class="check"><div class="inside"></div></div>
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div id="mm-search-btn" class="button mm-button">
+                        <button type="submit" class="btn btn-success btn-lg mm-search-row-btn">
+                            <span class="glyphicon glyphicon-search"></span> {{ 'search.start'|trans }}
+                        </button>
+                    </div>
+
+                </div>
+
+                    <div id="mm-option-home" class="hidden">
+                        <div class="pull-left"><img class="img-responsive" src="{{ asset('bundles/uipublic/images/mm/icon-home.png') }}" alt="HomeMeal" /></div>
+                        <p>{{ 'search.select'|trans }} <span class="mm-green">"{{ 'search.home.label'|trans }}"</span> {{ 'search.home.description'|trans }}</p>
+                    </div>
+
+                    <div id="mm-option-pro" class="hidden">
+                        <div class="pull-left"><img class="img-responsive" src="{{ asset('bundles/uipublic/images/mm/icon-pro.png') }}" alt="ProMeal" /></div>
+                        <p>{{ 'search.select'|trans }} <span class="mm-green">"{{ 'search.pro.label'|trans }}"</span> {{ 'search.pro.description'|trans }}</p>
+                    </div>
+
+
+                {#<div class="col-xs-2 hidden-lg">
+                    <button type="submit" class="btn btn-success btn-lg mm-search-row-btn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>#}
+            </div>
+        </div>
+    </div>
+</form>
+{% endspaceless %}

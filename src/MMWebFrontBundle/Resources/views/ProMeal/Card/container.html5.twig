@@ -1,0 +1,23 @@
+{% extends '@WEBUI/layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set referer = app.request.server.get('http-referer')|default('home') %}
+{% block navbar %}
+<nav class="navbar navbar-fixed-top" role="navigation">
+    <a href="{{ path( referer ) }}">
+        <button class="btn-lg btn-block btn-success">
+            {{ 'registration.back'|trans }}
+        </button>
+    </a>
+</nav>
+
+{% endblock %}
+
+{% block layout_header %}
+{% endblock %}
+
+{% block layout_body %}
+    {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

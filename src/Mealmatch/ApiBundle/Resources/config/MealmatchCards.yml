@@ -1,0 +1,424 @@
+# Mealmatch Cards with text and hashtags
+card100:
+    text: 'Love and fantasy are the best spices.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #fantasy #love #spices'
+card101:
+    text: 'May the food be with you!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #theforce #starwars'
+card102:
+    text: 'May the food be with you'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #maytheforcebewithyou'
+card103:
+    text: 'My head says gym but my heart says tacos.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #gym #heart #tacos'
+card104:
+    text: 'My hobbies include eating and complaining that I´m getting fat.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #hobbies #complaining #fat'
+card105:
+    text: 'My rap name is Lil Hangry'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #rap'
+card106:
+    text: 'Oh Crepe!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #crepe'
+card107:
+    text: 'One has to be an idiot to speak badly of macaroni'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #macaroni'
+card108:
+    text: 'FOOD VIBES ONLY'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #vibes #food'
+card109:
+    text: 'FOOD BABY ON BOARD'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #babyonboard #food'
+card10:
+    text: 'Good Food starts with Good Products'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food #products'
+card110:
+    text: 'FOOD THINGS ARE GOING TO HAPPEN'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food #future'
+card111:
+    text: 'HOME SWEETS HOME'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #homesweethome'
+card112:
+    text: 'Life is a combination between magic and pasta'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #magic #paste'
+card113:
+    text: 'EAT. PRAY. EAT MORE.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #eat #play #eatmore'
+card114:
+    text: 'PAPA WAS A FOODIE'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #papa #foodie'
+card115:
+    text: 'STAY CALM AND EAT ON'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #staycalm'
+card116:
+    text: 'BACK FOR FOOD'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #backformore'
+card117:
+    text: 'THERE ARE FOOD PEOPLE AND BAD PEOPLE'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #badpeople #foodpeople'
+card118:
+    text: '"Sauce ON, Sauce OFF."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #sauce'
+card119:
+    text: 'Save the Earth!!! It´s the only planet where chocolate exists. ;)'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #safeearth #planet #chocolcate'
+card11:
+    text: '"Good food is very often, even most often, simple food."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food #simple'
+card120:
+    text: 'Share your food with the people you love.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #love #share #people'
+card121:
+    text: 'Stressed backwards is Desserts!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #desserts #stressed'
+card122:
+    text: 'The belly rules the mind!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #belly #mind #rules'
+card123:
+    text: 'The early bird needs a lot of coffee'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #earlybird #coffee'
+card124:
+    text: 'The only ring I want is an onion ring'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #ring #wedding #onion'
+card125:
+    text: 'There´s is no place like the kitchen'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #kitchen'
+card126:
+    text: 'The secret ingredient is always love'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #secret #ingredient #love'
+card127:
+    text: 'They call it a Royale with cheese.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #royal #withcheese'
+card128:
+    text: 'Things worth eating are worth waiting for.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #worth #waiting #for'
+card129:
+    text: 'Today I´ll be as useless as the G in Lasagna'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #lasagne #today'
+card12:
+    text: '"If you cook it, they will come."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cookit'
+card130:
+    text: 'Today`s good mood is sponsored by coffee'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #coffee'
+card131:
+    text: 'True friendship: Always agreeing on what to eat!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #friendship #consent'
+card132:
+    text: 'Waffles are just pancakes with abs.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #waffles #pancakes'
+card133:
+    text: '"What`s meant to be in your belly, will always find a way."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #belly'
+card134:
+    text: 'Wine + Dinner = Winner'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #wine #dinner #winner'
+card135:
+    text: 'With enough butter anything is good'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #butter'
+card136:
+    text: 'WTF'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #wtf'
+card137:
+    text: 'You`re the cheese to my macaroni'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #macaroni #cheese #macncheese'
+card138:
+    text: '"You become what you eat, so better eat healthy."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #eathealthy'
+card139:
+    text: 'You can´t buy happiness but you can buy chocolate.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #chocolate'
+card13:
+    text: 'It´s amazing how much food can teach you.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #amazing #teachyou'
+card140:
+    text: 'You don´t need a silver fork to eat good food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #silver #goodfood'
+card141:
+    text: 'You have to feed your mind in order to nourish your soul.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #soul #nourish'
+card14:
+    text: 'Just keep eating'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #keepeating'
+card15:
+    text: 'Keine Kantine? Kein Problem.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #kantine #keinproblem'
+card16:
+    text: 'Life happens. Chocolate helps.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #chocolate'
+card17:
+    text: 'Name one food you want to have in 2018.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #2018'
+card18:
+    text: '"One cannot think well, love well, sleep well, if one has not dined well."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #love #sleep #think'
+card19:
+    text: '"WHATEVER YOU ARE, BE FOOD ONE."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #whatever'
+card1:
+    text: 'A good cook never lacks friends! ;)'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #good #cook #friends'
+card20:
+    text: 'SEE THE FOOD'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #seethefood'
+card21:
+    text: 'FOOD PEOPLE BRING OUT THE GOOD IN PEOPLE.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #people'
+card22:
+    text: 'I FEEL FOOD VIBES'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #vibes'
+card23:
+    text: 'LET THE FOOD TIMES ROLE'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #times'
+card24:
+    text: 'FOOD. BETTER. BEST.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food #better #best'
+card25:
+    text: 'MY FOOD. YOUR FOOD. OUR FOOD.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food'
+card26:
+    text: 'GIVE THIS WORLD FOOD ENERGY'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food #energy'
+card27:
+    text: 'RESPECT THE FOOD'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #respect'
+card28:
+    text: 'GOOD FRIENDS. GOOD FOOD. GOOD LAUGHS.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #laughs #food'
+card29:
+    text: '"THEY WANT TO SEE YOU DO FOOD, BUT NEVER BETTER THEN THEM. REMEMBER THAT."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #dogood'
+card2:
+    text: 'All I am I owe to SPAGHETTI.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #spaghetti'
+card30:
+    text: '"I´m on seafood diet, I see food and I eat it."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #seafood #diet'
+card31:
+    text: 'Sharing is Caring.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #sharing #caring'
+card32:
+    text: 'SINGLE? TAKEN? HUNGRY!!!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #single #taken #hungry'
+card33:
+    text: 'I think my soulmate might be CARBS.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #carbs #soulmate'
+card34:
+    text: 'Stop caring what other people eat. ;)'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #caring #otherpeople'
+card35:
+    text: 'Tell me what you eat and I´ll tell you who you are.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #whoyouare #whatyoueat'
+card36:
+    text: 'The Chef Is Always Right'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #chef #alwaysright'
+card37:
+    text: 'The 1st rule of Mealmatch is you do talk about Mealmatch!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #1strule'
+card38:
+    text: 'The last taste is always the sweetest.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #taste #sweetest'
+card39:
+    text: 'Today´s Soup: Whiskey with ice croutons'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #whiskey #ice #croutons'
+card3:
+    text: 'Good is all the sweeter when shared with good friends.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #good #sweeter'
+card40:
+    text: 'There`s is no thing like too much garlic.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #garlic #toomuch'
+card41:
+    text: 'Cooking is love made visible!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cooking #love'
+card42:
+    text: 'A balanced diet is a cookie in each hand.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #balanced #diet #cookie'
+card43:
+    text: 'Age and glasses of wine should never be counted'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #wine #glasses'
+card44:
+    text: 'A good cook is like a sorceress who dispenses hapiness. #cook #sorceress #hapiness'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card45:
+    text: 'Always trust your instincts and eat what feels right.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #instincts #trust'
+card46:
+    text: 'A messy kitchen is a sign of hapiness.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #kitchen #messy #happiness'
+card47:
+    text: 'A party without cake is just a meeting.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cake #party #meeting'
+card48:
+    text: 'Bakers make the world smell better.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #bakers #world #smell'
+card49:
+    text: 'Bake the world a better place.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #bake #world #betterplace'
+card4:
+    text: 'Breaking Bread.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #breakingbread #bread'
+card50:
+    text: 'Be a cupcake in a world of muffins'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cupcake #word #muffins'
+card51:
+    text: '"Be a pineapple: Stand tall, wear a crown and be sweet on the inside."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #pineapple #crown #sweetinside'
+card52:
+    text: 'Brunch is always a good idea'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #brunch #idea'
+card53:
+    text: 'Calories don`t count on the weekend.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #weekend #calories'
+card54:
+    text: '"Chocolate comes from cocoa, which is a tree. That makes it a plant. Chocolate is salad!"'
+    hashtags: '#mealmatchme #socialdining #meetandeat #newfriends #chocolate #salad #plant #cocoa #tree'
+card55:
+    text: 'Chocolate doesn`t ask stupid questions. Chocolate simply understands!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #chocolate #understands'
+card56:
+    text: 'Come for the food… Stay for the fun.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #fun #food'
+card57:
+    text: 'Cooking with love is food for the soul'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #soul #food #cooking #love'
+card58:
+    text: '"Cook it again, Sam."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cook #moview'
+card59:
+    text: 'Cupcakes are muffins that believes in miracles.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cupcakes #muffins #miracles'
+card5:
+    text: '"Eat to fuel your body, not feed your emotions."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #body #emotions'
+card60:
+    text: 'Dessert is like a feel-good-song: The best ones make you dance.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #dessert #dance'
+card61:
+    text: 'Don´t be eye candy; be soul food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #eyecandy #soulfood'
+card62:
+    text: '"Don´t be UPSETTI, Eat some SPAGHETTI."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #spaghetti'
+card63:
+    text: '"Eat Drink, Man Woman."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #drink #man #woman'
+card64:
+    text: '"Eat, drink and be merry, for tomorrow we may diet."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #diet #tomorrow #bemerry'
+card65:
+    text: 'Eating is a necessity but cooking is an art.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #cooking #art'
+card66:
+    text: 'Fetuccini Alfredo is macaroni and cheese for adults.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #adults #macaroni #fetuccini'
+card67:
+    text: '"First we eat, then we do everything else."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #everythingelse'
+card68:
+    text: 'Foodfellas'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #goodfellas'
+card69:
+    text: 'Foodie Nights'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #foodies'
+card6:
+    text: 'Eat like you give a damn about yourself'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #giveadamn'
+card70:
+    text: '"Food is our common ground, a universal experience."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #experience #commonground #universal'
+card71:
+    text: 'Food is symbolic of LOVE when words are inadequate.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #inadequate #love #symbolic #food'
+card72:
+    text: 'Food is THE way to connect people'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food'
+card73:
+    text: 'Look for the food things in life'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food'
+card74:
+    text: 'Food Will Hunting'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #willhunting #food'
+card75:
+    text: 'Friday is my second favorite F-word!!!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #fck #favorite'
+card76:
+    text: 'Friends buy you food. Best friends eat your food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #food'
+card77:
+    text: 'Chocolate is god´s apology for broccoli.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #chocolate #broccoli #god'
+card78:
+    text: '"GOOD FOOD, GOOD MOOD."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #goodmood'
+card79:
+    text: 'Good food is cooked with the fire of passion.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #passion #fire #goodfood'
+card7:
+    text: '"Eat when you are hungry, not when you are lonely."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #hungry #lonely'
+card80:
+    text: 'Great food is like great sex: The more you have the more you want.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #sex #great'
+card81:
+    text: 'Hard work should be rewarded by good food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends #hardwork'
+card82:
+    text: '"Thank god I don`t have to hunt for food, I don`t even know where TACOs live."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends '
+card83:
+    text: '"If it doesn`t feed your soul, get rid of it."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card84:
+    text: 'I followed my heart and it led me into the fridge.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card85:
+    text: 'If you`re afraid of butter… Use cream!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card86:
+    text: 'I like hastags because the look like waffles ###'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card87:
+    text: 'I love the smell of bacon in the morning'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card88:
+    text: 'It´s all about the food'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card89:
+    text: 'It´s coffee o´clock'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card8:
+    text: '"Fish, to taste right, must swim three times - in water, in butter and in wine."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card90:
+    text: 'It´s never too cold for ice cream.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card91:
+    text: 'I won`t be impressed with technology until I can download food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card92:
+    text: 'Keep calm and eat cake.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card93:
+    text: 'Always kiss the cook!'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card94:
+    text: 'Last name: HUNGRY. First name: ALWAYS.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card95:
+    text: 'Laughter is brightest where food is best'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card96:
+    text: 'Let food be your medicine and medicine be your food.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card97:
+    text: 'Let´s be wicked and have snacks for dinner'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card98:
+    text: '"Life is uncertain, Eat dessert first."'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card99:
+    text: 'Live. Love. Eat.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'
+card9:
+    text: 'Food is my BEST friend.'
+    hashtags: '#mealmatchme #mealmatch #socialdining #meetandeat #newfriends'

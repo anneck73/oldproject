@@ -1,0 +1,28 @@
+body:           Nachricht
+messenger:      Benutzer Nachrichten
+inbox:          Nachrichteneingang
+sent:           Nachrichtenausgang
+deleted:        Gelöscht
+send_new:       Neue Nachricht senden
+allyourmessages: Hier siehst Du all Deine Nachrichten
+search:         Suche
+threads_found:  "%num% Konversation gefunden mit | %num% Konversationen gefunden mit"
+thread:         Nachrichtenverlauf
+message_info:   "von %sender%, am %date%"
+reply:          Antworten
+messages:       Nachrichten
+subject:        Betreff
+starter:        Autor
+startdate:      Angefangen am
+actions:        Aktionen
+new:            Neu
+goto_last:      zur letzten Nachricht springen
+last_message:   letzte Nachricht
+on:             "Gesendet am %date%"
+by:             "von %sender%"
+no_thread:      Es gibt keine Konversation zum Anzeigen.
+delete:         löschen
+submit:         absenden
+view:           ansehen
+recipient:      Empfänger (Mealmatch Benutzername)
+isread:         Gelesen

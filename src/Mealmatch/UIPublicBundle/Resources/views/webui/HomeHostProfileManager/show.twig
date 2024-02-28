@@ -1,0 +1,191 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% import '@WEBUI/Widgets/mealmatch.macros.html.twig' as macros %}
+{% trans_default_domain 'Mealmatch' %}
+ {% if app.user.profile.imageName != "image/udefault.png" %}
+     {% set profileImage %} {{ asset(app.user.profile.imageName, 's3img') }} {% endset %}
+ {% else %}
+     {% set profileImage %} {{ asset('bundles/uipublic/images/mm/profilbild_default.png') }} {% endset %}
+ {% endif %}
+{% set swtTitle %}{{ 'homehostprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="form-bg">
+                    <div class="banner-bg">
+                        {{ form_start(userPicForm) }}
+                        <div id="imageUpload" class="profile-img">
+                            <img class="img-responsive img-circle" height="150px" width="150px"
+                                 src="{{ profileImage }}" alt="ProfileImage">
+                        </div>
+                        {{ form_widget(userPicForm) }}
+                        {{ form_end(userPicForm) }}
+                    </div>
+                </div>
+            </div>
+{#            <div class="mm-spacer"></div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-12 meal-mg-title">#}
+{#                    <div class="meal-icon col-md-2 hidden-xs">#}
+{#                        <span class="img-responsive mm-circle-icon fa fa-pencil-square-o"></span>#}
+{#                    </div>#}
+{#                    <div class="col-md-10">#}
+{#                        <h3 class="mm-line-solid-bottom-green">#}
+{#                            <p>Beschreibung</p>#}
+{#                        </h3>#}
+{#                        <p>Beschreibung:</p>#}
+{#                        <div>{{ rProfile.description|raw }}</div>#}
+{#                        <a href="{{ path('homehost_profile_manager_edit_desc') }}">#}
+{#                            <div class="button-div text-center">#}
+{#                                <button class="main-btn">{{ 'update'|trans }}</button>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="mm-spacer-x2"></div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-12 meal-mg-title">#}
+{#                    <div class="meal-icon col-md-2 hidden-xs">#}
+{#                        <span class="mm-circle-icon fa fa-map-o"></span>#}
+{#                    </div>#}
+{#                    <div class="col-md-10">#}
+{#                        <h3 class="mm-line-solid-bottom-green">#}
+{#                            <p>Restaurant Geo Koordinaten</p>#}
+{#                        </h3>#}
+{#                        <p>Die Addresse in einer Zeile: {{ rProfile.locationString|default('NO LOCATION STRING!!!') }}</p>#}
+{#                        <div id="restMap"></div>#}
+{#                        <a href="{{ path('restaurant_profile_manager_edit_geo') }}">#}
+{#                            <div class="button-div text-center">#}
+{#                                <button class="main-btn">{{ 'update'|trans }}</button>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="mm-spacer-x2"></div>#}
+{#            <!--// //-->#}
+{#            <div class="row">#}
+{#                <div class="col-md-12 meal-mg-title">#}
+{#                    <div class="meal-icon col-md-2 hidden-xs">#}
+{#                        <span class="mm-circle-icon fa fa-info-circle"></span>#}
+{#                    </div>#}
+{#                    <div class="col-md-10">#}
+{#                        <h3 class="mm-line-solid-bottom-green">#}
+{#                            <p>Kontaktdaten</p>#}
+{#                        </h3>#}
+{#                        <p>Kontakt Postanschrift: {{ rProfile.contactAddress }}</p>#}
+{#                        <p>Kontakt Telefonnummer: {{ rProfile.contactPhone }}</p>#}
+{#                        <p>Kontakt Email: {{ rProfile.contactEmail }}</p>#}
+{#                        <a href="{{ path('homehost_profile_manager_edit_contact') }}">#}
+{#                            <div class="button-div text-center">#}
+{#                                <button class="main-btn">{{ 'update'|trans }}</button>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+            <div class="mm-spacer-x2"></div>
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2 hidden-xs">
+                        <span class="mm-circle-icon fa fa-euro"></span>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            <p>Bezahlinformationen</p>
+                        </h3>
+                        {% set mangopayOwner = mangopay_pub_service.getMangopayUserService.getUser(pProfile.mangopayID) %}
+                        <p class="mm-line-dotted-bottom-green">Registrierte Person ({{ pProfile.mangopayID|default('???') }})</p>
+                        <p>Eigentümer: {{ uProfile.firstName }} {{ uProfile.lastName }} ({{ mangopayOwner.PersonType }})</p>
+                        {{ macros.mangopayOwnerCard(mangopayOwner) }}
+                        <p class="mm-line-dotted-bottom-green">E-Wallet ({{ pProfile.mangopayWalletID|default('???') }})</p>
+                        <p></p>
+                        {% set mangopayWallet = mangopay_pub_service.getMangopayWalletService.getWallet(pProfile.mangopayWalletID) %}
+                        {{ macros.mangopayWalletCard(mangopayWallet) }}
+                        <p class="mm-line-dotted-bottom-green">Verknüpftes Bankkonto ({{ pProfile.mangopayBankAccountID|default('???') }})</p>
+                        {% set mangopayBankaccount = mangopay_pub_service.getMangopayBankaccountService.getBankAccount(pProfile.mangopayID, pProfile.mangopayBankAccountID) %}
+                        {{ macros.mangopayBankaccountCard(mangopayBankaccount) }}
+
+                        <a href="{{ path('homehost_profile_manager_edit_payment') }}">
+                            <div class="button-div text-center">
+                                <button class="main-btn">{{ 'update'|trans }}</button>
+                            </div>
+                        </a>
+                        {% if pProfile.mangopayBankAccountID is not null %}
+                        <p></p>
+                        <a href="#" data-toggle="modal" data-target="#payoutAmount">
+                            <div class="button-div text-center">
+                                <button class="main-btn">{{ 'restaurantprofile.payment.payoutWallet'|trans }}</button>
+                            </div>
+                        </a>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+{#            <div class="mm-spacer-x2"></div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-12 meal-mg-title">#}
+{#                    <div class="meal-icon col-md-2 hidden-xs">#}
+{#                        <span class="mm-circle-icon fa fa-camera"></span>#}
+{#                    </div>#}
+{#                    <div class="col-md-10">#}
+{#                        <h3 class="mm-line-solid-bottom-green">#}
+{#                            <p>Home Schaufenster (Bilder)</p>#}
+{#                        </h3>#}
+{#                        <div class="container-fluid">#}
+{#                            {% for pic in rProfile.pictures %}#}
+{#                                <div class="col-md-3 col-xs-6">#}
+{#                                    <li class="res-img-list">#}
+{#                                        <img class="img-thumbnail" src="{{ vich_uploader_asset(pic, 'fileData') }}" alt="{{ pic.fileName }}"/>#}
+{#                                    </li>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        <a href="{{ path('homehost_profile_manager_edit_pics') }}">#}
+{#                            <div class="button-div text-center">#}
+{#                                <button class="main-btn">{{ 'update'|trans }}</button>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block page_js %}
+
+    <script type="text/javascript">
+
+        function initMap() {
+            var geo_address = {
+                lat: {{ geoAddress.lat }},
+                lng: {{ geoAddress.long }}
+            };
+            console.log('geoAddress: ' + geo_address.lat + ',' + geo_address.lng);
+            if (geo_address.length < 1) {
+                $("#restMap").hide();
+            } else {
+
+                // The location of restaurant
+                var latLng = { lat: geo_address['lat'], lng: geo_address['lng'] };
+
+                // The map centered at the restaurant location
+                var map = new google.maps.Map(document.getElementById('restMap'), {zoom: 10, center: latLng});
+
+                // The marker, positioned at the restaurant location
+                var marker = new google.maps.Marker({position: latLng, map: map, title: '{{ app.user.restaurantProfile.name }}' });
+            }
+        }
+
+        $("#imageUpload").click(function () {
+            $("#mmuserbundle_mmuserprofile_pic_imageFile").trigger('click');
+        });
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GMAPS_API_KEY }}&callback=initMap"></script>
+{% endblock %}

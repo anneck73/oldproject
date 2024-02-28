@@ -1,0 +1,63 @@
+{# newUI Based Layout TWIG template
+
+Usage: It displays 1 row of 2 columns, left and right in a bootstrap container.
+Left Column: 2 wide displays a page specific icon
+Right Column: 10 wide displays a headline and text.
+
+Variables defined using layout prefix 'swt' (symbol with text):
+- swtIcon
+- swtHeadline
+- swtText
+
+TWIG Blocks to overwride (if required)
+- swt_header
+- swt_main_body_content
+- swt_main_text
+- swt_bottom
+
+#}
+{% extends '@WEBUI/newUI-Base.html.twig' %}
+
+{# Default Value for swtIcon, you can overwride it extending templates. #}
+{% if swtIcon is not defined %}
+    {% set swtIcon %}<span class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}
+{% endif %}
+
+{% block body %}
+    {% block swt_header %}
+    <div class="header-container findmeal-banner">
+        <div class="search-sec mm-header-title">
+            <h3>{{ swtTitle }}</h3>
+        </div>
+    </div>
+    {% endblock %}
+    {% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        {{ swtIcon }}
+                    </div>
+                    <div class="col-md-10">
+                        {% block swt_main_text %}
+                        <h3 class="title">{{ swtTitle }}</h3>
+                        {% if swtSubtitle is not empty %}
+                            <p class="margin-bottom1">{{ swtSubtitle }}</p>
+                        {% endif %}
+
+                        <div class=" cont-font">
+                            {{ swtText }}
+                        </div>
+                        {% endblock %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block swt_bottom %}
+        <!--// There is no default for swt_block bottom //-->
+    {% endblock %}
+{% endblock body %}

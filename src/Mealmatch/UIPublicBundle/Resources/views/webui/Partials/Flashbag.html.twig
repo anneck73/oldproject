@@ -1,0 +1,14 @@
+<!--// FlashBag //-->
+{% spaceless %}
+<div id="mmFlashback" class="mm-alert">
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div id="mmTypeOfAlert" class="alert alert-{{ type }} alert-dismissible fade in text-center" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                {{ message | raw }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endspaceless %}
+<!--// /FlashBag //-->

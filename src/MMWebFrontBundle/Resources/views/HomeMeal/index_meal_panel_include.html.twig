@@ -1,0 +1,91 @@
+{% trans_default_domain 'Mealmatch' %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a href="{{ path('api_promeal_show', { 'id': proMeal.id }) }}">
+                {{ proMeal.title }} (ID#{{ proMeal.id }})
+            </a>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="mm-header"><h3>{{ proMeal.tableTopic }}</h3></div>
+                <div>{{ proMeal.description }}</div>
+                <div class="mm-header"><h3>Standort / Addresse</h3></div>
+                {% if proMeal.mealAddresses.count > 0 %}
+                <div>{{ proMeal.locationString }}{{ proMeal.mealAddresses.count }}
+                    <div class="container-fluid">
+                        {% include '@WEBUI/Partials/mealAddress.html.twig' with {'addr': proMeal.mealAddress} %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="mm-header"><h3>{{ 'time'|trans }}</h3></div>
+                <div>
+                    <ul class="dropdown">
+                        {% for aTime in aDates[proMeal.id] %}
+                        <li>Von {{ aTime['start']|date('d.m.Y H:i:s') }} bis {{ aTime['end']|date('H:i:s') }}
+                            <a href="{{ path('api_mealevent_edit', { 'id': aTime['eventID'] }) }}">
+                                <button class="btn btn-sm btn-info" name="_editAddress">{{ 'mealevent.edit.label'|trans }}</button>
+                            </a>
+                        </li>
+                        {% endfor %}
+                        {% if aDates|length <= 0 %}
+                        <li>{{ 'mealevent.missing'|trans }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="mm-header"><h3>{{ 'menu'|trans }}</h3></div>
+                <div>
+                    <ul class="dropdown">
+                        {% for mealOffer in proMeal.mealOffers %}
+                        <li class="mm-menu">{{ mealOffer.name }}: {{ mealOffer.description|raw }} {{ mealOffer.price }} {{ mealOffer.currency }}
+                            <a href="{{ path('api_mealoffer_edit', { 'id': mealOffer.id }) }}">
+                                <button class="btn btn-sm btn-info" name="_editOffer">{{ 'mealoffer.edit.label'|trans }}</button>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <ul>{% if proMeal.mealAddresses.count > 0 %}
+                    <li>
+                        <a href="{{ path('api_mealaddress_edit', { 'id': proMeal.mealAddress.id }) }}">
+                            <button class="btn btn-lg btn-info" name="_editAddress">{{ 'promeal.addAddress.edit.label'|trans }}</button>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{{ path('api_promeal_addEvent', { 'id': proMeal.id }) }}">
+                            <button class="btn btn-lg btn-info" name="_addEvent">{{ 'promeal.addEvent.label'|trans }}</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('api_promeal_addOffer', { 'id': proMeal.id }) }}">
+                            <button class="btn btn-lg btn-info" name="_addOffer">{{ 'promeal.addOffer.label'|trans }}</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pull-right">
+        </div>
+
+
+    </div>
+    <div class="list-group">Restaurant-Meals für die gewählten Zeiträume:
+        <ul>
+            {% include '@WEBUI/Partials/proMealNode.html.twig' with {'nodes': childMeals[proMeal.id] } %}
+        </ul>
+    </div>
+    <div class="list-group">Actions
+        <a href="{{ path('api_promeal_show', { 'id': proMeal.id }) }}"
+           class="list-group-item list-group-item-success">Show</a>
+        <a href="{{ path('api_promeal_edit', { 'id': proMeal.id }) }}"
+           class="list-group-item list-group-item-info">Edit</a>
+        <a href="{{ path('api_promeal_start', { 'id': proMeal.id }) }}"
+           class="list-group-item list-group-item-danger">ProMeals für die gewählten Zeiträume anlegen</a>
+
+    </div>
+</div>

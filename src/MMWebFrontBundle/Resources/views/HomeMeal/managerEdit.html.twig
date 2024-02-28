@@ -1,0 +1,287 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% form_theme meal_form '@WEBUI/Form/fields.html.twig' %}
+{% form_theme meal_option_form '@WEBUI/Form/fields.html.twig' %}
+{% form_theme address_form '@WEBUI/Form/fields.html.twig' %}
+
+{% set main_header_title = 'homemeal.manager.title'|trans %}
+{% set main_header_subtitle = 'homemeal.manager.edit.subtitle'|trans %}
+{% set main_header_action_path = path('api_homemeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-create-meal-circle"></span>{% endset %}
+
+{% block main_content %}
+    <div class="col-xs-9 no-padding no-margin">
+        <!-- Tab panes -->
+        <div class="tab-content nav-tabs-justified">
+
+            <!-- TAB 1 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 1 %} in active{% endif %}"
+                 id="homemeal">
+                {{ form_start(meal_form) }}
+                <div class="row">
+                    <div class="col-lg-10">
+                    {{ form_row(meal_form.title, {'help': 'meal.title.help'|trans}) }}
+                    {{ form_row(meal_form.mealMain, {'help': 'meal.main.help'|trans}) }}
+                    {{ form_row(meal_form.mealStarter, {'help': 'meal.starter.help'|trans}) }}
+                    {{ form_row(meal_form.mealDesert, {'help': 'meal.dessert.help'|trans}) }}
+                    {{ form_row(meal_form.description, {'help': 'meal.description.help'|trans}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                    </div>
+                </div>
+                {{ form_end(meal_form) }}
+            </div>
+
+            <!-- TAB 2 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 2 %} in active{% endif %}"
+                 id="offers">
+                {{ form_start(meal_option_form) }}
+                <div class="row">
+                    <div class="col-xs-4">
+                        {{ form_row(meal_option_form.maxNumberOfGuest, {'help': 'meal.maxguest.help'|trans}) }}
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_row(meal_option_form.sharedCost, {'help': 'meal.sharedcost.help'|trans}) }}
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_row(meal_option_form.sharedCostCurrency, {'help': 'meal.currency.help'|trans}) }}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        {{ form_row(meal_option_form.categories, {'help': 'meal.category.help'|trans}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        {{ form_row(meal_option_form.countryCategory, {'help': 'meal.countryCategory.help'|trans}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                    </div>
+                </div>
+                {{ form_end(meal_option_form) }}
+
+            </div>
+
+            <!-- TAB 3 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 3 %} in active{% endif %}"
+                 id="ingredients">
+                {{ form_start(address_form) }}
+                <div class="row">
+                    <div class="col-xs-10">
+                        {{ form_row(address_form.locationString, { 'help': 'mealaddress.locationstring.help'|trans }) }}
+                        {% if address_form.bellSign is defined %}
+                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'info'} %}
+                                {% block message %}
+                                    <p>Wir haben folgende Koordinaten für die von Dir genannte Addresszeile gefunden. Bitte überprüfe das Ergebnis:</p>
+                                {% endblock %}
+                            {% endembed %}
+                            <h2>{{ 'mealaddress.address'|trans }}</h2>
+                            {% include '@WEBUI/Partials/mealAddress.html.twig' with {'addr': homeMeal.address} %}
+                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'info'} %}
+                                {% block message %}
+                                    <p>Um Deinen Gästen zu helfen Deine Wohnung besser zu finden kannst Du hier noch den Text an Deinem Klingelschild eintragen.</p>
+                                {% endblock %}
+                            {% endembed %}
+                            <div class="mm-spacer"></div>
+                            {{ form_row(address_form.bellSign, { 'help': 'mealaddress.bellsign.help'|trans }) }}
+                            {% embed '@WEBUI/Partials/boostrap-message.embed.html.twig' with {'type': 'warning'} %}
+                                {% block message %}
+                                    <p>Nur von Dir akzeptierte Gäste sehen all deine Angaben. In den Suchergebnisse wird
+                                        nur die <b>Straße</b> ausgewiesen.</p>
+                                {% endblock %}
+                            {% endembed %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                    </div>
+                </div>
+
+                {{ form_end(address_form) }}
+            </div>
+
+            <!-- TAB 4 -->
+            <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 4 %} in active{% endif %}"
+                 id="events">
+                {{ include('@WEBUI/MealEvent/help.include.html.twig') }}
+               <table class="mm-table">
+                    <thead>
+                        <th>{{ 'events.from'|trans }}</th>
+                        <th>{{ 'events.to'|trans }}</th>
+                        <th>{{ 'meal.index.available.actions.label'|trans }}</th>
+                    </thead>
+                    <tbody>
+                        {% if homeMeal.mealEvents.count > 0 %}
+                            {% for mealEvent in homeMeal.mealEvents %}
+                                {{ form_start(eventForms[loop.index0]) }}
+                                <tr>
+                                    <td>{{ form_widget(eventForms[loop.index0].startDateTime, {'id': 'start'~loop.index0}) }}</td>
+                                    <td>{{ form_widget(eventForms[loop.index0].endDateTime) }}</td>
+                                    <td>{{ include('@WEBUI/MealEvent/safeOrRemove.include.html.twig',
+                                            {'idx': loop.index0, 'eventID': mealEvent.id, 'mealID': homeMeal.id}) }}</td>
+                                </tr>
+                                {{ form_end(eventForms[loop.index0]) }}
+                            {% endfor %}
+                        {% endif %}
+                        {% if homeMeal.isRootNode and homeMeal.mealEvents.count < 5 %}
+                            <tr>
+                                <td colspan="3">
+                                    <a href="{{ path('api_homemeal_manager_addEvent', { 'id': homeMeal.id }) }}"
+                                       class="btn btn-success pull-left">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        {{ 'homemeal.addEvent.label'|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            {#
+                                {% if homeMeal.mealEvents.count > 0 %}
+                                {% for mealEvent in homeMeal.mealEvents %}
+
+                                    {{ form_start(eventForms[loop.index0]) }}
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <div class="form-group">
+
+                                    <label>{{ 'homemeal.startdatetime.label'|trans }}</label>
+                                    <a class="pull-right glyphicon glyphicon-question-sign mm-help-icon"
+                                       tabindex="8"
+                                       data-toggle="popover"
+                                       data-trigger="focus"
+                                       data-placement="left"
+                                       data-container="body"
+                                       title="{{ 'homemeal.startdatetime.label'|trans }}"
+                                       data-content="{{ 'homemeal.startdatetime.help'|trans }}"></a>
+                                    <div class="input-group date" id="mm-addEventStart-datetimepicker">
+                                        {{ form_widget(eventForms[loop.index0].startDateTime) }}
+                                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-5">
+                                <div class="form-group">
+                                    <label>{{ 'homemeal.enddatetime.label'|trans }}</label>
+                                    <a class="pull-right glyphicon glyphicon-question-sign mm-help-icon"
+                                       tabindex="8"
+                                       role="button"
+                                       data-toggle="popover"
+                                       data-trigger="focus"
+                                       data-placement="left"
+                                       data-container="body"
+                                       title="{{ 'homemeal.enddatetime.label'|trans }}"
+                                       data-content="{{ 'homemeal.enddatetime.help'|trans }}"></a>
+                                    <div class="input-group date" id="mm-addEventEnd-datetimepicker">
+                                        {{ form_widget(eventForms[loop.index0].endDateTime) }}
+                                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-lg btn-success btn-block">{{ 'meal.btn.safe.label'|trans }}</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="cols-xs-12">
+                                <div class="container"> {% include '@WEBUI/Partials/rrule-form.inc.html.twig' %}</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {{ form_widget(eventForms[0]) }}
+                            </div>
+                        </div>
+
+
+                        {{ form_end(eventForms[loop.index0]) }}
+
+                    {% endfor %}
+                {% endif %}
+          #}
+        </div>
+
+    </div>
+    <div class="col-xs-3 no-padding">
+        <!-- Nav tabs -->
+        <ul class="nav nav-stacked tabs-right" role="tablist">
+            <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}">
+                <a href="#homemeal" aria-controls="promeal" role="tab"
+                   data-toggle="tab"><span class="icon-user"></span>Meal
+                    ({{ ('meal.status.' ~ homeMeal.status|lower)|trans }})</a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                <a href="#offers" aria-controls="offers" role="tab"
+                   data-toggle="tab"><span class="icon-note"></span>{{ 'homemeal.manager.tab_two'|trans }}</a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}">
+                <a href="#ingredients" aria-controls="ingredients" role="tab"
+                   data-toggle="tab"><span class="icon-location-pin"></span>{{ 'homemeal.manager.tab_three'|trans }}
+                </a>
+            </li>
+            <li role="presentation" class="{% if selectedTab == 4 %}active{% endif %}">
+                <a href="#events" aria-controls="events" role="tab"
+                   data-toggle="tab"><span class="icon-settings"></span>{{ 'homemeal.manager.tab_four'|trans }}</a>
+            </li>
+            {% for transition in workflow_transitions(homeMeal) %}
+                <li role="presentation" class="action">
+                    <a href="{{ path('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': transition.name }) }}"
+                       role="tab">
+                        <button class="btn btn-block btn-warning">
+                            {{ ('transition.' ~ transition.name)|trans }}
+                        </button>
+                    </a>
+                </li>
+            {% else %}
+                <!--// No actions available. //-->
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
+
+{#% block navbar %}
+    <div class="hidden-xs">
+        {% include('MMWebFrontBundle:NavBars:host.navbar.html.twig') %}
+    </div>
+    <div class="visible-xs">
+        {% include('MMWebFrontBundle:NavBars:host-xs.navbar.html.twig') %}
+    </div>
+{% endblock %#}
+
+{% block page_js %}
+    {#
+    {% javascripts
+    '@MMWebFrontBundle/Resources/public/js/jquery/jquery-ui.js'
+    '@MMWebFrontBundle/Resources/public/js/mm-rrule-gui.js'
+    output='js/mealmatch-rrule-ui.js'
+    filter='?jsqueeze'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+#}
+{% endblock %}

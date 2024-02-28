@@ -1,0 +1,203 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set viewData = { 'title': ('navabar.inbox'|trans) } %}
+{% block title %}MealMatch |{{ 'joinrequest.create.title'|trans }} {% endblock %}
+{% set main_header_title %}{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}{% endset %}
+{% set main_header_subtitle %}{% trans from 'FOSMessageBundle' %}allyourmessages{% endtrans %}{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-inbox-circle"></span>{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block staticPages %}
+
+    <div class="mela-manager-table inbox-table table-responsive">
+
+        <table class="table">
+            <thead>
+            <th class="">{% trans from 'FOSMessageBundle' %}isread{% endtrans %}</th>
+            <th class="">{% trans from 'FOSMessageBundle' %}starter{% endtrans %}</th>
+            <th class="">{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
+            <th class="">{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th>
+            <th class="">{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>
+            </thead>
+            <tbody>
+
+            {% if threads %}
+                {% for thread in threads %}
+                    <tr>
+                        <td>
+                            <div class="mm-status flexbox fl-center">
+                                {% if not fos_message_is_read(thread) %}
+                                    <div class="mm-point mm-bg-green"></div>
+                                {% else %}
+                                    <div class="mm-point mm-bg-light-grey"></div>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            {% if thread.createdBy != 'SYSTEM' %}
+                                <a href="{{ path('public_user_by_username',   {'pName': thread.createdBy}) }}">
+                                    {% if thread.createdBy.profile.imageName != "image/udefault.png" %}
+                                        <img class="mm-user-icon-small img-responsive img-circle"
+                                             src="{{ asset(thread.createdBy.profile.imageName, 's3img') }}"
+                                             alt="Profileimage"/>
+                                    {% else %}
+                                        <img class="mm-user-icon-small img-responsive img-circle"
+                                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                             alt="Profileimage"/>
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                {% if thread.createdBy.profile.imageName != "image/udefault.png" %}
+                                    <img class="mm-user-icon-small img-responsive img-circle"
+                                         src="{{ asset(thread.createdBy.profile.imageName, 's3img') }}"
+                                         alt="Profileimage"/>
+                                {% else %}
+                                    <img class="mm-user-icon-small img-responsive img-circle"
+                                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                         alt="Profileimage"/>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <p><a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                                    {{ thread.subject }}
+                                </a></p>
+                        </td>
+                        <td>
+                            <p>{{ thread.createdAt|date("d.m.Y") }}<br>{{ thread.createdAt|date("H:i") }} Uhr</p>
+                        </td>
+                        <td>
+                            {% if fos_message_can_delete_thread(thread) %}
+                                {% if fos_message_deleted_by_participant(thread) %}
+                                    {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                                    {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                                {% else %}
+                                    {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                                    {% set submitValue %}{% endset %}
+                                {% endif %}
+                                <form action="{{ formAction }}" method="post">
+                                    <button class="btn-small btn-delete btn" type="submit"
+                                            value="{{ submitValue }}"></button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">
+                        {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}
+                    </td>
+                </tr>
+            {% endif %}
+            <tbody>
+        </table>
+
+
+        <!--{% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads} %}-->
+
+
+    </div>
+
+{% endblock %}
+
+
+{% block layout_body %}
+    {% spaceless %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="pull-right">
+                <a href="{{ url('fos_message_thread_new' ) }}">
+                    <button class="btn btn-lg btn-success"><span
+                                class="glyphicon glyphicon-send"></span> {% trans from 'FOSMessageBundle' %}
+                            - send_new{% endtrans %}
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="mm-circle center-block"><span class="icon-heart mm-green"></span></div>
+            </div>
+            <div class="col-md-10">
+                <h2 class="no-margin">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
+                <h3 class="margin-bottom">{% trans from 'FOSMessageBundle' %}allyourmessages{% endtrans %}</h3>
+
+                <div class="mm-messages-thread-list mm-text">
+
+                    <table class="mm-table">
+                        <thead>
+                        <th class="col-xs-1">{% trans from 'FOSMessageBundle' %}isread{% endtrans %}</th>
+                        <th class="col-xs-1">{% trans from 'FOSMessageBundle' %}starter{% endtrans %}</th>
+                        <th class="col-xs-7">{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
+                        <th class="col-xs-2">{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th>
+                        <th class="col-xs-1">{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>
+                        </thead>
+                        <tbody>
+
+                        {% if threads %}
+                            {% for thread in threads %}
+                                <tr>
+                                    <td>
+                                        <div class="mm-status flexbox fl-center">
+                                            {% if not fos_message_is_read(thread) %}
+                                                <div class="mm-point mm-bg-green"></div>
+                                            {% else %}
+                                                <div class="mm-point mm-bg-light-grey"></div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        {% if thread.createdBy.profile.imageName != "image/udefault.png" %}
+                                            <img class="mm-user-icon-small img-responsive img-circle"
+                                                 src="{{ asset(thread.createdBy.profile.imageName, 's3img') }}"
+                                                 alt="Profileimage"/>
+                                        {% else %}
+                                            <img class="mm-user-icon-small img-responsive img-circle"
+                                                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                                 alt="Profileimage"/>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <p class="font-weight-300">{{ thread.createdBy }}</p>
+                                        {#<p>Das Meal New ... (#8) ist nun im Status: RUNNING !</p>#}
+                                        <p><a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                                                {{ thread.subject }}
+                                            </a></p>
+                                    </td>
+                                    <td>
+                                        <p>{{ thread.createdAt|date("m.d.Y") }}</p>
+                                        <p>{{ thread.createdAt|date("h:i") }} Uhr</p>
+                                    </td>
+                                    <td>
+                                        {% if fos_message_can_delete_thread(thread) %}
+                                            {% if fos_message_deleted_by_participant(thread) %}
+                                                {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                                                {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                                            {% else %}
+                                                {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                                                {% set submitValue %}{% endset %}
+                                            {% endif %}
+                                            <form action="{{ formAction }}" method="post">
+                                                <button class="btn-small btn-delete" type="submit"
+                                                        value="{{ submitValue }}"></button>
+                                            </form>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6">
+                                    {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tbody>
+                    </table>
+                    <!--{% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads} %}-->
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}

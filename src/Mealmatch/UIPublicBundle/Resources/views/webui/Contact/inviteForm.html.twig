@@ -1,0 +1,18 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'invite.form.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% block staticPages %}
+    <div class="contact-form">
+    {{ form_start(invite_form) }}
+    {{ form_row(invite_form.email, { 'attr' : { 'class': 'tbox' } }) }}
+    <div class="text-center">
+        <button class="btn btn-lg btn-success" type="submit">
+            <span class="glyphicon glyphicon-send"></span>
+            {{ 'invite.form.button.label'|trans }}
+        </button>
+    </div>
+    {{ form_end(invite_form) }}
+    </div>
+{% endblock %}

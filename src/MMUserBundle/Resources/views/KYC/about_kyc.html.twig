@@ -1,0 +1,67 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title = 'kyc.about.title'|trans %}
+{% set main_header_subtitle = 'kyc.about.title'|trans %}
+{% set viewDataImage %}{{ asset('bundles/mmwebfront/images/mm/mealmatch_header.jpg') }}{% endset %}
+{% block main_content %}
+    <div class="row margin-bottom3 margin-top1-5">
+    <div class="row">
+            <h2 class="no-margin title">{{ main_header_title }}</h2>
+    </div>
+    <div class="row">
+        <p class="content">{{ 'kyc.about.intro'|trans| raw }} </p>
+
+    {% if is_granted('ROLE_HOME_USER') %}
+        {{ 'kyc.guest.about'|trans |raw}}
+
+    {% elseif  is_granted('ROLE_RESTAURANT_USER')%}
+        {{ 'kyc.host.about'|trans |raw}}
+        <ol>
+            <li>{{ 'kyc.docType.idProof'|trans }}
+                <p>{{ 'kyc.hostusage.idproof'|trans }}</p>
+            </li>
+            <li>{{ 'kyc.docType.articleAss'|trans }}
+                <p>{{ 'kyc.usage.aa'|trans }}</p>
+            </li>
+            <li>{{ 'kyc.docType.regProof'|trans }}
+                <p>{{ 'kyc.usage.regproof'|trans }}</p>
+            </li>
+            <li>{{ 'kyc.docType.shareHolderDeclaration'|trans }}
+                <p>{{ 'kyc.usage.shareDec'|trans|raw }}</p>
+            </li>
+        </ol>
+
+    {% endif %}
+    <div class =" col-lg-12 col-md-12 col-sm-12 col-xs-12 dosdont">
+    <div class =" col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <h1>Do’s</h1>
+        <ul>
+            <li>{{ 'kyc.about.do1'|trans }}</li>
+            <li>{{ 'kyc.about.do2'|trans }}</li>
+
+        </ul>
+    </div>
+    <div class =" col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <h1>Don’ts</h1>
+        <ul>
+            <li>{{ 'kyc.about.dont1'|trans }}</li>
+            <li>{{ 'kyc.about.dont2'|trans }}</li>
+            <li>{{ 'kyc.about.dont3'|trans }}</li>
+
+        </ul>
+    </div>
+    </div>
+    {% if is_granted('ROLE_HOME_USER') %}
+        <br>
+        <p><a class="text-primary links" href="{{ path('guest_kyc_show')}}">{{ 'kyc.complete.link'|trans }}</a></p>
+    {% elseif is_granted('ROLE_RESTAURANT_USER')%}
+        <br>
+        <p> <a class="text-primary links" href="{{ path('kyc_show')}}">{{ 'kyc.complete.link'|trans }}</a></p>
+    {% endif %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/mmuser/css/about_kyc.css') }}" rel="stylesheet"/>
+{% endblock %}

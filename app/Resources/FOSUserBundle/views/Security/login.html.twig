@@ -1,0 +1,41 @@
+{# for new UI #}
+{#{% extends '@UIMealManager/main_layout.html.twig' %}#}
+{% extends "@WEBUI/Layouts/simple.html.twig" %}
+
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'layout.login'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+
+{% set viewData = {'title': 'layout.login'|trans} %}
+
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+
+{% block simple_main_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock %}
+
+{% block page_js %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({ cache: true });
+            $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+                FB.init({
+                    appId: '{{ fb_app_id }}',
+                    version: 'v2.3'
+                });
+            });
+        });
+        $(document).ready(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId={{ fb_app_id }}";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+{% endblock %}

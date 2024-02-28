@@ -1,0 +1,44 @@
+{% trans_default_domain 'Mealmatch' %}
+{#
+This file is used in SearchService, and served through a JSON response to the mm-search.js "load" method.
+#}
+<div class="meal-result-card flexbox">
+    <div class="meal-result-card-left">
+        <div class="text-center meal-result-card-date">{{ meal.startDateTime|date('d.') }}</br>
+            {{ meal.startDateTime|date('M.') }}
+        </div>
+    </div>
+    <div class="meal-result-card-center">
+        <a href="#" data-toggle="modal" data-target="#proMealModal-{{ meal.id }}">
+        <div class="meal-result-card-meal-title">{{ meal.tabletopic|length > 45 ? meal.tabletopic|slice(0, 45) ~ '...' : meal.tabletopic }}</div>
+        <div class="meal-result-card-meal-fulldate">{{ meal.startDateTime|date('d.m.y H:i') }}</div>
+        <div class="meal-result-card-meal-hostnloc">{{ meal.address.postalcode }} {{ meal.address.city }}
+            - {{ meal.host.restaurantprofile.name }}</div>
+        </a>
+    </div>
+    <div class="meal-result-card-right">
+        <div id="mealResultProMealProfileImage" class="meal-result-card-profile-image">
+            <a href="{{ path('public_user_by_username', {'pName': meal.host.username }) }}">
+            {% if meal.host.profile.imageName == "image/udefault.png" %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+            {% else %}
+                <img class="img-responsive img-circle" height="48px" width="48px"
+                     src="{{ asset(meal.host.profile.imageName, 's3img') }}" alt="Profileimage"/>
+            {% endif %}
+            </a>
+        </div>
+    </div>
+</div>
+<!-- ProMealModal#{{ meal.id }} -->
+<div class="modal fade" id="proMealModal-{{ meal.id }}" tabindex="-1" role="dialog" aria-labelledby="proMealModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% set proMeal = meal %}
+                {% set rProfile = meal.host.restaurantprofile %}
+                {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+            </div>
+        </div>
+    </div>
+</div>

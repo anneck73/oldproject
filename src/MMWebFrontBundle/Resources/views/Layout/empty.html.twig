@@ -1,0 +1,33 @@
+{% extends "@MMWebFront/twbs3-base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{#
+The simple layout is documented here: @todo
+The following 2 blocks are defined and arranged in this template:
+    - MAIN_CONTENT
+    - MAIN_BOTTOM
+Variables used by the template, can be overriden when extended.
+#}
+{% if viewDataImage is not defined %}{% set viewDataImage %}{{ asset('bundles/mmwebfront/images/mm/mealmatch_header.jpg') }}{% endset %}{% endif %}
+{% if viewData.title is not defined %}{% set viewData = {'title': '<!--// NO VIEW DATA TITLE //-->'} %}{% endif %}
+{% if left_icon is not defined %}{% set left_icon %}<span
+        class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}{% endif %}
+{% if main_header_title is not defined %}{% set main_header_title %}{{ viewData.title }}{% endset %}{% endif %}
+{% if main_header_subtitle is not defined %}{% set main_header_subtitle %}MAIN_HEADER_SUB_TITLE{% endset %}{% endif %}
+{% if main_header_action_path is not defined %}{% set main_header_action_path %}MAIN_HEADER_ACTION_PATH{% endset %}{% endif %}
+{% if main_header_action_label is not defined %}{% set main_header_action_label %}MAIN_HEADER_ACTION_LABEL{% endset %}{% endif %}
+{# Layout
+The simple layout only defines a fixed custom header with flexible image and title!
+#}
+{% block body %}
+    {#
+    This is just a div with nothing but the id marker for our content,
+    the rest ist EMPTY! ;)
+    #}
+    <article id="mm-content">
+        <section id="empty-content-main">
+        {% block empty_content %}
+            <!--// empty/empty_content //-->
+        {% endblock %}
+        </section>
+    </article>
+{% endblock body %}

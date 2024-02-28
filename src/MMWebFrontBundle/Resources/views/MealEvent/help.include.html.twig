@@ -1,0 +1,16 @@
+{% trans_default_domain 'Mealmatch' %}
+{% if homeMeal is defined %}
+    {% if homeMeal.isRootNode %}
+        <div class="alert alert-warning" role="alert">
+            <b>{{ 'note'|trans }}</b>: {{ 'homemeal.dates.note'|trans }}
+        </div>
+    {% endif %}
+{% endif %}
+{% if proMeal is defined %}
+    {% if proMeal.isRootNode %}
+        <div class="alert alert-warning" role="alert">
+            <b>{{ 'note'|trans }}</b>: {{ 'promeal.dates.note'|trans }}
+        </div>
+    {% endif %}
+{% endif %}
+

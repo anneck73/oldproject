@@ -1,0 +1,9 @@
+
+{% trans_default_domain 'MMWebFrontBundle' %}
+{% block title %}Mealmatch | {{ 'terms.title'|trans }} Restaurants {% endblock %}
+{% block body %}
+<iframe src="/pdfview?file=/bundles/mmwebfront/NutzungsbedingungenRestaurant.pdf"
+        width="100%"
+        height="800px"
+        class="container no-margin"></iframe>
+{% endblock body %}

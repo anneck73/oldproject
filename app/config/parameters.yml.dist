@@ -1,0 +1,124 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+
+    # Mealmatch
+    mm:
+      website_online: true
+      ga_tracking_id: UA-102805155-1
+
+    # Mealmatch features
+    mm_features:
+        ticket_coupons: false
+        messaging: false
+        autobahn: false
+        websockets: false
+        facebook_login: true
+        # feature to change template path
+        variant_default: prod
+
+    ## security channel
+    mm_security_channel: 'https'
+
+    ## The Fee's of Mealmatch
+    mm_fee_homemeal: 0.15
+    mm_fee_promeal: 0.15
+
+    # WWW -> MMWebFront and all default routes? @todo: not used yet ...
+    # Defaults to www.mealmatch.de
+    www_req.subdomain: www|pro|restaurant|home|mealmatch-stage|mealmatch
+    www_def.subdomain: www
+    www_req.domain: mealmatch|mealmatchapp|frb
+    www_def.domain: mealmatch
+    www_req.toplevel: de|io
+    www_def.toplevel: de
+    # Mobile -> MobileFront settings to only match m|mobile.* routes.
+    # Defaults to match m.mealmatch.de
+    mobile_req.subdomain: m|mobile
+    mobile_def.subdomain: m
+    mobile_req.domain: mealmatch|mealmatchapp|frb
+    mobile_def.domain: mealmatch
+    mobile_req.toplevel: de|local|io
+    mobile_def.toplevel: de
+    # Database
+    database_host: localhost
+    database_port: 3306
+    database_name: mealmatch_ui
+    database_user: root
+    database_password: root
+
+    # AWS3
+    aws3_bucket: xxx
+    aws3_host: xxx
+    aws3_key: xxx
+    aws3_region: xxx
+    aws3_secret: xxx
+    aws3_server: xxx
+
+    # Mailer
+    mailer_transport: smtp
+    mailer_host: login18.schwarzkuenstler.info
+    mailer_user: mailer@mealmatch.de
+    mailer_password: 'mvXV%%%x&amp;$!1UfFb'
+
+    # facebook
+    facebook_app_id: 1808267089461050
+    facebook_secret: 425be9cc5bf772511fec807a61169680
+
+    # GMaps
+    gmaps_api_key: AIzaSyC0xceQe_AIz0qbhS4QQtPdRX0022EBALI
+    # MangoPay
+    mangopay_coupon_wallet_id:
+        sandbox: '60376095'
+        live: '483592898'
+
+    mangopay_credentials:
+        live: false
+        sandbox:
+            client_id: '220777'
+            client_password: 'xLWXBMC5QADRK6g0koK3bAOqiAuWzEbQ62SkNokvfTXQftfXXx'
+        production:
+            client_id: 'mealmatchgmbhprod'
+            # client_password: 'xLWXBMC5QADRK6g0koK3bAOqiAuWzEbQ62SkNokvfTXQftfXXx'
+            client_password: 'tjeaFoVzsAZOw1uq2LMVNbKygMZHsgnozG0k9fDvvW6FY496K9'
+    # PayPal
+    paypal_credentials:
+        app_id: APP-9KN92377EH262120N
+        username: mealmatch_api1.steinebach.biz
+        password: N7Q25VBLBH8WGRSN
+        signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAqe2RNyOTETm3Xgzbm8xAbAkvqYr
+        email: payment@mealmatch.de
+        live: true
+        sandbox:
+          app_id: APP-80W284485P519543T
+          username: andre.anneck-facilitator_api1.mealmatch.de
+          password: HR5SLLDZM5VGRLMY
+          email: mmtest.merchant@mealmatch.de
+          signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A8VATVg.JX2gjB-7T2q3kBzbjmHH
+    # A secret key that's used to generate certain security-related tokens
+    secret:            eb3c36367a865febf98284bfdfe0c7bf7810ec95
+
+    # Composer Vendor
+    vendor_dir: '%kernel.root_dir%/../vendor'
+
+    # Memcached
+    session_memcache_prefix: mm_
+    session_memcache_expire: 14400
+    session_memcache_host_1: memcachecluster.frbit.com
+    session_memcache_port_1: 11211
+
+    # Twitter
+    twitter_credentials:
+        MealmatchKoeln:
+            consumerKey: "UDXt5X25iSKSDHteDszoyBL3f"
+            consumerSecret: "mWiVqbuyDvL41VIhHpKIL3XVxXHcvZCCHqj5LWGHSWLrTE56EF"
+            accessToken: "984755612536975362-2AJPikDgo9frY7oUpJDA5rWirXxlsct"
+            accessTokenSecret: "zLlOvnrobRDEn8x5qi8P7yL3NII27Cg6loMlNga9YsaA1"
+        MealmatchApp:
+            consumerKey: "2H0ZXyq64uZ9C56uESEkoUPp3"
+            consumerSecret: "rlk3mt1J0rNX8d1W8lvNUw93HJYvzo2YwBE8kVLsE6ZO0aedRM"
+            accessToken: "770179896106778624-gEGVvsF3FLxkZFwr618CZ2sxnAXwRmC"
+            accessTokenSecret: "9XfPKbL3IZby5nhAmcw5Wa1q89biNTxNuod2bMWIHbOjP"
+
+

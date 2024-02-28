@@ -1,0 +1,135 @@
+# Mealmatch Workflows
+framework:
+    workflows:
+        # ------------------------------------
+        # BaseMeal --- the same for all meals!
+        # ------------------------------------
+        base_meal:
+            type: 'workflow'
+            marking_store:
+                type: 'single_state'
+                arguments:
+                    - status
+            supports:
+                - Mealmatch\ApiBundle\Entity\Meal\BaseMeal
+            places:
+                - CREATED
+                - READY
+                - RUNNING
+                - RUNNING_EVENT
+                - STOPPED
+                - FINISHED
+                - CLOSED
+                - DELETED
+            transitions:
+                create_meals:
+                    from: CREATED
+                    to: READY
+                    # only if address is useable ...
+                    # @todo:  and subject.getMealOffers().count()>=1 but only for ProMeals
+                    guard: "subject.getAddress().isGeoCoded() and subject.getCategories().count()>=1"
+                start_meal:
+                    from: READY
+                    to: RUNNING
+                    guard: "!subject.isRootNode()"
+                stop_meal:
+                    from: RUNNING
+                    to: STOPPED
+                    guard: "subject.getGuests().count() < 1"
+                # Creates a new JoinRequest ...
+                join_meal:
+                    from: RUNNING
+                    to: RUNNING
+                    guard: "user !== subject.getHost() and subject.getMealType() === 'HomeMeal'"
+                # Creates a new Ticket
+                pay_meal:
+                    from: RUNNING
+                    to: RUNNING
+                    guard: "user !== subject.getHost() and subject.getSharedCost() > 0"
+                restart_meal:
+                    from: STOPPED
+                    to: READY
+                delete_meal:
+                    from: [STOPPED, READY]
+                    to: DELETED
+                # System-User / Bot-Agent triggered events.
+                # Finishe meals from running.
+                finish_meal:
+                    from: RUNNING
+                    to: FINISHED
+                    guard: "has_role('ROLE_SYSTEM')"
+                # Archive them (keep in db, remove from view)
+                archive_meal:
+                    from: FINISHED
+                    to: CLOSED
+                    guard: "has_role('ROLE_SYSTEM')"
+                # Signal that the event is commencing (start datetime)
+                start_meal_eventime:
+                    from: RUNNING
+                    to: RUNNING_EVENT
+                    guard: "has_role('ROLE_SYSTEM')"
+                # Signal that the event has ended (end datetime)
+                stop_meal_eventime:
+                    from: RUNNING_EVENT
+                    to: FINISHED
+                    guard: "has_role('ROLE_SYSTEM')"
+
+        # ------------------------------------
+        # MealTicket
+        # ------------------------------------
+        meal_ticket:
+            type: 'workflow'
+            marking_store:
+                type: 'single_state'
+                arguments:
+                    - status
+            supports:
+                - Mealmatch\ApiBundle\Entity\Meal\BaseMealTicket
+            places:
+                - CREATED
+                - PREPARE_PAYMENT
+                - PROCESSING_PAYMENT
+                - PROCESSING_COUPON_CODE
+                - PAYMENT_ERROR
+                - PAYED
+                - CANCELLED
+                - USED
+            transitions:
+                create_ticket:
+                    to: CREATED
+                    guard: "subject.getStatus() === null"
+                prepare_ticket:
+                    from: CREATED
+                    to: PREPARE_PAYMENT
+                    guard: "subject.getGuest() === user"
+                finish_prepare_ticket:
+                    from: PREPARE_PAYMENT
+                    to: CREATED
+                pay_ticket:
+                    from: CREATED
+                    to: PROCESSING_PAYMENT
+                    guard: "subject.isPayable() === true"
+                payment_retry:
+                    from: PAYMENT_ERROR
+                    to: CREATED
+                    guard: "subject.getGuest() === user"
+                payment_error:
+                    from: PROCESSING_PAYMENT
+                    to: PAYMENT_ERROR
+                    guard: "has_role('ROLE_SYSTEM')"
+                payment_success:
+                    from: PROCESSING_PAYMENT
+                    to: PAYED
+                    guard: "has_role('ROLE_SYSTEM')"
+                cancel_ticket:
+                    from: PAYMENT_ERROR
+                    to: CANCELLED
+                    guard: "subject.getGuest() === user"
+                use_ticket:
+                    from: PAYED
+                    to: USED
+                    guard: "subject.getHost() === user"
+                redeem_coupon:
+                    from: CREATED
+                    to: CREATED
+                    # guard: "subject.getGuest() === user and subject.guest.paymentProfile.isValid"

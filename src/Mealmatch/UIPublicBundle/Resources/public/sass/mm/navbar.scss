@@ -1,0 +1,433 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # NAVBAR
+\*------------------------------------*/
+
+
+// NAVBAR PUBLIC
+.mm-navbar-public{
+  max-height: $nav-height;
+  height: $nav-height;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+
+  li{
+
+    padding: 1rem 1rem 0 0;
+
+      a{
+          display: inline-block;
+          padding: 0;
+          color: $grey;
+      }
+
+      span{
+          color: $green;
+          font-size: $fs-xs;
+        padding-right: 3px;
+      }
+
+    .btn-success {
+      span {
+        color: $white;
+      }
+    }
+
+    &.mm-user-dropdown {
+      padding-top: 0;
+    }
+  }
+
+  .mm-user-profilimage-nav > a > img {
+    float: right;
+    height: 45px;
+  }
+
+
+  #mm-profile-image-dropdown-menu {
+
+    border-top-color: transparent;
+    padding: 0;
+
+    li {
+
+      padding: 0;
+      @include t-ease-background(0.5s);
+
+      a {
+        padding: 0.5rem 1rem;
+      }
+
+      &:hover {
+        background-color: $green;
+        color: $white;
+      }
+
+      a:hover {
+        background-color: transparent;
+        background-image: none;
+        color: $white;
+      }
+    }
+  }
+
+  
+  .navbar-nav{
+
+    li{
+      a:hover, 
+      a:focus{
+        color: $green;
+        background-color: transparent; 
+      }
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    margin-top: -5px;
+    padding: 0;
+  }
+}
+
+.navbar-right {
+  margin-right: inherit;
+  margin-top: 0;
+}
+
+
+
+.mm-navbar-public,
+.mm-navbar-xs{
+  background-color: $white;
+  border-bottom: none;
+  @include box-shadow(0px 3px 5px 0px rgba(0,0,0,0.75));
+}
+
+// ALL XS-NAVBARS
+.mm-navbar-xs{
+  max-height: $nav-height-xs;
+  height: $nav-height-xs;
+  padding: 5px 10px;
+
+  .navbar-content{
+    @include flexbox();
+    @include align-items(center);
+    height: 100%;
+  }
+}
+
+
+// NAVBAR PUBLIC XS
+.mm-navbar-xs-public{
+  
+  a.navbar-brand {
+
+    width: 100%;
+
+    span{
+      margin-top: 10px;
+    }
+
+    img{
+      height: 35px;
+      width: auto;
+    }
+  }
+
+}
+
+
+// NAVBAR USER XS
+.mm-navbar-xs-user{
+  
+  img.mm-navbar-logo{
+    width: 9rem;
+    height: auto;
+  }
+
+  .mm-search{
+    span{
+      font-size: 22px;
+      line-height: 2;
+      color: $grey;
+      margin-left: 8px;
+    }
+  }
+}
+
+
+// SEARCH BOX
+
+.mm-search{
+  button{
+    border: none;
+    background-color: transparent;
+  }
+}
+
+/*.mm-search{
+  .mm-search-form-xs{
+    position: absolute;
+    top: 10px;
+
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+
+    .input-group{
+      //width: 232px;
+    }
+
+    input.form-control{
+      width: 0;
+    }
+
+    input, button,
+    .input-group input, 
+    .input-group .btn-success{
+      height: 35px;
+    }
+
+    .input-group-btn{
+      span{
+        font-size: 22px;
+        line-height: 1.1;
+        color: $grey;
+      }
+
+     &:active{
+        background: $green;
+      }
+
+      &:active +  input.form-control{
+        width: 232px;
+      }
+    }
+
+  }
+}*/
+
+
+
+// MODAL
+.modal-menu{
+
+  .modal-dialog{
+    margin: 0;
+  }
+
+  .modal-content{
+    border-radius: 0;
+    border: none;
+  }
+
+  .modal-body{
+
+    padding: 0;
+
+    // Menu
+    ul.navbar-nav{
+      margin: 0;
+
+      > li > a{
+        text-shadow: none;
+      }
+    }
+
+    span{
+      font-size: 1rem;
+      width: 20px;
+      padding-right: 10px;
+      color: $green;
+    }
+
+    // Dropdown in Menu
+    li.dropdown{
+
+      &.open >a{
+        @include box-shadow(0 2px 2px 0 rgba(0,0,0,0.5));
+        border-bottom: none;
+        z-index: 200;      
+      }
+
+    }
+
+    // 2nd Menu
+    ul.dropdown-menu{
+      @include box-shadow(none);
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      margin: 0;
+      padding: 0;
+      z-index: 100;
+
+      li{
+        background-color: $light-white;
+
+        a{
+          color: $grey;
+          font-weight: 200;
+          border-bottom: 1px solid $white;
+          padding: 10px 15px 10px 45px;
+          font-size: 16px;
+        }
+
+        &:last-child a{
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .nav li a{
+    padding: 12px 15px;
+    border-bottom: 1px solid $light-white;
+
+    &:hover, &:active{
+      background-color: $green;
+      color: #fff;
+
+      span{
+        color: #fff;
+      }
+    }
+  }
+
+  .nav li:last-child a{
+    border-bottom: none;
+  }
+
+  .mm-only-search{
+    .input-group{
+      
+      width: 100%;
+
+    }
+  }
+
+}
+
+
+
+
+// soa, 03.2018: ab hier überprüfen //
+
+.navbar-brand {
+  margin: 0;    // überflüssig?
+  padding: 0;
+  height: auto; // überflüssig?
+}
+
+
+
+#mm-become-host-dropdown-menu {
+    margin-top: 4px;
+}
+
+.mm-navbar-profile-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+
+
+.mm-navbar-xs-user-dropdown {
+    margin-right: 5px;
+    margin-top: 5px;
+    z-index: 150;
+}
+
+/*.mm-search-form-xs {
+    margin-left: 75px;
+    margin-right: 75px;
+    margin-top: -60px;
+}*/
+
+
+#navbarSearchBtn {
+    padding: 0;
+}
+
+
+
+/******
+ 
+ kann wahrscheinlich raus, soa, 03.2018
+
+ *****/
+
+@media (max-width: 767px) {
+    /*.mm-navbar-public .navbar-nav .open .dropdown-menu > li > a {
+        color: #ecf0f1;
+    }
+    .mm-navbar-public .navbar-nav .open .dropdown-menu > li > a:hover,
+    .mm-navbar-public .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #000000;
+    }
+    .mm-navbar-public .navbar-nav .open .dropdown-menu > .active > a,
+    .mm-navbar-public .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .mm-navbar-public .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #000000;
+        background-color: #000000;
+    } */
+
+
+}
+
+/*
+.badge {
+  margin-left: 1rem;
+}
+
+
+.mm-navbar-logo {
+  height: 45px;
+}
+*/
+
+.mm-navbar-public ul .dropdown-menu {
+    /* background-color: #86bd24; */
+}
+
+.mm-navbar-public .navbar-nav > .active > a,
+.mm-navbar-public .navbar-nav > .active > a:hover,
+.mm-navbar-public .navbar-nav > .active > a:focus {
+    /* mm-green */
+    //color: #86bd24;
+    /* background-color: #86bd24; */
+}
+
+/*.mm-navbar-public .navbar-nav > .open > a,
+.mm-navbar-public .navbar-nav > .open > a:hover,
+.mm-navbar-public .navbar-nav > .open > a:focus {
+    color: #000000;
+  background-color: transparent;
+}
+
+.mm-navbar-public .navbar-toggle {
+    border-color: #000000;
+}
+.mm-navbar-public .navbar-toggle:hover,
+.mm-navbar-public .navbar-toggle:focus {
+    background-color: #000000;
+}*/
+.mm-navbar-public .navbar-toggle .icon-bar {
+    /*background-color: #ecf0f1; */
+}
+
+
+/*.mm-navbar-public .navbar-link {
+    color: #ecf0f1;
+}
+.mm-navbar-public .navbar-link:hover {
+    color: #000000;
+}*/

@@ -1,0 +1,4 @@
+services:
+#    mealmatch_user_profile_app.example:
+#        class: Mealmatch\UserProfileAppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

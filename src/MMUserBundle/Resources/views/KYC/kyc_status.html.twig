@@ -1,0 +1,55 @@
+{% extends '@WEBUI/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title = 'kyc.status.title'|trans %}
+{% set main_header_subtitle = 'kyc.status.title'|trans %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+{% set userData= 0 %}
+    <div class="row margin-bottom3 margin-top1-5">
+        <div class="row">
+            <h2 class="no-margin">{{ main_header_title }}</h2>
+            <br>
+        </div>
+        <div class="table-responsive">
+            <table style="width:100%">
+                <tr>
+                    <th>{{ 'kyc.status.userId'|trans }}</th>
+                    <th>{{ 'profile.show.username'|trans }}</th>
+                    <th>{{ 'kyc.status.mangopayId'|trans }}</th>
+                    <th>{{ 'kyc.status.overall'|trans }}</th>
+                    <th>{{ 'kyc.status.details'|trans }}</th>
+                </tr>
+
+                {% for kycProfile in kycProfiles %}
+                <tr>
+                    <td>{{ kycProfile['userId'] }}</td>
+                    <td>{{ kycProfile['userName'] }}</td>
+                    <td>{{ kycProfile['mangopayId'] }}</td>
+                    <td>{{ kycProfile['status'] }}</td>
+                    {% set kyc = kycProfile %}
+                    {% if kycProfile['status'] == 'Pending' or kycProfile['status'] =='Approved' %}
+                    <td><a href="{{ path('userprofile_d_show', {'request':kyc }) }}" data-toggle="modal" data-target="#kycModal-1" >{{ 'kyc.status.select'|trans }}</a></td>
+                    {% else %}
+                    <td class = "unselectable">{{ 'kyc.status.select'|trans }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="kycModal-1" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{ include('@MMUser/KYC/kyc.html5.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+       <link href="{{ asset('bundles/mmuser/css/kyc_status.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+

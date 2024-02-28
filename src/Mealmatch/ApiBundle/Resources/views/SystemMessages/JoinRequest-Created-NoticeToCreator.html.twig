@@ -1,0 +1,6 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>{{ 'joinrequest.created.mail.salutation'|trans({ '%hostusername%': GUEST.username }) }}</p>
+<p>Du hast für das Meal {{ MEAL.title}} eine Anfrage zur Teilnahme gestellt.</p>
+<p>Unter dem Punkt <a href="{{ path('joinrequest_index') }}">"Meine Matches"</a> kannst du jederzeit den Status deiner Anfrage einsehen.</p>
+<p>Dort wirst du auch automatisch zum Bezahlvorgang weitergeleitet, findest den Weg zum Gastgeber und mehr Details zu anderen Teilnehmern.</p>
+<p>- {{ 'joinrequest.mail.yourteam'|trans }}</p>

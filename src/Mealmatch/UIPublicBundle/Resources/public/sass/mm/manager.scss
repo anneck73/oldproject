@@ -1,0 +1,66 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # CLASSES
+\*------------------------------------*/
+
+$user-img-size: 200px;
+
+.mm-user-image {
+  position: relative;
+  border-radius: 50%;
+  /*@include t-ease-background(0.5s);*/
+
+
+  .mm-upload-hover-img {
+    background-color: transparent;
+  }
+
+  &:hover .mm-upload-hover-img {
+    display: flex !important;
+    background-color: $green;
+    border-radius: 50%;
+    opacity: 1;
+    color: $grey;
+  }
+
+  .upload-image {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+    &.mm-upload-hover-img {
+      @include t-ease-all(0.5s); // klappt noch nicht
+    }
+
+    a {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      text-decoration: none;
+      z-index: 10;
+    }
+
+    span {
+      font-size: $fs-m;
+    }
+  }
+}
+
+
+.mm-user-image,
+.mm-user-image .upload-image,
+.mm-user-image img{
+    width: $user-img-size;
+    height: $user-img-size;
+}

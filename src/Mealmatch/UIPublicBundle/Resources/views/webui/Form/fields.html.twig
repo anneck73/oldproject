@@ -1,0 +1,22 @@
+{# Custom form row for mealmatch ... #}
+{% trans_default_domain 'Mealmatch' %}
+{% block form_row %}
+    {% spaceless %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                {{ form_label(form) }}
+                <a tabindex="0" role="button"
+                   data-trigger="focus"
+                   data-toggle="popover"
+                   title="{% if title is defined %}{{ title }}{% else %}---{{ 'help'|trans }}{% endif %}"
+                   data-placement="{% if datap is defined %}{{ datap }}{% else %}left{% endif %}"
+                   data-content="{% if help is defined %}{{ help }}{% endif %}"
+                   class="pull-right glyphicon icon-question mm-green mm-question-sign"></a>
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    </div>
+    {% endspaceless %}
+{% endblock form_row %}

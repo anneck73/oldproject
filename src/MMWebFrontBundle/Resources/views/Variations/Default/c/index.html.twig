@@ -1,0 +1,25 @@
+{% extends 'MMWebFrontBundle::twbs3-base.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+
+{% block body %}
+    <div class="visible-xs">
+        {{ include('MMWebFrontBundle:Partials:bigSlide-xs.partial.html.twig') }}
+        {{ include('MMWebFrontBundle:Default/index:body-xs.html.twig') }}
+    </div>
+    <div class="hidden-xs">
+        {{ include('MMWebFrontBundle:Partials:bigSlide.partial.html.twig') }}
+        {{ include('MMWebFrontBundle:Default/index:body.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block GA_inner %}
+    {{ parent() }}
+    ga('variationsTracker.set', 'variation', 'c');
+
+    {% if is_granted('ROLE_USER') %}
+        ga('variationsTracker.set', 'userid', '{{ app.user.id }}');
+    {% endif %}
+
+    ga('variationsTracker.send');
+{% endblock GA_inner %}

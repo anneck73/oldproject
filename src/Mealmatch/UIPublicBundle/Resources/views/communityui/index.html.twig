@@ -1,0 +1,73 @@
+{# v0.2.18-dev, wizard: THIS TEMPLATE IS NOT USED AS A LAYOUT?!#}
+
+{% extends '@WEBUI/newUI-Base.html.twig' %}
+{% import '@WEBUI/Widgets/mealmatch.macros.html.twig' as widget %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% block body %}
+
+    <div class="search-container">
+        <div class="search-sec">
+            <h3>{{ 'startpage.search.top.teaser'|trans }}</h3>
+            <form role="search" method="get" action="{{ path('search_do') }}">
+                <input name="searchLocation" type="text" class="home-search" placeholder="Deine Mealmatch Community in Köln">
+                <button class="search-btn">{{ 'search.startPageWithCards'|trans }}</button>
+            </form>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="container container-cust">
+            <div class="row">
+                <div class="meal-cards">
+{#                    {{ widget.mealcardsHorizontal(mealsInCityStartingToday, 'startpageWithCards.teaser.headline'|trans) }}#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="meet-people">
+        <h3 class="text-center">{{ 'startpage.info2.block1'|trans|nl2br }}</h3>
+        <div class="mm-spacer"></div>
+        <div class="mm-spacer"></div>
+
+        <div class="icons-container">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 text-center">
+                        <span class="mm-circle-icon mm-icon-host-circle"></span>
+                        <p>{{ 'startpage.info2.block2'|trans }}</p>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <span class="mm-circle-icon mm-icon-guest-circle"></span>
+                        <p>{{ 'startpage.info2.block3'|trans }}</p>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <span class="mm-circle-icon mm-icon-create-meal-circle"></span>
+                        <p>{{ 'startpage.info2.block4'|trans }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mm-spacer"></div>
+    <div class="mm-spacer"></div>
+
+    <div class="signup-free">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-offset-1">
+                    <h3>{{ 'startpage.teaser.headline'|trans }}</h3>
+                    <p>{{ 'startpage.info.block1'|trans }}</p>
+                    <p>{{ 'startpage.info.block2'|trans }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ include('@WEBUI/testimonials.html.twig') }}
+
+{% endblock %}

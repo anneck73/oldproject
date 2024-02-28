@@ -1,0 +1,22 @@
+{% trans_default_domain 'Mealmatch' %}
+<h3 class="text-center payment-title">
+    {{ ticket.host.restaurantprofile.name }}
+</h3>
+{% if ticket.status == 'PAYED' %}
+<h3 class="text-center payment-title">
+    {{ ticket.number }}
+</h3>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-9">
+        <p>{{ 'restaurantprofile.registration.company'|trans }} : {{ ticket.host.restaurantprofile.company }}</p>
+        <p>{{ 'profile.registration.address.label'|trans }} : {{ ticket.host.restaurantprofile.address.locationString }}</p>
+        <p>{{ 'restaurantprofile.taxid.label'|trans }} : {{ ticket.host.restaurantprofile.taxid }}</p>
+    </div>
+</div><div class="row">
+    <div class="col-lg-3">
+        <p><nobr>{{ 'mealticket.created.at'|trans }}: {{ ticket.createdAt|date('d.m.y') }}</nobr></p>
+        <p><nobr>{{ 'mealticket.guest'|trans }}: {{ ticket.guest.profile.firstname }} {{ ticket.guest.profile.lastname }}</nobr></p>
+    </div>
+</div>

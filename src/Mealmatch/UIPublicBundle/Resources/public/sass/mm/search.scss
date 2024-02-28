@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+*/
+
+/*------------------------------------*\
+  # SEARCH
+\*------------------------------------*/
+
+#search-results {
+
+  padding: 1rem 1.5rem;
+  overflow-y: scroll;
+  background-color: $white;
+
+  #resultCount {
+    padding-bottom: 1rem;
+    font-size: $fs-l;
+  }
+
+}
+
+.meal-result-card {
+
+  border-radius: $border-radius;
+  border: 2px solid $grey;
+  margin-bottom: 0.5rem;
+  flex-grow: 2;
+
+  @include t-ease-background(0.5s);
+
+  &:hover{
+    background-color: $green;
+  }
+
+  .meal-result-card-left,
+  .meal-result-card-center,
+  .meal-result-card-right {
+    padding: 0.5rem 0.5rem 0;
+
+  }
+
+  .meal-result-card-left {
+    background-color: $grey;
+    width: 100px;
+    // height: 100px;
+    font-size: $fs-l;
+    color: $green;
+    text-transform: uppercase;
+  }
+
+  .meal-result-card-center {
+    flex-grow: 1;
+  }
+
+  .meal-result-card-right{
+    min-width: 100px;
+    height: 100px;
+  }
+
+  .meal-result-card-meal-title {
+    font-size: $fs-s;
+    font-weight: 300;
+  }
+
+  .meal-result-card-meal-fulldate,
+  .meal-result-card-meal-hostnloc {
+    font-size: $fs-xs;
+  }
+
+  .meal-result-card-profile-image {
+    img {
+      width: 80px;
+      height: 80px;
+    }
+
+  }
+
+}
+
+#search-results-xs{
+  .meal-result-card-top{
+    font-size: $fs-xl;
+    color: $white;
+    background-color: $grey;
+    height: 50px;
+    padding: 5px; 
+  }
+
+  .meal-result-card-profile-image img{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+

@@ -1,0 +1,40 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="modal-content" role="document">
+    <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{ 'layout.login'|trans }}</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.getToken('authenticate') }}"/>
+            <label for="username">{{ 'security.login.username'|trans }}</label>
+            <input type="text" class="form-control" id="username" name="_username" value="" required="required"
+                   autofocus/>
+            <br/>
+            <label for="password">{{ 'security.login.password'|trans }}</label>
+            <input type="password" id="password" class="form-control" name="_password" required="required"/>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit">
+                {{ 'security.login.submit'|trans }}
+            </button>
+        </div>
+        <div class="modal-footer">
+            <p class="text-left">Falls Du noch kein Profil angelegt hast, dann registriere Dich <u><a
+                            href="{{ path('fos_user_registration_register') }}">hier</a></u> kostenlos. Es dauert nur 1
+                Minütchen.</p>
+        </div>
+    </form>
+    {% for owner in hwi_oauth_resource_owners() %}
+        {% if mm_features[owner ~ '_login'] is defined and mm_features[owner ~ '_login'] %}
+            <div class="modal-footer">
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': owner }) }}">
+                    <button class="btn btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span>
+                        Einklick-Registrierung mit {{ owner }}</button>
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

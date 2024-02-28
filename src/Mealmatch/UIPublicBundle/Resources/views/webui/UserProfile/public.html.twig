@@ -1,0 +1,210 @@
+{% extends '@WEBUI/Layouts/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# Set restaurant with specified userAccount in restaurant_role for readability #}
+{% set restaurant = uAccount %}
+{% block title %}Mealmatch Home: {{ uAccount.username }}{% endblock %}
+{% set main_header_title = uAccount.username %}
+{% set main_header_subtitle = 'userprofile.public.subtitle'|trans %}
+
+{% block simple_main_content %}
+
+    <div class="restaurant-img">
+        <div class="stationimg-div">
+            {% if uAccount.profile.imageName != "image/udefault.png" %}
+                <img src="{{ asset(uAccount.profile.imageName, 's3img') }}"
+                     alt="Profileimage"/>
+            {% else %}
+                <img src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                     alt="Profileimage"/>
+            {% endif %}
+            {#<h3>{{ main_header_title }}</h3>#}
+        </div>
+    </div>
+    <div class="restaurant-listdetails">
+        <div class="col-md-12">
+            <div class="res-menu card">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#meals" aria-controls="meals" role="tab" data-toggle="tab">
+                            <i class="fa fa-user-o" aria-hidden="true"></i><span class="tab-heading">{{ 'meal.show.title'|trans }}</span></a></li>
+                    <li role="presentation"><a href="#over" aria-controls="over" role="tab" data-toggle="tab">
+                            <i class="fa fa-map-o" aria-hidden="true"></i><span class="tab-heading">{{ 'public-footer.about'|trans }}</span></a></li>
+                    <li role="presentation"><a href="#address" aria-controls="address" role="tab" data-toggle="tab">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i><span class="tab-heading">{{ 'profile.registration.address.label'|trans }}</span></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="meals">
+                        <div class="row">
+                            <h4 class="station-heading">{{ uAccount.username }}'s {{ 'userprofile.meals'|trans }}</h4>
+                            {% for meal in mHosted %}
+                                <div class="col-md-12">
+                                    <div class="shop-wrap">
+                                        <div class="shop-logo">
+                                            {% if uAccount.profile.imageName != "image/udefault.png" %}
+                                                <img src="{{ asset(uAccount.profile.imageName, 's3img') }}"
+                                                     alt="Profileimage"/>
+                                            {% else %}
+                                                <img src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                                     alt="Profileimage"/>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="shop-det res-menu">
+                                            <span class="shop-name">{{ meal.title }}</span>
+                                            <div class="shop-dtetime">
+                                                <span class="icon-calendar"></span> <span> {{ meal.startDateTime|date('d.m.Y - H:i') }} Uhr</span>
+                                            </div>
+                                            <div class="shop-location">
+                                                <span class="icon-pie-chart"></span> <span>
+                                                {% set freeSeats =  meal.maxNumberOfGuest - meal.guests.count %}
+                                                    {{ meal.guests|length }} {{ 'meal.seats.taken'|trans }}
+                                                    | {{ freeSeats }} {{ 'meal.seats.free'|trans }}</span>
+                                            </div>
+                                        </div>
+                                        {% set item = '' %}
+                                        <div id="restaurant-guest-carousel" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for guest in meal.guests %}
+                                                    {% if loop.first %} {% set item = 'active' %} {% endif %}
+                                                    {% if (loop.index % 3) == 1 %}
+                                                        <div class="item {{ item }}">
+                                                        <div class="guest">
+                                                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                                                    <img class="guset-pic" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                                                {% else %}
+                                                                    <img class="guset-pic" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                        {% if loop.last %}
+                                                            {{ "</div>" }}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {%  if (loop.index % 3) == 2 %}
+                                                        <div class="guest">
+                                                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                                                    <img class="guset-pic" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                                                {% else %}
+                                                                    <img class="guset-pic" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                        {% if loop.last %}
+                                                            {{ "</div>" }}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {% if (loop.index % 3) == 0 %}
+                                                        <div class="guest">
+                                                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                                                    <img class="guset-pic" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                                                {% else %}
+                                                                    <img class="guset-pic" src="{{ asset(guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% set item = '' %}
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <!-- Left and right controls -->
+                                            {% if meal.guests|length > 3 %}
+                                                <a class="left carousel-control" href="#restaurant-guest-carousel" data-slide="prev">
+                                                    <i class="fa fa-chevron-left"></i>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="right carousel-control" href="#restaurant-guest-carousel" data-slide="next">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="shopprice-div">
+                                            <a href="#" data-toggle="modal" data-target="#proMealModal-{{ meal.id }}">
+                                                <button type="button" class="btn btn-lg btn-success btn-block">
+                                                    {{ 'meal.action.joinminimum'|trans }} {{ meal.sharedCost|number_format(2) }} {{ meal.sharedCostCurrency }}
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane guest-about" id="over">
+                        {#<h4 class="station-heading">{{ restaurant.username }}</h4>
+                        <p class="tab-text">{{ restaurant.restaurantProfile.description|raw }}</p>
+                        <div class="row over-img">
+                            {% for pic in restaurant.restaurantProfile.pictures %}
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <img src="{{ vich_uploader_asset(pic, 'fileData') }}" alt="{{ pic.fileName }}"/>
+                                </div>
+                            {% endfor %}
+                        </div>#}
+                        {% if app.user %}
+                            {#<h2>{{ 'userprofile.public.subtitle'|trans }}</h2>#}
+                            <p class="guest-un">{{ uAccount.profile.firstname }} {{ uAccount.profile.lastname }}, {{ uAccount.profile.age }}</p>
+                            <h3 class="guest-hobbiestitle">{{ 'profile.registration.hobbies'|trans }} : <span class="guest-hobbies">Games</span></h3>
+                            <p>{{ uAccount.profile.hobbies }}</p>
+                            <h3 class="guest-desc">{{ 'help.user.profile.selfDescription'|trans }}</h3>
+                            <p>{{ uAccount.profile.selfDescription|raw }}</p>
+                        {% else %}
+                            <p>{{ 'userprofile.public.error'|trans }}</p>
+                        {% endif %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="address"><h2 class="station-heading">{{ 'restaurantprofile.destination.title'|trans }}</h2>
+                        <br>
+                        <div class="row over-img">
+                            <div class="col-lg-4 col-md-3 col-sm-3">
+                                <h3 class="station-headings">{{ 'profile.registration.address.label'|trans }}</h3>
+                                {#<p class="font">{{ main_header_title }}<br/>
+                                    {{ restaurant.restaurantProfile.address.streetName }} {{ restaurant.restaurantProfile.address.streetNumber }}
+                                    <br/>
+                                    {{ restaurant.restaurantProfile.address.postalCode }} {{ restaurant.restaurantProfile.address.city }}</p>#}
+                                <p class="font">
+                                    {% if app.user %}
+                                    {# User is logged in #}
+                                    {% if meal_service.isUserGuestOfHost(app.user, uAccount) %}
+                                        {# User is a guest in one of the meals of the host ...  #}
+                                        {{ uAccount.profile.firstname }} {{ uAccount.profile.lastname }} <br/>
+                                        {{ uAccount.profile.addressLine1 }}<br/>
+                                        {% if uAccount.profile.addressLine2 != null %}
+                                            {{ uAccount.profile.addressLine2 }}<br/>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% else %}
+                                <p>{{ 'userprofile.public.error'|trans }}</p>
+                                {% endif %}
+                                {{ uAccount.profile.areaCode }} {{ uAccount.profile.city }}
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-sm-3">
+                                {#<h3 class="station-headings">{{ 'restaurantprofile.destination.title'|trans }}</h3>#}
+                                <p class="font">{{ 'JR.meal.wayto.text.start'|trans }}: </p>
+                                <a target="_blank" class="dir-btn"
+                                   href="https://www.google.com/maps/dir/Current+Location/{{ uAccount.profile.addressLine1 }},  {{ uAccount.profile.areaCode }} {{ uAccount.profile.city }}">
+                                    {{ 'JR.meal.route'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

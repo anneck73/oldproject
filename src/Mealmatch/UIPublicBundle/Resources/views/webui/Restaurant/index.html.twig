@@ -1,0 +1,151 @@
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{# Set Variables #}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% set colorClass %}mm-green{% endset %}
+{# Overwrite Blocks #}
+{% block title %}Mealmatch | {{ 'restaurant.title'|trans }}{% endblock %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+
+{% block main_content %}{% spaceless %}
+    <div class="res-menu card my-restaurant">
+        <ul class="nav nav-tabs res-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#meals" aria-controls="meals" role="tab" data-toggle="tab">
+                    <i class="fa fa-server" aria-hidden="true"></i><span class="tab-heading">{{ 'restaurantview.tickets-sold-last.label'|trans }}</span></a></li>
+            <li role="presentation"><a href="#over" aria-controls="over" role="tab" data-toggle="tab">
+                    <i class="fa fa-users" aria-hidden="true"></i><span class="tab-heading">{{ 'restaurantview.served-next.label'|trans }}</span></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content ">
+            <div role="tabpanel" class="tab-pane active " id="meals">
+                <div class="col-md-12">
+                    <div class="mela-manager-table table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="status">{{ 'restaurantview.tablehead.payed'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.meal'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.guest'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.actions.label'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for ticket in ticketsSoldLast %}
+                                {# Determin CSS Class to use for status color symbol #}
+                                {% if ticket.status == 'PAYED' %}{% set colorClass %}mm-green{% endset %}
+                                {% elseif ticket.status == 'PROCESSING' %}{% set colorClass %}mm-light-grey{% endset %}
+                                {% elseif ticket.status == 'CANCELLED' %}{% set colorClass %}mm-light-grey{% endset %}
+                                {% elseif ticket.status == 'ERROR' %}{% set colorClass %}mm-red{% endset %}
+                                {% endif %}
+                                <tr>
+                                    <td>
+                                        <div class="mm-meal-status">
+                                            <div class="mm-meal-status-icon fa fa-bullseye {{ colorClass }}" aria-hidden="true">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="res-meal">
+                                        <div class="restaurant-meal">
+                                            <div>
+                                                {% set mealType %}{{ ticket.baseMeal.mealType }}{% endset %}
+                                                {% if mealType == "ProMeal" %}
+                                                    {% set mealOffer = ticket.selectedMealOffer %}
+                                                    <p><b>{{ ticket.baseMeal.tabletopic }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                                                    <p class="mm-footer-text">{{ mealOffer.name }}
+                                                        | {{ mealOffer.price }} {{ mealOffer.currency }}</p>
+                                                {% endif %}
+                                                {% if mealType == "HomeMeal" %}
+                                                    <p><b>{{ ticket.baseMeal.title }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td  class="single-guest-cont">
+                                        <a href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">
+                                            {% if ticket.guest.profile.imageName == "image/udefault.png" %}
+                                                <img class="join-request-img" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage"/>
+                                            {% else %}
+                                                <img class="join-request-img" src="{{ asset(ticket.guest.profile.imageName, 's3img') }}" alt="Profileimage"/>
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                    <td class="campaign">
+                                        <a class="btn btn-lg btn-success mymatches-act"
+                                           href="{{ path('api_mealticket_show', {'id': ticket.id}) }}">
+                                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="over">
+                <div class="col-md-12">
+                    <div class="mela-manager-table table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="status">{{ 'restaurantview.tablehead.payed'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.meal'|trans }}
+                                    & {{ 'restaurantview.tablehead.offer'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.guest'|trans }}</th>
+                                <th class="">{{ 'restaurantview.tablehead.actions.label'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for ticket in ticketsNext %}
+                                <tr>
+                                    <td>
+                                        <div class="mm-meal-status">
+                                            <div class="mm-meal-status-icon fa fa-bullseye
+                                     {% if ticket.status == 'PAYED' %} mm-green
+                                     {% endif %}" aria-hidden="true">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td  class="res-meal">
+                                        <div class="restaurant-meal-offer">
+                                            <a href="{{ path('api_mealticket_show', {'id': ticket.id}) }}">
+                                                {% set mealType %}{{ ticket.baseMeal.mealType }}{% endset %}
+                                                {% if mealType == "ProMeal" %}
+                                                    {% set mealOffer = ticket.selectedMealOffer %}
+                                                    <p><b>{{ ticket.baseMeal.tabletopic }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                                                    <p class="mm-footer-text">{{ mealOffer.name }}
+                                                        | {{ mealOffer.price }} {{ mealOffer.currency }}</p>
+                                                {% endif %}
+                                                {% if mealType == "HomeMeal" %}
+                                                    <p><b>{{ ticket.baseMeal.title }}</b> | <span class="mm-footer-text">{{ ticket.baseMeal.startDateTime|date('d.m.y H:i') }} Uhr</span></p>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td  class="single-guest-cont">
+                                        {#<a href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">#}
+                                        {% if ticket.guest.profile.imageName == "image/udefault.png" %}
+                                            <img class="join-request-img" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" title="{{ ticket.guest.username }}"/>
+                                        {% else %}
+                                            <img class="join-request-img" src="{{ asset(ticket.guest.profile.imageName, 's3img') }}" alt="Profileimage" title="{{ ticket.guest.username }}"/>
+                                        {% endif %}
+                                        {#</a>#}
+                                    </td>
+                                    <td class="campaign">
+                                        <a class="btn btn-lg btn-success mymatches-act"
+                                           href="{{ path('public_user_by_username', {'pName': ticket.guest.username}) }}">
+                                            {{ 'restaurantview.action.ticket.label.guestprofile'|trans }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endspaceless %}
+{% endblock %}

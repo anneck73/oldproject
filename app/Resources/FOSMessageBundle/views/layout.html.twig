@@ -1,0 +1,9 @@
+{% extends '@WEBUI/newUI-Base.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}{% endblock title%}
+{% block body %}
+    <div id="mm-content" class="container-fluid table mm-content">
+       {% block fos_message_content %}{% endblock %}
+    </div>
+
+{% endblock body %}

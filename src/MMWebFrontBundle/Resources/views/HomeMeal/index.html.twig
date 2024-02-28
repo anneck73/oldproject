@@ -1,0 +1,108 @@
+{# Meine Home-Meals Verwalten #}
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{#% block navbar %}
+    <div class="hidden-xs">
+        {% include('MMWebFrontBundle:NavBars:host.navbar.html.twig') %}
+    </div>
+    <div class="visible-xs">
+        {% include('MMWebFrontBundle:NavBars:host-xs.navbar.html.twig') %}
+    </div>
+{% endblock %#}
+{% set main_header_title = 'meal.index.title'|trans %}
+{% set main_header_subtitle = 'meal.index.subtitle'|trans %}
+    {% set left_icon %}<span class="mm-circle-icon mm-icon-meals-circle"></span>{% endset %}
+{% set main_header_action_path = path('api_homemeal_new') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-plus"></span> {{ 'homemeal.create.label'|trans }}
+{% endset %}
+{% block main_content %}
+    <table class="mm-table">
+        <thead>
+        <th class="col-xs-1">{{ 'meal.status.label'|trans }}</th>
+        <th class="col-xs-6">{{ 'homemeal.label'|trans }}</th>
+        <th class="col-xs-3">{{ 'meal.guests'|trans }}</th>
+        <th class="col-xs-2">{{ 'meal.index.available.actions.label'|trans }}</th>
+        </thead>
+        <tbody>
+
+        {% for meal in allChildMeals %}
+            {% set freePlaces = (meal.maxnumberofguest - meal.guests|length) %}
+            {% set maxPlaces = meal.maxnumberofguest %}
+
+            <tr>
+                <!-- Status -->
+                <td class="col-xs-1">
+                    <div class="mm-meal-status">
+                        <div class="mm-meal-status-icon fa fa-bullseye
+                                    {% if meal.status == 'RUNNING' %} mm-green
+                                    {% elseif meal.status == 'READY' %} mm-red
+                                    {% elseif meal.status == 'STOPPED' %} mm-light-grey
+                                    {% elseif meal.status == 'FINISHED' %} mm-light-grey
+                                    {% endif %}" aria-hidden="true"></div>
+                        <p>{{ ('basemeal.status.' ~ meal.status ~ '.label')|trans }}</p>
+                    </div>
+                </td>
+
+                <!-- Meal -->
+                <td class="col-xs-6">
+                    <div class="flexbox">
+                        <!-- ToDo: Das Meal-Bild einsten -->
+                        <img class="mm-img-meal-q-small margin-right-half"
+                             src="{{ asset('bundles/uipublic/images/cards/card-picture.jpg') }}"
+                             alt="{{ meal.categories.first }}">
+                        <div>
+                            <p class="font-weight-300">
+                                <a href="#" data-toggle="modal"
+                                   data-target="#mm-meal-modal-{{ meal.id }}">{{ meal.title }}</a>
+                            </p>
+                            <p>{{ meal.mealEvents.first.startDateTime|date('d.m.y - H:i') }}</p>
+                            <p>{{ meal.guests|length }} {{ 'meal.seats.taken'|trans }}
+                                | {{ freePlaces }} {{ 'meal.free.guestplaces'|trans }}</p>
+                        </div>
+                    </div>
+                </td>
+
+
+                <td class="col-xs-3">
+                    {% if meal.guests|length > 0 %}
+                        <div class="flexbox fl-wrap mm-user-icon-list">
+                            {% for guest in meal.guests %}
+                                <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                         alt="Profileimage"/>
+                                {% else %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                         alt="Profileimage"/>
+                                {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        ---
+                    {% endif %}
+                </td>
+                <td class="col-xs-2">
+                    {{ include('@WEBUI/HomeMeal/availableHomeMealActions.partial.html.twig') }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{#
+
+{% block layout_body %}{% spaceless %}
+    <div class="">
+    {% set button_route_name = 'api_homemeal_new' %}
+    {% set button_label = '<span class="glyphicon glyphicon-plus"></span> ' ~ 'homemeal.create.label'|trans %}
+    {% set button_class = 'btn-success pull-right' %}
+
+
+</div>
+{% endspaceless %}{% endblock %}
+#}

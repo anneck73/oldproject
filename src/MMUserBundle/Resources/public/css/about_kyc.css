@@ -1,0 +1,36 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top:20px;
+}
+td, th {
+    border: 1px solid #222222;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #86bc2575;
+}
+
+h2.title{
+    margin-bottom: 15px !important;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.content{
+    padding-bottom: 20px;
+}
+
+.dosdont{
+    background-color: #ddd;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.links{
+    color: #025bb3 !important;
+    font-style: italic;
+}

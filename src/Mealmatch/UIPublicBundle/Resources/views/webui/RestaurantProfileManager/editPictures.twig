@@ -1,0 +1,74 @@
+{% extends '@WEBUI/Layouts/symbolWithText.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set swtTitle %}{{ 'restaurantprofile.manager.title'|trans|raw }}{% endset %}
+{% block swt_main_body_content %}
+    <div class="body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 meal-mg-title">
+                    <div class="meal-icon col-md-2">
+                        <a href="{{ path('api_restaurant_profile_manager') }}">
+                            <span class="mm-circle-icon fa fa-backward"></span>
+                            <span>{{ 'meal.btn.backto-index.label'|trans }}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mm-line-solid-bottom-green">
+                            Restaurant Schaufenster (Bilder)
+                        </h3>
+                        <div class="container-fluid">
+                            {% for pic in rProfile.pictures %}
+                                <div class="col-md-3 col-xs-6">
+                                    <li class="res-img-list">
+                                        <img class="img-thumbnail" src="{{ vich_uploader_asset(pic, 'fileData') }}" alt="{{ pic.fileName }}"/>
+                                    </li>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <h3>Bild Upload</h3>
+                        {{ form_start(uploadPictureForm) }}
+                        {{ form_widget(uploadPictureForm) }}
+                        <button class="btn btn-lg btn-success btn-block">{{ 'restaurantprofile.manager.add.picture'|trans }}</button>
+                        {{ form_end(uploadPictureForm) }}
+                        <div class="mm-spacer"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Modal to upload a new RestaurantImage file #}
+    <div id="addRestaurantPicture" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <h3>Bild Upload</h3>
+                {{ form_start(uploadPictureForm) }}
+                {{ form_widget(uploadPictureForm) }}
+                <button class="btn btn-lg btn-success btn-block">{{ 'restaurantprofile.manager.add.picture'|trans }}</button>
+                {{ form_end(uploadPictureForm) }}
+                <div class="mm-spacer"></div>
+                <h3>Restaurant Bilder</h3>
+                <ul class="nav nav-tabs">
+                    {% for pic in rProfile.pictures %}
+                        <li class="">
+                            <img class="img-thumbnail" src="{{ vich_uploader_asset(pic, 'fileData') }}"
+                                 alt="{{ pic.fileName }}"/>
+
+                            <a href="{{ path('restaurant_profile_manager_delete_picture', { 'id': pic.id }) }}">
+                                <button class="btn btn-lg btn-danger btn-block">
+                                    <span class="glyphicon glyphicon-minus-sign"></span>
+                                    {{ 'btn.delete.label'|trans }}
+                                </button>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

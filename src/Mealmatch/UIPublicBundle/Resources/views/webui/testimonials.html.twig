@@ -1,0 +1,72 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="testimonials">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-offset-2 col-sm-offset-2">
+                <h3 class="test-title">{{ 'voices.label'|trans }}</h3>
+                <div class="seprator"></div>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner testimoni-sliders">
+                        <div class="item active">
+
+                            <div class="row text-center" style="padding: 20px">
+                                <p class="testimonial_para">"{{ 'voices.voice1.text'|trans }}"</p>
+                                <div class="row text-center">
+                                    <div class="test-user">
+                                        <div class="">
+                                            <img class="img-responsive"
+                                                 src="{{ asset('/bundles/uipublic/images/voices/benhammer_rund.png') }}" alt="Ben H." style="width: 100px"/>
+                                            <h4>Ben H.</h4>
+                                            <p class="testimonial_subtitle"><span>Köln</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row text-center" style="padding: 20px">
+
+                                <p class="testimonial_para">"{{ 'voices.voice2.text'|trans }}"</p>
+                                <div class="row">
+                                    <div class="test-user">
+                                        <div class="">
+                                            <img class="img-responsive"
+                                                 src="{{ asset('/bundles/uipublic/images/voices/mukeshkumarsingh_rund.png') }}" alt="Mukesh K. S." style="width: 100px"/>
+                                            <h4>Mukesh K. S.</h4>
+                                            <p class="testimonial_subtitle"><span>Indore (India)</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row text-center" style="padding: 20px">
+
+                                <p class="testimonial_para">"{{ 'voices.voice3.text'|trans }}"</p>
+                                <div class="row">
+                                    <div class="test-user">
+                                        <div class="">
+                                            <img class="img-responsive"
+                                                 src="{{ asset('/bundles/uipublic/images/voices/ramonakrieger_rund.png') }}" alt="Ramona K." style="width: 100px"/>
+                                            <h4>Ramona K.</h4>
+                                            <p class="testimonial_subtitle"><span>Köln</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="controls testimonial_control pull-right">
+                    <a class="left btn btn-default testimonial_btn" href="#carousel-example-generic"
+                       data-slide="prev"> <img src="{{ asset('/bundles/uipublic/images/left.png') }}" class="arrow"> </a>
+
+                    <a class="right btn btn-default testimonial_btn" href="#carousel-example-generic"
+                       data-slide="next"> <img src="{{ asset('/bundles/uipublic/images/right.png') }}" class="arrow">  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

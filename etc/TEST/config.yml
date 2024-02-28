@@ -1,0 +1,445 @@
+# Mealmatch 2017
+# Configuration for SK Host
+# test.meal-match.com
+# Author: wizard@mealmatch.de
+# ################################################################################################
+imports:
+    - { resource: parameters.yml }
+    - { resource: app_version.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@MMUserBundle/Resources/config/services.yml" }
+    - { resource: "@MMWebFrontBundle/Resources/config/services.yml" }
+    - { resource: "@MMApiBundle/Resources/config/services.yml" }
+    - { resource: "@MealmatchPayPalBundle/Resources/config/services.yml" }
+# Versioning ...
+shivas_versioning:
+    version_parameter:  app_version
+    version_file: app_version.yml
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+    paypal_logfile: "%kernel.root_dir%/../var/logs/paypal-%kernel.environment%.log"
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: MMUserBundle\Entity\MMUser
+
+# #########################################
+# Framework
+# #########################################
+framework:
+    #esi:             ~
+    translator: { fallbacks: [en] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    trusted_hosts: ~
+    # Recommendation from geocoder: When using Request::getClientIp() with Symfony 2.1+, ensure you have a trusted proxy set.
+    trusted_proxies: ['127.0.0.1']
+    session: ~
+    http_method_override: true
+    assets:
+        version: 'v%app_version%'
+        version_format: '%%s?version=%%s'
+        base_path: ~
+        # base_urls: ['http://static.meal-match.com/assets']
+        packages:
+            img:
+                base_urls: ['http://static.meal-match.com/images/mm/']
+            s3img:
+                base_urls: ['https://%aws3_bucket%.objects.frb.io/']
+            static:
+                base_urls: ['http://static.meal-match.com/assets/']
+
+# #########################################
+# Twig Configuration
+# #########################################
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes: ['bootstrap_3_layout.html.twig']
+    globals:
+        mm: "%mm%"
+        mm_features: "%mm_features%"
+        fos_csrf_provider: "@security.csrf.token_manager"
+        app_version: v%app_version%
+        fb_app_id: "%facebook_app_id%"
+    exception_controller: mm.exception_controller:showAction
+    paths:
+      "%kernel.root_dir%/../src/MMWebFrontBundle/Resources/views": "MMWebFront"
+
+# #########################################
+# Doctrine Configuration
+# #########################################
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     '%database_host%'
+                port:     '%database_port%'
+                dbname:   '%database_name%'
+                user:     '%database_user%'
+                password: '%database_password%'
+                charset:  UTF8
+        types:
+        # For GeoCodeable annotation
+            point:
+                class:                Knp\DoctrineBehaviors\DBAL\Types\PointType
+                commented:            true
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        metadata_cache_driver: array
+        result_cache_driver: array
+        query_cache_driver: array
+
+# #########################################
+# FOSUser
+# #########################################
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: MMUserBundle\Entity\MMUser
+    profile:
+        form:
+            type: MMUserBundle\Form\MMProfileType
+    registration:
+        form:
+            type: MMUserBundle\Form\MMRegistrationType
+        confirmation:
+            enabled: true
+            template: MMUserBundle:Registration:email.txt.twig
+
+    service:
+        user_manager: mm_user_manager
+        mailer: fos_user.mailer.twig_swift
+
+    from_email:
+        address:        mailer@mealmatch.de
+        sender_name:    Mealmatch Mailer Service
+# #########################################
+# FOSMessaging
+# #########################################
+fos_message:
+    db_driver: orm
+    thread_class: MMApiBundle\Entity\Messages\Thread
+    message_class: MMApiBundle\Entity\Messages\Message
+# #########################################
+# Assetic
+# #########################################
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+        jsqueeze: ~
+
+    bundles: ['MMWebFrontBundle']
+    assets:
+        boostrap_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap.css.map'
+            output: 'css/bootstrap.css.map'
+        boostrap_min_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap.min.css.map'
+            output: 'css/bootstrap.min.css.map'
+        boostrap_theme_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap-theme.css.map'
+            output: 'css/bootstrap-theme.css.map'
+        boostrap_theme_min_map:
+            inputs: '@MMWebFrontBundle/Resources/public/css/bootstrap-theme.min.css.map'
+            output: 'css/bootstrap-theme.min.css.map'
+
+        glyphicons_eot:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.eot'
+            output: 'fonts/glyphicons-halflings-regular.eot'
+        glyphicons_svg:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.svg'
+            output: 'fonts/glyphicons-halflings-regular.svg'
+        glyphicons_ttf:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+            output: 'fonts/glyphicons-halflings-regular.ttf'
+        glyphicons_woff:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff'
+            output: 'fonts/glyphicons-halflings-regular.woff'
+        glyphicons_woff2:
+            inputs: '%vendor_dir%/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2'
+            output: 'fonts/glyphicons-halflings-regular.woff2'
+
+# #########################################
+# GeoCoder (gmaps, etc)
+# #########################################
+bazinga_geocoder:
+    providers:
+#        cache:
+#            adapter:              ~ # Required
+#            provider:             ~ # Required
+#            locale:               null
+#            lifetime:             86400
+        google_maps:
+            locale:               de
+            region:               null
+            use_ssl:              true
+            api_key:              AIzaSyDCWA5rT9jgYF6R8I2j9TUncfl185bCujU
+            # mealmatch . masterchief AIzaSyC0xceQe_AIz0qbhS4QQtPdRX0022EBALI
+            # api_key:              AIzaSyC0xceQe_AIz0qbhS4QQtPdRX0022EBALI
+
+# #########################################
+# Database migrations with doctrine
+# #########################################
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: MealMatch\Migrations
+    table_name: migration_versions
+    name: Mealmatch Migrations
+
+# #########################################
+# Filesystem simulation with Gaufrette
+# #########################################
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        mm_ftp_adapter:
+            ftp:
+                host: static.meal-match.com
+                username: mm_static_1
+                password: lyXi397?
+                directory: /images/
+                create: true
+                mode: FTP_BINARY
+        mm_s3_images_adapter:
+            aws_s3:
+                service_id:   'mm.s3'
+                bucket_name:  'mealmatch-stage'
+                options:
+                    directory:  '/images'
+                    create:   true
+#        mm_s3_mailspool_adapter:
+#            aws_s3:
+#                service_id:   'mm.s3'
+#                bucket_name:  'mealmatch-stage'
+#                options:
+#                    directory:  '/mailspool'
+#                    create:   true
+
+    filesystems:
+        aws3_fs:
+            adapter:    mm_s3_images_adapter
+            alias:      mm_s3_filesystem
+#        aws3_mailspool:
+#            adapter:    mm_s3_mailspool_adapter
+#            alias:      s3spool
+
+# #########################################
+# Vich Uploader
+# #########################################
+#vich_uploader:
+#    db_driver: orm # or mongodb or propel or phpcr
+#    storage:   gaufrette
+#
+#    mappings:
+#            meal_image:
+#                uri_prefix:         'https://%aws3_server%/images/'
+#                upload_destination: aws3_fs
+#                namer:              vich_uploader.namer_uniqid
+#            user_image:
+#                uri_prefix:         'https://%aws3_server%/images/'
+#                upload_destination: aws3_fs
+#                namer:              vich_uploader.namer_uniqid
+
+# #########################################
+# AWS
+# #########################################
+aws:
+    version: latest
+    region: '%aws3_region%'
+    credentials:
+        key: '%aws3_key%'
+        secret: '%aws3_secret%' # this will be escaped as '@not-a-real-secret'
+        signature: 'v4'
+    S3:
+        version: 'latest'
+        signature: 'v4'
+# #########################################
+# Swiftmailer Configuration
+# #########################################
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "login18.schwarzkuenstler.info"
+    username:  "%mailer_user%"
+    password:  "Jzy*g632"
+#    spool:     { type: memory }
+    spool:
+        type: db
+#        path: gaufrette://aws3_mailspool/mails
+
+# #########################################
+# Swiftmailer Spool in DB Configuration
+# #########################################
+white_october_swift_mailer_db:
+    entity_class: MMApiBundle\Entity\EMail
+
+# #########################################
+# OAUTH to connect to Facebook, PayPal, ...
+# #########################################
+hwi_oauth:
+    firewall_names: [main]
+    use_referer: true
+    connect:
+        account_connector: mm_user_provider
+    # Resource Owners
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_secret%"
+            authorization_url:   https://www.facebook.com/v2.7/dialog/oauth
+            access_token_url:    https://graph.facebook.com/v2.7/oauth/access_token
+            revoke_token_url:    https://graph.facebook.com/v2.7/me/permissions
+            infos_url:           https://graph.facebook.com/v2.7/me?fields=id,name,first_name,last_name,email,picture.type(large)
+            scope:               "email, public_profile"
+            paths:
+                email: email
+#           options:
+#               display: popup
+        google:
+            type:                google
+            client_id:           123
+            client_secret:       123
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+        paypal:
+            type:                paypal
+            client_id:           Ac02GJdJRi6L8VValU96F54p1oViILO-JQ2BHj1PVSgXVDMg8JyCjc-_HBL-pxJWmd1ErMLYZrvHUdYR
+            client_secret:       EApZ3Kr25H5mDeW4yIwOJGgn9enlRcb0kpJZXQmlmhXaift9PPhWOfznFIU-JmsDYGn-2tdO-2LY-b7_
+
+        twitter:
+            type:                twitter
+            client_id:           mZN14KgLyz96hSFPXi1x8dSwn
+            client_secret:       lfWOFtfC9gEbDeV95rgYofRNB7fjtXIVklDAnVY87LOgVuNwHg
+
+
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            facebook: facebook_id
+            google: google_id
+
+white_october_pagerfanta:
+    exceptions_strategy:
+        out_of_range_page:        ~
+        not_valid_current_page:   ~
+
+ivory_ck_editor:
+    configs:
+        my_config:
+            toolbar: 'basic'
+            # uiColor: "#000000"
+# #########################################
+# JMS i18n Routing - Yeah!
+# #########################################
+jms_i18n_routing:
+    default_locale: de
+    locales: [en, de]
+    strategy: prefix_except_default
+
+#lsw_memcache:
+#    clients:
+#        default:
+#            # persistent_id: default  # Do NOT use this, see known issues
+#            hosts:
+#                - { dsn: "%session_memcache_host_1%", port: "%session_memcache_port_1%", weight: 15 }
+#                # - { dsn: 10.0.0.2, port: 11211, weight: 30 }
+#            options:
+#                compression: true
+#                serializer: json
+#                prefix_key: "%session_memcache_prefix%"
+#                hash: default
+#                distribution: consistent
+#                libketama_compatible: true
+#                buffer_writes: true
+#                binary_protocol: true
+#                no_block: true
+#                tcp_nodelay: false
+#                socket_send_size: 4096
+#                socket_recv_size: 4096
+#                connect_timeout: 1000
+#                retry_timeout: 0
+#                send_timeout: 0
+#                recv_timeout: 0
+#                poll_timeout: 1000
+#                cache_lookups: false
+#                server_failure_limit: 0
+#        sessions:
+#            hosts:
+#                - { dsn: "%session_memcache_host_1%", port: "%session_memcache_port_1%" }
+
+#lsw_memcache:
+#    doctrine:
+#        metadata_cache:
+#            client: default
+#            entity_manager: "@doctrine.orm.entity_manager"          # the name of your entity_manager connection
+#            prefix: "meta_"                # you may specify a prefix for the entries
+#        result_cache:
+#            client: default
+#            entity_manager: "@doctrine.orm.entity_manager"  # you may specify multiple entity_managers
+#            prefix: "result_"                # you may specify a prefix for the entries
+#        query_cache:
+#            client: default
+#            entity_manager: "@doctrine.orm.entity_manager"
+#            prefix: "query_"                # you may specify a prefix for the entries
+#lsw_memcache:
+#    session:
+#        client: sessions
+#        prefix: "%session_memcache_prefix%"
+#        ttl: 7200
+#        locking: false
+#        spin_lock_wait: 150000
+
+# ####################################################################################################################
+# @todo does not work on fortrabbit
+# lsw memcache v2+
+#lsw_memcache:
+#    pools:
+#        default:
+#            servers:
+#                - { host: "%session_memcache_host_1%", tcp_port: "%session_memcache_port_1%", weight: 15 }
+#                # - { host: 10.0.0.2, tcp_port: 11211, weight: 30 }
+#            options:
+#                allow_failover: true
+#                max_failover_attempts: 20
+#                default_port: 11211
+#                chunk_size: 32768
+#                protocol: ascii
+#                hash_strategy: consistent
+#                hash_function: crc32
+#                redundancy: true
+#                session_redundancy: 2
+#                compress_threshold: 20000
+#                lock_timeout: 15
+#        sessions:
+#            servers:
+#                - { host: "%session_memcache_host_1%", tcp_port: "%session_memcache_port_1%" }
+#lsw_memcache:
+#    sessions:
+#        pool: sessions
+#        auto_load: true
+#        prefix: "mm_sess"
+#        ttl: 7200
+#        locking: true
+#        spin_lock_wait: 150000

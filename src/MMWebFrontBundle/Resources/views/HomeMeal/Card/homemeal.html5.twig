@@ -1,0 +1,161 @@
+{#
+    HTML5 Template !!!
+    Shows a HomeMeal "Card"
+#}
+{% trans_default_domain 'Mealmatch' %}
+
+{% spaceless %}
+
+    <section id="home-meal-card-{{ homeMeal.id }}" class="grid pro-meal-card">
+
+        <section class="card">
+
+            <header>
+                <figure>
+                    <img class="mm-logo-s" src="{{ asset('bundles/uipublic/images/cards/card-picture.jpg') }}"
+                         alt="{{ homeMeal.title }}">
+                    <figcaption>
+                        <p class="upper fs-4s text-shadow">{{ homeMeal.mealEvents.first.startDateTime|date('d. M') }}</p>
+                        <p class="fs-l text-shadow">{{ homeMeal.title|length > 45 ? homeMeal.title|slice(0, 45) ~ '...' : homeMeal.title }}</p>
+                    </figcaption>
+                </figure>
+            </header>
+
+            <div class="card-title flexbox-h grid">
+                <a href="{{ path('public_user_by_username', {'pName': homeMeal.host.username}) }}">
+                {% if homeMeal.host.profile.imageName == "image/udefault.png" %}
+                    <img class="card-profile img-circle"
+                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                         alt="Profileimage"/>
+                {% else %}
+                    <img class="card-profile img-circle" src="{{ asset(homeMeal.host.profile.imageName, 's3img') }}"
+                         alt="{{ homeMeal.host.username }}"/>
+                {% endif %}
+                </a>
+                <div>
+                    <h2>{{ 'homemeal.manager.card.entree'|trans }}: {{ homeMeal.mealMain }}</h2>
+                    <p class="fs-xs">#{{ homeMeal.categories|join(' #') }}</p>
+                    <p class="light-grey fs-xs">{{ homeMeal.description|raw }}</p>
+                </div>
+            </div>
+            <div class="card-infos grid">
+
+                <div class="hr"></div>
+
+                <div class="flexbox-centering grid-half">
+
+                    <div class="card-info">
+                        <span class="icon-clock"></span>
+                        <p>{{ homeMeal.mealEvents.first.startDateTime|date('H:i') }}</p>
+                    </div>
+                    {% set currencySymbol = 'glyphicon-eur' %}
+                    {% if homeMeal.sharedCostCurrency == 'USD' %}
+                        {% set currencySymbol = 'glyphicon-usd' %}
+                    {% endif %}
+                    <div class="card-info">
+                        <span class="glyphicon {{ currencySymbol }}"></span>
+                        <p>{{ homeMeal.sharedCost|number_format(2) }}</p>
+                    </div>
+
+                    <div class="card-info">
+                        <span class="icon-location-pin"></span>
+                        <p>0,5 km</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-infos grid">
+                <div class="hr"></div>
+                <div class="flexbox-centering grid-half">
+                    <div class="card-info">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        <p>{{ homeMeal.mealEvents.first.startDateTime|date('d.m.y') }}</p>
+                    </div>
+                    <div class="card-info">
+                        {% set guests =  homeMeal.guests|length %}
+                        <p>{{ guests }}</p>
+                        <p> {% transchoice guests with {'%count%': guests } from "Mealmatch" %}
+                                homemeal.manager.card.seats_taken{% endtranschoice %}
+                    </div>
+                    <div class="card-info">
+                        {% set freeSeats =  homeMeal.maxNumberOfGuest - homeMeal.guests.count %}
+                        <p class="mm-green">{{ freeSeats }}</p>
+                        <p> {% transchoice freeSeats with {'%count%': freeSeats } from "Mealmatch" %}
+                                homemeal.manager.card.seats_free{% endtranschoice %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="hr"></div>
+
+            <div class="card-infos grid">
+                <div class="hr"></div>
+                <h3>{{ 'meal.guests'|trans }}</h3>
+                <div class="flexbox-centering grid-half">
+                    <div class="flexbox fl-wrap mm-user-icon-list">
+                        {% for guest in homeMeal.guests %}
+                            <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                {% if guest.profile.imageName == "image/udefault.png" %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                         alt="Profileimage"/>
+                                {% else %}
+                                    <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                         src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                         alt="Profileimage"/>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="hr"></div>
+            </div>
+
+
+            <!--// Meal Location //-->
+            <div class="card-infos grid">
+
+                <div class="hr"></div>
+
+                <div class="flexbox-centering grid-half">
+                    <div class="card-address text-center">
+                        <span class="icon-location-pin"></span>
+                        <p>{{ homeMeal.host.profile.firstname }}, {{ homeMeal.host.profile.lastname }}</p>
+                        {% if meal_service.isGuest(homeMeal, app.user) %}
+                        <p>{{ homeMeal.address.streetName }} {{ homeMeal.address.streetNumber }}</p>
+                        {% endif %}
+                        <p>{{ homeMeal.address.postalCode }} {{ homeMeal.address.locality }}
+                            - {{ homeMeal.address.sublocality }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-infos grid">
+
+                <div class="hr"></div>
+                <div class="text-center">
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ homeMeal.host.username }}" height="48px" width="49px"/>
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ homeMeal.host.username }}" height="48px" width="49px"/>
+                    <img class="icon" src="{{ asset('bundles/uipublic/images/icons/soup.png') }}"
+                         alt="{{ homeMeal.host.username }}" height="48px" width="49px"/>
+                </div>
+                <div class="hr"></div>
+            </div>
+
+            <div class="hr"></div>
+
+            <a href="{{ path('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': 'join_meal' }) }}">
+                <button class="btn btn-lg btn-success btn-block">
+                    {{ 'meal.action.join'|trans }} {{ homeMeal.sharedCost|number_format(2) }} {{ homeMeal.sharedCostCurrency }}
+                </button>
+            </a>
+
+        </section>
+
+    </section>
+
+
+{% endspaceless %}

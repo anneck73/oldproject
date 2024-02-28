@@ -1,0 +1,241 @@
+{% extends "@MMWebFront/Layout/landingpage.html.twig" %}
+{% trans_default_domain "Mealmatch" %}
+{% set main_header_title %}Dein Meal in Köln{% endset %}
+{% set currencySymbol = '€' %}
+{% if homeMeal.sharedCostCurrency == 'USD' %}
+    {% set currencySymbol = '$' %}
+{% endif %}
+{% set endTime = homeMeal.endDateTime|date('H:i') %}
+{% block page_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        // let shortenText = mmUI.showHideMore();
+		// mmUI.bindShowHideMoreElemten(shortenText);
+	});
+</script>
+{% endblock %}
+
+{% block main_content %}
+
+	<div class="breadcrumb">
+		<span class="icon-direction"></span>&nbsp;
+		<a href="{{ path('public_meals_country_index', {'country': homeMeal.address.countryCode}) }}">Social-Dining</a> /
+		<a href="{{ path('public_homemeal_index') }}">Home-Meals</a> /
+		<a href="{{ path('public_homemeal_hostname',
+		    {'hostName': homeMeal.host.username}) }}">{{ homeMeal.host.username }}</a> /
+		<a href="{{ path('public_homemeal_hostname_mealtitle',
+		    {'hostName': homeMeal.host.username, 'mealTitle': homeMeal.title}) }}">{{ homeMeal.title }}</a> /
+		{{ homeMeal.startDateTime|date('d.m.Y H:i') }}
+	</div>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+              "@id": "{{ url('public_meals_country_index', {'country': homeMeal.address.countryCode}) }}",
+              "name": "Meals"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+              "@id": "{{ url('public_homemeal_index') }}",
+              "name": "Restaurant-Meals"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "{{ url('public_homemeal_hostname', {'hostName': homeMeal.host.username}) }}",
+          "name": "{{ homeMeal.host.username }}"
+        }
+      },{
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "{{ url('public_homemeal_hostname_mealtitle', {'hostName': homeMeal.host.username, 'mealTitle': homeMeal.title }) }}",
+          "name": "{{ homeMeal.title }}"
+        }
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "Mealmatch Home-Meal {{ homeMeal.title }} bei {{ homeMeal.host.username }}",
+      "startDate": "{{ homeMeal.startDateTime|date('Y-m-d') }}T{{ homeMeal.startDateTime|date('H:i') }}-{{ endTime }}",
+      "location": {
+        "@type": "Place",
+        "name": "{{ homeMeal.host.username }}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ homeMeal.address.streetName }} {{ homeMeal.address.streetNumber }}",
+          "addressLocality": "{{ homeMeal.address.locality }}",
+          "postalCode": "{{ homeMeal.address.postalCode }}",
+          "addressRegion": "{{ homeMeal.address.sublocality }}",
+          "addressCountry": "{{ homeMeal.address.countryCode }}"
+        }
+      },
+      "image": [
+        "{{ asset('bundles/mmwebfront/images/mm/Logo_mm_48px_bild.jpg') }}"
+       ],
+      "description": "{{ homeMeal.description }}",
+      "endDate": "{{ homeMeal.startDateTime|date('Y-m-d') }}T{{ homeMeal.startDateTime|date('H:i') }}-{{ endTime }}",
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ url('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': 'join_meal' }) }}",
+        "price": "{{ homeMeal.sharedCost }}",
+        "priceCurrency": "{{ homeMeal.sharedCostCurrency }}",
+        "availability": "http://schema.org/InStock",
+        "validFrom": "{{ homeMeal.startDateTime|date('Y-m-d') }}T{{ homeMeal.startDateTime|date('H:i') }}-{{ endTime }}"
+      },
+      "performer": {
+         "@type": "Private",
+         "name": "{{ homeMeal.host.username }}"
+      }
+    }
+    </script>
+
+    <div class="row margin-bottom3 margin-top3">
+
+     	<!-- USER IMAGE -->
+        <div class="col-xs-3">
+            <div class="mm-user-image center-block">
+                <a href="{{ path('public_user_by_username', {'pName': homeMeal.host.username}) }}">
+                    {% if homeMeal.host.profile.imageName == "image/udefault.png" %}
+                        <img class="card-profile img-circle"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                             alt="Profileimage"/>
+                    {% else %}
+                        <img class="card-profile img-circle" src="{{ asset(homeMeal.host.profile.imageName, 's3img') }}"
+                             alt="{{ homeMeal.host.username }}"/>
+                    {% endif %}
+                </a>
+                <p class="text-center fs-xss margin-top-half">
+                    <a class="mm-green"
+                       href="{{ path('public_promeal_hostname', {'hostName': homeMeal.host.username}) }}">{{ homeMeal.host.username }}</a>
+                </p>
+                <p class="fs-xs">#{{ homeMeal.host.restaurantprofile.type }}</p>
+            </div>
+        </div>
+
+        <!-- MEAL -->
+        <div class="col-xs-6">
+            <h2 class="no-margin">{{ homeMeal.title }}</h2>
+            <h3 class="margin-bottom">{{ homeMeal.startDateTime|date()|localizeddate('long', 'short', app.request.locale ) }} Uhr | # {{ homeMeal.categories.first }}</h3>
+
+            <div class="post_wrap">
+                <div class="child">
+                    <h4>Mealbeschreibung</h4>
+                    <p>{{ homeMeal.description|raw }}</p>
+                </div>
+                <div class="child">
+                    <h4>Hauptgericht</h4>
+                    <p>{{ homeMeal.mealMain }}</p>
+                    {% if homeMeal.mealStarter is not empty %}
+                    <h4>Vorspeise</h4>
+                    <p>{{ homeMeal.mealStarter }}</p>
+                    {% endif %}
+                    {% if homeMeal.mealDesert is not empty %}
+                    <h4>Nachspeise</h4>
+                    <p>{{ homeMeal.mealDesert }}</p>
+                    {% endif %}
+                    <p><a href="{{ path('doTransitionBaseMeal', { 'id': homeMeal.id, 'transition': 'join_meal' }) }}">
+                        <button class="btn btn-lg btn-success btn-block">
+                            {{ 'meal.action.join'|trans }} {{ homeMeal.sharedCost|number_format(2) }} {{ homeMeal.sharedCostCurrency }}
+                        </button>
+                    </a></p>
+                </div>
+                <p class="message mm-green pointer margin-top margin-bottom"></p>
+            </div>
+
+            <div class="guests mm-line-dotted-grey">
+                <p>Deine Tischnachbarn:</p>
+                <div class="flexbox fl-wrap mm-user-icon-list">
+                    {% for guest in homeMeal.guests %}
+                        <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                            {% else %}
+                                <img class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                     src="{{ asset(guest.profile.imageName, 's3img') }}"
+                                     alt="Profileimage"/>
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        Sei der erste Gast!
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO BOX -->
+        <div class="col-xs-3">
+            <div class="mm-green-box pull-right">
+                <div class="inner">
+                    <div class="text-center">
+                        <p class="font-weight-300">HUNGER?</p>
+                        <div class="mm-line-dotted"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            {% set freeSeats =  homeMeal.maxNumberOfGuest - homeMeal.guests.count %}
+                            <p class="text-center mm-green">{{ freeSeats }}</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>Plätze frei!</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-calendar"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ homeMeal.startDateTime|date('d.m.Y') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-clock"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ homeMeal.startDateTime|date('H:i') }} Uhr</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green">{{ currencySymbol }}</p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ homeMeal.sharedCost|number_format(2) }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p class="text-center mm-green"><span class="icon-location-pin"></span></p>
+                        </div>
+                        <div class="col-xs-9 no-padding-left">
+                            <p>{{ homeMeal.address.postalCode }} {{ homeMeal.address.city }}<br/>
+                                {{ homeMeal.address.sublocality }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-success">Teilnehmen</button>
+            </div>
+        <div>
+    </div>
+
+
+{% endblock %}

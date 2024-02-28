@@ -1,0 +1,197 @@
+{% extends '@WEBUI/simple_ui_a.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set main_header_title = 'kyc.about.title'|trans %}
+{% set main_header_subtitle = 'kyc.about.title'|trans %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+
+{% block main_content %}
+
+    <div class="row margin-bottom3 margin-top1-5">
+        <div class="row">
+            <div class="col-xs-6  no-padding">
+                <h2 class="no-margin">{{ main_header_title }}</h2>
+                {#<h3 class="margin-bottom">{{ main_header_subtitle }}</h3>#}
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 no-padding">
+                <!-- Tab panes -->
+                <div class="tab-content kyc-list">
+                    {% if kyc_status[0] == 'none'  %}
+                        <div id="idproof" role="tabpanel"
+                             class="tab-pane fade {% if selectedTab == 1 %} in active{% endif %}">
+                            {{ form_start(formTabOne) }}
+                            {{ form_widget(formTabOne) }}
+                            <button class="btn btn-lg btn-success" type="submit">
+                                <span class="glyphicon glyphicon-send"></span>
+                                {{ 'kyc.submit.label'|trans }}
+                            </button>
+                            {{ form_end(formTabOne) }}
+                        </div>
+                    {% else %}
+                        <div id="status1" role="tabpanel" class="tab-pane fade {% if selectedTab == 1 %} in active{% endif %}">
+                            {% if kyc_status[0] == 'VALIDATION_ASKED' %}
+                                <h1 class="heading">{{ 'kyc.file.status1'|trans }}</h1>
+                            {% elseif kyc_status[0] == 'VALIDATED' %}
+                                <h1 class="heading">{{ 'kyc.file.status2'|trans }}</h1>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if kyc_status[1] == 'none'  %}
+                        <div id="regProof" role="tabpanel"
+                             class="tab-pane fade {% if selectedTab == 2 %} in active{% endif %}">
+                            {{ form_start(formTabTwo) }}
+                            {{ form_widget(formTabTwo) }}
+                            <button class="btn btn-lg btn-success" type="submit">
+                                <span class="glyphicon glyphicon-send"></span>
+                                {{ 'kyc.submit.label'|trans }}
+                            </button>
+                            {{ form_end(formTabTwo) }}
+                        </div>
+                    {% else %}
+                        <div id="status2" role="tabpanel" class="tab-pane fade{% if selectedTab == 2 %} in active{% endif %}">
+                            {% if kyc_status[1] == 'VALIDATION_ASKED' %}
+                                <h1 class="heading">{{ 'kyc.file.status1'|trans }}</h1>
+                            {% elseif kyc_status[1] == 'VALIDATED' %}
+                                <h1 class="heading">{{ 'kyc.file.status2'|trans }}</h1>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if kyc_status[2] == 'none'  %}
+                        <div id="articleAss" role="tabpanel"
+                             class="tab-pane fade {% if selectedTab == 3 %} in active{% endif %}">
+                            {{ form_start(formTabThree) }}
+                            {{ form_widget(formTabThree) }}
+                            <button class="btn btn-lg btn-success" type="submit">
+                                <span class="glyphicon glyphicon-send"></span>
+                                {{ 'kyc.submit.label'|trans }}
+                            </button>
+                            {{ form_end(formTabThree) }}
+                        </div>
+                    {% else %}
+                        <div id="status3" role="tabpanel" class="tab-pane fade {% if selectedTab == 3 %} in active{% endif %}">
+                            {% if kyc_status[2] == 'VALIDATION_ASKED' %}
+                                <h1 class="heading">{{ 'kyc.file.status1'|trans }}</h1>
+                            {% elseif kyc_status[2] == 'VALIDATED' %}
+                                <h1 class="heading">{{ 'kyc.file.status2'|trans }}</h1>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if kyc_status[3] == 'none'  %}
+                        <div id="shareholderDec" role="tabpanel"
+                             class="tab-pane fade {% if selectedTab == 4 %} in active{% endif %}">
+                            <p>{{ 'kyc.usage.shareDec'|trans|raw }}</p>
+                            {{ form_start(formTabFour) }}
+                            {{ form_widget(formTabFour) }}
+                            <button class="btn btn-lg btn-success" type="submit">
+                                <span class="glyphicon glyphicon-send"></span>
+                                {{ 'kyc.submit.label'|trans }}
+                            </button>
+                            {{ form_end(formTabFour) }}
+                        </div>
+                    {% else %}
+                        <div id="status4" role="tabpanel" class="tab-pane fade {% if selectedTab == 4 %} in active{% endif %}">
+                            {% if kyc_status[3] == 'VALIDATION_ASKED' %}
+                                <h1 class="heading">{{ 'kyc.file.status1'|trans }}</h1>
+                            {% elseif kyc_status[3] == 'VALIDATED' %}
+                                <h1 class="heading">{{ 'kyc.file.status2'|trans }}</h1>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-xs-1 no-padding"></div>
+            {# The Tabs to the left #}
+            <div class="col-xs-5 ">
+                <!-- Nav tabs -->
+                <ul class="nav nav-stacked tabs-right" role="tablist">
+                    <li role="presentation" class="{% if selectedTab == 1 %} active {% endif %}">
+                        {% if kyc_status[0] == 'none'  %}
+                            <a href="#idproof" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-user"></span>{{ 'kyc.docType.idProof'|trans }}</a>
+                        {% else %}
+                            <a href="#status1" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-user"></span>{{ 'kyc.docType.idProof'|trans }}</a>
+                        {% endif %}
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                        {% if kyc_status[1] == 'none'  %}
+                            <a href="#regProof" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-note"></span>{{ 'kyc.docType.regProof'|trans }}</a>
+                        {% else %}
+                            <a href="#status2" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-note"></span>{{ 'kyc.docType.regProof'|trans }}</a>
+                        {% endif %}
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 3 %}active{% endif %}">
+                        {% if kyc_status[2] == 'none'  %}
+                            <a href="#articleAss" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-doc"></span>{{ 'kyc.docType.articleAss'|trans }}</a>
+                        {% else %}
+                            <a href="#status3" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-doc"></span>{{ 'kyc.docType.articleAss'|trans }}</a>
+                        {% endif %}
+                    </li>
+                    <li role="presentation" class="{% if selectedTab == 4 %}active{% endif %}">
+                        {% if kyc_status[3] == 'none'  %}
+                            <a href="#shareholderDec" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-people"></span>{{ 'kyc.docType.shareHolderDeclaration'|trans }}</a>
+                        {% else %}
+                            <a href="#status4" role="tab"
+                               data-toggle="tab"><span
+                                        class="icon-people"></span>{{ 'kyc.docType.shareHolderDeclaration'|trans }}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {% stylesheets
+    '@MMWebFrontBundle/Resources/public/css/bootstrap-switch.css'
+    output='css/bootstrap-switch.css'
+    filter='?scssphp' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    <style>
+        .heading{
+            line-height: 1.5;
+            font-size: 30px;
+            margin: 0;
+            font-weight: inherit;
+        }
+
+        .kyc-list .tab-pane{
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 15px 0;
+            box-shadow: 0 0 31px #00000030;
+        }
+    </style>
+{% endblock %}
+
+{% block page_js %}
+    {% javascripts
+    '@MMWebFrontBundle/Resources/public/js/bootstrap-switch.js'
+    output='js/bootstrap-switch.min.js'
+    filter='?jsqueeze' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

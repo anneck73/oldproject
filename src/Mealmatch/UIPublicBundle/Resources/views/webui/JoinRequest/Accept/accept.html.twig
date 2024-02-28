@@ -1,0 +1,10 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}MealMatch |{{ 'joinrequest.accept.title'|trans }} {% endblock %}
+{% set main_header_title %}{{ 'joinrequest.accept.title'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'joinrequest.accept.subltitle'|trans }}{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    {% include '@WEBUI/JoinRequest/Accept/accept_content.html.twig' %}
+{% endblock %}
+

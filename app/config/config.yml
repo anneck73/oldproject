@@ -1,0 +1,312 @@
+# MealMatch 2016
+imports:
+    - { resource: parameters.yml }
+    - { resource: app_version.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "FlySystem/config.yml" }
+    - { resource: "VichUploader/config.yml" }
+    - { resource: "FOS/fos_user.yml" }
+    - { resource: "FOS/fos_message.yml" }
+    - { resource: "FOS/fos_js_routing.yml" }
+    - { resource: "TWIG/config.yml" }
+    - { resource: "SEO/config.yml" }
+    - { resource: "@MMUserBundle/Resources/config/services.yml" }
+    - { resource: "@MMWebFrontBundle/Resources/config/services.yml" }
+    - { resource: "@MealmatchPayPalBundle/Resources/config/services.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
+    - { resource: "@MMApiBundle/Resources/config/services.yml" }
+    - { resource: "@MealmatchMangopayBundle/Resources/config/services.yml" }
+    - { resource: "@MealmatchWorkflowBundle/Resources/config/workflow.yml" }
+    - { resource: "@MealmatchWebAdminBundle/Resources/config/services.yml" }
+    - { resource: "@MealmatchWebAdminBundle/Resources/config/easy_admin.yml" }
+    - { resource: "websocket/gos.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+    paypal_logfile: "%kernel.root_dir%/../var/logs/paypal-%kernel.environment%.log"
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: MMUserBundle\Entity\MMUser
+#
+# Overwrite this to tell the geocoder which adapter to use (enforce)
+#    bazinga_geocoder.geocoder.default_adapter.class: Http\Adapter\Guzzle6\Client
+
+# #########################################
+# Webpack / Encore  - UI assets
+# #########################################
+webpack_encore:
+    # The path where Encore is building the assets - i.e. Encore.setOutputPath()
+    output_path: '%kernel.project_dir%/web/static/prod'
+
+# #########################################
+# Framework
+# #########################################
+framework:
+    esi: { enabled: true }
+    translator:
+        fallbacks: [en]
+        paths: ['%kernel.root_dir%/../app/Resources/translations']
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    trusted_hosts: ~
+    session:
+        handler_id: session.handler.memcached
+    http_method_override: true
+    assets:
+        json_manifest_path: '%kernel.project_dir%/web/static/prod/manifest.json'
+        # since 0.2.10 NO MORE STATICS TO ENABLE GREEN SSL SYMBOL!
+        packages:
+            s3img:
+                base_urls: ['https://%aws3_bucket%.objects.frb.io/']
+            s3bcat:
+                base_urls: ['https://%aws3_bucket%.objects.frb.io/images/b/c/']
+            s3_rimages:
+                base_urls: ['https://%aws3_bucket%.objects.frb.io/images/r/']
+
+# #########################################
+# Doctrine Configuration
+# #########################################
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     '%database_host%'
+                port:     '%database_port%'
+                dbname:   '%database_name%'
+                user:     '%database_user%'
+                password: '%database_password%'
+                charset:  UTF8mb4
+                server_version: '5.5'
+                # to enable migrations
+                mapping_types:
+                    point: point
+
+        types:
+        # For GeoCodeable annotation
+            point:
+                class:                Knp\DoctrineBehaviors\DBAL\Types\PointType
+                commented:            true
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        # naming_strategy: "@mm_api.doctrine_version_naming_strategy"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        metadata_cache_driver: apcu
+        result_cache_driver: apcu
+        query_cache_driver: apcu
+#        dql:
+#            numeric_functions:
+#                DISTANCE: Knp\DoctrineBehaviors\ORM\Geocodable\Query\AST\Functions\DistanceFunction
+        mappings:
+#            gedmo_translatable:
+#                type: annotation
+#                prefix: Gedmo\Translatable\Entity
+#                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+#                alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
+#                is_bundle: false
+#            gedmo_translator:
+#                type: annotation
+#                prefix: Gedmo\Translator\Entity
+#                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+#                alias: GedmoTranslator # (optional) it will default to the name set for the mapping
+#                is_bundle: false
+#            gedmo_loggable:
+#                type: annotation
+#                prefix: Gedmo\Loggable\Entity
+#                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+#                alias: GedmoLoggable # (optional) it will default to the name set for the mappingmapping
+#                is_bundle: false
+            gedmo_tree:
+                type: annotation
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                alias: GedmoTree # (optional) it will default to the name set for the mapping
+                is_bundle: false
+        filters:
+            softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
+
+# #########################################
+# GeoCoder (gmaps, etc)
+# #########################################
+bazinga_geocoder:
+    profiling:
+        enabled: ~                # Default is same as kernel.debug
+    fake_ip:
+        enabled: true
+        ip: 127.0.0.1
+    providers:
+        # ...
+        google_maps:
+            factory:  Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            limit: 5
+            locale: 'de'
+            aliases:
+                - google_geocoder
+            options:
+                httplug_client: "@httplug.client" # When using HTTPlugBundle
+                region: 'Germany'
+                api_key: "%gmaps_api_key%"
+
+# #########################################
+# Database migrations with doctrine
+# #########################################
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: MealMatch\Migrations
+    table_name: migration_versions
+    name: Mealmatch Migrations
+
+# #########################################
+# AWS
+# #########################################
+aws:
+    version: latest
+    region: '%aws3_region%'
+    credentials:
+        key: '%aws3_key%'
+        secret: '%aws3_secret%' # this will be escaped as '@not-a-real-secret'
+        signature: 'v4'
+    S3:
+        version: 'latest'
+        signature: 'v4'
+# #########################################
+# Swiftmailer Configuration
+# #########################################
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "login18.schwarzkuenstler.info"
+    username:  "%mailer_user%"
+    password:  "Jzy*g632"
+#    spool:     { type: memory }
+    spool:
+        type: db
+#        path: gaufrette://aws3_mailspool/mails
+
+# #########################################
+# Swiftmailer Spool in DB Configuration
+# #########################################
+white_october_swift_mailer_db:
+    entity_class: MMApiBundle\Entity\EMail
+
+# #########################################
+# OAUTH to connect to Facebook, PayPal, ...
+# #########################################
+hwi_oauth:
+    firewall_names: [main]
+    use_referer: true
+    connect:
+        account_connector: mm_user_provider
+    # Resource Owners
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_secret%"
+            authorization_url:   "https://www.facebook.com/v2.9/dialog/oauth"
+            access_token_url:    "https://graph.facebook.com/v2.9/oauth/access_token"
+            revoke_token_url:    "https://graph.facebook.com/v2.9/me/permissions"
+            infos_url:           "https://graph.facebook.com/v2.9/me?fields=id,name,first_name,last_name,email,picture.type(large)"
+            scope:               "email, public_profile"
+            paths:
+                username: username
+                email: email
+                profilepicture: picture.data.url
+            options:
+                csrf: true
+        google:
+            type:                google
+            client_id:           123
+            client_secret:       123
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+        paypal:
+            type:                paypal
+            client_id:           Ac02GJdJRi6L8VValU96F54p1oViILO-JQ2BHj1PVSgXVDMg8JyCjc-_HBL-pxJWmd1ErMLYZrvHUdYR
+            client_secret:       EApZ3Kr25H5mDeW4yIwOJGgn9enlRcb0kpJZXQmlmhXaift9PPhWOfznFIU-JmsDYGn-2tdO-2LY-b7_
+
+        twitter:
+            type:                twitter
+            client_id:           mZN14KgLyz96hSFPXi1x8dSwn
+            client_secret:       lfWOFtfC9gEbDeV95rgYofRNB7fjtXIVklDAnVY87LOgVuNwHg
+
+
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            facebook: facebook_id
+            google: google_id
+
+white_october_pagerfanta:
+    exceptions_strategy:
+        out_of_range_page:        ~
+        not_valid_current_page:   ~
+
+ivory_ck_editor:
+    inline: false
+    configs:
+        my_config:
+            toolbar: 'basic'
+            # uiColor: "#000000"
+# #########################################
+# JMS i18n Routing - Yeah!
+# #########################################
+jms_i18n_routing:
+    default_locale: de
+    locales: [en, de]
+    strategy: prefix_except_default
+
+jms_translation:
+    configs:
+        app:
+            dirs:
+              - "%kernel.root_dir%/../src"
+              #- "%kernel.root_dir%/Resources/translations"
+              #- "%kernel.root_dir%/../src/MMApiBundle/Resources/translations/"
+              #- "%kernel.root_dir%/../src/MMWebFrontBundle/Resources/translations/"
+              #- "%kernel.root_dir%/../src/MMUserBundle/Resources/translations/"
+              # - "%kernel.root_dir%/../src/MMPayPalBundle/Resources/translations/"
+            output_dir: "%kernel.root_dir%/Resources/translations"
+            output_format: yml
+            ignored_domains: [routes]
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]
+jms_serializer:
+
+
+# #########################################
+# Doctrine extensions
+# #########################################
+stof_doctrine_extensions:
+    default_locale: de
+    # Only used if you activated the Uploadable extension
+    uploadable:
+        # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
+        default_file_path:       "%kernel.root_dir%/../web/uploads"
+
+        # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
+        # mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
+        # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
+        # default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
+    orm:
+        default:
+            uploadable: true
+            sortable: true
+            softdeleteable: true # See WEBAPP-9
+            translatable: false

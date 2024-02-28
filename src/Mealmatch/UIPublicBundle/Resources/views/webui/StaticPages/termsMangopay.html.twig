@@ -1,0 +1,55 @@
+{% extends '@WEBUI/Layouts/simple_ui_a.html.twig' %}
+{% trans_default_domain 'MMWebFrontBundle' %}
+{% set main_header_title %}{{ 'data.privacy.statement.label'|trans }}{% endset %}
+{% block title %}Mealmatch | {{ 'terms.title'|trans }}{% endblock %}
+{# Terms overwrites BODY because we dont need a layout.#}
+{% block body %}
+    <div
+            class="mm-exported-html-container pre-scrollable"
+            dir="ltr"
+            style="max-width:8.2681in; margin-top:0.9839in; margin-bottom:0.7874in; margin-left:0.9839in; margin-right:0.9839in; text-align: justify-all"
+    >
+        {% include '@WEBUI/StaticPages/Terms/mangopay-text.html.twig' %}
+    </div>
+{% endblock body %}
+{# Pagespecific stylesheet. #}
+{# WARNING! Dont try to export this into css, this is generated form libre office and is always copy&paste ! #}
+{% block page_stylesheets %}
+    {# Using LibreOffice style export format #}
+    <style type="text/css">
+        @page {  }
+        table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+        td, th { vertical-align:top; font-size:12pt;}
+        h1, h2, h3, h4, h5, h6 { clear:both;}
+        ol, ul { margin:0; padding:0;}
+        li { list-style: none; margin:0; padding:0;}
+        /* "li span.odfLiEnd" - IE 7 issue*/
+        li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+        span.footnodeNumber { padding-right:1em; }
+        span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+        span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+        .gr1 { font-size:24pt; font-family:Liberation Serif; min-height:0.477cm;min-width:0.477cm;padding-top:0cm; padding-bottom:0cm; padding-left:0cm; padding-right:0cm; }
+        .gr2 { font-size:24pt; font-family:Liberation Serif; min-height:0.422cm;min-width:0.422cm;padding-top:0cm; padding-bottom:0cm; padding-left:0cm; padding-right:0cm; }
+        .gr3 { font-size:24pt; font-family:Liberation Serif; }
+        .gr4 { font-size:24pt; font-family:Liberation Serif; min-height:0.35cm;min-width:0.35cm;padding-top:0cm; padding-bottom:0cm; padding-left:0cm; padding-right:0cm; }
+        .gr5 { font-size:24pt; font-family:Liberation Serif; min-height:0.388cm;min-width:0.388cm;padding-top:0cm; padding-bottom:0cm; padding-left:0cm; padding-right:0cm; }
+        .P1 { text-align:left ! important; writing-mode:lr-tb; }
+        .P2 { font-size:13.6000003814697pt; }
+        .P3 { font-size:12pt; }
+        .P5 { font-size:10pt; }
+        .P6 { font-size:11.1000003814697pt; }
+        .T1 { color:#000000; font-family:CIDFont+F1; font-size:13.6000003814697pt; }
+        .T10 { color:#000000; font-family:CIDFont+F5; font-size:12pt; }
+        .T11 { color:#000000; font-family:CIDFont+F3; font-size:11.1000003814697pt; }
+        .T2 { color:#000000; font-family:CIDFont+F2; font-size:12pt; }
+        .T3 { color:#000000; font-family:CIDFont+F3; font-size:12pt; }
+        .T4 { color:#000000; font-family:CIDFont+F1; font-size:12pt; }
+        .T5 { color:#0000ff; font-family:CIDFont+F1; font-size:12pt; }
+        .T6 { color:#000000; font-family:CIDFont+F4; font-size:10pt; }
+        .T7 { color:#000000; font-family:CIDFont+F5; font-size:10pt; }
+        .T8 { color:#000000; font-family:CIDFont+F6; font-size:12pt; }
+        .T9 { color:#0000ff; font-family:CIDFont+F3; font-size:12pt; }
+        /* ODF styles with no properties representable as CSS */
+        .dp1 .dp2 .P4  { }
+    </style>
+{% endblock %}

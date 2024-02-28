@@ -1,0 +1,35 @@
+{% trans_default_domain 'Mealmatch' %}
+{# Variables used in this template #}
+{% set currencySymbol = 'glyphicon-eur' %}
+{% set showCoupon = mm_features.ticket_coupons %}
+{% set testEnv = false %}
+{% if app_name in ['mealmatch-stage', 'mealmatch-dev'] %}
+    {% set testEnv = true %}
+{% endif %}
+{# Enable Coupons only if TRUE OR we are on STAGE/DEV #}
+{% if (testEnv) or (showCoupon) %}
+    <div class="mm-spacer"></div>
+    {% if ticket.coupon == null %}
+        <!--// CouponCode redeemRequest //-->
+        <div class="mm-coupon-code">
+            {{ form_start(redeemRequestForm) }}
+            {{ form_widget(redeemRequestForm) }}
+            <!--// CouponCode redeemRequest //-->
+            <a href="{{ path('doTransitionMealTicket', { 'id': ticket.id, 'transition': 'redeem_created' }) }}">
+                <button class="btn-lg btn-success btn-block">
+                    {{ ('transition.redeem_created')|trans }}
+                </button>
+
+            </a>
+            {{ form_end(redeemRequestForm) }}
+        </div>
+        <div class="mm-spacer"></div>
+    {% endif %}
+{% endif %}
+{# END OF COUPON FEATURE #}
+{# The HEAD of the ticket with participiants, address, etc. #}
+{{ include('@WEBUI/MealTicket/HomeMeal/head.include.html.twig') }}
+{# Ticket contents, mael, prices, etc. #}
+{{ include('@WEBUI/MealTicket/HomeMeal/mainTable.include.html.twig') }}
+{# Totals #}
+{{ include('@WEBUI/MealTicket/HomeMeal/bottom.include.html.twig') }}

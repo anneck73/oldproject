@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # MEALS
+  # CSS-Rules for Home + Pro Meals (homemeal-index, promeal-index)
+  # Check also hommeal-index.scss and promeal-index.scss
+\*------------------------------------*/
+
+
+/* MEAL STATUS */
+
+.mm-meal-status {
+  @include flexbox();
+  @include flex-direction(column);
+  @include align-items(center);
+  @include align-self(center);
+}
+
+.mm-meal-status-xs{
+  color: $white;
+  display: inline;
+  position: absolute;
+  left: 0;
+  padding: 2px 10px;
+
+  @include box-shadow(2px 2px 4px 0px rgba(0,0,0,0.2));
+}
+
+.mm-meal-status-icon {
+  font-size: $fs-xxl;
+  margin-bottom: 0.5rem;
+}
+
+/* MEAL ACTIONS */
+
+/* Div with all Meal-Action Buttons */
+.meal-actions{
+  .btn{
+    height: 40px;
+  }
+
+  // Mobile
+  @include x-small-devices(){
+
+    @include flexbox();
+    @include justify-content(center);
+
+    .btn{
+    	height: 35px;
+  	}
+
+    .meal-action-btn,
+    .meal-action-view{
+      margin-right: 5px;
+    }
+
+    .meal-action-btn{
+    	width: 100%;
+  	} 
+  
+  }
+
+}

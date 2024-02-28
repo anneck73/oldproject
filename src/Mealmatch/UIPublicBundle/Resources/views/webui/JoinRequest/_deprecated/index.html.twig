@@ -1,0 +1,142 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}MealMatch: {{ 'joinrequest.index.title_tag'|trans }} {% endblock %}
+{% set main_header_title %}{{ 'joinrequest.index.title_tag'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'joinrequest.index.subtitle'|trans }}{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-matches-circle"></span>{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-xs-9 no-padding-right">
+            <!-- Tab panes -->
+            <div class="tab-content nav-tabs-justified">
+                <div role="tabpanel" class="tab-pane fade{% if selectedTab == 1 %} in active{% endif %}"
+                     id="guest">
+                    <div class=" mm-tab-content">
+                        {{ include('@WEBUI/JoinRequest/index_content_guest.html.twig') }}
+                    </div>
+
+                    <div class="mm-spacer"></div>
+
+                    <h3>{{ 'joinrequest.index.subtitle.mealtickets'|trans }}</h3>
+                    <div class="mm-tab-content">
+                        {{ include('@WEBUI/JoinRequest/index_content_guest_tickets.html.twig') }}
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade mm-tab-content{% if selectedTab == 2 %} in active{% endif %}"
+                     id="host">
+                    {{ include('@WEBUI/JoinRequest/index_content_host.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-3 no-padding">
+            <!-- Nav tabs -->
+            <ul class="nav nav-stacked tabs-right" role="tablist">
+                <li role="presentation" class="{% if selectedTab == 1 %}active{% endif %}">
+                    <a href="#guest" aria-controls="promeal" role="tab"
+                       data-toggle="tab">{{ 'joinrequest.index.title'|trans }}</a>
+                </li>
+                <li role="presentation" class="{% if selectedTab == 2 %}active{% endif %}">
+                    <a href="#host" aria-controls="offers" role="tab"
+                       data-toggle="tab">{{ 'joinrequest.index.hosting.title'|trans }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+{#
+{% block body %}
+{% spaceless %}
+<div class="hidden-xs">
+    <div id="mm-content" class="container-fluid table mm-content">
+        <div class="mm-well">
+            <!-- Nav tabs -->
+            <ul id="mm-matches-tab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#guest"
+                       aria-controls="guest"
+                       role="tab"
+                       data-toggle="tab"><h1>{{ 'joinrequest.index.title'|trans }}</h1>
+                        <h5>{{ 'joinrequest.index.subtitle'|trans }}</h5></a>
+                    </li>
+                <li role="presentation">
+                    <a href="#host"
+                       aria-controls="host"
+                       role="tab"
+                       data-toggle="tab"><h1>{{ 'joinrequest.index.hosting.title'|trans }}</h1>
+                        <h5>{{ 'joinrequest.index.hosting.subtitle'|trans }}</h5></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content mm-tab-content">
+                <div role="tabpanel" class="tab-pane active" id="guest">
+                    {{ include('@WEBUI/JoinRequest/index_content_guest.html.twig') }}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="host">
+                    {{ include('@WEBUI/JoinRequest/index_content_host.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="visible-xs">
+    <div id="mm-content" class="container-fluid table mm-content">
+        <div class="mm-well">
+
+<h1>{{ 'joinrequest.index.title'|trans }}</h1>
+<h5>{{ 'joinrequest.index.subtitle'|trans }}</h5>
+{{ include('@WEBUI/JoinRequest/index_content_guest-xs.html.twig') }}
+<h1>{{ 'joinrequest.index.hosting.title'|trans }}</h1>
+<h5>{{ 'joinrequest.index.hosting.subtitle'|trans }}</h5>
+{{ include('@WEBUI/JoinRequest/index_content_host-xs.html.twig') }}
+
+        </div>
+    </div>
+</div>
+#}
+{#
+
+<div id="mm-content" class="container-fluid mm-content">
+
+    <div class="mm-well">
+
+        <!-- Nav tabs -->
+        <ul id="mm-matches-tab" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#guest" aria-controls="guest" role="tab" data-toggle="tab">{{ 'joinrequest.index.tab1.label'|trans }}</a></li>
+            <li role="presentation">
+                <a href="#host" aria-controls="host" role="tab" data-toggle="tab">{{ 'joinrequest.index.tab2.label'|trans }}</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="guest">
+                {{ include('joinrequest/index_content_guest.html.twig') }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="host">
+                {{ include('joinrequest/index_content_host.html.twig') }}
+            </div>
+        </div>
+
+    </div>
+
+{% endspaceless %}
+{% endblock %}
+#}
+{% block page_js %}
+    <script type="text/javascript">
+        $('#mm-matches-tab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show')
+        });
+
+        jQuery(document).ready(function ($) {
+            $('#mm-matches-tab').tab();
+        });
+
+    </script>
+{% endblock %}

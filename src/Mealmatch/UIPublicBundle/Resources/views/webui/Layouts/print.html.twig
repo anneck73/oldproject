@@ -1,0 +1,41 @@
+{% trans_default_domain 'Mealmatch' %}
+{% extends '@WEBUI/print-base.html.twig' %}
+{% block body %}
+    <div class="header-container findmeal-banner">
+        <img src="{{ webDir }}/{{ asset('bundles/uipublic/images/mm/Logo_mm_48px_verbunden.jpg') }}">
+    </div>
+    {% block default_main %}
+        EMPTY DEFAULT MAIN FROM layouts/print.html.twig!
+    {% endblock %}
+{% endblock %}
+{#<!DOCTYPE html><!--// Copyright Mealmatch GmbH © 2016-2018. All rights reserved! {{ app_version }} //-->#}
+{#<html lang="{{ app.request.locale }}">#}
+{#<head>#}
+{#    <meta property="og:copyright" name="copyright" content="Copyright Mealmatch GmbH © 2016-2019. All rights reserved!">#}
+{#</head>#}
+{# BASE HTML BODY #}
+{#<body class="mm-body">#}
+{#<div class="content">#}
+{#    <section class="main">#}
+{#        <!--// main_header//-->#}
+
+{#        <div class="body-content">#}
+{#            <div class="container container-cust">#}
+{#                <div class="row">#}
+{#                    <div class="mm-default-main">#}
+{#                        {% block default_main %}#}
+{#                            EMPTY!#}
+{#                        {% endblock %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+{#    </section>#}
+{#</div>#}
+
+{#</body>#}
+{#</html>#}
+
+
+

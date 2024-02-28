@@ -1,0 +1,81 @@
+# Mealmatch 2017
+# Configuration for target host
+# meal-match.com
+parameters:
+    mm:
+        ga_tracking_id: UA-88829351-1
+        website_online: '%env(MM_WEBSITE_ONLINE)'
+        env(MM_WEBSITE_ONLINE): true
+    mm_features:
+        messaging: false
+        autobahn: false
+        websockets: false
+        facebook_login: false
+        # currently only for startpage, possible values a,b,c
+        variant_default: b
+
+        paypal_marketplace:
+        live:
+            username: ''
+            password: ''
+            mealmatch_master_token: 'XXX'
+        sandbox:
+            username: ''
+            password: ''
+            mealmatch_master_token: 'XXX'
+
+    # GMaps
+    gmaps_api_key: AIzaSyC0xceQe_AIz0qbhS4QQtPdRX0022EBALI
+
+    # MangoPay
+    mangopay_credentials:
+        live: false
+        sandbox:
+            client_id: '220777'
+            client_password: 'xLWXBMC5QADRK6g0koK3bAOqiAuWzEbQ62SkNokvfTXQftfXXx'
+        production:
+            client_id: xxx
+            client_password: xxx
+
+    database_host: mealmatch.local
+    database_port: 3306
+    database_name: mealmatch_local_test
+    database_user: db
+    database_password: 123
+    aws3_bucket: mealmatch-stage
+    aws3_host: mealmatch-stage.objects.frb.io
+    aws3_key: mealmatch-stage
+    aws3_region: eu-west-1
+    aws3_secret: QWiulrTj44JNkqlnw1S1k2sk9JPo-SyVlfkEj8pt0zPoXRkTdbM1HjwSrfuu_skO
+    aws3_server: objects.eu2.frbit.com
+    mailer_transport: smtp
+    mailer_host: login18.schwarzkuenstler.info
+    mailer_user: mailer@mealmatch.de
+    mailer_password: 'mvXV%%%x&amp;$!1UfFb'
+    facebook_app_id: 1808267089461050
+    facebook_secret: 425be9cc5bf772511fec807a61169680
+    paypal_credentials:
+        app_id: APP-9KN92377EH262120N
+        username: mealmatch_api1.steinebach.bi
+        password: N7Q25VBLBH8WGRSN
+        signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAqe2RNyOTETm3Xgzbm8xAbAkvqYr
+        email: payment@mealmatch.de
+        live: false
+        sandbox:
+            app_id: APP-80W284485P519543T
+            username: andre.anneck-facilitator_api1.mealmatch.de
+            password: HR5SLLDZM5VGRLMY
+            email: mmtest.company@mealmatch.de
+            signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A8VATVg.JX2gjB-7T2q3kBzbjmHH
+    secret: eb3c36367a865febf98284bfdfe0c7bf7810ec95
+    vendor_dir: '%kernel.root_dir%/../vendor'
+    session_memcache_prefix: mm_
+    session_memcache_expire: 14400
+    session_memcache_host_1: localhost
+    session_memcache_port_1: 11211
+
+    router.request_context.host: mealmatch.local
+
+    # this channel is enforced and set to http on local dev.
+    # if you need to test https, use default setting(https).
+    mm_security_channel: 'http'

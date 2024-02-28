@@ -1,0 +1,14 @@
+{% extends '@WEBUI/Layouts/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.check_email.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.check_email.title'|trans }}{% endset %}
+
+{% block simple_main_content %}
+    <div class="invite-friend">
+        <div class="invite-content">
+            <i class="icon-info fa-4x" aria-hidden="true"></i>
+            <h3>{{ 'registration.response'|trans }} </h3>
+            {{ 'registration.check_email'|trans({'%email%': user.email}) }}
+        </div>
+    </div>
+{% endblock %}

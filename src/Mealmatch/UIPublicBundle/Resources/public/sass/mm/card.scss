@@ -1,0 +1,156 @@
+/*
+ * Copyright (c) 2017. Mealmatch GmbH
+ * Author: Wizard <wizard@mealmatch.de>
+ */
+/**
+ * Mealmatch Menu Card CSS
+ */
+.mm-card-header {
+
+  position: relative;
+  left: 50px;
+  top: -50px;
+  width: 300px;
+
+}
+
+.mm-card-super-header {
+
+  position: relative;
+  left: 60px;
+  top: -30px;
+  width: 300px;
+
+}
+
+.mm-card {
+
+}
+
+/** all btn eckig */
+.card button {
+  border-radius: 0px;
+}
+
+.mm-card-content {
+  height: 255px;
+  overflow-y: hidden;
+}
+
+.mm-card .mm-title {
+  border-bottom: 1px solid #000000;
+  text-align: center;
+}
+
+.mm-card .mm-menu .mm-starter-hd {
+  padding: 10px 0 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.mm-card .mm-menu .mm-starter {
+  text-align: center;
+  font-size: 12px;
+}
+
+.mm-card .mm-menu .mm-main-hd {
+  padding: 10px 0 0;
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+
+}
+
+.mm-card .mm-menu .mm-main {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.mm-card .mm-menu .mm-desert-hd {
+  padding: 10px 0 0;
+  text-align: center;
+  font-size: 14px;
+
+}
+
+.mm-menu {
+  max-height: 250px;
+}
+
+.mm-card .mm-menu .mm-desert {
+  text-align: center;
+  font-size: 12px;
+}
+
+.mm-card-guests {
+  border-radius: 0px;
+}
+
+.mm-footer {
+
+}
+
+.mm-card-price {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.mm-card-join {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.mm-header {
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+.mm-description {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.mm-host-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.mm-guest-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.mm-card-hostname {
+  position: absolute;
+  right: 5px;
+  top: 35px;
+  font-size: 11px;
+}
+
+.mm-title-xs {
+  font-size: 24px;
+}
+
+.mm-title-sm {
+  font-size: 24px;
+}
+
+.mm-title-md {
+  font-size: 24px;
+}
+
+.mm-title-lg {
+  font-size: 24px;
+}
+
+.mm-card-title {
+  margin-left: 5px;
+  margin-top: 5px;
+}

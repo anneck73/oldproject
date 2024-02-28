@@ -1,0 +1,119 @@
+{% trans_default_domain 'Mealmatch' %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th class="status">{{ 'meal.index.status.label'|trans }}</th>
+        <th class="th-left">Meal</th>
+        <th>{{ 'meal.index.message.label'|trans }}</th>
+        <th>{{ 'meal.index.guest.label'|trans }}</th>
+        <th>{{ 'meal.index.available.actions.label'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for joinRequest in joinReqH %}
+{#        #}{# Determin CSS Class to use for status color symbol #}
+{#        {% if ticket.status == 'PAYED' %}{% set colorClass %}mm-green{% endset %}#}
+{#        {% elseif ticket.status == 'PROCESSING' %}{% set colorClass %}mm-light-grey{% endset %}#}
+{#        {% elseif ticket.status == 'CANCELLED' %}{% set colorClass %}mm-light-grey{% endset %}#}
+{#        {% elseif ticket.status == 'ERROR' %}{% set colorClass %}mm-red{% endset %}#}
+{#        {% endif %}#}
+        <tr>
+            <td>
+                <div class="mm-meal-status">
+                    <div class="mm-meal-status-icon fa fa-bullseye
+                {% if joinRequest.status == 'ACCEPTED' %} mm-green
+                    {#<span class="btn btn-success">{{ 'joinrequest.status.accepted'|trans }}</span>#}
+                {% endif %}
+                {% if joinRequest.status == 'DENIED' %} mm-red
+                    {#<span class="btn btn-danger">{{ 'joinrequest.status.denied'|trans }}</span>#}
+                {% endif %}
+                {% if joinRequest.status == 'CREATED' %} mm-light-grey
+                    {#<span class="btn btn-primary">{{ 'joinrequest.status.created'|trans }}</span>#}
+                {% endif %}
+                {% if joinRequest.status == 'PAYED' %} mm-green
+                    {#<span class="btn btn-success">{{ 'joinrequest.status.payed'|trans }}"></span>#}
+                {% endif %}
+                {% if joinRequest.status == 'PAYMENT_FAILED' %} mm-red
+                {% endif %}">
+                    </div>
+                    {% if joinRequest.status == 'ACCEPTED' %}
+                        <p>{{ 'joinrequest.status.accepted'|trans }}</p>
+                    {% endif %}
+                    {% if joinRequest.status == 'DENIED' %}
+                        <p>{{ 'joinrequest.status.denied'|trans }}</p>
+                    {% endif %}
+                    {% if joinRequest.status == 'CREATED' %}
+                        <p>{{ 'joinrequest.status.created'|trans }}</p>
+                    {% endif %}
+                    {% if joinRequest.status == 'PAYED' %}
+                        <p>{{ 'joinrequest.status.payed'|trans }}</p>
+                    {% endif %}
+                    {% if joinRequest.status == 'PAYMENT_FAILED' %}
+                        <p>{{ 'joinrequest.status.payment_failed'|trans }}</p>
+                    {% endif %}
+                </div>
+            </td>
+            <td class="info-cont">
+                <div class="mealinfo-title">
+                    <a href="#" data-toggle="modal" data-target="#mm-meal-modal-{{ joinRequest.id }}-{{ joinRequest.baseMeal.id }}">{{ joinRequest.baseMeal.title }}</a>
+                    <div id="mm-meal-modal-{{ joinRequest.id }}-{{ joinRequest.baseMeal.id }}"
+                         class="mm-meal-modal modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {% set homeMeal = joinRequest.baseMeal %}
+                                    {{ include('@WEBUI/HomeMeal/Card/homemeal.html5.twig') }}
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                </div>
+            </td>
+            <td class="msg-cont">{{ joinRequest.messageToHost }}</td>
+            <td  class="host-cont">
+                <a href="#" data-toggle="modal"
+                   data-target="#mm-userprofile-modal-{{ joinRequest.id }}-{{ joinRequest.createdBy.id }}">
+                    {% set uProfile = joinRequest.createdBy.profile %}
+                    {% set uAccount = joinRequest.createdBy %}
+                    {% if uProfile.imageName == "image/udefault.png" %}
+                        <img class="join-request-img" src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}">
+                    {% else %}
+                        <img class="join-request-img" src="{{ asset(uProfile.imageName, 's3img') }}">
+                    {% endif %}
+                </a>
+            </td>
+            <td class="action-cont">
+                {% if joinRequest.status == 'CREATED' %}
+                    <a href="{{ path('joinrequest_deny', { 'hash': joinRequest.hash }) }}">
+                        <button class="btn btn-danger btn-155">{{ 'joinrequest.index.deny.label'|trans }}</button>
+                    </a>
+                    <a href="{{ path('joinrequest_accept', { 'hash': joinRequest.hash }) }}">
+                        <button class="btn btn-success btn-155">{{ 'joinrequest.index.accept.label'|trans }}</button>
+                    </a>
+                {% endif %}
+                {% if joinRequest.status == 'ACCEPTED' %}
+                    {{ 'joinrequest.waitingforpayment'|trans }}
+                {% endif %}
+                {% if joinRequest.status == 'PAYED' %}
+                    {{ 'joinrequest.payed'|trans }}
+                {% endif %}
+                {% if joinRequest.status == 'DENIED' %}
+                    {{ 'joinrequest.denied'|trans }}
+                {% endif %}
+                {% if joinRequest.status == 'PAYMENT_FAILED' %}
+                    {% for homeMealTicket in guestsHomeMealTickets %}
+                        {% if homeMealTicket.baseMeal.id == joinRequest.meal.id %}
+                            <a target="_blank" href="{{ path('api_mealticket_show', {'id': homeMealTicket.id}) }}">
+                                <button class="btn btn-danger btn-block">
+                                    {{ 'joinrequest.error'|trans }}
+                                </button>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

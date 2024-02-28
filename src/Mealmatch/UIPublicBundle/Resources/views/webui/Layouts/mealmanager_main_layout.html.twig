@@ -1,0 +1,67 @@
+{% extends "@WEBUI/newUI-Base.html.twig" %}
+{% trans_default_domain 'Mealmatch' %}
+{#
+Variables used by the template, can be overriden when extended.
+#}
+{% if colLeft is not defined %}{% set colLeft %}col-sm-2 col-xs-12{% endset %}{% endif %}
+{% if colRight is not defined %}{% set colRight %}col-sm-10 col-xs-12{% endset %}{% endif %}
+{% if viewDataImage is not defined %}{% set viewDataImage %}{{ asset('bundles/uipublic/images/mm/mealmatch_header.jpg') }}{% endset %}{% endif %}
+{% if viewDataImageXS is not defined %}{% set viewDataImageXS %}{{ asset('bundles/uipublic/images/mm/mealmatch_header_xs.jpg') }}{% endset %}{% endif %}
+{% if viewData.title is not defined %}{% set viewData = {'title': '<!--// NO VIEW DATA TITLE //-->'} %}{% endif %}
+{% if left_icon is not defined %}{% set left_icon %}<span
+        class="mm-circle-icon mm-icon-default-circle"></span>{% endset %}{% endif %}
+{% if main_header_title is not defined %}{% set main_header_title %}{{ viewData.title }}{% endset %}{% endif %}
+{% if main_header_subtitle is not defined %}{% set main_header_subtitle %}MAIN_HEADER_SUB_TITLE{% endset %}{% endif %}
+{% if main_header_action_path is not defined %}{% set main_header_action_path %}MAIN_HEADER_ACTION_PATH{% endset %}{% endif %}
+{% if main_header_action is not defined %}{% set main_header_action %} {% endset %}{% endif %}
+{% if main_header_action_label is not defined %}{% set main_header_action_label %}MAIN_HEADER_ACTION_LABEL{% endset %}{% endif %}
+{# Layout #}
+{% block body %}
+    {% block headerImg %}
+    <div class="header-container findmeal-banner">
+        <div class="search-sec">
+            <h3>{{ main_header_title }}</h3>
+        </div>
+    </div>
+    {% endblock %}
+    <div class="body-content">
+    <div class="container">
+    <div class="row">
+    {% block doubleHeader %}
+    <div class="col-md-12 meal-mg-title">
+        <div class="meal-icon">
+            {{ left_icon }}
+        </div>
+        <div class="meal-title">
+            <h3 class="title">{{ main_header_title }}</h3>
+            {% if main_header_subtitle is not empty %}
+                <p class="margin-bottom1-5">{{ main_header_subtitle }}</p>
+            {% endif %}
+        </div>
+    {% if main_header_action is not empty %}
+        <div class="create-meal">
+            {% block main_header_action %}
+                <a href="{{ main_header_action_path }}">
+                    <button class="create-btn">
+                        {{ main_header_action_label }}
+                    </button>
+                </a>
+            {% endblock main_header_action %}
+        </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+    <div class="mm-layout mm-layout-main-content">
+        {% block main_content %}
+            <div class="col-md-12">
+                {% if viewData.text is defined %}{{ viewData.text|raw }}{% endif %}
+            </div>
+        {% endblock %}
+    </div>
+    </div>
+    </div>
+    </div>
+    {% block main_bottom %}
+        <!--// There is no default for block bottom //-->
+    {% endblock %}
+{% endblock body %}

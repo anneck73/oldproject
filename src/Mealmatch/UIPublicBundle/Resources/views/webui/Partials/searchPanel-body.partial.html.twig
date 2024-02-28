@@ -1,0 +1,91 @@
+{#
+Author: wizard@mealmatch.de
+Used in JS "search" of PublicSearchController
+Included in searchPanelWidget.html.twig
+Using Route: json_search "/s/"
+#}
+{% trans_default_domain 'Mealmatch' %}
+<div class="mm-spacer"></div>
+<h2 class="mm-header">{{ meal.title }}</h2>
+<p class="mm-footer-text">{{ meal.description|raw }}</p>
+<ul class="nav">
+    {% if meal.guests|length > 0 %}
+        <li>Gäste:
+            <ul class="nav nav-pills">
+                {% for guest in meal.guests %}
+                    <li>
+                        <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                            {% else %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset(guest.profile.imageName, 's3img') }}"/>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
+{% if free > 0 %}
+    <button class="btn btn-success pull-left" type="button">Frei <span class="badge mm-bg-green">{{ free }}</span> Max
+        <span
+                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+    <div class="pull-right">
+        <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+            <button class="btn btn-success" type="button">
+                {{ 'meal.action.join'|trans }} {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+            </button>
+        </a>
+    </div>
+{% else %}
+    <div class="text-center">
+        <button class="btn btn-danger" type="button">Frei <span class="badge mm-bg-green">{{ free }}</span> Max <span
+                    class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+    </div>
+{% endif %}
+{#
+
+<ul class="nav nav-justified">
+    <li><button class="btn btn-success pull-left" type="button">
+            {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+        </button>
+    </li>
+    <li><nobr>Frei <span class="badge mm-bg-green">5</span> Max <span class="badge mm-green" style="background-color: #0f0f0f">15</span></nobr></li>
+    <li>
+        <div class="mm-accordion-collapse-action pull-right">
+            {% if not null == app.user %}
+                {% if meal.host.id == app.user.id %}
+                    <a href="{{ path('meal_edit',{'id': meal.id}) }}">
+                        <button class="btn btn-success" type="button">
+                            {{ 'meal.action.edit'|trans }}
+                        </button>
+                    </a>
+                {% else %}
+                    <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+                        <button class="btn btn-success" type="button">
+                            {{ 'meal.action.join'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+            {% else %}
+                <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+                    <button class="btn btn-success" type="button">
+                        {{ 'meal.action.join'|trans }}
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+    </li>
+</ul>
+
+#}
+
+

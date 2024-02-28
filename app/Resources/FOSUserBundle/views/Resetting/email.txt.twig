@@ -1,0 +1,21 @@
+{% trans_default_domain 'Mealmatch' %}
+{% block subject %}
+{% autoescape false %}
+{{ 'resetting.email.subject'|trans({'%username%': user.username}) }}
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{% endautoescape %}
+{{ include('@MMApi/Emails/footer.html.twig') }}
+{% endblock %}
+{% block body_html %}
+
+{% autoescape false %}
+{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{% endautoescape %}
+
+{{ include('@MMApi/Emails/footer.html.twig') }}
+{% endblock %}
+

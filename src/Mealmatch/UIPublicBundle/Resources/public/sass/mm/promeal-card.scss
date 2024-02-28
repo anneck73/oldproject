@@ -1,0 +1,307 @@
+/* START */
+
+#index-content{
+	text-align: center;
+	// background-image: url("../images/background.jpg");
+	//height: $content-height;
+
+	header{
+		text-align: center;
+		padding-bottom: 1rem;
+	}
+
+	img.mm-logo-s{
+		width: 15rem;
+		height: auto;
+		margin: 1rem 0;
+	}
+}
+/*------------------------------------*\
+  # TEXT
+\*------------------------------------*/
+.pro-meal-card {
+  a, a:link, a:active{
+    color: $white;
+    text-decoration: none;
+  }
+
+  .pro-meal-card h2{
+    font-size: $fs-l;
+    font-weight: 300;
+    margin: 0;
+  };
+
+
+
+  .fw-thin{ font-weight: 100; }
+  .fw-lighter{ font-weight: 200; }
+  .fw-regular{ font-weight: 400; }
+
+
+  /*------------------------------------*\
+    # CLASSES
+  \*------------------------------------*/
+
+  .responsive-image{
+    width: 100%;
+    height: auto;
+  }
+
+  .relative{
+    position: relative;
+  }
+
+  .flexbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .flexbox-h {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+
+  .flexbox-centering {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+
+  .flexbox-space{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    -webkit-align-content: space-between;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .flexbox-space-around{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+    -webkit-align-content: space-between;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .text-shadow{
+    text-shadow: 2px 2px 2px $black;
+  }
+
+  .grid{
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  .grid-full{
+    padding: 1rem;
+  }
+
+  .centering{
+    text-align: center;
+  }
+
+  .upper{
+    text-transform: uppercase;
+  }
+
+  .hr{
+    /*width: 100%;
+    height: 1px;
+    box-shadow: 0 0.5px 0 rgba(151, 151, 151, 0.6);
+    */
+    border-top: 0.5px solid rgba(151, 151, 151, 0.3);
+    margin-bottom: 1rem;
+  }
+
+  .bc-light-white{
+    background-color: $light-white;
+  }
+
+
+
+  .card{
+
+    color: $grey;
+    background-color: $white;
+    border-radius: 2px;
+
+    margin-bottom: 1rem;
+
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.39);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.39);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.39);
+
+    figure{
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      position: relative;
+      width: 100%;
+      height: 12rem;
+      border-radius: 2px 2px 0 0;
+
+      img{
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+
+        opacity: 0.7;
+        filter: alpha(opacity=70); /* For IE8 and earlier */
+
+        border-radius: 2px 2px 0 0;
+      }
+
+      figcaption{
+        color: $white;
+        position: absolute;
+        bottom: 1.5rem;
+        text-align: center;
+        width: 100%;
+
+        p{
+          margin: 0 0 0.5rem 0;
+        }
+      }
+    }
+
+    .card-title{
+
+      p{
+        margin: 0;
+      }
+
+    }
+
+    .card-profile{
+      width: 3rem;
+      height: auto;
+      margin-right: 1rem;
+    }
+
+    .card-info{
+      text-align: center;
+      width: 7rem;
+
+      span{
+        font-size: $fs-m;
+      }
+
+      p{
+        font-size: $fs-xs;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    .card-pricetag{
+      text-align: left;
+      width: 14rem;
+
+      span{
+        font-size: $fs-m;
+      }
+
+      p{
+        font-size: $fs-xs;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    .card-address{
+      text-align: center;
+      width: 14rem;
+
+      span{
+        font-size: $fs-m;
+      }
+
+      p{
+        font-size: $fs-xs;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    .card-actions{
+      button{
+        border: none;
+        background-color: initial;
+        font-size: $fs-m;
+        margin: 0;
+        padding: 0;
+
+        &.more{
+          background-image: url("../images/icons/more.png");
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+  }
+}

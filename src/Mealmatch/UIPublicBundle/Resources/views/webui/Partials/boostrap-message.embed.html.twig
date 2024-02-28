@@ -1,0 +1,12 @@
+{#
+this is to be emedded using twig embed overriding block "message".
+#}
+{% if app.user.settings.uiHints %}
+<div class="alert alert-{{ type }} alert-dismissible fade in no-margin" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <p>{% block message %}
+        default
+        {% endblock %}</p>
+</div>
+{% endif %}
+

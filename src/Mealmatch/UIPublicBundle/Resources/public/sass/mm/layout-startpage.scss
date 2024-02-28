@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2016-17. Mealmatch GmbH
+ *
+ * Author: 
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+
+/*------------------------------------*\
+  # BASE
+\*------------------------------------*/
+
+.mm-layout-container {
+  padding: 2rem 1rem;
+}
+
+.mm-layout-manager-container {
+  padding: 5px;
+}
+
+#mm-promeal-manager-actions {
+  padding-top: 0;
+  margin-top: -20px;
+}
+
+#mm-restaurantprofile-manager {
+
+  .layout_left {
+    padding-right: 0;
+
+  }
+
+  .layout_right {
+    padding-left: 0;
+    margin-left: -15px;
+  }
+
+}
+
+.mm-layout-search-container {
+  padding: 0;
+}
+
+.mm-layout-search-results-container {
+  position: absolute;
+  top: 95px;
+  left: 15px;
+  z-index: 99;
+  width: 450px;
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

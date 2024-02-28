@@ -1,0 +1,84 @@
+{#
+    to be included ... shows all available actions for current meal.
+#}
+{% trans_default_domain 'Mealmatch' %}
+
+<div class="margin-bottom-half meal-actions">
+    {% for transition in workflow_transitions(meal) %}
+        <a class="meal-action-btn" href="{{ path('doTransitionBaseMeal', { 'id': meal.id, 'transition': transition.name }) }}">
+            <button class="action-btn">
+                <!-- Bereitstellen -->
+                {% if transition.name == "restart_meal" %}
+                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                    <!-- Veröffentlichen -->
+                {% elseif transition.name == "start_meal" %}
+                    <i class="icon-globe"></i>
+                    <!-- Stoppen -->
+                {% elseif transition.name == "stop_meal" %}
+                    <i class="fa fa-hourglass-o"></i>
+                {% endif %}
+                {{ ('transition.' ~ transition.name)|trans }}
+            </button>
+        </a>
+    {% else %}
+        No actions available.
+    {% endfor %}
+
+    <div class="flexbox promeal-actions">
+        <a name="meal_edit_link" href="{{ path('api_promeal_manager_show', {'id': meal.id}) }}">
+            <span class="action-icons"><i class="icon-eye"></i></span>
+        </a>
+        {% if meal.status == 'RUNNING' %}
+            {% if meal.guests|length > 0 %}
+                    <a name="meal_edit_link" data-toggle="modal" data-target="#mealstopalert1" class="stop-meal">
+                    <span class="action-icons"><i class="icon-settings"></i></span>
+
+                </a>
+            {% else %}
+                <a name="meal_edit_link" data-toggle="modal" data-target="#mealstopalert2" class="stop-meal">
+
+                    <span class="action-icons"><i class="icon-settings"></i></span>
+                </a>
+            {% endif %}
+        {% else %}
+            <a name="meal_edit_link" href="{{ path('api_promeal_manager_edit', {'id': meal.id}) }}">
+                <span class="action-icons"><i class="icon-settings"></i></span>
+            </a>
+        {% endif %}
+        <a class="fb-xfbml-parse-ignore" target="_blank"
+           href="https://www.facebook.com/sharer/sharer.php?u={{ url('public_promeal_hostname_mealtitle_id',
+           {'hostName': meal.host.username, 'mealTitle': meal.title, 'mealID': meal.id} ) }}&amp;src=sdkpreparse">
+            <span class="action-icons"><i class="icon-social-facebook"></i></span>
+        </a>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="mealstopalert1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{ 'note'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'mealmananger.settings.note1'|trans }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mealstopalert2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{ 'note'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'mealmananger.settings.note2'|trans }}</p>
+            </div>
+        </div>
+    </div>
+</div>

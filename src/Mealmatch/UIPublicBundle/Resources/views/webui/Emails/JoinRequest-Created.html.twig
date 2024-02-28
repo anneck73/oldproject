@@ -1,0 +1,8 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>{{ 'joinrequest.created.mail.salutation'|trans({ '%hostusername%': MEAL.host.username }) }}</p>
+<p>{{ 'joinrequest.created.text.1'|trans }} <a
+            href="{{ url('public_user_by_username', {'pName': GUEST.username}) }}">{{ GUEST.username }}</a> {{ 'joinrequest.created.text.2'|trans({'%mealtitle%': MEAL.title}) }}
+</p>
+<p>{{ 'joinrequest.created.text.3'|trans }} „<a href="{{ url('joinrequest_index') }}">{{ 'joinrequest.created.text.4'|trans }}</a>“ {{ 'joinrequest.created.text.5'|trans }}.</p>
+<p>- {{ 'joinrequest.mail.yourteam'|trans }}</p>
+{{ include('@MMApi/Emails/footer.html.twig') }}

@@ -1,0 +1,153 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set free = (meal.maxnumberofguest - meal.guests|length) %}
+{% set max = meal.maxnumberofguest %}
+<div class="card-container manual-flip" xmlns="http://www.w3.org/1999/html">
+    <div class="card mm-card">
+        <div class="front">
+
+            <button class="btn btn-success mm-card-turn pull-left" type="button" onclick="rotateCard(this)"
+                    data-toggle="tooltip" data-placement="bottom" title="Notizen des Gastgebers">
+                <span class="badge"><i class="fa fa-mail-reply"></i></span>
+            </button>
+            <h2 class="pull-left mm-card-title">{{ meal.title }}</h2>
+            <div class="mm-host-image">
+                <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+                {% if meal.host.profile.imageName == "image/udefault.png" %}
+                    <img class="img-circle"
+                         width="35px"
+                         height="35px"
+                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+                {% else %}
+                    <img class="img-circle"
+                         width="35px"
+                         height="35px"
+                         src="{{ asset(meal.host.profile.imageName, 's3img') }}" />
+                {% endif %}
+                </a>
+            </div>
+
+            <p class="clearfix"></p>
+            <ul class="nav">
+                {% if(app.user is not null and meal.guest(app.user)) %}
+                    <li>{{ 'location'|trans }}:
+                        <p>{{ meal.host.profile.firstName }} {{ meal.host.profile.lastName }}</p>
+                        <p>{{ meal.address.streetName }}, {{ meal.address.streetNumber }}</p>
+                        <p>{{ meal.address.postalCode }} {{ meal.address.city }}</p>
+                    </li>
+                {% else %}
+                    <li>{{ 'location'|trans }}: {{ meal.address.postalCode }} {{ meal.address.city }}</li>
+                {% endif %}
+
+                <li>{{ 'meal.startdatetime.label'|trans }}: {{ meal.startDateTime|date('d.m.y H:i') }}</li>
+                <li><h2>Menu:</h2><ul class="nav nav-stacked">
+                        {% for mealOffer in meal.mealOffers %}
+                            <li class="mm-menu">{{ mealOffer.name }}: {{ mealOffer.description|raw }} {{ mealOffer.price }} {{ mealOffer.currency }}
+                                <a href="{{ path('api_mealoffer_edit', { 'id': mealOffer.id }) }}">
+                                    <button class="btn btn-sm btn-info" name="_editOffer">{{ 'mealoffer.edit.label'|trans }}</button>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul></li>
+                {% if meal.guests|length > 0 %}
+                    <li><h2>Gäste:</h2>
+                        <ul class="nav nav-pills">
+                            {% for guest in meal.guests %}
+                                <li>
+                                    <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                        {% if guest.profile.imageName == "image/udefault.png" %}
+                                            <img class="img-circle"
+                                                 width="35px"
+                                                 height="35px"
+                                                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                                 alt="Profileimage"/>
+                                        {% else %}
+                                            <img class="img-circle"
+                                                 width="35px"
+                                                 height="35px"
+                                                 src="{{ asset(guest.profile.imageName, 's3img') }}"/>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <p class="mm-spacer"></p>
+            <div>
+
+                {% if free > 0 %}
+                    <button class="btn btn-success pull-left" type="button"
+                            style="position: absolute; left: 0; bottom: 0;">Frei <span
+                                class="badge mm-bg-green">{{ free }}</span> Max
+                        <span
+                                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+                    <div class="pull-right" style="position: absolute; right: 0; bottom: 0;">
+                    <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+                        <button class="btn btn-success" type="button">
+                            {{ 'meal.action.join'|trans }} {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+                        </button>
+                    </a>
+                    </div>
+            {% else %}
+                <div class="text-center">
+                    <button class="btn btn-danger" type="button">Frei <span class="badge mm-bg-green">{{ free }}</span>
+                        Max <span
+                                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+                </div>
+            {% endif %}
+
+            </div>
+
+        </div> <!-- end front panel -->
+        <div class="back">
+            <button class="btn btn-success mm-card-turn pull-left" type="button" onclick="rotateCard(this)"
+                    data-toggle="tooltip" data-placement="bottom" title="Zurück zum Meal">
+                <span class="badge"><i class="fa fa-mail-reply"></i></span>
+            </button>
+            <h2 class="pull-left mm-card-title">{{ meal.title }}</h2>
+            <div class="mm-host-image">
+                <a href="{{ path('public_user_by_username', {'pName': meal.host.username}) }}">
+                    {% if meal.host.profile.imageName == "image/udefault.png" %}
+                        <img class="img-circle"
+                             width="35px"
+                             height="35px"
+                             src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+                    {% else %}
+                        <img class="img-circle"
+                             width="35px"
+                             height="35px"
+                             src="{{ asset(meal.host.profile.imageName, 's3img') }}" />
+                    {% endif %}
+                </a>
+            </div>
+
+            <p class="clearfix"></p>
+            <div class="mm-well">
+                {{ meal.description|raw }}
+            </div>
+            <div class="nav navbar-fixed-bottom">
+                {% if free > 0 %}
+                    <button class="btn btn-success pull-left" type="button">Frei <span
+                                class="badge mm-bg-green">{{ free }}</span> Max
+                        <span
+                                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+                    <div class="pull-right">
+                    <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+                        <button class="btn btn-success" type="button">
+                            {{ 'meal.action.join'|trans }} {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+                        </button>
+                    </a>
+                    </div>
+            {% else %}
+                <div class="text-center">
+                    <button class="btn btn-danger" type="button">Frei <span class="badge mm-bg-green">{{ free }}</span>
+                        Max <span
+                                class="badge mm-green" style="background-color: #0f0f0f">{{ max }}</span></button>
+                </div>
+            {% endif %}
+            </div>
+        </div> <!-- end back panel -->
+    </div> <!-- end card -->
+</div>

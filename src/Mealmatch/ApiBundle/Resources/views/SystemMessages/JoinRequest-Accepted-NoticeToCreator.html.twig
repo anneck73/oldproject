@@ -1,0 +1,27 @@
+{% trans_default_domain 'Mealmatch' %}
+<p>{{ 'joinrequest.accepted.mail.salutation'|trans({ '%u%': GUEST.username }) }}</p>
+<p>{{ 'joinrequest.accepted.mail.text.1'|trans({'%hostusername%': HOST.username, '%hostlastname%': HOST.profile.lastName, '%mealtitle%': MEAL.title}) }}</p>
+
+{% if (JR.baseMeal.sharedCost > 0) %}
+    <p>{{ 'joinrequest.accepted.mail.text.pay'|trans }}</p>
+    <p>
+        <a href="{{ url('api_mealticket_create_from_joinreq', {'id': JR.id}) }}">{{ 'joinrequest.accepted.mail.text.pay2'|trans }}</a>
+    </p>
+{% else %}
+    <p>{{ 'joinrequest.accepted.mail.text.free'|trans }}</p>
+    <p>
+        <a href="{{ url('api_basemeal_join', {'id': JR.id}) }}">{{ 'joinrequest.accepted.mail.text.free2'|trans }}</a>
+    </p>
+{% endif %}
+<p></p>
+<p>{{ 'JR.meal.location.text'|trans }}:</p>
+<p>{{ HOST.profile.firstName }} {{ HOST.profile.lastName }}</p>
+<p>{{ JR.baseMeal.address.streetName }}, {{ JR.baseMeal.address.streetNumber }}</p>
+<p><b>{{ JR.baseMeal.address.postalCode }}</b> {{ JR.baseMeal.address.city }}</p>
+<p></p>
+<p>{{ 'JR.meal.wayto.text.start'|trans }} <a
+            href="https://www.google.com/maps/dir/Current+Location/{{ JR.baseMeal.address.locationString|url_encode }}">Link</a>
+    {{ 'JR.meal.wayto.text.end'|trans }}folgen:</p>
+<p>https://www.google.com/maps/dir/Current+Location/{{ JR.baseMeal.address.locationString }}</p>
+<p></p>
+<p>{{ 'joinrequest.mail.yourteam'|trans }}</p>

@@ -1,0 +1,19 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currencySymbol = 'glyphicon-eur' %}
+{% set tokens = ticket.paymentTokens %}
+<div>
+    <h2>Bezahlvorgänge (#{{ tokens.count }}):</h2>
+    {% for token in tokens %}
+        {% set reqFields = pTokens.first.tokenReq.fields %}
+        {% set reqService = pTokens.first.tokenReq.Service %}
+        <p>#{{ token.id }} - {{ token.tokenStatus }} {{ reqFields.actionType }}</p>
+        <p>{{ reqFields.receiverList.0.email }} ({{ reqFields.receiverList.0.amount }}
+            ), {{ reqFields.receiverList.1.email }} ({{ reqFields.receiverList.1.amount }})</p>
+        {% if pTokens.first.tokenResp.PayPalException is not null %}
+            <p class="alert-danger">{{ pTokens.first.tokenResp.PayPalException }}</p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{{ include('@WEBUI/MealTicket/HomeMeal/mainTable.include.html.twig') }}
+{{ include('@WEBUI/MealTicket/HomeMeal/bottom.include.html.twig') }}

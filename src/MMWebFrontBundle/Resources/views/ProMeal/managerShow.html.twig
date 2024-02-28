@@ -1,0 +1,26 @@
+{% extends '@WEBUI/Layout/main.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% set main_header_title = 'promeal.manager.title'|trans %}
+{% set main_header_subtitle = 'promeal.manager.show.subtitle'|trans %}
+{% set main_header_action_path = path('api_promeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+
+{% block main_content %}
+    {{ include('@WEBUI/ProMeal/Card/promeal.html5.twig') }}
+{% endblock %}
+
+{% block page_js %}
+    {#
+    {% javascripts
+    '@MMWebFrontBundle/Resources/public/js/jquery/jquery-ui.js'
+    '@MMWebFrontBundle/Resources/public/js/mm-rrule-gui.js'
+    output='js/mealmatch-rrule-ui.js'
+    filter='?jsqueeze'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+#}
+{% endblock %}

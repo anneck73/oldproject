@@ -1,0 +1,15 @@
+{
+  "projectId": "mmwebapp",
+  "baseUrl": "https://mealmatch-dev.frb.io",
+  "fixturesFolder": "tests/Mealmatch/cypress/fixtures/",
+  "integrationFolder": "tests/Mealmatch/cypress/integration/",
+  "viewportWidth": 1855,
+  "viewportHeight": 1060,
+  "defaultCommandTimeout": 10000,
+  "videosFolder": "build/videos/",
+  "supportFile": "tests/Mealmatch/cypress/support/commands.js",
+  "watchForFileChanges": false,
+  "chromeWebSecurity": false
+}
+
+

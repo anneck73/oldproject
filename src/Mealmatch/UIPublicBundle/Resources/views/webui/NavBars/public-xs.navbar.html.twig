@@ -1,0 +1,32 @@
+{% set currentRoute = app.request.get('_route') %}
+{% trans_default_domain 'Mealmatch' %}
+<!--// navbar public xs //-->
+{{ include('@WEBUI/Partials/search-modal.partial.html.twig') }}
+
+<nav class="navbar navbar-fixed-top mm-navbar-xs mm-navbar-xs-public" role="navigation">
+    <div class="navbar-content">
+        <a class="navbar-brand" href="#"
+           data-toggle="modal" data-target="#mm-public-logo-menu-modal">
+            {% if currentRoute != 'search_do' %}
+                <img src="{{ asset('bundles/uipublic/images/mm/mealmatch-logo-h45.png') }}" alt="Mealmatch"
+                     class="pull-left mm-navbar-logo">
+                <span class="icon-menu pull-right"></span>
+            {% else %}
+                <img src="{{ asset('bundles/uipublic/images/mm/Logo_mm_48px_bild.jpg') }}" alt="Mealmatch" class="pull-left mm-navbar-logo">
+
+            {% endif %}
+
+        </a>
+        {% if currentRoute == 'search_do' %}{% spaceless %}
+            <div class="mm-nav-search text-center">
+                <div class="mm-search">
+                    <button id="navbarSearchBtn" data-toggle="modal" data-target="#mm-search-modal">
+                        <span class="icon-magnifier"></span>
+                    </button>
+                </div>
+            </div>
+        {% endspaceless %}{% endif %}
+    </div>
+</nav>
+<!--// END navbar public xs//-->
+

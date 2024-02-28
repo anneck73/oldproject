@@ -1,0 +1,56 @@
+{% set currentRoute = app.request.get('_route') %}
+{% trans_default_domain 'Mealmatch' %}
+{{ include('@WEBUI/Partials/public-logo-menu-modal.partial.html.twig') }}
+{{ include('@WEBUI/Partials/search-modal.partial.html.twig') }}
+{% spaceless %}
+<nav class="navbar navbar-fixed-top mm-navbar-xs mm-navbar-xs-user" role="navigation">
+    <div class="navbar-content fl-justify-space-between">
+        
+        <div class="mm-search">
+            
+
+         <button id="navbarSearchBtn" data-toggle="modal" data-target="#mm-search-modal">
+                <span class="icon-magnifier"></span>
+        </button>
+
+    </div>
+
+        <img src="{{ asset('bundles/uipublic/images/mm/Logo_mm_48px_wort.jpg') }}" alt="Mealmatch"
+                 class="pull-left mm-navbar-logo">
+            
+        
+
+        {#% if currentRoute == 'search_do' %}
+            <button id="navbarSearchBtn" data-toggle="modal" data-target="#mm-public-search-config-modal" class="btn btn-success">
+                Suche anpassen <span class="glyphicon glyphicon-search"></span>
+            </button>
+            {% else %}
+        {% endif %#}
+
+        <div class="mm-user-menu-xs-navbar">
+            {#<a class="navbar-brand" href="#"
+           data-toggle="modal" data-target="#mm-public-logo-menu-modal">
+
+       </a>#}
+            <a href="#" class="" data-toggle="modal" data-target="#mm-public-logo-menu-modal" role="button">
+                {% if app.user.profile.imageName == "image/udefault.png" %}
+                    <img class="img-responsive img-circle" height="45px" width="45px"
+                         src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+                {% else %}
+                    <img class="img-responsive img-circle" height="45px" width="45px"
+                         src="{{ asset(app.user.profile.imageName, 's3img') }}" alt="Profileimage" />
+                {% endif %}
+            </a>
+        </div>
+        {#% if currentRoute != 'home' %}
+            {% if currentRoute != 'search_do' %}
+                <div class="mm-search-form-xs pull-left">
+                    {{ include('@MMWebFront/Partials/searchNavbar.partial.html.twig') }}
+                </div>
+            {% endif %}
+        {% endif %#}
+
+
+    </div>
+</nav>
+{% endspaceless %}

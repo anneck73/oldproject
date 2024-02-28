@@ -1,0 +1,16 @@
+{#
+    This is a partial to be used with MealAddress contained in the 'addr' variable.
+#}
+{% trans_default_domain 'Mealmatch' %}
+<div class="container-fluid">
+    <ul class="nav">
+        <li>{{ addr.streetName }}, {{ addr.streetNumber }}</li>
+        <li>{{ addr.postalCode }} {{ addr.city }} ({{ addr.state }})</li>
+        <li>{{ addr.subLocality }}</li>
+        <li>Geo coordinates: {{ addr.location }}</li>
+        <li><div class="mm-spacer"></div></li>
+        <li>{{ 'mealaddress.bellsign.label'|trans }}: {{ addr.bellSign }}</li>
+    </ul>
+</div>
+
+

@@ -1,0 +1,4 @@
+services:
+#    mealmatch_registration_app.example:
+#        class: Mealmatch\RegistrationAppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

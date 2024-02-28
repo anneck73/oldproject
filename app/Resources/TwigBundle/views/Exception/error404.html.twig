@@ -1,0 +1,49 @@
+{# Mealmatch Custom Error Template #}
+{% extends '@WEBUI/Layouts/simple.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% set titleValue %}{{ ('error.' ~ status_code ~ '.title')|trans }}{% endset %}
+{% set textValue %}{{ ('error.' ~ status_code ~ '.text')|trans }}{% endset %}
+{% set viewData = {
+    'title': titleValue,
+    'text': textValue,
+} %}
+
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+{% set left_icon %}<span class="fa fa-exclamation-triangle mm-circle-error-icon mm-red"></span>{% endset %}
+{% block simple_main_content %}
+
+    <div class="block-exception">
+        <div class="block-exception-detected clear-fix">
+            <div class="text-exception">
+
+                <div class="mm-header">
+                    <h1>{{ exception.class|abbr_class }} ({{ status_code }}) - Was wurde gesucht? </h1>
+                    <h3>{{ exception.message|nl2br|format_file_from_text }}</h3>
+                </div>
+                <div>
+                    <strong>{{ status_code }}</strong> {{ status_text }} - {{ exception.class|abbr_class }}
+                </div>
+
+                {% set previous_count = exception.allPrevious|length %}
+                {% if previous_count %}
+                    <div class="linked">
+                        <span><strong>{{ previous_count }}</strong> linked Exception{{ previous_count > 1 ? 's' : '' }}:</span>
+                        <ul>
+                            {% for i, previous in exception.allPrevious %}
+                                <li>
+                                    {{ previous.class|abbr_class }} <a href="#traces-link-{{ i + 1 }}"
+                                                                       onclick="toggle('traces-{{ i + 1 }}', 'traces'); switchIcons('icon-traces-{{ i + 1 }}-open', 'icon-traces-{{ i + 1 }}-close');">&#187;</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block navbar %}
+    {% include('@WEBUI/NavBars/public.navbar.html.twig') %}
+{% endblock %}

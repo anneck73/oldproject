@@ -1,0 +1,31 @@
+{% trans_default_domain 'Mealmatch' %}
+<div class="row">
+    <div class="text-center">
+        {% if meal.host.profile.imageName == "image/udefault.png" %}
+            <img class="center-block img-responsive img-circle"
+                 width="240px"
+                 height="240px"
+                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}" alt="Profileimage" />
+        {% else %}
+            <img class="center-block img-responsive img-circle"
+                 width="240px"
+                 height="240px"
+                 src="{{ asset(meal.host.profile.imageName, 's3img') }}" />
+        {% endif %}
+        <p>{{ 'meal.host.label'|trans }}: {{ meal.host.username }}</p>
+        <p>{{ 'meal.title.label'|trans }}: {{ meal.title }}</p>
+    </div>
+</div>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div>
+    <button class="btn btn-lg btn-success" type="submit">
+        {{ 'joinrequest.create.submit'|trans }}
+    </button>
+</div>
+{{ form_end(form) }}
+
+
+
+

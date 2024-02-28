@@ -1,0 +1,19 @@
+{% if button_route_name is not defined%}{% set button_route_name = 'home' %}{% endif %}
+{% if button_label is not defined%}{% set button_label = 'undefined' %}{% endif %}
+{% if header_title is not defined%}{% set header_title = 'undefined' %}{% endif %}
+{% if header_subtitle is not defined%}{% set header_subtitle = 'undefined' %}{% endif %}
+{% spaceless %}
+<div class="mm-header">
+    <div class="mm-edit-action-panel pull-right">
+        <a href="{{ path( button_route_name ) }}">
+            <button class="btn btn-success btn-action">
+                {{ button_label|raw }}
+            </button>
+        </a>
+    </div>
+    <div class="mm-header">
+        <h1>{{ header_title }}</h1>
+        <h3 class="mm-subtitle"><small>{{ header_subtitle }}</small></h3>
+    </div>
+</div>
+{% endspaceless %}

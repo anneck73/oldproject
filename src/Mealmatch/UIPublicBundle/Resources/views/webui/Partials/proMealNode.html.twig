@@ -1,0 +1,18 @@
+{#
+    This partial is using itself (recursion) to render ProMeal-nodes ...
+    It skips the root node and shows all child nodes of the current node ...
+#}
+<!--partials/proMealNode-->
+{% for node in nodes %}
+    {% if not node.isRootNode() %}
+    <li>
+        {{ node.materializedPath }}/{{ node.id }}
+        {{ node.tableTopic }}
+        {% if node.getChildNodes()|length > 1 %}
+            <ul class="nav navigation-list nav-tree">
+                {% include "@MMWebFront/Partials/proMealNode.html.twig" with {'nodes': node.getChildNodes()} %}
+            </ul>
+        {% endif %}
+    </li>
+    {% endif %}
+{% endfor %}

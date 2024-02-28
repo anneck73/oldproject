@@ -1,0 +1,96 @@
+{% trans_default_domain 'Mealmatch' %}
+{% if meals is not empty %}
+    <div class="mm-well">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% for meal in meals %}
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading-{{ meal.id }}">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse-{{ meal.id }}" aria-controls="collapse-{{ meal.id }}">
+                                    <h1 class="panel-title">
+                                        {{ meal.title }}
+
+                                        {% if meal.status == 'CREATED' %}
+                                            <button class="btn btn-success pull-right">
+                                                {{ 'meal.status.created'|trans }}
+                                            </button>
+                                        {% endif %}
+                                        {% if meal.status == 'RUNNING' %}
+                                            <button class="btn btn-success pull-right">
+                                                {{ 'meal.status.running'|trans }}
+                                            </button>
+                                        {% endif %}
+                                        {% if meal.status == 'STOPPED' %}
+                                            <button class="btn btn-success  pull-right">
+                                                {{ 'meal.status.stopped'|trans }}
+                                            </button>
+                                        {% endif %}
+                                        {% if meal.status == 'FINISHED' %}
+                                            <button class="btn btn-simple  pull-right">
+                                                {{ 'meal.status.finished'|trans }}
+                                            </button>
+                                        {% endif %}
+                                    </h1>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapse-{{ meal.id }}" class="panel-collapse collapse out" role="tabpanel"
+                         aria-labelledby="heading-{{ meal.id }}">
+                        <div class="panel-body">
+                            <h2 class="mm-header">{{ meal.title }}</h2>
+                            <p class="mm-footer-text">{{ meal.description|raw }}</p>
+                            <ul class="nav">
+                                {% if meal.starter is not empty %}
+                                    <li>Vorspeise: {{ meal.starter }}</li>{% endif %}
+                                {% if meal.main is not empty %}
+                                    <li>Hauptgang: {{ meal.main }}</li>{% endif %}
+                                {% if meal.desert is not empty %}
+                                    <li>Nachtisch:{{ meal.desert }}</li>{% endif %}
+                                {% if meal.guests|length > 0 %}
+                                    <li>Gäste:
+                                        <ul class="nav">
+                                            {% for guest in meal.guests %}
+                                                <li>
+                                                    <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                                                        {% if guest.profile.imageName == "image/udefault.png" %}
+                                                            <img class="img-circle"
+                                                                 width="35px"
+                                                                 height="35px"
+                                                                 src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                                                 alt="Profileimage"/>
+                                                        {% else %}
+                                                            <img class="img-circle"
+                                                                 width="35px"
+                                                                 height="35px"
+                                                                 src="{{ asset(guest.profile.imageName, 's3img') }}"/>
+                                                        {% endif %}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="text-center" style="margin-bottom: 15px;">
+                                    <a href="{{ path('api_homemeal_manager_edit', {'id': meal.id}) }}">
+                                        <button class="btn btn-success">{{ 'meal.edit.btn.label'|trans }} <span
+                                                    class="glyphicon glyphicon-cog"></span></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+
+

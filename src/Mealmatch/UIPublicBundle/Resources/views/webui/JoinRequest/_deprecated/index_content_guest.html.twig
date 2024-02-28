@@ -1,0 +1,124 @@
+{% trans_default_domain 'Mealmatch' %}
+<table class="mm-table">
+    <thead>
+    <tr>
+        <th class="col-xs-1">{{ 'meal.index.status.label'|trans }}</th>
+        <th class="col-xs-3">Mealmatch</th>
+        <th class="col-xs-3">{{ 'meal.index.message.label'|trans }}</th>
+        <th class="col-xs-2">{{ 'meal.index.host.label'|trans }}</th>
+        <th class="col-xs-3">{{ 'meal.index.available.actions.label'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for joinRequest in joinReqG %}
+        <tr>
+            <td class="col-xs-1">
+                <div class="mm-meal-status">
+                    <div class="mm-meal-status-icon fa fa-bullseye
+                {% if joinRequest.status == 'ACCEPTED' %} mm-green
+
+                {% endif %}
+                {% if joinRequest.status == 'DENIED' %} mm-red
+                {% endif %}
+                {% if joinRequest.status == 'CREATED' %} mm-light-grey
+                {% endif %}
+                {% if joinRequest.status == 'PAYED' %} mm-green
+                {% endif %}
+                {% if joinRequest.status == 'JOINED_FREE' %} mm-green
+                {% endif %}
+                {% if joinRequest.status == 'PENDING' %} mm-light-grey
+                {% endif %}
+                {% if joinRequest.status == 'PAYMENT_FAILED' %} mm-red
+                {% endif %}">
+                    </div>
+                    {% if joinRequest.status == 'ACCEPTED' %}
+                        <p>{{ 'joinrequest.status.accepted'|trans }}</p> {% endif %}
+                    {% if joinRequest.status == 'DENIED' %}<p>{{ 'joinrequest.status.denied'|trans }}</p> {% endif %}
+                    {% if joinRequest.status == 'CREATED' %}<p>{{ 'joinrequest.status.created'|trans }}</p>{% endif %}
+                    {% if joinRequest.status == 'PAYED' %}<p>{{ 'joinrequest.status.payed'|trans }}</p>{% endif %}
+                    {% if joinRequest.status == 'JOINED_FREE' %}
+                        <p>{{ 'joinrequest.status.joined_free'|trans }}</p>{% endif %}
+                    {% if joinRequest.status == 'PENDING' %}<p>{{ 'joinrequest.status.pending'|trans }}</p>{% endif %}
+                    {% if joinRequest.status == 'PAYMENT_FAILED' %}
+                        <p>{{ 'joinrequest.status.payment_failed'|trans }}</p> {% endif %}
+                </div>
+            </td>
+            <td class="col-xs-3"><a href="#"
+                                    data-toggle="modal"
+                                    data-target="#homeMealModal-{{ joinRequest.meal.id }}">{{ joinRequest.baseMeal.title }}</a>
+                <div class="modal fade" id="homeMealModal-{{ joinRequest.meal.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="homeMealModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {% set homeMeal = joinRequest.meal %}
+                                {% set rProfile = joinRequest.meal.host.restaurantprofile %}
+                                {{ include('@WEBUI/HomeMeal/Card/homemeal.html5.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="col-xs-3">{{ joinRequest.messageToGuest }}</td>
+            <td class="col-xs-2"><a href="{{ path('public_user_by_username',   {'pName': joinRequest.meal.host}) }}">
+                    {% set uProfile = joinRequest.baseMeal.host.profile %}
+                    {% set uAccount = joinRequest.baseMeal.host %}
+                    {% if uProfile.imageName == "image/udefault.png" %}
+                        <img
+                                width="72px" height="72px" border="0"
+                                class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}">
+                    {% else %}
+                        <img width="72px" height="72px" border="0"
+                             class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset(uProfile.imageName, 's3img') }}">
+                    {% endif %}
+                </a>
+            </td>
+            <td class="col-xs-3">
+                {% if joinRequest.status == 'CREATED' %}
+                    {{ 'joinrequest.waitingforhost'|trans }}
+                {% endif %}
+                {% if joinRequest.status == 'ACCEPTED' %}
+                    {% if(joinRequest.baseMeal.sharedcost == 0) %}
+                        <a href="{{ path('api_basemeal_join', {'id': joinRequest.id }) }}">
+                            <button class="btn btn-success">
+                                {{ 'joinrequest.index.joinfree.label'|trans }}
+                            </button>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('api_mealticket_create_from_joinreq', {'id': joinRequest.id }) }}">
+                            <button class="btn btn-success">
+                                {{ 'joinrequest.index.pay.label'|trans }}
+                            </button>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                {% if joinRequest.status == 'JOINED_FREE' %}
+                    <a target="_blank"
+                       href="https://www.google.com/maps/dir/Current+Location/{{ joinRequest.baseMeal.address.locationString }}">
+                        <button class="btn btn-success">
+                            {{ 'joinrequest.index.show_location.label'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if joinRequest.status == 'DENIED' %}
+                    {{ 'joinrequest.denied_response_to_guest'|trans }}
+                {% endif %}
+                {% if joinRequest.status == 'PAYED' %}
+                    <a target="_blank"
+                       href="https://www.google.com/maps/dir/Current+Location/{{ joinRequest.baseMeal.address.locationString }}">
+                        <button class="btn btn-success">
+                            {{ 'joinrequest.index.show_location.label'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if joinRequest.status == 'PAYMENT_FAILED' %}
+                    <button class="btn btn-danger">{{ 'joinrequest.status.failed'|trans|raw }}</button>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

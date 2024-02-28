@@ -1,0 +1,13 @@
+{% trans_default_domain 'Mealmatch' %}
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request form-signin">
+    <div>
+        <label for="username">{{ 'resetting.request.username'|trans }}</label><br>
+        <input class="form-control tbox" type="text" id="username" name="username" required="required" />
+    </div>
+    <div class="mm-spacer"></div>
+    <div class="button-div text-center">
+        <button class="main-btn" type="submit" id="_submit" name="_submit">
+            {{ 'resetting.request.submit'|trans }}
+        </button>
+    </div>
+</form>

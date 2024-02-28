@@ -1,0 +1,37 @@
+services:
+  # the namespace prefix for classes (must end in \)
+  Mealmatch\CouponBundle\Services\:
+    autowire: true
+    autoconfigure: true
+    # create services for all the classes found in this directory...
+    resource: '../../Services'
+    tags: ['controller.service_arguments']
+
+ # Public CouponData Service
+  PublicCouponService:
+    class: 'Mealmatch\CouponBundle\Services\PublicCouponService'
+    public: true
+    tags:
+      - { name: 'controller.service_arguments'}
+      - { name: monolog.logger, channel: mealmatch }
+    arguments:
+      $couponService: '@Mealmatch\CouponBundle\Services\CouponService'
+
+  api.coupon:
+    alias: Mealmatch\CouponBundle\Services\PublicCouponService
+    public: true
+
+  # BaseCoupon Service
+  Mealmatch\CouponBundle\Services\BaseCouponService:
+    # public: true
+    arguments:
+      $logger: "@logger"
+      $entityManager: "@doctrine.orm.entity_manager"
+      $translator: "@translator.default"
+
+  Mealmatch\CouponBundle\Controller\CouponManagerController:
+    calls:
+      - [setContainer, ["@service_container"]]
+    tags:
+      - { name: monolog.logger, channel: mealmatch }
+      - { name: 'controller.service_arguments'}

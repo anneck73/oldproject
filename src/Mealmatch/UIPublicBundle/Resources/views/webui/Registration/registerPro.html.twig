@@ -1,0 +1,9 @@
+{% extends '@WEBUI/Layouts/simple.html.twig' %} {#  THIS is OUR registerPro NOT Suave. Quick hack to display fields, there is NO main_content block in maim_layout.html.twig #}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.pro.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.pro.title'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'registration.pro.subtitle'|trans }}{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block simple_main_content %}
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends '@WEBUI/newUI-Base.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% block body %}
+
+    {% block headerImage %}
+        <div class="header-container findmeal-banner">
+            <div class="search-sec">
+                <h3>Find A Meal</h3>
+            </div>
+        </div>
+    {% endblock %}
+
+    <div class="body-content">
+        <div class="container container-cust">
+            <div class="row xs-flex">
+                {% block search_panel %}
+                {% endblock %}
+                <!-- // search // -->
+                <div class="meal-cards">
+                    <div class="col-md-6 col-sm-12">
+                        {% block search_results %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 search-map">
+                    <div class="map-div">
+                    <div class="" style="height: 400px !important;" >
+                        <div id="map-canvas" ></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pager-fanta">
+                {{ pagerfanta(resultPager, 'twitter_bootstrap3') }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

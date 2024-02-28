@@ -1,0 +1,595 @@
+# #########################################
+# EasyAdmin Bundle ...
+# #########################################
+easy_admin:
+    # General Config
+    site_name: "Mealmatch Admin Backend %app_version%"
+
+    # Design
+    design:
+        brand_color: '#95C821'
+        form_theme: 'vertical'
+        assets:
+            favicon: '/favicon.ico'
+        menu:
+            - label: 'User'
+              children: ['User', 'PaymentProfile', 'UserProfile', 'UserSettings', 'RestaurantProfile', 'KYCProfile']
+            - label: 'Coupons'
+              children: ['Coupon', 'MealCoupon','UsedCoupon', 'CouponProfile']
+            - label: 'Payment'
+              children: ['MealTicketError','MealTicketPayed','MealTicket', 'MealTicketTransaction']
+            - label: 'All Meals'
+              children: ['RunningBaseMeals','BaseMeal', 'MealJoinRequest', 'BaseMealCategory']
+            - label: 'Restaurant Meals'
+              children: ['RunningProMeals','ProMeal', 'MealOffer', 'MealEvent', 'MealAddress']
+            - label: 'Home Meals'
+              children: ['RunningHomeMeals', 'HomeMeal', 'MealPart', 'MealEvent', 'MealAddress']
+            - label: 'Base Meals'
+              children: ['BaseMealCategory']
+            - label: 'System'
+              children: ['CronJob', 'CronReport', 'LogMealmatch', 'LogMangopay']
+            - label: 'Community'
+              children: ['Community', 'CommunityGroup']
+
+
+    formats:
+        date:     'd.m.Y'
+        time:     'H:i'
+        datetime: 'd.m.Y H:i:s'
+
+    list:
+        actions: ['-delete', 'show'] #Deactivate delete button globally on list view
+        max_results: 50
+    # Managed entites ...
+    entities:
+        User:
+            class: MMUserBundle\Entity\MMUser
+            list:
+                fields:
+                    - 'Username'
+                    - 'Email'
+                    - 'Enabled'
+                    - { property: 'lastLogin', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'Roles', type: 'array'}
+        PaymentProfile:
+            class: MMUserBundle\Entity\MMUserPaymentProfile
+        UserProfile:
+            class: MMUserBundle\Entity\MMUserProfile
+        UserSettings:
+            class: MMUserBundle\Entity\MMUserSettings
+        RestaurantProfile:
+            class: MMUserBundle\Entity\MMRestaurantProfile
+        KYCProfile:
+            class: MMUserBundle\Entity\MMUserKYCProfile
+        MealCoupon:
+            class: Mealmatch\ApiBundle\Entity\Coupon\MealCoupon
+            title: 'foo'
+            list:
+                fields:
+                    - 'title'
+                    - 'description'
+                    - 'code'
+                    - 'status'
+                    - 'availableAmount'
+                    - 'value'
+                    - 'currency'
+                    - 'language'
+                    - 'usedAmount'
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Coupon'}
+                    - 'title'
+                    - 'description'
+                    - { property: 'code', label: 'The coupon code string to be used', 'help': 'The code the user has to enter to validate!' }
+                    - 'language'
+                    - 'value'
+                    - 'currency'
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Amount'}
+                    - 'usedAmount'
+                    - 'availableAmount'
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Status'}
+                    - 'status'
+
+        Coupon:
+            class: Mealmatch\ApiBundle\Entity\Coupon\Coupon
+            title: 'foo'
+            list:
+                fields:
+                    - 'title'
+                    - 'description'
+                    - 'code'
+                    - 'status'
+                    - 'availableAmount'
+                    - 'value'
+                    - 'currency'
+                    - 'language'
+                    - 'usedAmount'
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Coupon'}
+                    - 'title'
+                    - 'description'
+                    - { property: 'code', label: 'The coupon code string to be used', 'help': 'The code the user has to enter to validate!' }
+                    - 'language'
+                    - 'value'
+                    - 'currency'
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Amount'}
+                    - 'usedAmount'
+                    - 'availableAmount'
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Status'}
+                    - 'status'
+        CouponProfile:
+            class: Mealmatch\ApiBundle\Entity\User\Profiles\CouponProfile
+        UsedCoupon:
+            class: Mealmatch\ApiBundle\Entity\Coupon\UsedCoupon
+        MealTicket:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMealTicket
+            list:
+                fields:
+                    - id
+                    - status
+                    - lastPaymentStatus
+                    - totalPrice
+                    - price
+                    - guest
+                    - host
+                    - paymentType
+                    - resourceId
+                    - selectedMealOffer
+                    - coupon
+                    - transactions
+        MealTicketPayed:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMealTicket
+            list:
+                dql_filter: "entity.status = 'PAYED'"
+                fields:
+                    - id
+                    - status
+                    - lastPaymentStatus
+                    - totalPrice
+                    - price
+                    - guest
+                    - host
+                    - paymentType
+                    - payInStatus
+                    - selectedMealOffer
+                    - transactions
+        MealTicketError:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMealTicket
+            list:
+                dql_filter: "entity.status = 'PAYMENT_ERROR'"
+                fields:
+                    - id
+                    - status
+                    - lastPaymentStatus
+                    - totalPrice
+                    - price
+                    - guest
+                    - host
+                    - paymentType
+                    - payInStatus
+                    - selectedMealOffer
+                    - transactions
+        MealTicketTransaction:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealTicketTransaction
+            list:
+                max_results: 50
+                # dql_filter: "entity.status = 'PAYMENT_ERROR'"
+                fields:
+                    - resourceId
+                    - transactionType
+                    - processed
+                    - userId
+                    - mealTicket
+                    - paymentStatus
+                    - paymentType
+                    - mangoNotifiedDate
+                    - mangoObj
+                    - mangoEvent
+                    - mangoEventType
+                sort: ['mangoNotifiedDate', 'DESC']
+            edit:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Mealmatch'}
+                    - processed
+                    - userId
+                    - mealticketId
+                    - paymentStatus
+                    - paymentType
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Mangopay'}
+                    - resourceId
+                    - mangoNotifiedDate
+                    - mangoObj
+                    - mangoEvent
+                    - mangoEventType
+                    - payoutResourceId
+
+        MealJoinRequest:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealJoinRequest
+        MealAddress:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealAddress
+        MealOffer:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealOffer
+        MealPart:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealPart
+        CronJob:
+            class: Cron\CronBundle\Entity\CronJob
+            show:
+                fields:
+                    - Id
+                    - Name
+                    - Command
+                    - Schedule
+                    - { property: 'Description', type: 'raw' }
+#                    - Reports
+                    - { property: 'Reports', type: 'collection' }
+        CronReport:
+            class: Cron\CronBundle\Entity\CronReport
+            list:
+                fields:
+                    - Id
+                    - { property: 'Output', type: 'raw' }
+        LogCommand:
+            class: Mealmatch\ApiBundle\Entity\LogEntry
+            list:
+                dql_filter: "entity.channel = 'command'"
+                max_results: 50
+                sort: ['createdAt', 'DESC']
+                actions: ['delete', 'show']
+                fields:
+                    - { property: 'message', type: "raw"}
+            show:
+                fields:
+                    - level
+                    - { property: 'message', format: "raw"}
+                    - { property: 'requestInfos', type: 'text'}
+                    #- { property: 'context', type: 'json_array'}
+                    - createdAt
+                    - createdBy
+        LogMealmatch:
+            class: Mealmatch\ApiBundle\Entity\LogEntry
+            list:
+                dql_filter: "entity.channel = 'mealmatch'"
+                max_results: 50
+                sort: ['createdAt', 'DESC']
+                actions: ['delete', 'show']
+                fields:
+                    - { property: 'message', type: "raw"}
+            show:
+                fields:
+                    - level
+                    - { property: 'message', format: "raw"}
+                    - { property: 'requestInfos', type: 'text'}
+                    #- { property: 'context', type: 'json_array'}
+                    - createdAt
+                    - createdBy
+        LogMangopay:
+            class: Mealmatch\ApiBundle\Entity\LogEntry
+            list:
+                dql_filter: "entity.channel = 'mangopay'"
+                max_results: 50
+                sort: ['createdAt', 'DESC']
+                actions: ['delete', 'show']
+                fields:
+                    - { property: 'message', type: "raw"}
+            show:
+                fields:
+                    - level
+                    - { property: 'message', format: "raw"}
+                    - { property: 'requestInfos', type: 'text'}
+                    #- { property: 'context', type: 'json_array'}
+                    - createdAt
+                    - createdBy
+        Community:
+            class: Mealmatch\ApiBundle\Entity\Community\Community
+
+        CommunityGroup:
+            class: Mealmatch\ApiBundle\Entity\Community\CommunityGroup
+
+#        UrgentIssues:
+#            class: App\Entity\Issue
+#            list:
+#                dql_filter: "entity.label = 'CRITICAL' OR entity.priority > 4"
+#            ImportantIssues:
+#                class: App\Entity\Issue
+#                list:
+#                    dql_filter: "entity.priority > 2 AND entity.numComments > 10"
+        RunningBaseMeals:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMeal
+            list:
+                dql_filter: "entity.leaf = 1 AND entity.status = 'RUNNING'"
+                fields:
+                    - leaf
+                    - title
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - joinRequests
+                    - host
+
+        BaseMeal:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMeal
+            list:
+                dql_filter: "entity.leaf = 1"
+                fields:
+                    - leaf
+                    - title
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - joinRequests
+                    - host
+            edit:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'BaseMeal information'}
+                    - title
+                    - description
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'createdAt', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'updatedAt', type: 'datetime', format: 'j.n.Y' }
+                    - countryCategory
+                    - categories
+                    - leaf
+                    - hash
+                    - mealTickets
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Participants'}
+                    - host
+                    - guests
+                    - maxNumberOfGuest
+                    - mealTickets
+                    - joinRequests
+                    - createdBy
+                    - updatedBy
+                    - deletedBy
+                    - { type: 'group', css_class: 'col-sm-6', label: 'BaseMeal finance information'}
+                    - sharedCost
+                    - sharedCostCurrency
+        BaseMealCategory:
+            class: Mealmatch\ApiBundle\Entity\Meal\BaseMealCategory
+            list:
+                fields:
+                    - name
+                    - description
+                    - { property: 'imageURL', type: 'image', base_path: "https://%aws3_host%/images/b/c"}
+                    - { property: 'createdAt', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'updatedAt', type: 'datetime', format: 'j.n.Y' }
+            edit:
+                fields:
+                  - { type: 'group', css_class: 'col-sm-6', label: 'BaseMealCategory information'}
+                  - name
+                  - { property: 'description', type: 'ckeditor'}
+                  - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', base_path: "https://%aws3_host%/images/b/c" }
+
+            new:
+              fields:
+                - { type: 'group', css_class: 'col-sm-6', label: 'New BaseMealCategory'}
+                - name
+                - { property: 'description', type: 'ckeditor'}
+                - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', base_path: "https://%aws3_host%/images/b/c" }
+
+        RunningProMeals:
+            class: Mealmatch\ApiBundle\Entity\Meal\ProMeal
+            list:
+                dql_filter: "entity.leaf = 1 AND entity.status = 'RUNNING'"
+                fields:
+                    - title
+                    - status
+                    - tableTopic
+                    - mealOffers
+                    - MinOfferPrice
+                    - MealEvent
+        ProMeal:
+            class: Mealmatch\ApiBundle\Entity\Meal\ProMeal
+            list:
+                dql_filter: "entity.leaf = 1"
+                fields:
+                    - title
+                    - status
+                    - tableTopic
+                    - mealOffers
+                    - specials
+                    - mealOfferNotes
+                    - countryOfferNotes
+                    - MinOfferPrice
+            edit:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Meal information'}
+                    - tableTopic
+                    - mealOffers
+                    - specials
+                    - mealOfferNotes
+                    - countryOfferNotes
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Location information'}
+                    - location
+                    - locationString
+
+        RunningHomeMeals:
+            class: Mealmatch\ApiBundle\Entity\Meal\HomeMeal
+            list:
+                dql_filter: "entity.leaf = 1 AND entity.status = 'RUNNING'"
+                fields:
+                    - title
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - joinRequests
+                    - host
+
+        HomeMeal:
+            class: Mealmatch\ApiBundle\Entity\Meal\HomeMeal
+            list:
+                dql_filter: "entity.leaf = 1"
+                fields:
+                    - title
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - joinRequests
+                    - host
+            edit:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'BaseMeal information'}
+                    - title
+                    - description
+                    - status
+                    - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'createdAt', type: 'datetime', format: 'j.n.Y' }
+                    - { property: 'updatedAt', type: 'datetime', format: 'j.n.Y' }
+                    - countryCategory
+                    - categories
+                    - leaf
+                    - hash
+                    - mealTickets
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Participants'}
+                    - host
+                    - guests
+                    - maxNumberOfGuest
+                    - mealTickets
+                    - joinRequests
+                    - createdBy
+                    - updatedBy
+                    - deletedBy
+                    - { type: 'group', css_class: 'col-sm-6', label: 'BaseMeal finance information'}
+                    - sharedCost
+                    - sharedCostCurrency
+
+
+
+        MealEvent:
+            class: Mealmatch\ApiBundle\Entity\Meal\MealEvent
+            edit:
+              fields:
+                - { type: 'group', css_class: 'col-sm-6', label: 'Meal Event time range'}
+                - { property: 'startDateTime', type: 'datetime', format: 'j.n.Y' }
+                - { property: 'endDateTime', type: 'datetime', format: 'j.n.Y' }
+                - timezone
+                - allDay
+                - reoccuring
+                - rrule
+
+
+#
+#        BaseMealTicket:
+#            class: Mealmatch\ApiBundle\Entity\Meal\BaseMealTicket
+#            list:
+#                fields:
+#                    - id
+#                    - titel
+#                    - status
+#                    - host
+#                    - guest
+#                    - BaseMeal
+#                    - selectedMealOffer
+#                    - price
+#                    - currency
+#                    - payinStatus
+#                    - redeemRequests
+#
+#        MealJoinRequest:
+#            class: Mealmatch\ApiBundle\Entity\Meal\MealJoinRequest
+#
+#        MealAddress:
+#            class: Mealmatch\ApiBundle\Entity\Meal\MealAddress
+#            edit:
+#                fields:
+#                  - id
+#                  - locationString
+#                  - createdBy
+#
+#        MealOffer:
+#            class: Mealmatch\ApiBundle\Entity\Meal\MealOffer
+#
+#        MealPart:
+#            class: Mealmatch\ApiBundle\Entity\Meal\MealPart
+#
+#        MealEvent:
+#            class: Mealmatch\ApiBundle\Entity\Meal\MealEvent
+#            edit:
+#              fields:
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Event information'}
+#                - startDateTime
+#                - endDateTime
+#                - timezone
+#                - allDay
+#                - reoccuring
+#                - rrule
+#
+#        User:
+#            class: MMUserBundle\Entity\MMUser
+#            list:
+#              fields:
+#                - id
+#                - enabled
+#                - username
+#                - usernameCanonical
+#                - email
+#                - emailCanonical
+#                - lastLogin
+#                - confirmationToken
+#
+#            edit:
+#              fields:
+#                - enabled
+#                - username
+#                - usernameCanonical
+#                - email
+#        RestaurantProfile:
+#            class: MMUserBundle\Entity\MMRestaurantProfile
+#            list:
+#              fields:
+#                - id
+#                - company
+#                - name
+#                - type
+#                - contactPhone
+#                - contactEmail
+#            edit:
+#              fields:
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Basic inforamtion' }
+#                - company
+#                - name
+#                - type
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Contact information'}
+#                - contactAddress
+#                - contactPhone
+#                - contactEmail
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Location information'}
+#                - locationString
+#                - description
+#                - pictures
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Legal information' }
+#                - commercialRegisterNumber
+#                - taxID
+#                - authorizedRepresentative
+#                - legalFiles
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Finance information'}
+#                - payPalEmail
+#                - bankIBAN
+#        CronJob:
+#            class: Cron\CronBundle\Entity\CronJob
+#
+#        CronReport:
+#            class: Cron\CronBundle\Entity\CronReport
+#
+#        RedeemRequest:
+#            class: Mealmatch\ApiBundle\Entity\CouponData\RedeemRequest
+#
+#        UserProfile:
+#            class: MMUserBundle\Entity\MMUserProfile
+#            edit:
+#              fields:
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Contact inforamtion' }
+#                - firstName
+#                - lastName
+#                - addressLine1
+#                - addressLine2
+#                - state
+#                - country
+#                - areaCode
+#                - city
+#                - imageName
+#                - setImageFile
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Description inforamtion' }
+#                - birthday
+#                - gender
+#                - hobbies
+#                - selfDescription
+#                - { type: 'group', css_class: 'col-sm-6', label: 'Finance information'}
+#                - payPalEmail

@@ -1,0 +1,66 @@
+{% trans_default_domain 'Mealmatch' %}
+{% spaceless %}
+    <!--// mm-accordion-collapse.partial.html.twig //-->
+<div class="mm-spacer"></div>
+    <h2 class="mm-header">{{ meal.title }}</h2>
+<p class="mm-footer-text">{{ meal.description|raw }}</p>
+<ul class="nav">
+    {% if meal.starter is not empty %}
+        <li>Vorspeise: {{ meal.starter }}</li>{% endif %}
+    {% if meal.main is not empty %}
+        <li>Hauptgang: {{ meal.main }}</li>{% endif %}
+    {% if meal.desert is not empty %}
+        <li>Nachtisch:{{ meal.desert }}</li>{% endif %}
+    {% if meal.guests|length > 0 %}
+        <li>Gäste:
+            <ul class="nav nav-pills">
+                {% for guest in meal.guests %}
+                    <li>
+                        <a href="{{ path('public_user_by_username', {'pName': guest.username}) }}">
+                            {% if guest.profile.imageName == "image/udefault.png" %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}"
+                                     alt="Profileimage"/>
+                            {% else %}
+                                <img class="img-circle"
+                                     width="35px"
+                                     height="35px"
+                                     src="{{ asset(guest.profile.imageName, 's3img') }}"/>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
+<button class="btn btn-success pull-left" type="button">
+    {{ meal.sharedCost }} {{ meal.sharedCostCurrency }}
+</button>
+<div class="mm-accordion-collapse-action pull-right">
+{% if not null == app.user %}
+    {% if meal.host.id == app.user.id %}
+        <a href="{{ path('meal_edit',{'id': meal.id}) }}">
+            <button class="btn btn-success" type="button">
+                {{ 'meal.action.edit'|trans }}
+            </button>
+        </a>
+    {% else %}
+        <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+            <button class="btn btn-success" type="button">
+                {{ 'meal.action.join'|trans }}
+            </button>
+        </a>
+    {% endif %}
+{% else %}
+    <a href="{{ path('meal_add_join_request',{'id': meal.id}) }}">
+        <button class="btn btn-success" type="button">
+            {{ 'meal.action.join'|trans }}
+        </button>
+    </a>
+{% endif %}
+</div>
+    <!--// EOF: mm-accordion-collapse.partial.html.twig //-->
+{% endspaceless %}

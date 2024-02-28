@@ -1,0 +1,194 @@
+{% extends '@WEBUI/Layouts/mealmanager_main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+
+{% set main_header_title = 'promeal.manager.title'|trans %}
+{% set main_header_subtitle = 'promeal.manager.subtitle'|trans %}
+{% set main_header_action_path = path('api_promeal_index') %}
+{% set main_header_action_label %}
+    <span class="glyphicon glyphicon-backward"></span> {{ 'meal.btn.backto-index.label'|trans }}
+{% endset %}
+{% set left_icon %}<span class="mm-circle-icon mm-icon-create-meal-circle"></span>{% endset %}
+
+{% block main_content %}
+    <div class="meal-creation">
+        <div class="main-width">
+            <div class="create-meal-accord">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse"  data-parent="#accordion1" href="#collapse1">
+                                    <h4 class="panel-title meal-creation-title">
+                                        Meal Details
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse {% if selectedTab == 1 %} in {% endif %}">
+                                    <div class="panel-body">
+                                        {{ form_start(page_meal_form) }}
+                                        {#{{ form_row(page_meal_form._token) }}#}
+                                        {{ form_row(page_meal_form.tableTopic, {'help': 'promeal.tabletopic.help'|trans}, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(page_meal_form.maxNumberOfGuest, {'help': 'promeal.maxguest.help'|trans}, { 'attr': {'class': 'tbox'} }) }}
+                                        {{ form_row(page_meal_form.description, {'help': 'promeal.description.help'|trans}, { 'attr': {'class': 'tbox'} }) }}
+                                        <div class="button-div text-center">
+                                            <button class="main-btn" type="submit">Save</button>
+                                        </div>
+                                        {{ form_end(page_meal_form) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
+                                    <h4 class="panel-title meal-creation-title offer-title">
+                                        Offer Details
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse {% if selectedTab == 2 %} in {% endif %}">
+                                    {#<div id="collapse2" class="panel-collapse collapse in">#}
+                                    <div class="panel-body">
+                                        <div class="offer-table table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th class="th-left">{{ 'meal.description.label'|trans }}</th>
+                                                    <th>{{ 'promeal.addOffer.price.label'|trans }}</th>
+                                                    <th>{{ 'meal.index.available.actions.label'|trans }}</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                {% for offer in proMeal.mealOffers %}
+                                                    <tr>
+                                                        <td>{{ offer.name }}</td>
+                                                        <td class="meal-description">{{ offer.description|raw }}</td>
+                                                        <td>{{ offer.price|number_format(2) }} {{ proMeal.sharedCostCurrency }}</td>
+                                                        <td class="action-td">{{ include('@WEBUI/MealCreation/collapseAndRemoveUI.html.twig',
+                                                                {'idx': loop.index0, 'offerID': offer.id, 'mealID': proMeal.id}) }}</td>
+                                                    </tr>
+                                                    <tr id="offer-{{ offer.id }}" class="collapse fade">
+                                                        <td colspan="5" class="no-padding">
+                                                            <div class="mm-tab-section">
+                                                                {{ form_start(offerForms[loop.index0]) }}
+                                                                {{ form_row(offerForms[loop.index0].name,
+                                                                    {
+                                                                        'help': 'promeal.addOffer.name.help'|trans,
+                                                                        'title': 'promeal.addOffer.name.helptitle'|trans
+                                                                    } , { 'attr': {'class': 'tbox'} }
+                                                                )
+                                                                }}
+                                                                {{ form_row(offerForms[loop.index0].description,
+                                                                    {'help': 'promeal.addOffer.description.help'|trans, 'id': offer.id }, { 'attr': {'class': 'tbox'} }) }}
+                                                                {{ form_row(offerForms[loop.index0].price,
+                                                                    {'help': 'promeal.addOffer.price.help'|trans}, { 'attr': {'class': 'tbox'} }) }}
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 text-center">
+                                                                        <button class="main-btn save-offer">
+                                                                            {{ 'meal.btn.safe.label'|trans }}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                {{ form_end(offerForms[loop.index0]) }}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <!--button href="{{ path('api_promeal_manager_addOffer', { 'id': proMeal.id }) }}" class="btn btn-success pull-left margin-top-half">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                    {{ 'promeal.addOffer.label'|trans }}
+                                                     </button-->
+                                                        <a href="{{ path('api_promeal_manager_addOffer', { 'id': proMeal.id }) }}"
+                                                           class="btn btn-success add-offer">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                            {{ 'promeal.addOffer.label'|trans }}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion3" class="" href="#collapse3">
+                                    <h4 class="panel-title meal-creation-title date-title">
+                                        Date and Time
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse {% if selectedTab == 4 %} in {% endif %}">
+                                    {#<div id="collapse3" class="panel-collapse collapse in ">#}
+                                    <div class="panel-body">
+                                        <div class="date-table table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>From</th>
+                                                    <th>To</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% if proMeal.mealEvents.count > 0 %}
+                                                    {% for mealEvent in proMeal.mealEvents %}
+                                                        {{ form_start(eventForms[loop.index0]) }}
+                                                        <tr>
+                                                            <td>{{ form_widget(eventForms[loop.index0].startDateTime) }}</td>
+                                                            <td>{{ form_widget(eventForms[loop.index0].endDateTime) }}</td>
+                                                            <td>{{ include('@WEBUI/MealCreation/safeOrRemove.html.twig',
+                                                                    {'idx': loop.index0, 'eventID': mealEvent.id, 'mealID': proMeal.id}) }}</td>
+                                                        </tr>
+                                                        {{ form_end(eventForms[loop.index0]) }}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if proMeal.isRootNode and proMeal.mealEvents.count < 5 %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-center">
+                                                            <div class="add-period">
+                                                                <a href="{{ path('api_promeal_manager_addEvent', { 'id': proMeal.id }) }}">
+                                                                    <button class="period-btn" type="button"> <span class="add-icon"> <i class="fa fa-plus"></i></span> {{ 'promeal.addEvent.label'|trans }}</button>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-div text-center">
+                            {% for transition in workflow_transitions(proMeal) %}
+                                <a href="{{ path('doTransitionBaseMeal', { 'id': proMeal.id, 'transition': transition.name }) }}">
+                                    <button class="main-btn" style="background-color: #205081">
+                                        {{ ('transition.' ~ transition.name)|trans }}
+                                    </button>
+                                </a>
+                            {% else %}
+                                <!--// No actions available. //-->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

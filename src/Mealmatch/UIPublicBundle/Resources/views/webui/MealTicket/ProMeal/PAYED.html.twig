@@ -1,0 +1,19 @@
+{% trans_default_domain 'Mealmatch' %}
+{% set currencySymbol = 'glyphicon-eur' %}
+{{ include('@WEBUI/MealTicket/ProMeal/head.include.html.twig') }}
+{{ include('@WEBUI/MealTicket/ProMeal/mainTable.include.html.twig') }}
+{{ include('@WEBUI/MealTicket/ProMeal/bottom.include.html.twig') }}
+
+
+    <h3 class="text-center payment-title">
+        {{ ticket.number }}
+    </h3>
+
+    <p>{{ 'mealticket.payed.at'|trans }}: {{ ticket.updatedAt|date('d.m.y H:i') }}</p>
+{%  if not print %}
+<a href="{{ path('api_mealticket_print', { 'id': ticket.id }) }}">
+    <button class="btn-lg btn-success btn-block">
+        Drucken als PDF
+    </button>
+</a>
+{% endif %}

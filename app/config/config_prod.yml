@@ -1,0 +1,50 @@
+# Mealmatch 2017
+# Author: wizard@mealmatch.de
+# (!) Note: Host specific production settings are loaded through parameters_prod.php
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_prod.php }
+
+monolog:
+    channels: [mealmatch, mangopay, command]
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: warning
+            handler:      nested
+        nested:
+            type:  error_log
+            level: error
+        console:
+            type:  console
+#        mail:
+#            type:         fingers_crossed
+#            # 500 errors are logged at the critical level
+#            action_level: critical
+#            # to also log 400 level errors (but not 404's):
+#            # action_level: error
+#            # excluded_404s:
+#            #     - ^/
+#            handler:      deduplicated
+#        deduplicated:
+#            type:    deduplication
+#            handler: swift
+#        swift:
+#            type:       swift_mailer
+#            from_email: 'error@mealmatch.de'
+#            to_email:   'webmaster@mealmatch.de'
+#            subject:    'An Error Occurred! %%message%%'
+#            level:      debug
+#            formatter:  monolog.formatter.html
+#            content_type: text/html
+        mealmatch:
+            level: debug
+            type:  service
+            channels: [mealmatch, mangopay, command]
+            id: apibundle.services.logentry_handler
+
+#            level:    warning # error und warning
+#            type:     stream
+#            path:     "%kernel.logs_dir%/%kernel.environment%_mealmatch.log"
+#            channels: [mealmatch]
+

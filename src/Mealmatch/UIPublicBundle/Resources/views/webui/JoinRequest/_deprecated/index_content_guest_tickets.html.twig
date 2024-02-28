@@ -1,0 +1,124 @@
+{% trans_default_domain 'Mealmatch' %}
+
+
+<table class="mm-table">
+    <thead>
+    <tr>
+        <th class="col-xs-1">{{ 'meal.index.status.label'|trans }}</th>
+        <th class="col-xs-4">Mealmatch</th>
+
+        <th class="col-xs-4">{{ 'meal.index.host.label'|trans }}</th>
+        <th class="col-xs-3">{{ 'meal.index.available.actions.label'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for meal in usersJoinedProMeals %}
+        <tr>
+            <td class="col-xs-1">
+
+                <div class="mm-meal-status">
+                    <div class="mm-meal-status-icon fa fa-bullseye
+                {% if meal.status == 'CANCELLED' %} mm-red
+                {% endif %}
+                {% if meal.status == 'CREATED' %} mm-light-grey
+                {% endif %}
+                {% if meal.status == 'PAYED' %} mm-green
+                {% endif %}
+                {% if meal.status == 'USED' %} mm-red
+                {% endif %}
+                {% if meal.status == 'PROCESSING_PAYMENT' %} mm-light-grey
+                {% endif %}
+                {% if meal.status == 'PAYMENT_ERROR' %} mm-red
+                {% endif %}">
+                    </div>
+                    {% if meal.status == 'CANCELLED' %}
+                        <p>{{ 'mealticket.status.cancelled'|trans }}</p>
+                    {% endif %}
+                    {% if meal.status == 'CREATED' %}
+                        <p>{{ 'mealticket.status.created'|trans }}</p>
+                    {% endif %}
+                    {% if meal.status == 'PAYED' %}
+                        <p>{{ 'mealticket.status.payed'|trans }}</p>
+                    {% endif %}
+                    {% if meal.status == 'USED' %}
+                        <p>{{ 'mealticket.status.used'|trans }}</p>
+                    {% endif %}
+                    {% if meal.status == 'PROCESSING_PAYMENT' %}
+                        <p>{{ 'mealticket.status.processing'|trans }}</p>
+                    {% endif %}
+                    {% if meal.status == 'PAYMENT_ERROR' %}
+                        <p>{{ 'mealticket.status.error'|trans }}</p>
+                    {% endif %}
+                </div>
+            </td>
+
+            <td class="col-xs-3">
+                <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                    {{ meal.titel }}</a>
+            </td>
+
+            <td class="col-xs-2">
+                <a href="{{ path('public_user_by_username',   {'pName': meal.host}) }}">
+                    {% set uProfile = meal.host.profile %}
+                    {% set uAccount = meal.host %}
+                    {% if uProfile.imageName == "image/udefault.png" %}
+                        <img
+                                width="72px" height="72px" border="0"
+                                class="mm-user-icon-small margin-right-half margin-bottom-half"
+                                src="{{ asset('bundles/uipublic/images/mm/profilbild_default.png') }}">
+                    {% else %}
+                        <img width="72px" height="72px" border="0"
+                             class="mm-user-icon-small margin-right-half margin-bottom-half"
+                             src="{{ asset(uProfile.imageName, 's3img') }}">
+                    {% endif %}
+                </a>
+            </td>
+
+            <td class="col-xs-3">
+                {% if meal.status == 'CREATED' %}
+                    <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if meal.status == 'USED' %}
+                    <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if meal.status == 'PROCESSING_PAYMENT' %}
+                    <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if meal.status == 'PAYMENT_ERROR' %}
+                    <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if meal.status == 'CANCELLED' %}
+                    <a href="{{ path('api_mealticket_show', {'id': meal.id}) }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'restaurantview.action.ticket.label.mealticket'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+                {% if meal.status == 'PAYED' %}
+                    <a href="https://www.google.com/maps/dir/Current+Location/{{ meal.baseMeal.mealAddress.locationString }}">
+                        <button class="btn btn-success btn-block">
+                            {{ 'joinrequest.index.show_location.label'|trans }}
+                        </button>
+                    </a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+# #########################################
+# Vich Uploader USING FLYSYSTEM!!!!
+# #########################################
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    storage: flysystem
+    mappings:
+        meal_image:
+            uri_prefix:         'https://%aws3_host%/images/m'
+            upload_destination: s3_images_fs
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        restaurant_image:
+            uri_prefix:         'https://%aws3_host%/images/r'
+            upload_destination: s3_rimages_fs
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        restaurant_file:
+            uri_prefix:         'https://%aws3_host%/files/r'
+            upload_destination: s3_rfiles_fs
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        basemeal_category_image:
+            uri_prefix:         'https://%aws3_host%/images/b/c'
+            upload_destination: s3_bcimages_fs
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   false
+            delete_on_remove:   true
+        mealtickets_pdf:
+            uri_prefix:         'https://%aws3_host%/mealtickets/'
+            upload_destination: s3_mealticket_fs
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true

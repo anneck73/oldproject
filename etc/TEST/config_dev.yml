@@ -1,0 +1,69 @@
+# Mealmatch 2017
+# Configuration for SK Host
+# test.meal-match.com
+# Author: wizard@mealmatch.de
+# ################################################################################################
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_dev.yml }
+
+doctrine:
+    orm:
+        metadata_cache_driver: array
+        result_cache_driver: array
+        query_cache_driver: array
+
+#doctrine_cache:
+#    providers:
+#        my_apc_metadata_cache:
+#            type: apc
+#            namespace: metadata_cache_ns
+#        my_apc_query_cache:
+#            namespace: query_cache_ns
+#            apc: ~
+#    aliases:
+#        apc_cache: my_apc_cache
+#
+#    providers:
+#        my_apc_cache:
+#            type: apc
+#            namespace: my_apc_cache_ns
+#            aliases:
+#                - apc_cache
+
+
+
+assetic:
+  use_controller: true
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!event]
+        console:
+            type:   console
+            channels: [!event, !doctrine]
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type:   firephp
+        #    level:  info
+        chromephp:
+            type:   chromephp
+            level:  debug
+
+#swiftmailer:
+#    delivery_address: me@example.com

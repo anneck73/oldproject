@@ -1,0 +1,62 @@
+{% extends "@WEBUI/Layouts/simple.html.twig" %}
+{#{% extends "@WEBUI/main_layout.html.twig" %}#}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'about.title'|trans }}{% endblock %}
+{% set main_header_title %}  {{ 'about.title'|trans }}  {% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% set main_header_subtitle %}<!--// NO SUBTITLE //-->{% endset %}
+
+{% block simple_main_content %}
+    <div class="container">
+        <div class="row">
+            <!--<h2 class="content-title">Meals Found</h2>-->
+            <div class="meal-cards">
+                <div class="col-md-3 col-sm-12">
+                    <img src="{{ asset('/bundles/uipublic/images/about/about-img-1.jpg') }}" class="about-img">
+                </div>
+
+                <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12">
+                        <h3 class="content-about-title">{{ 'about.mealmatch.title'|trans}}</h3>
+                        <p>{{ 'about.mealmatch.content'|trans|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div><hr/>
+        <div class="row">
+            <!--<h2 class="content-title">Meals Found</h2>-->
+            <div class="meal-cards"><br/>
+                <div class="col-md-3 col-sm-12 visible-xs visible-sm">
+                    <img src="{{ asset('/bundles/uipublic/images/about/about-img-2.jpg') }}" class="about-img">
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12">
+                        <h3 class="content-about-title">{{ 'about.eatalone.title'|trans }}</h3>
+                        <p>{{ 'about.eatalone.content'|trans|raw }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 hidden-xs hidden-sm">
+                    <img src="{{ asset('/bundles/uipublic/images/about/about-img-2.jpg') }}" class="about-img">
+                </div>
+            </div>
+
+        </div><hr/>
+        <div class="row">
+            <!--<h2 class="content-title">Meals Found</h2>-->
+            <div class="meal-cards">
+                <div class="col-md-3 col-sm-12">
+                    <img src="{{ asset('/bundles/uipublic/images/about/about-img-3.jpg') }}" class="about-img">
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12">
+                        <h3 class="content-about-title">{{ 'about.vision.title'|trans }}</h3>
+                        {{ 'about.vision.content'|trans|raw }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div><hr/>
+        {{ include('@WEBUI/testimonials.html.twig') }}
+    </div>
+{% endblock %}

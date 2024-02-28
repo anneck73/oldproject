@@ -1,0 +1,44 @@
+services:
+#
+# PayPal all in one manager ...
+#
+    mealmatch_paypal.manager:
+        class: Mealmatch\PayPalBundle\Services\PayPalManagerService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@logger'
+            - '@event_dispatcher'
+            - '@router'
+            - '%paypal_credentials%'
+        calls:
+            - [setWorkflow, ["@workflow.meal_ticket"]]
+        tags:
+            - { name: monolog.logger, channel: paypal }
+    #
+    # PayPal PaymentToken service
+    #
+    mealmatch_paypal.payment_token:
+        class: Mealmatch\PayPalBundle\Services\PaymentTokenService
+        arguments: ['@doctrine.orm.entity_manager', '@logger']
+        tags:
+            - { name: monolog.logger, channel: paypal }
+
+
+    mm.papal.token:
+        alias: mealmatch_paypal.payment_token
+
+    # EventSubscriber for the BaseMealTicket transitions
+    mealmatch_paypal.notify:
+        class: Mealmatch\PayPalBundle\EventSubscriber\PayPalIPNSubscriber
+        arguments:
+              - "@logger"
+              - "@doctrine.orm.entity_manager"
+        tags:
+          - { name: kernel.event_subscriber, event: workflow.meal_ticket.transition }
+          - { name: monolog.logger, channel: paypal }
+
+    # Tag PayPal Controller with logger channel paypal
+    mealmatch_paypal.controller:
+        class: Mealmatch\PayPalBundle\Controller\PayPalController
+        tags:
+            - { name: monolog.logger, channel: paypal }

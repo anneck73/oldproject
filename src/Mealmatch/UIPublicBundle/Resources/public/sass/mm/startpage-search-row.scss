@@ -1,0 +1,89 @@
+/*
+ * Copyright (c) 2017. Mealmatch GmbH
+ *
+ * Author:
+ * Wizard <wizard@mealmatch.de>
+ * Sahrah El ghammaz <sahrah.elghammaz@mealmatch.de>
+ */
+
+/*------------------------------------*\
+  # SEARCH ROW
+\*------------------------------------*/
+
+#top-image {
+
+  .img-responsive {
+    width: auto;
+    height: auto;
+  }
+
+
+
+}
+
+#mm-search-startpage-with-cards {
+  position: relative;
+  margin-top: -8rem;
+  margin-left: auto;
+  //background-color: $green;
+  //opacity: 0.2;
+  font-color: $white;
+
+  #searchslogan {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    word-break: break-all;
+    line-break: anywhere;
+    .search-meals-in-your-city {
+
+      // Font stuff
+      font-size: $fs-2s;
+      color: $white;
+      font-weight: 300;
+      text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.57);
+
+    }
+
+  }
+}
+
+.mm-search-row-startpage {
+  //position: absolute;
+  margin: 15px 5px;
+  padding: 5px;
+
+  #completeSearchRow {
+    .flexbox {
+      border-style: solid;
+      border-color: $white;
+      background-color: $white;
+      opacity: 0.95;
+      padding: 0.3em;
+
+      .form-control {
+        border-style: hidden;
+        border-radius: 0;
+
+      }
+      .glyphicon {
+        color: $green;
+
+      }
+      .btn, .btn-success {
+        font-size: $fs-xs;
+      }
+
+      input.form-control {
+        font-size: $fs-s;
+        color: $black;
+        border: 0;
+        box-shadow: none;
+        height: 2rem;
+        width: 30rem;
+      }
+    }
+  }
+}
+
+

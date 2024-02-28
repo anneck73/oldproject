@@ -1,0 +1,9 @@
+{% extends '@WEBUI/Layouts/main_layout.html.twig' %}
+{% trans_default_domain 'Mealmatch' %}
+{% block title %}Mealmatch | {{ 'registration.check_email.title'|trans }}{% endblock %}
+{% set main_header_title %}{{ 'registration.check_email.title'|trans }}{% endset %}
+{% set main_header_subtitle %}{{ 'registration.title'|trans }}{% endset %}
+{% block main_header_action %}<!--// NO ACTION //-->{% endblock %}
+{% block staticPages %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock %}
